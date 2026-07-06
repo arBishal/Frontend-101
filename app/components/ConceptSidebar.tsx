@@ -8,8 +8,8 @@ export default function ConceptSidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="shrink-0 w-14 lg:w-56 border-r border-zinc-200 dark:border-zinc-800">
-      <nav className="flex flex-col gap-1 p-2 lg:p-3">
+    <aside className="shrink-0 w-14 lg:w-64 border-r border-zinc-200 dark:border-zinc-800">
+      <nav className="flex flex-col gap-1 px-2 py-6 lg:px-6 lg:py-6">
         {concepts.map((concept) => {
           const href = `/concepts/${concept.slug}`;
           const isActive = pathname === href;

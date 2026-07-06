@@ -41,10 +41,17 @@ export default function ResponsivenessPage() {
 
       {/* Breakpoint indicator */}
       <div className="mb-10">
-        <p className="font-mono text-sm uppercase tracking-widest text-zinc-400 dark:text-zinc-500 mb-4">
-          Current breakpoint
-        </p>
-        <div className="grid grid-cols-3 gap-3">
+        <div className="flex items-baseline gap-3 mb-4">
+          <p className="font-mono text-sm uppercase tracking-widest text-zinc-400 dark:text-zinc-500">
+            Current breakpoint
+          </p>
+          {windowWidth && (
+            <span className="font-mono text-sm font-medium text-zinc-900 dark:text-zinc-50">
+              {windowWidth}px
+            </span>
+          )}
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
           {breakpoints.map((bp) => {
             const isActive = activeBp?.name === bp.name;
             const Icon = bp.icon;
@@ -52,46 +59,43 @@ export default function ResponsivenessPage() {
             return (
               <div
                 key={bp.name}
-                className={`relative rounded-lg border p-4 text-center transition-all ${
+                className={`relative rounded-lg border p-4 transition-all flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3 ${
                   isActive
                     ? "border-zinc-400 dark:border-zinc-500 bg-zinc-100 dark:bg-zinc-800"
                     : "border-zinc-200 dark:border-zinc-800"
                 }`}
               >
                 <Icon
-                  className={`size-6 mx-auto mb-2 ${
+                  className={`size-6 shrink-0 ${
                     isActive
                       ? "text-zinc-700 dark:text-zinc-200"
                       : "text-zinc-300 dark:text-zinc-600"
                   }`}
                 />
-                <p
-                  className={`font-mono text-sm font-medium ${
-                    isActive
-                      ? "text-zinc-700 dark:text-zinc-200"
-                      : "text-zinc-400 dark:text-zinc-500"
-                  }`}
-                >
-                  {bp.name}
-                </p>
-                <p
-                  className={`font-mono text-xs mt-0.5 ${
-                    isActive
-                      ? "text-zinc-500 dark:text-zinc-400"
-                      : "text-zinc-300 dark:text-zinc-700"
-                  }`}
-                >
-                  {bp.label}
-                </p>
+                <div className="text-center sm:text-left">
+                  <p
+                    className={`font-mono text-sm font-medium ${
+                      isActive
+                        ? "text-zinc-700 dark:text-zinc-200"
+                        : "text-zinc-400 dark:text-zinc-500"
+                    }`}
+                  >
+                    {bp.name}
+                  </p>
+                  <p
+                    className={`font-mono text-xs ${
+                      isActive
+                        ? "text-zinc-500 dark:text-zinc-400"
+                        : "text-zinc-300 dark:text-zinc-700"
+                    }`}
+                  >
+                    {bp.label}
+                  </p>
+                </div>
               </div>
             );
           })}
         </div>
-        {windowWidth && (
-          <p className="mt-3 font-mono text-xs text-zinc-400 dark:text-zinc-500 text-center">
-            window.innerWidth = {windowWidth}px
-          </p>
-        )}
       </div>
 
       {/* Sample layout demo */}
