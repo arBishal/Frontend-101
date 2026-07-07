@@ -162,7 +162,7 @@ export default function ApiDemo() {
 
       {/* Network Inspector */}
       <div className="w-full sm:w-1/3 shrink-0 rounded-lg bg-zinc-900 dark:bg-zinc-800 p-4 font-mono text-sm">
-        <p className="text-xs uppercase tracking-widest text-zinc-500 mb-3">
+        <p className="text-xs uppercase tracking-widest text-zinc-700 dark:text-zinc-300 mb-3">
           Network Inspector
         </p>
         <label className="flex items-center gap-2 text-xs text-zinc-500 cursor-pointer select-none mb-4">

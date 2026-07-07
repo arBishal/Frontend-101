@@ -9,17 +9,6 @@ import { concepts } from "@/app/lib/concepts";
 
 const availableConcepts = concepts.filter((c) => c.status === "available");
 
-function Tooltip({ label, children }: { label: string; children: React.ReactNode }) {
-  return (
-    <div className="relative group">
-      {children}
-      <span className="pointer-events-none absolute top-full left-1/2 -translate-x-1/2 mt-2 px-2 py-1 rounded text-xs bg-zinc-900 dark:bg-zinc-700 text-zinc-100 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-150">
-        {label}
-      </span>
-    </div>
-  );
-}
-
 export default function Navbar() {
   const { resolvedTheme, setTheme } = useTheme();
   const pathname = usePathname();
@@ -55,30 +44,26 @@ export default function Navbar() {
             GitHub
           </a>
           {isConceptPage && (
-            <Tooltip label={copied ? "Copied!" : "Copy link"}>
-              <button
-                onClick={handleShare}
-                className="rounded p-1.5 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
-                aria-label="Copy link"
-              >
-                {copied ? (
-                  <Check className="size-4 text-emerald-500" />
-                ) : (
-                  <Link2 className="size-4" />
-                )}
-              </button>
-            </Tooltip>
-          )}
-          <Tooltip label={resolvedTheme === "dark" ? "Light mode" : "Dark mode"}>
             <button
-              onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
+              onClick={handleShare}
               className="rounded p-1.5 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
-              aria-label="Toggle theme"
+              aria-label="Copy link"
             >
-              <Sun className="size-4 hidden dark:block" />
-              <Moon className="size-4 block dark:hidden" />
+              {copied ? (
+                <Check className="size-4 text-emerald-500" />
+              ) : (
+                <Link2 className="size-4" />
+              )}
             </button>
-          </Tooltip>
+          )}
+          <button
+            onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
+            className="rounded p-1.5 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+            aria-label="Toggle theme"
+          >
+            <Sun className="size-4 hidden dark:block" />
+            <Moon className="size-4 block dark:hidden" />
+          </button>
         </div>
       </div>
       {isConceptPage && (

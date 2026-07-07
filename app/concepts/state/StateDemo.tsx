@@ -69,8 +69,8 @@ export default function StateDemo() {
       </div>
 
       {/* State Inspector */}
-      <div className="sm:w-56 lg:w-64 shrink-0 rounded-lg bg-zinc-900 dark:bg-zinc-800 p-4 font-mono text-sm">
-        <p className="text-[10px] uppercase tracking-widest text-zinc-500 mb-3">
+      <div className="w-full sm:w-1/3 shrink-0 rounded-lg bg-zinc-900 dark:bg-zinc-800 p-4 font-mono text-sm">
+        <p className="text-xs uppercase tracking-widest text-zinc-700 dark:text-zinc-300 mb-3">
           State Inspector
         </p>
         <div className="space-y-2 text-xs">
