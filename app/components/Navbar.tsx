@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Sun, Moon, Link2, Check } from "lucide-react";
-import { useTheme } from "next-themes";
+import { useTheme } from "@/app/components/ThemeProvider";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { concepts } from "@/app/lib/concepts";

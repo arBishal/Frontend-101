@@ -47,7 +47,7 @@ export const concepts: Concept[] = [
   },
   {
     slug: "frameworks",
-    title: "Why Frameworks Exist",
+    title: "Frameworks",
     description: "The manual pain frameworks were built to remove.",
     status: "available",
     icon: Code,
