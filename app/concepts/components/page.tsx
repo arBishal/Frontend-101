@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import ComponentDemo from "./ComponentDemo";
 
 export const metadata: Metadata = {
   title: "Components | Frontend 101",
@@ -16,8 +17,42 @@ export default function ComponentsPage() {
           Why we build UIs out of reusable pieces.
         </p>
       </div>
-      <div className="rounded border border-dashed border-zinc-300 dark:border-zinc-700 p-12 text-center text-sm text-zinc-400 dark:text-zinc-500 font-mono">
-        Coming up next
+
+      <div>
+        <p className="font-mono uppercase tracking-wide font-medium text-zinc-400 dark:text-zinc-500 mb-4">
+          Interactive demo
+        </p>
+        <ComponentDemo />
+      </div>
+
+      <div className="text-sm lg:text-base text-zinc-600 dark:text-zinc-400 space-y-3">
+        <p className="font-mono uppercase tracking-wide font-medium text-zinc-400 dark:text-zinc-500">
+          How it works
+        </p>
+        <p>
+          Components are reusable, self-contained pieces of UI. Instead of
+          writing one giant page, you break the interface into smaller parts —
+          a sidebar, a top bar, stat cards, a table — each responsible for its
+          own structure and style.
+        </p>
+        <p>
+          The dashboard above is built from distinct components. Click
+          &ldquo;Show Components&rdquo; to toggle X-ray mode and see where each
+          component begins and ends.
+        </p>
+        <ul className="list-disc list-inside space-y-1.5 font-mono text-xs lg:text-sm">
+          <li><strong>Navbar</strong> — logo and nav links</li>
+          <li><strong>Sidebar</strong> — icon-based navigation rail</li>
+          <li><strong>Stat Card</strong> — repeated four times in a grid</li>
+          <li><strong>Table</strong> — header row + data rows</li>
+          <li><strong>Footer</strong> — site info and tagline</li>
+        </ul>
+        <p>
+          Notice how components can be nested: the Sidebar sits alongside
+          the main content area, and Stat Cards repeat inside a grid. This composability is what makes
+          component-based UIs powerful — you build small pieces and combine them
+          into complex interfaces.
+        </p>
       </div>
     </div>
   );
