@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Heart, UserPlus, UserCheck } from "lucide-react";
 import Button from "@/app/components/ui/Button";
+import Input from "@/app/components/ui/Input";
 
 function ValueDisplay({ type, children }: { type: "string" | "boolean" | "number"; children: React.ReactNode }) {
   const color = {
@@ -27,11 +28,11 @@ export default function StateDemo() {
         <div className="w-full flex flex-col md:flex-row items-center gap-3 md:gap-4">
           <div className="size-12 md:size-14 shrink-0 rounded-full bg-zinc-200 dark:bg-zinc-700" />
           <div className="w-full flex flex-col md:flex-row justify-between items-center min-w-0 gap-4 md:gap-6">
-            <input
+            <Input
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="block w-full bg-zinc-400 dark:bg-zinc-900 text-base text-zinc-900 dark:text-zinc-50 px-3 py-1 rounded-sm focus:border-zinc-500 border border-transparent dark:focus:border-zinc-400 outline-none transition-colors"
+              className="block w-full"
               aria-label="Profile name"
             />
             <div className="flex items-center gap-2">

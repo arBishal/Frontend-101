@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Loader2, Search } from "lucide-react";
 import Button from "@/app/components/ui/Button";
+import Input from "@/app/components/ui/Input";
 
 type Status = "idle" | "loading" | "success" | "error";
 
@@ -89,13 +90,13 @@ export default function ApiDemo() {
       {/* Request Card */}
       <div className="w-full rounded-lg border border-zinc-200 dark:border-zinc-800 p-5 sm:p-6 space-y-5">
         <div className="flex gap-2">
-          <input
+          <Input
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleFetch()}
             placeholder="Example: Snorlax"
-            className="flex-1 min-w-0 bg-zinc-100 dark:bg-zinc-900 text-sm text-zinc-900 dark:text-zinc-50 px-3 py-2 rounded-md border border-zinc-200 dark:border-zinc-700 focus:border-zinc-400 dark:focus:border-zinc-500 outline-none transition-colors"
+            className="flex-1 min-w-0"
             aria-label="Pokemon name or ID"
           />
           <Button

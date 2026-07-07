@@ -12,7 +12,7 @@ export default function Home() {
           <span>npx frontend-101</span>
         </div>
 
-        <h1 className="text-5xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50 sm:text-6xl leading-tight">
+        <h1 className="text-4xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50 md:text-5xl lg:6xl leading-tight">
           Frontend Concepts,{" "}
           <span className="text-zinc-400 dark:text-zinc-500">Explained</span>
         </h1>
