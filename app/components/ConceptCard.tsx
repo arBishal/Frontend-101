@@ -1,6 +1,10 @@
 import type { Concept } from "@/app/lib/concepts";
 
-export default function ConceptCard({ concept }: { concept: Concept }) {
+type ConceptCardProps = {
+  concept: Concept;
+};
+
+export default function ConceptCard({ concept }: ConceptCardProps) {
   const Icon = concept.icon;
 
   return (

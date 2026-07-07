@@ -3,11 +3,11 @@ import Footer from "@/app/components/Footer";
 import ConceptSidebar from "@/app/components/ConceptSidebar";
 import ConceptNav from "@/app/components/ConceptNav";
 
-export default function ConceptsLayout({
-  children,
-}: {
+type ConceptsLayoutProps = {
   children: React.ReactNode;
-}) {
+};
+
+export default function ConceptsLayout({ children }: ConceptsLayoutProps) {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
