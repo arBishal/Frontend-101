@@ -22,6 +22,18 @@ export default function ApiCallsPage() {
         <p className="font-mono uppercase tracking-wide font-medium text-zinc-500 dark:text-zinc-300 mb-4">
           Interactive demo
         </p>
+        <p className="text-zinc-500 dark:text-zinc-400 text-sm mb-4">
+          This demo fetches a random Pokémon from{" "}
+          <a
+            href="https://pokeapi.co"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline underline-offset-2 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+          >
+            PokéAPI
+          </a>
+          {" "}— a free, public REST API. Hit the button and watch the full request lifecycle play out.
+        </p>
         <ApiDemo />
       </div>
 
