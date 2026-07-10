@@ -7,7 +7,10 @@ import { concepts } from "@/app/lib/concepts";
 
 export default function ConceptNav() {
   const pathname = usePathname();
-  const currentIndex = concepts.findIndex((c) => `/concepts/${c.slug}` === pathname);
+  const currentIndex = concepts.findIndex((c) => {
+    const href = `/concepts/${c.slug}`;
+    return pathname === href || pathname.startsWith(href + "/");
+  });
   const prev = currentIndex > 0 ? concepts[currentIndex - 1] : null;
   const next = currentIndex < concepts.length - 1 ? concepts[currentIndex + 1] : null;
 

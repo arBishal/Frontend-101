@@ -8,12 +8,18 @@ import {
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
+export type ConceptChild = {
+  slug: string;
+  title: string;
+};
+
 export type Concept = {
   slug: string;
   title: string;
   description: string;
   status: "available" | "coming-soon";
   icon: LucideIcon;
+  children?: ConceptChild[];
 };
 
 export const concepts: Concept[] = [
@@ -51,6 +57,11 @@ export const concepts: Concept[] = [
     description: "The manual pain frameworks were built to remove.",
     status: "available",
     icon: Code,
+    children: [
+      { slug: "frameworks", title: "Overview" },
+      { slug: "frameworks/see-the-diff", title: "See the Difference" },
+      { slug: "frameworks/landscape", title: "Landscape" },
+    ],
   },
   {
     slug: "accessibility",

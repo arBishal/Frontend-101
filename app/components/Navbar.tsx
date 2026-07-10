@@ -15,8 +15,9 @@ export default function Navbar() {
   const isConceptPage = pathname.startsWith("/concepts/");
   const [copied, setCopied] = useState(false);
 
-  const currentSlug = isConceptPage ? pathname.split("/concepts/")[1] : null;
-  const currentIndex = availableConcepts.findIndex((c) => c.slug === currentSlug);
+  const rawSlug = isConceptPage ? pathname.split("/concepts/")[1] : null;
+  const topLevelSlug = rawSlug ? rawSlug.split("/")[0] : null;
+  const currentIndex = availableConcepts.findIndex((c) => c.slug === topLevelSlug);
   const progressPct = currentIndex >= 0 ? ((currentIndex + 1) / availableConcepts.length) * 100 : 0;
 
   async function handleShare() {
