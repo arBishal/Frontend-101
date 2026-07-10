@@ -4,6 +4,8 @@ import { useState } from "react";
 import { Loader2, Search } from "lucide-react";
 import Button from "@/app/components/ui/Button";
 import Input from "@/app/components/ui/Input";
+import Card from "@/app/components/ui/Card";
+import InspectorPanel from "@/app/components/ui/InspectorPanel";
 
 type Status = "idle" | "loading" | "success" | "error";
 
@@ -88,7 +90,7 @@ export default function ApiDemo() {
   return (
     <div className="flex flex-col sm:flex-row gap-4">
       {/* Request Card */}
-      <div className="w-full rounded-lg border border-zinc-200 dark:border-zinc-800 p-5 sm:p-6 space-y-5">
+      <Card className="w-full space-y-5">
         <div className="flex gap-2">
           <Input
             type="text"
@@ -158,13 +160,10 @@ export default function ApiDemo() {
             </p>
           )}
         </div>
-      </div>
+      </Card>
 
       {/* Network Inspector */}
-      <div className="w-full sm:w-1/3 shrink-0 rounded-lg bg-zinc-900 dark:bg-zinc-800 p-4 font-mono text-sm">
-        <p className="text-xs uppercase tracking-widest text-zinc-700 dark:text-zinc-300 mb-3">
-          Network Inspector
-        </p>
+      <InspectorPanel title="Network Inspector">
         <label className="flex items-center gap-2 text-xs text-zinc-500 cursor-pointer select-none mb-4">
           <input
             type="checkbox"
@@ -210,7 +209,7 @@ export default function ApiDemo() {
             </span>
           </div>
         </div>
-      </div>
+      </InspectorPanel>
     </div>
   );
 }

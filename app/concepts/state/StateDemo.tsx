@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import { Heart, UserPlus, UserCheck } from "lucide-react";
 import Button from "@/app/components/ui/Button";
 import Input from "@/app/components/ui/Input";
+import Card from "@/app/components/ui/Card";
+import InspectorPanel from "@/app/components/ui/InspectorPanel";
 
 function ValueDisplay({ type, children }: { type: "string" | "boolean" | "number"; children: React.ReactNode }) {
   const color = {
@@ -28,7 +30,7 @@ export default function StateDemo() {
   return (
     <div className="flex flex-col sm:flex-row gap-4">
       {/* Profile Card */}
-      <div className="flex justify-center md:justify-between items-center w-full rounded-lg border border-zinc-200 dark:border-zinc-800 p-5 sm:p-6">
+      <Card className="flex justify-center md:justify-between items-center w-full">
         {/* Avatar + Name + Follow + Heart */}
         <div className="w-full flex flex-col md:flex-row items-center gap-3 md:gap-4">
           {avatarSeed ? (
@@ -79,13 +81,10 @@ export default function StateDemo() {
             </div>
           </div>
         </div>
-      </div>
+      </Card>
 
       {/* State Inspector */}
-      <div className="w-full sm:w-1/3 shrink-0 rounded-lg bg-zinc-900 dark:bg-zinc-800 p-4 font-mono text-sm">
-        <p className="text-xs uppercase tracking-widest text-zinc-700 dark:text-zinc-300 mb-3">
-          State Inspector
-        </p>
+      <InspectorPanel title="State Inspector">
         <div className="space-y-2 text-xs">
           <div className="flex justify-between gap-3">
             <span className="text-zinc-400">name</span>
@@ -100,7 +99,7 @@ export default function StateDemo() {
             <ValueDisplay type="number">{likes}</ValueDisplay>
           </div>
         </div>
-      </div>
+      </InspectorPanel>
     </div>
   );
 }

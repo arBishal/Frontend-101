@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import Input from "@/app/components/ui/Input";
+import Card from "@/app/components/ui/Card";
+import InspectorPanel from "@/app/components/ui/InspectorPanel";
 
 type Fix = "altText" | "contrast" | "labels" | "keyboard";
 
@@ -31,7 +33,7 @@ export default function AccessibilityDemo() {
   return (
     <div className="flex flex-col sm:flex-row gap-4">
       {/* Signup Form */}
-      <div className="w-full rounded-lg border border-zinc-200 dark:border-zinc-800 p-5 sm:p-6 space-y-5">
+      <Card className="w-full space-y-5">
         {/* Logo */}
         <div className="relative w-fit">
           <img
@@ -98,13 +100,10 @@ export default function AccessibilityDemo() {
             </div>
           )}
         </div>
-      </div>
+      </Card>
 
       {/* Accessibility Audit */}
-      <div className="w-full sm:w-1/3 shrink-0 rounded-lg bg-zinc-900 dark:bg-zinc-800 p-4 font-mono text-sm">
-        <p className="text-xs uppercase tracking-widest text-zinc-700 dark:text-zinc-300 mb-3">
-          Accessibility Audit
-        </p>
+      <InspectorPanel title="Accessibility Audit">
         <div className="space-y-2 text-xs">
           {fixKeys.map((key) => (
             <div key={key} className="flex justify-between items-center gap-3">
@@ -135,7 +134,7 @@ export default function AccessibilityDemo() {
             {score === fixKeys.length && " — Perfect!"}
           </span>
         </div>
-      </div>
+      </InspectorPanel>
     </div>
   );
 }

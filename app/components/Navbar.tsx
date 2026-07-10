@@ -5,26 +5,35 @@ import { Sun, Moon, Link2, Check } from "lucide-react";
 import { useTheme } from "@/app/components/ThemeProvider";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { concepts } from "@/app/lib/concepts";
+import { concepts, type Concept } from "@/app/lib/concepts";
 
 const availableConcepts = concepts.filter((c) => c.status === "available");
 
-export default function Navbar() {
-  const { resolvedTheme, setTheme } = useTheme();
-  const pathname = usePathname();
-  const isConceptPage = pathname.startsWith("/concepts/");
-  const [copied, setCopied] = useState(false);
-
-  const rawSlug = isConceptPage ? pathname.split("/concepts/")[1] : null;
+function getProgressPct(pathname: string, available: Concept[]): number {
+  const rawSlug = pathname.split("/concepts/")[1];
   const topLevelSlug = rawSlug ? rawSlug.split("/")[0] : null;
-  const currentIndex = availableConcepts.findIndex((c) => c.slug === topLevelSlug);
-  const progressPct = currentIndex >= 0 ? ((currentIndex + 1) / availableConcepts.length) * 100 : 0;
+  const index = available.findIndex((c) => c.slug === topLevelSlug);
+  return index >= 0 ? ((index + 1) / available.length) * 100 : 0;
+}
+
+function useCopyLink() {
+  const [copied, setCopied] = useState(false);
 
   async function handleShare() {
     await navigator.clipboard.writeText(window.location.href);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   }
+
+  return { copied, handleShare };
+}
+
+export default function Navbar() {
+  const { resolvedTheme, setTheme } = useTheme();
+  const pathname = usePathname();
+  const isConceptPage = pathname.startsWith("/concepts/");
+  const { copied, handleShare } = useCopyLink();
+  const progressPct = isConceptPage ? getProgressPct(pathname, availableConcepts) : 0;
 
   return (
     <nav className="relative border-b border-zinc-200 dark:border-zinc-800 px-4 py-2 lg:px-6 lg:py-4">
