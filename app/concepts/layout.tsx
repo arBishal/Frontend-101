@@ -13,8 +13,8 @@ export default function ConceptsLayout({ children }: ConceptsLayoutProps) {
       <Navbar />
       <div className="flex-1 flex">
         <ConceptSidebar />
-        <main className="flex-1 min-w-0 p-6 lg:p-8">
-          {children}
+        <main className="flex-1 min-w-0 p-6 lg:p-8 flex flex-col">
+          <div className="flex-1">{children}</div>
           <ConceptNav />
         </main>
       </div>
