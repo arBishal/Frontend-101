@@ -33,7 +33,7 @@ export default function StateDemo() {
         <div className="w-full flex flex-col md:flex-row items-center gap-3 md:gap-4">
           <Image
             src={`https://api.dicebear.com/9.x/avataaars/svg?seed=${avatarSeed}`}
-            alt="Harry Dresden"
+            alt={`${name}'s avatar`}
             width={56}
             height={56}
             className="size-12 md:size-14 shrink-0 rounded-full bg-zinc-100 dark:bg-zinc-800"

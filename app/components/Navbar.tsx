@@ -4,10 +4,10 @@ import Link from "next/link";
 import { Sun, Moon, Link2, Check } from "lucide-react";
 import { useTheme } from "@/app/components/ThemeProvider";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { concepts, type Concept } from "@/app/lib/concepts";
 
-const availableConcepts = concepts.filter((c) => c.status === "available");
+const availableConcepts = concepts;
 
 function getProgressPct(pathname: string, available: Concept[]): number {
   const rawSlug = pathname.split("/concepts/")[1];
@@ -18,11 +18,19 @@ function getProgressPct(pathname: string, available: Concept[]): number {
 
 function useCopyLink() {
   const [copied, setCopied] = useState(false);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
+  }, []);
 
   async function handleShare() {
     await navigator.clipboard.writeText(window.location.href);
     setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    timeoutRef.current = setTimeout(() => setCopied(false), 2000);
   }
 
   return { copied, handleShare };

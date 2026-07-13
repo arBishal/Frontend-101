@@ -86,11 +86,16 @@ export default function ConceptSidebar() {
   });
 
   useEffect(() => {
-    concepts.forEach((c) => {
-      if (c.children && pathname.startsWith(`/concepts/${c.slug}`)) {
-        setExpandedSlugs((prev) => (prev.includes(c.slug) ? prev : [...prev, c.slug]));
-      }
-    });
+    const toExpand = concepts
+      .filter((c) => c.children && pathname.startsWith(`/concepts/${c.slug}`))
+      .map((c) => c.slug);
+
+    if (toExpand.length > 0) {
+      setExpandedSlugs((prev) => {
+        const newSlugs = toExpand.filter((s) => !prev.includes(s));
+        return newSlugs.length > 0 ? [...prev, ...newSlugs] : prev;
+      });
+    }
   }, [pathname]);
 
   function toggleExpanded(slug: string) {

@@ -1,4 +1,4 @@
-import { twMerge } from "tailwind-merge";
+import { cn } from "@/app/lib/cn";
 
 type InspectorPanelProps = {
   title: string;
@@ -9,7 +9,7 @@ type InspectorPanelProps = {
 export default function InspectorPanel({ title, children, className }: InspectorPanelProps) {
   return (
     <div
-      className={twMerge(
+      className={cn(
         "w-full sm:w-1/3 shrink-0 rounded-lg bg-zinc-900 dark:bg-zinc-800 p-4 font-mono text-sm",
         className
       )}

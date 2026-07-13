@@ -48,10 +48,14 @@ export default function CodeBlock(props: CodeBlockProps) {
       setRendered({ key, html: cached });
       return;
     }
-    codeToHtml(code, { lang, theme: "github-dark" }).then((html) => {
-      cache.current.set(key, html);
-      setRendered({ key, html });
-    });
+    codeToHtml(code, { lang, theme: "github-dark" })
+      .then((html) => {
+        cache.current.set(key, html);
+        setRendered({ key, html });
+      })
+      .catch((err) => {
+        console.error("Shiki highlighting failed:", err);
+      });
   }, [code, lang]);
 
   function handleTabChange(index: number) {
