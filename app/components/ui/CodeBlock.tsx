@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { codeToHtml } from "shiki";
+import { cn } from "@/app/lib/cn";
 
 type Tab = {
   label: string;
@@ -54,7 +55,7 @@ export default function CodeBlock(props: CodeBlockProps) {
   const lineCount = code.split("\n").length;
 
   return (
-    <div className={`rounded-lg bg-zinc-900 border border-zinc-800 overflow-hidden ${props.className ?? ""}`}>
+    <div className={cn("rounded-lg bg-zinc-900 border border-zinc-800 overflow-hidden", props.className)}>
       {/* Header — tabs or title */}
       {isTabbedMode ? (
         <div className="flex border-b border-zinc-800">
@@ -62,11 +63,10 @@ export default function CodeBlock(props: CodeBlockProps) {
             <button
               key={tab.label}
               onClick={() => handleTabChange(i)}
-              className={`flex-1 px-4 py-2 font-mono text-xs sm:text-sm transition-colors ${
-                activeTab === i
-                  ? "text-zinc-100 bg-zinc-50/5"
-                  : "text-zinc-500 hover:text-zinc-300"
-              }`}
+              className={cn(
+                "flex-1 px-4 py-2 font-mono text-xs sm:text-sm transition-colors",
+                activeTab === i ? "text-zinc-100 bg-zinc-50/5" : "text-zinc-500 hover:text-zinc-300"
+              )}
             >
               {tab.label}
             </button>

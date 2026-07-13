@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { ChevronDown } from "lucide-react";
 import { concepts, type Concept, type ConceptChild } from "@/app/lib/concepts";
 import { useState, useEffect } from "react";
+import { cn } from "@/app/lib/cn";
 
 type SidebarItemProps = {
   concept: Concept;
@@ -23,17 +24,18 @@ function SidebarItem({ concept, pathname, isExpanded, onToggle }: SidebarItemPro
   return (
     <div>
       <div
-        className={`flex items-center gap-3 rounded px-2.5 py-2 transition-colors ${
+        className={cn(
+          "flex items-center gap-3 rounded px-2.5 py-2 transition-colors",
           isActive
             ? "bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100"
             : isParentHighlighted
               ? "text-zinc-900 dark:text-zinc-100"
               : "text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-50 dark:hover:bg-zinc-800/50"
-        }`}
+        )}
       >
         <Link href={href} title={concept.title} className="flex items-center gap-3 flex-1 min-w-0">
           <Icon className="size-4 shrink-0" />
-          <span className={`hidden lg:block text-sm truncate ${isParentHighlighted ? "font-medium" : ""}`}>
+          <span className={cn("hidden lg:block text-sm truncate", isParentHighlighted && "font-medium")}>
             {concept.title}
           </span>
         </Link>
@@ -44,7 +46,7 @@ function SidebarItem({ concept, pathname, isExpanded, onToggle }: SidebarItemPro
             className="hidden lg:flex shrink-0 p-0.5 -mr-0.5"
           >
             <ChevronDown
-              className={`size-3.5 transition-transform ${isExpanded ? "rotate-0" : "-rotate-90"}`}
+              className={cn("size-3.5 transition-transform", isExpanded ? "rotate-0" : "-rotate-90")}
             />
           </button>
         )}
@@ -58,11 +60,12 @@ function SidebarItem({ concept, pathname, isExpanded, onToggle }: SidebarItemPro
               <Link
                 key={child.slug}
                 href={childHref}
-                className={`rounded px-2.5 py-1.5 text-sm transition-colors ${
+                className={cn(
+                  "rounded px-2.5 py-1.5 text-sm transition-colors",
                   isChildActive
                     ? "bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 font-medium"
                     : "text-zinc-400 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100"
-                }`}
+                )}
               >
                 {child.title}
               </Link>

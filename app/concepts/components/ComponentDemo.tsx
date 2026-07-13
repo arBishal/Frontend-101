@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Search, X } from "lucide-react";
 import Button from "@/app/components/ui/Button";
 import Card from "@/app/components/ui/Card";
+import { cn } from "@/app/lib/cn";
 
 function XRaySection({
   label,
@@ -18,16 +19,17 @@ function XRaySection({
 }) {
   return (
     <div
-      className={`relative border transition-colors duration-200 rounded-lg ${
-        active
-          ? "border-dashed border-zinc-400 dark:border-zinc-500"
-          : "border-transparent"
-      } ${className ?? ""}`}
+      className={cn(
+        "relative border transition-colors duration-200 rounded-lg",
+        active ? "border-dashed border-zinc-400 dark:border-zinc-500" : "border-transparent",
+        className
+      )}
     >
       <span
-        className={`absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 font-mono text-[10px] font-semibold uppercase tracking-wider px-1.5 py-0.5 rounded bg-zinc-900 dark:bg-zinc-100 text-zinc-100 dark:text-zinc-900 whitespace-nowrap transition-opacity duration-200 ${
+        className={cn(
+          "absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 font-mono text-xxs font-semibold uppercase tracking-wider px-1.5 py-0.5 rounded bg-zinc-900 dark:bg-zinc-100 text-zinc-100 dark:text-zinc-900 whitespace-nowrap transition-opacity duration-200",
           active ? "opacity-100" : "opacity-0 pointer-events-none"
-        }`}
+        )}
       >
         {label}
       </span>

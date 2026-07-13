@@ -7,6 +7,7 @@ import Button from "@/app/components/ui/Button";
 import Input from "@/app/components/ui/Input";
 import Card from "@/app/components/ui/Card";
 import InspectorPanel from "@/app/components/ui/InspectorPanel";
+import { cn } from "@/app/lib/cn";
 
 type Status = "idle" | "loading" | "success" | "error";
 
@@ -154,7 +155,7 @@ export default function ApiDemo() {
                   {data.types.map((type) => (
                     <span
                       key={type}
-                      className={`px-2 py-0.5 rounded-full text-xs font-medium capitalize ${typeColors[type] ?? defaultTypeColor}`}
+                      className={cn("px-2 py-0.5 rounded-full text-xs font-medium capitalize", typeColors[type] ?? defaultTypeColor)}
                     >
                       {type}
                     </span>

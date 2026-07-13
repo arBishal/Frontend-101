@@ -7,6 +7,7 @@ import Button from "@/app/components/ui/Button";
 import Input from "@/app/components/ui/Input";
 import Card from "@/app/components/ui/Card";
 import InspectorPanel from "@/app/components/ui/InspectorPanel";
+import { cn } from "@/app/lib/cn";
 
 function ValueDisplay({ type, children }: { type: "string" | "boolean" | "number"; children: React.ReactNode }) {
   const color = {
@@ -70,7 +71,7 @@ export default function StateDemo() {
                 className="text-xs px-1 py-1"
               >
                 <Heart
-                  className={`size-3.5 transition-colors ${likes > 0 ? "fill-red-500 text-red-500" : ""}`}
+                  className={cn("size-3.5 transition-colors", likes > 0 && "fill-red-500 text-red-500")}
                 />
                 {likes}
               </Button>

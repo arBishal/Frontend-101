@@ -6,6 +6,7 @@ import Input from "@/app/components/ui/Input";
 import CodeBlock from "@/app/components/ui/CodeBlock";
 import Card from "@/app/components/ui/Card";
 import { Plus, X, Check } from "lucide-react";
+import { cn } from "@/app/lib/cn";
 
 
 const vanillaCode = `<script>
@@ -193,11 +194,10 @@ export default function FrameworkDemo() {
                   )}
                 </button>
                 <span
-                  className={`flex-1 ${
-                    todo.done
-                      ? "line-through text-zinc-400 dark:text-zinc-600"
-                      : "text-zinc-700 dark:text-zinc-300"
-                  }`}
+                  className={cn(
+                    "flex-1",
+                    todo.done ? "line-through text-zinc-400 dark:text-zinc-600" : "text-zinc-700 dark:text-zinc-300"
+                  )}
                 >
                   {todo.text}
                 </span>

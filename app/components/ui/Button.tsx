@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { ComponentProps } from "react";
-import { twMerge } from "tailwind-merge";
+import { cn } from "@/app/lib/cn";
 
 const variants = {
   solid:
@@ -22,7 +22,7 @@ type Props = ComponentProps<"button"> & {
 };
 
 export default function Button({ variant = "solid", className = "", href, children, ...rest }: Props) {
-  const classes = twMerge(base, variants[variant], className);
+  const classes = cn(base, variants[variant], className);
 
   if (href) {
     if (href.startsWith("http")) {

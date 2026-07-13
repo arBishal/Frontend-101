@@ -5,6 +5,7 @@ import Image from "next/image";
 import Input from "@/app/components/ui/Input";
 import Card from "@/app/components/ui/Card";
 import InspectorPanel from "@/app/components/ui/InspectorPanel";
+import { cn } from "@/app/lib/cn";
 
 type Fix = "altText" | "contrast" | "labels" | "keyboard";
 
@@ -46,7 +47,7 @@ export default function AccessibilityDemo() {
             unoptimized
           />
           {fixes.altText && (
-            <span className="absolute top-0 left-12 font-mono text-[10px] bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-400 px-1.5 py-0.5 rounded whitespace-nowrap">
+            <span className="absolute top-0 left-12 font-mono text-xxs bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-400 px-1.5 py-0.5 rounded whitespace-nowrap">
               alt: Wikipedia logo
             </span>
           )}
@@ -54,11 +55,10 @@ export default function AccessibilityDemo() {
 
         {/* Heading */}
         <h2
-          className={`text-lg md:text-xl font-semibold transition-colors duration-200 ${
-            fixes.contrast
-              ? "text-zinc-900 dark:text-zinc-50"
-              : "text-zinc-300 dark:text-zinc-600"
-          }`}
+          className={cn(
+            "text-lg md:text-xl font-semibold transition-colors duration-200",
+            fixes.contrast ? "text-zinc-900 dark:text-zinc-50" : "text-zinc-300 dark:text-zinc-600"
+          )}
         >
           Log in to your account
         </h2>
@@ -110,9 +110,10 @@ export default function AccessibilityDemo() {
               <span className="text-zinc-400">{fixLabels[key]}</span>
               <button
                 onClick={() => toggle(key)}
-                className={`font-mono font-medium transition-colors cursor-pointer ${
+                className={cn(
+                  "font-mono font-medium transition-colors cursor-pointer",
                   fixes[key] ? "text-emerald-400" : "text-red-400"
-                }`}
+                )}
               >
                 {fixes[key] ? "ON" : "OFF"}
               </button>
@@ -122,13 +123,10 @@ export default function AccessibilityDemo() {
         <div className="border-t border-zinc-700 mt-4 pt-3 flex justify-between items-center text-xs">
           <span className="text-zinc-400">score</span>
           <span
-            className={`font-medium ${
-              score === 0
-                ? "text-red-400"
-                : score <= 2
-                  ? "text-amber-400"
-                  : "text-emerald-400"
-            }`}
+            className={cn(
+              "font-medium",
+              score === 0 ? "text-red-400" : score <= 2 ? "text-amber-400" : "text-emerald-400"
+            )}
           >
             {score} / {fixKeys.length}
             {score === fixKeys.length && " — Perfect!"}

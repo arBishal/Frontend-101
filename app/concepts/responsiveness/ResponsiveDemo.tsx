@@ -4,6 +4,7 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import { Monitor, Tablet, Smartphone } from "lucide-react";
 import Button from "@/app/components/ui/Button";
 import { useResizable } from "@/app/lib/useResizable";
+import { cn } from "@/app/lib/cn";
 
 const PRESETS = [
   { label: "Mobile", icon: Smartphone, range: "< 640px", width: 320 },
@@ -175,11 +176,12 @@ export default function ResponsiveDemo() {
           style={{ left: (isDesktop ? maxWidth : displayWidth) - 8 }}
         >
           <div
-            className={`h-12 w-1.5 rounded-full transition-colors ${
+            className={cn(
+              "h-12 w-1.5 rounded-full transition-colors",
               isDragging
                 ? "bg-zinc-900 dark:bg-zinc-100"
                 : "bg-zinc-300 dark:bg-zinc-600 group-hover:bg-zinc-500 dark:group-hover:bg-zinc-400"
-            }`}
+            )}
           />
         </div>
       </div>

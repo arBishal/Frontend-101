@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ExternalLink } from "lucide-react";
 import SectionLabel from "@/app/components/ui/SectionLabel";
+import { cn } from "@/app/lib/cn";
 import {
   siReact,
   siVuedotjs,
@@ -100,7 +101,7 @@ export default function LandscapePage() {
                   <svg
                     role="img"
                     viewBox="0 0 24 24"
-                    className={`size-5 shrink-0${darkInvert ? " dark:invert" : ""}`}
+                    className={cn("size-5 shrink-0", darkInvert && "dark:invert")}
                     style={{ fill: colorOverride ?? `#${icon.hex}` }}
                   >
                     <path d={icon.path} />
