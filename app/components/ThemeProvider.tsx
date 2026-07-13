@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState, useCallback } from "react";
+import { createContext, useContext, useEffect, useCallback, useSyncExternalStore } from "react";
 
 type Theme = "light" | "dark" | "system";
 type ResolvedTheme = "light" | "dark";
@@ -19,8 +19,29 @@ export function useTheme() {
   return useContext(ThemeContext);
 }
 
-function getSystemTheme(): ResolvedTheme {
+// Module-level set so setTheme can notify useSyncExternalStore within the same tab.
+// (The native `storage` event only fires in other tabs, not the originating tab.)
+const themeListeners = new Set<() => void>();
+
+function subscribeToTheme(callback: () => void): () => void {
+  themeListeners.add(callback);
+  const mq = window.matchMedia("(prefers-color-scheme: dark)");
+  mq.addEventListener("change", callback);
+  return () => {
+    themeListeners.delete(callback);
+    mq.removeEventListener("change", callback);
+  };
+}
+
+function getThemeSnapshot(): ResolvedTheme {
+  const stored = localStorage.getItem("theme");
+  if (stored === "dark") return "dark";
+  if (stored === "light") return "light";
   return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+}
+
+function getThemeServerSnapshot(): ResolvedTheme {
+  return "light";
 }
 
 function applyTheme(resolved: ResolvedTheme) {
@@ -28,34 +49,22 @@ function applyTheme(resolved: ResolvedTheme) {
 }
 
 export default function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [resolvedTheme, setResolvedTheme] = useState<ResolvedTheme>("light");
+  const resolvedTheme = useSyncExternalStore(
+    subscribeToTheme,
+    getThemeSnapshot,
+    getThemeServerSnapshot
+  );
 
+  // Sync the DOM class whenever the resolved theme changes.
+  // This is a DOM side-effect, not a setState call, so no cascading render.
   useEffect(() => {
-    const stored = localStorage.getItem("theme");
-    const resolved: ResolvedTheme =
-      stored === "dark" ? "dark" :
-      stored === "light" ? "light" :
-      getSystemTheme();
-    setResolvedTheme(resolved);
-    applyTheme(resolved);
-
-    const mq = window.matchMedia("(prefers-color-scheme: dark)");
-    function onSystemChange(e: MediaQueryListEvent) {
-      if (!localStorage.getItem("theme") || localStorage.getItem("theme") === "system") {
-        const r: ResolvedTheme = e.matches ? "dark" : "light";
-        setResolvedTheme(r);
-        applyTheme(r);
-      }
-    }
-    mq.addEventListener("change", onSystemChange);
-    return () => mq.removeEventListener("change", onSystemChange);
-  }, []);
+    applyTheme(resolvedTheme);
+  }, [resolvedTheme]);
 
   const setTheme = useCallback((next: Theme) => {
-    const resolved: ResolvedTheme = next === "system" ? getSystemTheme() : next;
-    setResolvedTheme(resolved);
-    applyTheme(resolved);
     localStorage.setItem("theme", next);
+    // Notify subscribers in this tab so useSyncExternalStore re-reads the snapshot.
+    themeListeners.forEach((cb) => cb());
   }, []);
 
   return (

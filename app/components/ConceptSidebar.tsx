@@ -31,24 +31,12 @@ function SidebarItem({ concept, pathname, isExpanded, onToggle }: SidebarItemPro
               : "text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-50 dark:hover:bg-zinc-800/50"
         }`}
       >
-        {hasChildren && !isExpanded ? (
-          <button
-            onClick={() => onToggle(concept.slug)}
-            className="flex items-center gap-3 flex-1 min-w-0"
-          >
-            <Icon className="size-4 shrink-0" />
-            <span className={`hidden lg:block text-sm truncate ${isParentHighlighted ? "font-medium" : ""}`}>
-              {concept.title}
-            </span>
-          </button>
-        ) : (
-          <Link href={href} title={concept.title} className="flex items-center gap-3 flex-1 min-w-0">
-            <Icon className="size-4 shrink-0" />
-            <span className={`hidden lg:block text-sm truncate ${isParentHighlighted ? "font-medium" : ""}`}>
-              {concept.title}
-            </span>
-          </Link>
-        )}
+        <Link href={href} title={concept.title} className="flex items-center gap-3 flex-1 min-w-0">
+          <Icon className="size-4 shrink-0" />
+          <span className={`hidden lg:block text-sm truncate ${isParentHighlighted ? "font-medium" : ""}`}>
+            {concept.title}
+          </span>
+        </Link>
         {hasChildren && (
           <button
             onClick={() => onToggle(concept.slug)}
@@ -109,7 +97,11 @@ export default function ConceptSidebar() {
   function toggleExpanded(slug: string) {
     setExpandedSlugs((prev) => {
       const next = new Set(prev);
-      next.has(slug) ? next.delete(slug) : next.add(slug);
+      if (next.has(slug)) {
+      next.delete(slug);
+    } else {
+      next.add(slug);
+    }
       return next;
     });
   }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useId } from "react";
 import { Heart, UserPlus, UserCheck } from "lucide-react";
 import Button from "@/app/components/ui/Button";
 import Input from "@/app/components/ui/Input";
@@ -21,11 +21,7 @@ export default function StateDemo() {
   const [name, setName] = useState("Batman");
   const [following, setFollowing] = useState(false);
   const [likes, setLikes] = useState(0);
-  const [avatarSeed, setAvatarSeed] = useState<string | null>(null);
-
-  useEffect(() => {
-    setAvatarSeed(Math.random().toString(36).slice(2));
-  }, []);
+  const avatarSeed = useId();
 
   return (
     <div className="flex flex-col sm:flex-row gap-4">
@@ -33,15 +29,11 @@ export default function StateDemo() {
       <Card className="flex justify-center md:justify-between items-center w-full">
         {/* Avatar + Name + Follow + Heart */}
         <div className="w-full flex flex-col md:flex-row items-center gap-3 md:gap-4">
-          {avatarSeed ? (
-            <img
-              src={`https://api.dicebear.com/9.x/avataaars/svg?seed=${avatarSeed}`}
-              alt="Harry Dresden"
-              className="size-12 md:size-14 shrink-0 rounded-full bg-zinc-100 dark:bg-zinc-800"
-            />
-          ) : (
-            <div className="size-12 md:size-14 shrink-0 rounded-full bg-zinc-100 dark:bg-zinc-800" />
-          )}
+          <img
+            src={`https://api.dicebear.com/9.x/avataaars/svg?seed=${avatarSeed}`}
+            alt="Harry Dresden"
+            className="size-12 md:size-14 shrink-0 rounded-full bg-zinc-100 dark:bg-zinc-800"
+          />
           <div className="w-full flex flex-col md:flex-row justify-between items-center min-w-0 gap-4 md:gap-6">
             <Input
               type="text"

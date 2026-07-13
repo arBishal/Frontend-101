@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, MousePointerClick, RefreshCw, Puzzle, Route } from "lucide-react";
+import SectionLabel from "@/app/components/ui/SectionLabel";
+import Card from "@/app/components/ui/Card";
 
 export const metadata: Metadata = {
   title: "Why Frameworks Exist | Frontend 101",
@@ -48,9 +50,7 @@ export default function FrameworksPage() {
 
       {/* What is a Framework? */}
       <div className="text-zinc-600 dark:text-zinc-400 space-y-3">
-        <p className="font-mono uppercase tracking-wide font-medium text-zinc-500 dark:text-zinc-300">
-          What is a framework?
-        </p>
+        <SectionLabel>What is a framework?</SectionLabel>
         <p>
           A framework is a pre-built foundation that handles the repetitive,
           error-prone parts of building UIs &mdash; DOM updates, state
@@ -70,15 +70,10 @@ export default function FrameworksPage() {
 
       {/* What Problems Do They Solve? */}
       <div>
-        <p className="font-mono uppercase tracking-wide font-medium text-zinc-500 dark:text-zinc-300 mb-4">
-          What problems do they solve?
-        </p>
+        <SectionLabel className="mb-4">What problems do they solve?</SectionLabel>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {problems.map(({ icon: Icon, title, description }) => (
-            <div
-              key={title}
-              className="rounded-lg border border-zinc-200 dark:border-zinc-800 p-5 space-y-2"
-            >
+            <Card key={title} className="space-y-2 sm:p-5">
               <div className="flex items-center gap-2.5">
                 <Icon className="size-4 text-zinc-500 dark:text-zinc-400 shrink-0" />
                 <p className="font-medium text-zinc-900 dark:text-zinc-100">
@@ -88,7 +83,7 @@ export default function FrameworksPage() {
               <p className="text-zinc-500 dark:text-zinc-400 text-sm">
                 {description}
               </p>
-            </div>
+            </Card>
           ))}
         </div>
       </div>

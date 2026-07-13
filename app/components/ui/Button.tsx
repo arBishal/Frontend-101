@@ -16,39 +16,24 @@ const base =
 
 type Variant = keyof typeof variants;
 
-type ButtonProps = ComponentProps<"button"> & {
+type Props = ComponentProps<"button"> & {
   variant?: Variant;
-  href?: never;
+  href?: string;
 };
 
-type AnchorProps = ComponentProps<"a"> & {
-  variant?: Variant;
-  href: string;
-};
-
-type Props = ButtonProps | AnchorProps;
-
-export default function Button({ variant = "solid", className = "", ...props }: Props) {
+export default function Button({ variant = "solid", className = "", href, children, ...rest }: Props) {
   const classes = twMerge(base, variants[variant], className);
 
-  if ("href" in props && props.href) {
-    const { href, ...rest } = props as AnchorProps;
-    const isExternal = href.startsWith("http");
-
-    if (isExternal) {
+  if (href) {
+    if (href.startsWith("http")) {
       return (
-        <a
-          href={href}
-          className={classes}
-          target="_blank"
-          rel="noopener noreferrer"
-          {...rest}
-        />
+        <a href={href} className={classes} target="_blank" rel="noopener noreferrer">
+          {children}
+        </a>
       );
     }
-
-    return <Link href={href} className={classes} {...rest} />;
+    return <Link href={href} className={classes}>{children}</Link>;
   }
 
-  return <button className={classes} {...(props as ButtonProps)} />;
+  return <button className={classes} {...rest}>{children}</button>;
 }

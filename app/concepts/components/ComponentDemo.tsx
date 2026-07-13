@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Search, X } from "lucide-react";
 import Button from "@/app/components/ui/Button";
+import Card from "@/app/components/ui/Card";
 
 function XRaySection({
   label,
@@ -63,7 +64,7 @@ export default function ComponentDemo() {
         </Button>
       </div>
 
-      <div className="rounded-lg border border-zinc-200 dark:border-zinc-800 p-3 sm:p-4 space-y-3 sm:space-y-4">
+      <Card className="p-3 sm:p-4 space-y-3 sm:space-y-4">
         {/* Navbar — full width */}
         <XRaySection label="navbar" active={xray}>
           <div className="rounded-lg bg-zinc-100 dark:bg-zinc-800 px-4 py-3 flex items-center justify-between gap-3">
@@ -152,7 +153,7 @@ export default function ComponentDemo() {
             <div className="h-2 w-28 rounded-full bg-zinc-200 dark:bg-zinc-700" />
           </div>
         </XRaySection>
-      </div>
+      </Card>
     </div>
   );
 }

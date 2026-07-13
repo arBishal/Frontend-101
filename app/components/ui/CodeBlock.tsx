@@ -32,14 +32,18 @@ type CodeBlockProps = SingleProps | TabbedProps;
 export default function CodeBlock(props: CodeBlockProps) {
   const isTabbedMode = !!props.tabs;
   const [activeTab, setActiveTab] = useState(0);
-  const [html, setHtml] = useState<string>("");
+  const [rendered, setRendered] = useState<{ key: string; html: string } | null>(null);
 
   const code = isTabbedMode ? props.tabs[activeTab].code : props.code;
   const lang = isTabbedMode ? props.tabs[activeTab].lang : props.lang;
+  const codeKey = `${lang}:${code}`;
+  const activeHtml = rendered?.key === codeKey ? rendered.html : null;
 
   useEffect(() => {
-    setHtml("");
-    codeToHtml(code, { lang, theme: "github-dark" }).then(setHtml);
+    const key = `${lang}:${code}`;
+    codeToHtml(code, { lang, theme: "github-dark" }).then((html) => {
+      setRendered({ key, html });
+    });
   }, [code, lang]);
 
   function handleTabChange(index: number) {
@@ -88,10 +92,10 @@ export default function CodeBlock(props: CodeBlockProps) {
           ))}
         </div>
         {/* Code */}
-        {html ? (
+        {activeHtml ? (
           <div
             className="flex-1 py-4 pr-4 font-mono text-xs leading-relaxed overflow-x-auto [&_pre]:!bg-transparent [&_pre]:!m-0 [&_pre]:!p-0 [&_code]:!bg-transparent"
-            dangerouslySetInnerHTML={{ __html: html }}
+            dangerouslySetInnerHTML={{ __html: activeHtml }}
           />
         ) : (
           <div className="flex-1 py-4 pr-4 font-mono text-xs leading-relaxed overflow-x-auto">

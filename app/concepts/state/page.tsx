@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import StateDemo from "./StateDemo";
+import SectionLabel from "@/app/components/ui/SectionLabel";
 
 export const metadata: Metadata = {
   title: "State | Frontend 101",
@@ -19,16 +20,12 @@ export default function StatePage() {
       </div>
 
       <div>
-        <p className="font-mono uppercase tracking-wide font-medium text-zinc-500 dark:text-zinc-300 mb-4">
-          Interactive demo
-        </p>
+        <SectionLabel className="mb-4">Interactive demo</SectionLabel>
         <StateDemo />
       </div>
 
       <div className="text-sm lg:text-base text-zinc-600 dark:text-zinc-400 space-y-3">
-        <p className="font-mono uppercase tracking-wide font-medium text-zinc-500 dark:text-zinc-300">
-          How it works
-        </p>
+        <SectionLabel>How it works</SectionLabel>
         <p>
           State is data that can change over time. Every time state changes, the
           UI re-renders to reflect the new value — this is the core loop of

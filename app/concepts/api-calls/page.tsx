@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import ApiDemo from "./ApiDemo";
+import SectionLabel from "@/app/components/ui/SectionLabel";
 
 export const metadata: Metadata = {
   title: "API Calls | Frontend 101",
@@ -19,9 +20,7 @@ export default function ApiCallsPage() {
       </div>
 
       <div>
-        <p className="font-mono uppercase tracking-wide font-medium text-zinc-500 dark:text-zinc-300 mb-4">
-          Interactive demo
-        </p>
+        <SectionLabel className="mb-4">Interactive demo</SectionLabel>
         <p className="text-zinc-500 dark:text-zinc-400 text-sm mb-4">
           This demo fetches a random Pokémon from{" "}
           <a
@@ -38,9 +37,7 @@ export default function ApiCallsPage() {
       </div>
 
       <div className="text-sm lg:text-base text-zinc-600 dark:text-zinc-400 space-y-3">
-        <p className="font-mono uppercase tracking-wide font-medium text-zinc-500 dark:text-zinc-300">
-          How it works
-        </p>
+        <SectionLabel>How it works</SectionLabel>
         <p>
           An API call is how the frontend asks a server for data. Instead of
           having everything built into the page, the UI sends a request over

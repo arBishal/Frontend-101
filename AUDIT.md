@@ -191,6 +191,8 @@ These are less applicable to a React component codebase of this size. No violati
 
 ## 8. Tailwind CSS Best Practices
 
+> **Note:** Tailwind class issues (#7, #32, #33, #34) are intentionally deferred. They will be addressed as a dedicated pass after all component-level refactoring is complete, so that class consolidation happens on stable, final component boundaries.
+
 ### String Concatenation vs `clsx`/`cn`
 
 | # | Issue | Locations |

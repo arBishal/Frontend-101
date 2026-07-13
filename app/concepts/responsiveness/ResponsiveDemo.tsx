@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useRef, useCallback, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { Monitor, Tablet, Smartphone } from "lucide-react";
 import Button from "@/app/components/ui/Button";
+import { useResizable } from "@/app/lib/useResizable";
 
 const PRESETS = [
   { label: "Mobile", icon: Smartphone, range: "< 640px", width: 320 },
@@ -13,7 +14,6 @@ const PRESETS = [
 export default function ResponsiveDemo() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [width, setWidth] = useState<number | null>(null);
-  const [isDragging, setIsDragging] = useState(false);
   const [maxWidth, setMaxWidth] = useState(1200);
   const [isDesktop, setIsDesktop] = useState(true);
 
@@ -33,7 +33,7 @@ export default function ResponsiveDemo() {
     return () => window.removeEventListener("resize", updateMax);
   }, [isDesktop]);
 
-  function handlePresetClick(presetWidth: number) {
+  const handlePresetClick = useCallback((presetWidth: number) => {
     if (presetWidth === Infinity) {
       setIsDesktop(true);
       setWidth(maxWidth);
@@ -41,33 +41,19 @@ export default function ResponsiveDemo() {
       setIsDesktop(false);
       setWidth(Math.min(presetWidth, maxWidth));
     }
-  }
+  }, [maxWidth]);
 
-  const handlePointerDown = useCallback(
-    (e: React.PointerEvent) => {
-      e.preventDefault();
-      setIsDragging(true);
+  const onResize = useCallback((clamped: number) => {
+    setWidth(clamped);
+    setIsDesktop(clamped === maxWidth);
+  }, [maxWidth]);
 
-      const onPointerMove = (ev: PointerEvent) => {
-        if (!containerRef.current) return;
-        const rect = containerRef.current.getBoundingClientRect();
-        const newWidth = Math.round(ev.clientX - rect.left);
-        const clamped = Math.max(280, Math.min(newWidth, maxWidth));
-        setWidth(clamped);
-        setIsDesktop(clamped === maxWidth);
-      };
-
-      const onPointerUp = () => {
-        setIsDragging(false);
-        document.removeEventListener("pointermove", onPointerMove);
-        document.removeEventListener("pointerup", onPointerUp);
-      };
-
-      document.addEventListener("pointermove", onPointerMove);
-      document.addEventListener("pointerup", onPointerUp);
-    },
-    [maxWidth]
-  );
+  const { isDragging, handlePointerDown } = useResizable({
+    containerRef,
+    maxWidth,
+    minWidth: 280,
+    onResize,
+  });
 
   function getActivePreset() {
     const w = width ?? maxWidth;

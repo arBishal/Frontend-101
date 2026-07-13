@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import FrameworkDemo from "./FrameworkDemo";
+import SectionLabel from "@/app/components/ui/SectionLabel";
 
 export const metadata: Metadata = {
   title: "See the Difference | Frontend 101",
@@ -22,16 +23,12 @@ export default function SeeTheDiffPage() {
       </div>
 
       <div>
-        <p className="font-mono uppercase tracking-wide font-medium text-zinc-500 dark:text-zinc-300 mb-4">
-          Interactive demo
-        </p>
+        <SectionLabel className="mb-4">Interactive demo</SectionLabel>
         <FrameworkDemo />
       </div>
 
       <div className="text-sm lg:text-base text-zinc-600 dark:text-zinc-400 space-y-3">
-        <p className="font-mono uppercase tracking-wide font-medium text-zinc-500 dark:text-zinc-300">
-          What to notice
-        </p>
+        <SectionLabel>What to notice</SectionLabel>
         <p>
           The live demo above is identical in both modes &mdash; a todo list
           where you can add, complete, and delete items. But look at the code

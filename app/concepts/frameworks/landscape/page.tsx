@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ExternalLink } from "lucide-react";
+import SectionLabel from "@/app/components/ui/SectionLabel";
 import {
   siReact,
   siVuedotjs,
@@ -74,9 +75,7 @@ export default function LandscapePage() {
       </div>
 
       <div>
-        <p className="font-mono uppercase tracking-wide font-medium text-zinc-500 dark:text-zinc-300 mb-4">
-          Major frameworks
-        </p>
+        <SectionLabel className="mb-4">Major frameworks</SectionLabel>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {frameworks.map(({ name, icon, philosophy, users, url, colorOverride, darkInvert }) => (
             <a
@@ -125,9 +124,7 @@ export default function LandscapePage() {
       </p>
 
       <div className="text-sm lg:text-base text-zinc-600 dark:text-zinc-400 space-y-3">
-        <p className="font-mono uppercase tracking-wide font-medium text-zinc-500 dark:text-zinc-300">
-          Which one should you pick?
-        </p>
+        <SectionLabel>Which one should you pick?</SectionLabel>
         <p>
           The best framework is the one your team knows and your project needs.
           They all solve the same core problems differently &mdash; the

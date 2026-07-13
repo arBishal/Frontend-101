@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import Button from "@/app/components/ui/Button";
 import Input from "@/app/components/ui/Input";
 import CodeBlock from "@/app/components/ui/CodeBlock";
+import Card from "@/app/components/ui/Card";
 import { Plus, X, Check } from "lucide-react";
 
 
@@ -124,34 +125,32 @@ const reactCode = `function TodoList() {
   );
 }`;
 
-type Todo = { id: number; text: string; done: boolean };
+type Todo = { id: string; text: string; done: boolean };
 
 export default function FrameworkDemo() {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [text, setText] = useState("");
 
-  function addTodo() {
+  const addTodo = useCallback(() => {
     if (!text.trim()) return;
-    setTodos((prev) => [...prev, { id: Date.now(), text: text.trim(), done: false }]);
+    setTodos((prev) => [...prev, { id: crypto.randomUUID(), text: text.trim(), done: false }]);
     setText("");
-  }
+  }, [text]);
 
-  function toggle(id: number) {
-    setTodos((prev) =>
-      prev.map((t) => (t.id === id ? { ...t, done: !t.done } : t))
-    );
-  }
+  const toggle = useCallback((id: string) => {
+    setTodos((prev) => prev.map((t) => (t.id === id ? { ...t, done: !t.done } : t)));
+  }, []);
 
-  function remove(id: number) {
+  const remove = useCallback((id: string) => {
     setTodos((prev) => prev.filter((t) => t.id !== id));
-  }
+  }, []);
 
   const doneCount = todos.filter((t) => t.done).length;
 
   return (
     <div className="flex flex-col gap-4">
       {/* Live demo */}
-      <div className="rounded-lg border border-zinc-200 dark:border-zinc-800 p-5 space-y-4">
+      <Card className="space-y-4 sm:p-5">
         <div className="flex items-center justify-between">
           <p className="font-mono text-sm md:text-base uppercase tracking-wide text-zinc-400 dark:text-zinc-300">
             What To Do?
@@ -216,7 +215,7 @@ export default function FrameworkDemo() {
             No todos yet. Type something and press Enter or click Add.
           </p>
         )}
-      </div>
+      </Card>
 
       {/* Code — side by side on md+, tabbed below md */}
       <div className="hidden lg:grid lg:grid-cols-2">
@@ -233,12 +232,12 @@ export default function FrameworkDemo() {
       </div>
 
       {/* Callout */}
-      <div className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-800/50 px-5 py-4">
+      <Card className="bg-zinc-50 dark:bg-zinc-800/50 px-5 py-4 sm:px-5 sm:py-4">
         <p className="text-sm text-zinc-600 dark:text-zinc-400">
           Both do the same thing. The framework version is shorter, declarative,
           and automatically keeps the UI in sync with the data.
         </p>
-      </div>
+      </Card>
     </div>
   );
 }
