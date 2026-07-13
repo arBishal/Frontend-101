@@ -17,7 +17,21 @@ export const metadata: Metadata = {
   title: "Frontend 101",
   description:
     "Interactive, visual explanations of core frontend concepts for new developers.",
+  openGraph: {
+    title: "Frontend 101",
+    description:
+      "Interactive, visual explanations of core frontend concepts for new developers.",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Frontend 101",
+    description:
+      "Interactive, visual explanations of core frontend concepts for new developers.",
+  },
 };
+
+const THEME_INIT_SCRIPT = `(function(){try{var s=localStorage.getItem('theme');var d=s==='dark'||((!s||s==='system')&&window.matchMedia('(prefers-color-scheme: dark)').matches);if(d)document.documentElement.classList.add('dark')}catch(e){}})();`;
 
 export default function RootLayout({
   children,
@@ -31,7 +45,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
-        <script dangerouslySetInnerHTML={{ __html: `(function(){try{var s=localStorage.getItem('theme');var d=s==='dark'||((!s||s==='system')&&window.matchMedia('(prefers-color-scheme: dark)').matches);if(d)document.documentElement.classList.add('dark')}catch(e){}})();` }} />
+        <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
       </head>
       <body className="min-h-full flex flex-col">
         <ThemeProvider>{children}</ThemeProvider>

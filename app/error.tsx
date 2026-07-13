@@ -1,6 +1,6 @@
 "use client";
 
-export default function ConceptError({
+export default function AppError({
   error,
   reset,
 }: {
