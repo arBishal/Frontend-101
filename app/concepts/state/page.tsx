@@ -19,6 +19,44 @@ export default function StatePage() {
         </p>
       </div>
 
+      <div className="text-zinc-600 dark:text-zinc-400 space-y-3">
+        <SectionLabel>What is state?</SectionLabel>
+        <p>
+          State is data that changes over time. A plain HTML page is static: its
+          content is baked in and never moves. State is what makes a UI{" "}
+          <em>interactive</em>: a counter that increments, a toggle that opens a
+          menu, a text field that updates as you type.
+        </p>
+        <p>
+          In frameworks like React, state is a special kind of variable. When
+          you update it, the framework automatically re-renders the parts of the
+          UI that depend on it. You don&rsquo;t touch the DOM yourself; you
+          change the data, and the screen follows.
+        </p>
+        <p>
+          Common examples of state: whether a user is logged in, the items in a
+          shopping cart, the current value of a search input, which tab is
+          selected.
+        </p>
+      </div>
+
+      <div className="text-zinc-600 dark:text-zinc-400 space-y-3">
+        <SectionLabel>Why it matters</SectionLabel>
+        <p>
+          Without state management, you&rsquo;d have to manually find the right
+          DOM element and update its content every time something changes. For a
+          simple counter, that&rsquo;s manageable. For a form with validation,
+          conditional fields, and error messages, it quickly becomes a tangled
+          mess.
+        </p>
+        <p>
+          State is the single source of truth for your UI. When state and
+          rendering stay in sync automatically, you eliminate the #1 source of
+          UI bugs: the screen showing something different from what the data
+          says.
+        </p>
+      </div>
+
       <div>
         <SectionLabel className="mb-4">Interactive demo</SectionLabel>
         <StateDemo />
@@ -28,7 +66,7 @@ export default function StatePage() {
         <SectionLabel>How it works</SectionLabel>
         <p>
           State is data that can change over time. Every time state changes, the
-          UI re-renders to reflect the new value — this is the core loop of
+          UI re-renders to reflect the new value; this is the core loop of
           every interactive interface.
         </p>
         <p>
@@ -38,19 +76,19 @@ export default function StatePage() {
         </p>
         <ul className="list-disc list-inside space-y-1.5 font-mono text-xs lg:text-sm">
           <li>
-            <strong>name</strong> — a string, edited via the text input
+            <strong>name</strong>: a string, edited via the text input
           </li>
           <li>
-            <strong>following</strong> — a boolean toggled by the Follow button
+            <strong>following</strong>: a boolean toggled by the Follow button
           </li>
           <li>
-            <strong>likes</strong> — a number incremented by the heart button
+            <strong>likes</strong>: a number incremented by the heart button
           </li>
         </ul>
         <p>
           Each click or keystroke calls a state update, which triggers a
           re-render, which updates the UI. The inspector makes this invisible
-          process visible — like a mini version of React DevTools.
+          process visible, like a mini version of React DevTools.
         </p>
       </div>
     </div>
