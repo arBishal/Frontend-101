@@ -5,7 +5,7 @@ import SectionLabel from "@/app/components/ui/SectionLabel";
 import Card from "@/app/components/ui/Card";
 
 export const metadata: Metadata = {
-  title: "Why Frameworks Exist | Frontend 101",
+  title: "Frameworks | Frontend 101",
   description: "The manual pain frameworks were built to remove.",
 };
 
@@ -41,14 +41,13 @@ export default function FrameworksPage() {
     <div className="flex flex-col gap-8 text-sm lg:text-base">
       <div className="space-y-2">
         <h1 className="text-2xl lg:text-3xl font-bold text-zinc-900 dark:text-zinc-50">
-          Why Frameworks Exist
+          Frameworks
         </h1>
         <p className="text-zinc-600 dark:text-zinc-400">
           The manual pain frameworks were built to remove.
         </p>
       </div>
 
-      {/* What is a Framework? */}
       <div className="text-zinc-600 dark:text-zinc-400 space-y-3">
         <SectionLabel>What is a framework?</SectionLabel>
         <p>
@@ -68,10 +67,21 @@ export default function FrameworksPage() {
         </p>
       </div>
 
-      {/* What Problems Do They Solve? */}
-      <div>
-        <SectionLabel className="mb-4">What problems do they solve?</SectionLabel>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div className="text-zinc-600 dark:text-zinc-400 space-y-3">
+        <SectionLabel>Why it matters</SectionLabel>
+        <p>
+          Without a framework, you&rsquo;d manually create, update, and remove
+          HTML elements every time data changes. For a simple counter
+          that&rsquo;s manageable. For a real app with forms, navigation, and
+          live data, it quickly becomes a tangled mess of DOM manipulation.
+        </p>
+        <p>
+          Frameworks solve this by keeping your UI in sync with your data
+          automatically. They also give you component reuse, routing
+          conventions, and structure &mdash; so you&rsquo;re not reinventing the
+          wheel every time you start a project.
+        </p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 !mt-4">
           {problems.map(({ icon: Icon, title, description }) => (
             <Card key={title} className="space-y-2 sm:p-5">
               <div className="flex items-center gap-2.5">
@@ -86,10 +96,6 @@ export default function FrameworksPage() {
             </Card>
           ))}
         </div>
-      </div>
-
-      {/* Closing */}
-      <div className="text-zinc-600 dark:text-zinc-400 space-y-3">
         <p>
           Frameworks aren&rsquo;t magic &mdash; they&rsquo;re JavaScript
           libraries with smart abstractions. This entire site is built with{" "}
@@ -101,7 +107,7 @@ export default function FrameworksPage() {
           href="/concepts/frameworks/see-the-diff"
           className="inline-flex items-center gap-2 text-sm font-medium text-zinc-900 dark:text-zinc-100 hover:underline"
         >
-          Next, see the difference for yourself
+          See the difference for yourself
           <ArrowRight className="size-4" />
         </Link>
       </div>

@@ -1,6 +1,29 @@
 import type { Metadata } from "next";
+import { Copy, TriangleAlert, Package } from "lucide-react";
 import ComponentDemo from "./ComponentDemo";
 import SectionLabel from "@/app/components/ui/SectionLabel";
+import Card from "@/app/components/ui/Card";
+
+const problems = [
+  {
+    icon: Copy,
+    title: "Code Duplication",
+    description:
+      "Without components, the same HTML is copy-pasted everywhere. One change means updating every copy by hand.",
+  },
+  {
+    icon: TriangleAlert,
+    title: "Inconsistency",
+    description:
+      "Miss one copy during an update and the UI breaks. Users see different styles for the same element.",
+  },
+  {
+    icon: Package,
+    title: "No Reuse",
+    description:
+      "Every new feature starts from scratch instead of composing from a shared library of tested parts.",
+  },
+];
 
 export const metadata: Metadata = {
   title: "Components | Frontend 101",
@@ -55,6 +78,21 @@ export default function ComponentsPage() {
           works: teams build a shared library of components (buttons, modals,
           form fields) that the entire app consumes.
         </p>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 !mt-4">
+          {problems.map(({ icon: Icon, title, description }) => (
+            <Card key={title} className="space-y-2 sm:p-5">
+              <div className="flex items-center gap-2.5">
+                <Icon className="size-4 text-zinc-500 dark:text-zinc-400 shrink-0" />
+                <p className="font-medium text-zinc-900 dark:text-zinc-100">
+                  {title}
+                </p>
+              </div>
+              <p className="text-zinc-500 dark:text-zinc-400 text-sm">
+                {description}
+              </p>
+            </Card>
+          ))}
+        </div>
       </div>
 
       <div>

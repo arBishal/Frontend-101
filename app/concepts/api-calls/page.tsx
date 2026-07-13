@@ -1,6 +1,29 @@
 import type { Metadata } from "next";
+import { HardDrive, UserX, RefreshCw } from "lucide-react";
 import ApiDemo from "./ApiDemo";
 import SectionLabel from "@/app/components/ui/SectionLabel";
+import Card from "@/app/components/ui/Card";
+
+const problems = [
+  {
+    icon: HardDrive,
+    title: "Hardcoded Data",
+    description:
+      "Without APIs, every piece of data would need to be baked into the page. No dynamic content at all.",
+  },
+  {
+    icon: UserX,
+    title: "No Personalization",
+    description:
+      "User profiles, preferences, and account data all live on a server. No API means no user-specific experience.",
+  },
+  {
+    icon: RefreshCw,
+    title: "No Live Updates",
+    description:
+      "Prices change, feeds refresh, notifications arrive. Without API calls, your UI shows stale data forever.",
+  },
+];
 
 export const metadata: Metadata = {
   title: "API Calls | Frontend 101",
@@ -63,6 +86,21 @@ export default function ApiCallsPage() {
           essential for building UIs that feel reliable even when the network
           is slow or the server is down.
         </p>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 !mt-4">
+          {problems.map(({ icon: Icon, title, description }) => (
+            <Card key={title} className="space-y-2 sm:p-5">
+              <div className="flex items-center gap-2.5">
+                <Icon className="size-4 text-zinc-500 dark:text-zinc-400 shrink-0" />
+                <p className="font-medium text-zinc-900 dark:text-zinc-100">
+                  {title}
+                </p>
+              </div>
+              <p className="text-zinc-500 dark:text-zinc-400 text-sm">
+                {description}
+              </p>
+            </Card>
+          ))}
+        </div>
       </div>
 
       <div>

@@ -1,6 +1,29 @@
 import type { Metadata } from "next";
+import { MousePointerClick, AlertCircle, Workflow } from "lucide-react";
 import StateDemo from "./StateDemo";
 import SectionLabel from "@/app/components/ui/SectionLabel";
+import Card from "@/app/components/ui/Card";
+
+const problems = [
+  {
+    icon: MousePointerClick,
+    title: "Manual DOM Updates",
+    description:
+      "Without state, you manually find DOM elements and update their content every time something changes.",
+  },
+  {
+    icon: AlertCircle,
+    title: "Stale UI",
+    description:
+      "The screen shows something different from what the data says. This is the #1 source of UI bugs.",
+  },
+  {
+    icon: Workflow,
+    title: "Tangled Logic",
+    description:
+      "Forms with validation, conditional fields, and error messages become an unmanageable mess of imperative code.",
+  },
+];
 
 export const metadata: Metadata = {
   title: "State | Frontend 101",
@@ -55,6 +78,21 @@ export default function StatePage() {
           UI bugs: the screen showing something different from what the data
           says.
         </p>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 !mt-4">
+          {problems.map(({ icon: Icon, title, description }) => (
+            <Card key={title} className="space-y-2 sm:p-5">
+              <div className="flex items-center gap-2.5">
+                <Icon className="size-4 text-zinc-500 dark:text-zinc-400 shrink-0" />
+                <p className="font-medium text-zinc-900 dark:text-zinc-100">
+                  {title}
+                </p>
+              </div>
+              <p className="text-zinc-500 dark:text-zinc-400 text-sm">
+                {description}
+              </p>
+            </Card>
+          ))}
+        </div>
       </div>
 
       <div>

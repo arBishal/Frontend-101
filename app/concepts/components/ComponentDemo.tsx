@@ -80,8 +80,8 @@ function OptionToggle<T extends string>({
           className={cn(
             "px-2 py-1 rounded text-xs font-mono transition-colors cursor-pointer",
             value === opt
-              ? "bg-zinc-700 dark:bg-zinc-600 text-emerald-400"
-              : "text-zinc-500 hover:text-zinc-300"
+              ? "bg-zinc-200 dark:bg-zinc-700 text-emerald-700 dark:text-emerald-400"
+              : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200"
           )}
         >
           {opt}
@@ -127,7 +127,7 @@ export default function ComponentDemo() {
       <Card className="flex flex-col xl:flex-row items-start xl:items-center xl:justify-around gap-4 xl:gap-6">
         {variants.map((variant) => (
           <div key={variant} className="flex items-center gap-3 xl:flex-col xl:gap-4">
-            <span className="font-mono text-xs text-zinc-400 w-16 xl:w-auto shrink-0">
+            <span className="font-mono text-xs text-zinc-500 w-16 xl:w-auto shrink-0">
               {variant}
             </span>
             <DemoButton
@@ -146,22 +146,22 @@ export default function ComponentDemo() {
       {/* Panels — side by side at sm+ */}
       <div className="flex flex-col sm:flex-row gap-4">
         {/* Props Inspector */}
-        <InspectorPanel title="Props Inspector" className="w-full sm:w-full flex-1">
+        <InspectorPanel title="Props Inspector" className="flex-1">
           <div className="space-y-2.5 text-xs">
             {variants.map((variant, i) => (
               <div key={variant} className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
                 <div className="flex items-center gap-2">
-                  <span className="text-zinc-500 w-4 shrink-0">#{i + 1}</span>
-                  <span className="text-zinc-500">variant</span>
-                  <span className="text-emerald-400">&quot;{variant}&quot;</span>
+                  <span className="text-zinc-600 dark:text-zinc-400 w-4 shrink-0">#{i + 1}</span>
+                  <span className="text-zinc-600 dark:text-zinc-400">variant</span>
+                  <span className="text-emerald-600 dark:text-emerald-400">&quot;{variant}&quot;</span>
                 </div>
                 <div className="flex items-center gap-2 pl-6 sm:pl-0 sm:ml-auto">
-                  <span className="text-zinc-500">disabled</span>
+                  <span className="text-zinc-600 dark:text-zinc-400">disabled</span>
                   <button
                     onClick={() => toggleDisabled(variant)}
                     className={cn(
                       "font-mono transition-colors cursor-pointer",
-                      disabledMap[variant] ? "text-amber-400" : "text-amber-400/60"
+                      disabledMap[variant] ? "text-amber-600 dark:text-amber-400" : "text-amber-600/50 dark:text-amber-400/60"
                     )}
                   >
                     {String(disabledMap[variant])}
@@ -173,10 +173,10 @@ export default function ComponentDemo() {
         </InspectorPanel>
 
         {/* Style Editor */}
-        <InspectorPanel title="Style Editor" className="w-full sm:w-full flex-1">
+        <InspectorPanel title="Style Editor" className="flex-1">
           <div className="space-y-3 text-xs">
             <div className="flex items-center gap-4 md:gap-6">
-              <p className="text-zinc-500 uppercase w-24 shrink-0">border-radius</p>
+              <p className="text-zinc-600 dark:text-zinc-400 uppercase w-24 shrink-0">border-radius</p>
               <OptionToggle
                 options={["rounded", "pill", "square"] as const}
                 value={radius}
@@ -184,7 +184,7 @@ export default function ComponentDemo() {
               />
             </div>
             <div className="flex items-center gap-4 md:gap-6">
-              <p className="text-zinc-500 uppercase w-24 shrink-0">size</p>
+              <p className="text-zinc-600 dark:text-zinc-400 uppercase w-24 shrink-0">size</p>
               <OptionToggle
                 options={["sm", "md", "lg"] as const}
                 value={size}

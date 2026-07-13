@@ -11,9 +11,9 @@ import { cn } from "@/app/lib/cn";
 
 function ValueDisplay({ type, children }: { type: "string" | "boolean" | "number"; children: React.ReactNode }) {
   const color = {
-    string: "text-emerald-400",
-    boolean: "text-amber-400",
-    number: "text-sky-400",
+    string: "text-emerald-600 dark:text-emerald-400",
+    boolean: "text-amber-600 dark:text-amber-400",
+    number: "text-sky-600 dark:text-sky-400",
   }[type];
 
   return <span className={color}>{children}</span>;
@@ -84,15 +84,15 @@ export default function StateDemo() {
       <InspectorPanel title="State Inspector">
         <div className="space-y-2 text-xs">
           <div className="flex justify-between gap-3">
-            <span className="text-zinc-400">name</span>
+            <span className="text-zinc-600 dark:text-zinc-400">name</span>
             <ValueDisplay type="string">&quot;{name}&quot;</ValueDisplay>
           </div>
           <div className="flex justify-between gap-3">
-            <span className="text-zinc-400">following</span>
+            <span className="text-zinc-600 dark:text-zinc-400">following</span>
             <ValueDisplay type="boolean">{String(following)}</ValueDisplay>
           </div>
           <div className="flex justify-between gap-3">
-            <span className="text-zinc-400">likes</span>
+            <span className="text-zinc-600 dark:text-zinc-400">likes</span>
             <ValueDisplay type="number">{likes}</ValueDisplay>
           </div>
         </div>

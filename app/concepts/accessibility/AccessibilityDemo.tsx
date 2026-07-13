@@ -107,14 +107,14 @@ export default function AccessibilityDemo() {
         <div className="space-y-2 text-xs">
           {fixKeys.map((key) => (
             <div key={key} className="flex justify-between items-center gap-3">
-              <span className="text-zinc-400">{fixLabels[key]}</span>
+              <span className="text-zinc-600 dark:text-zinc-400">{fixLabels[key]}</span>
               <button
                 type="button"
                 aria-pressed={fixes[key]}
                 onClick={() => toggle(key)}
                 className={cn(
                   "font-mono font-medium transition-colors cursor-pointer",
-                  fixes[key] ? "text-emerald-400" : "text-red-400"
+                  fixes[key] ? "text-emerald-600 dark:text-emerald-400" : "text-red-600 dark:text-red-400"
                 )}
               >
                 {fixes[key] ? "ON" : "OFF"}
@@ -122,8 +122,8 @@ export default function AccessibilityDemo() {
             </div>
           ))}
         </div>
-        <div className="border-t border-zinc-700 mt-4 pt-3 flex justify-between items-center text-xs">
-          <span className="text-zinc-400">score</span>
+        <div className="border-t border-zinc-200 dark:border-zinc-700 mt-4 pt-3 flex justify-between items-center text-xs">
+          <span className="text-zinc-600 dark:text-zinc-400">score</span>
           <span
             className={cn(
               "font-medium",

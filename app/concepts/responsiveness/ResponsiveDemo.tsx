@@ -88,7 +88,7 @@ export default function ResponsiveDemo() {
 
       {/* Width indicator */}
       <div>
-        <p className="font-mono uppercase tracking-wide text-xs font-medium text-zinc-400 dark:text-zinc-500 mb-1">
+        <p className="font-mono uppercase tracking-wide text-xs font-medium text-zinc-500 dark:text-zinc-400 mb-1">
           Viewport width
         </p>
         <span className="font-mono text-xl md:text-2xl font-medium text-zinc-900 dark:text-zinc-50 tabular-nums">
@@ -106,12 +106,12 @@ export default function ResponsiveDemo() {
           <div className="p-4 space-y-3">
             {/* Mock navbar */}
             <div className="rounded-lg bg-zinc-100 dark:bg-zinc-800 px-4 py-3 flex items-center justify-between">
-              <div className="size-5 rounded-full bg-zinc-300 dark:bg-zinc-600 shrink-0" />
+              <div className="size-5 rounded-full bg-zinc-400 dark:bg-zinc-600 shrink-0" />
               {displayWidth >= 640 ? (
                 <div className="flex gap-2.5">
-                  <div className="h-2 w-10 rounded-full bg-zinc-300 dark:bg-zinc-600" />
-                  <div className="h-2 w-10 rounded-full bg-zinc-300 dark:bg-zinc-600" />
-                  <div className="h-2 w-10 rounded-full bg-zinc-300 dark:bg-zinc-600" />
+                  <div className="h-2 w-10 rounded-full bg-zinc-400 dark:bg-zinc-600" />
+                  <div className="h-2 w-10 rounded-full bg-zinc-400 dark:bg-zinc-600" />
+                  <div className="h-2 w-10 rounded-full bg-zinc-400 dark:bg-zinc-600" />
                 </div>
               ) : (
                 <div className="space-y-1">
@@ -124,9 +124,9 @@ export default function ResponsiveDemo() {
 
             {/* Mock hero */}
             <div className="rounded-lg bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 px-5 py-8 text-center space-y-2.5">
-              <div className="h-3.5 w-1/3 mx-auto rounded-full bg-zinc-300 dark:bg-zinc-600" />
-              <div className="h-2 w-2/3 mx-auto rounded-full bg-zinc-200 dark:bg-zinc-700" />
-              <div className="h-2 w-1/2 mx-auto rounded-full bg-zinc-200 dark:bg-zinc-700" />
+              <div className="h-3.5 w-1/3 mx-auto rounded-full bg-zinc-400 dark:bg-zinc-600" />
+              <div className="h-2 w-2/3 mx-auto rounded-full bg-zinc-300 dark:bg-zinc-700" />
+              <div className="h-2 w-1/2 mx-auto rounded-full bg-zinc-300 dark:bg-zinc-700" />
             </div>
 
             {/* Mock cards */}
@@ -146,8 +146,8 @@ export default function ResponsiveDemo() {
                   key={i}
                   className="rounded-lg bg-zinc-100 dark:bg-zinc-800 p-4 space-y-2.5"
                 >
-                  <div className="h-2.5 w-14 rounded-full bg-zinc-300 dark:bg-zinc-600" />
-                  <div className="h-2 w-full rounded-full bg-zinc-200 dark:bg-zinc-700" />
+                  <div className="h-2.5 w-14 rounded-full bg-zinc-400 dark:bg-zinc-600" />
+                  <div className="h-2 w-full rounded-full bg-zinc-300 dark:bg-zinc-700" />
                 </div>
               ))}
             </div>
@@ -159,11 +159,11 @@ export default function ResponsiveDemo() {
                 flexDirection: displayWidth >= 640 ? "row" : "column",
               }}
             >
-              <div className="h-2 w-16 rounded-full bg-zinc-300 dark:bg-zinc-600" />
+              <div className="h-2 w-16 rounded-full bg-zinc-400 dark:bg-zinc-600" />
               <div className="flex gap-2.5">
-                <div className="h-2 w-8 rounded-full bg-zinc-300 dark:bg-zinc-600" />
-                <div className="h-2 w-8 rounded-full bg-zinc-300 dark:bg-zinc-600" />
-                <div className="h-2 w-8 rounded-full bg-zinc-300 dark:bg-zinc-600" />
+                <div className="h-2 w-8 rounded-full bg-zinc-400 dark:bg-zinc-600" />
+                <div className="h-2 w-8 rounded-full bg-zinc-400 dark:bg-zinc-600" />
+                <div className="h-2 w-8 rounded-full bg-zinc-400 dark:bg-zinc-600" />
               </div>
             </div>
           </div>

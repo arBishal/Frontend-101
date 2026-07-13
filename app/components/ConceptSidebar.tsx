@@ -30,7 +30,7 @@ function SidebarItem({ concept, pathname, isExpanded, onToggle }: SidebarItemPro
             ? "bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100"
             : isParentHighlighted
               ? "text-zinc-900 dark:text-zinc-100"
-              : "text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-50 dark:hover:bg-zinc-800/50"
+              : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-50 dark:hover:bg-zinc-800/50"
         )}
       >
         <Link href={href} title={concept.title} className="flex items-center gap-3 flex-1 min-w-0">
@@ -64,7 +64,7 @@ function SidebarItem({ concept, pathname, isExpanded, onToggle }: SidebarItemPro
                   "rounded px-2.5 py-1.5 text-sm transition-colors",
                   isChildActive
                     ? "bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 font-medium"
-                    : "text-zinc-400 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100"
+                    : "text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100"
                 )}
               >
                 {child.title}

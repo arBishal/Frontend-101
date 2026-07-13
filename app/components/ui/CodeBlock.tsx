@@ -48,7 +48,7 @@ export default function CodeBlock(props: CodeBlockProps) {
       setRendered({ key, html: cached });
       return;
     }
-    codeToHtml(code, { lang, theme: "github-dark" })
+    codeToHtml(code, { lang, themes: { light: "github-light", dark: "github-dark" } })
       .then((html) => {
         cache.current.set(key, html);
         setRendered({ key, html });
@@ -66,17 +66,19 @@ export default function CodeBlock(props: CodeBlockProps) {
   const lineCount = code.split("\n").length;
 
   return (
-    <div className={cn("rounded-lg bg-zinc-900 border border-zinc-800 overflow-hidden", props.className)}>
+    <div className={cn("rounded-lg bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 overflow-hidden", props.className)}>
       {/* Header — tabs or title */}
       {isTabbedMode ? (
-        <div className="flex border-b border-zinc-800">
+        <div className="flex border-b border-zinc-200 dark:border-zinc-800 bg-zinc-200 dark:bg-zinc-800">
           {props.tabs.map((tab, i) => (
             <button
               key={tab.label}
               onClick={() => handleTabChange(i)}
               className={cn(
                 "flex-1 px-4 py-2 font-mono text-xs sm:text-sm transition-colors",
-                activeTab === i ? "text-zinc-100 bg-zinc-50/5" : "text-zinc-500 hover:text-zinc-300"
+                activeTab === i
+                  ? "text-zinc-900 dark:text-zinc-100 bg-zinc-50 dark:bg-zinc-900"
+                  : "text-zinc-500 dark:text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-200"
               )}
             >
               {tab.label}
@@ -84,8 +86,8 @@ export default function CodeBlock(props: CodeBlockProps) {
           ))}
         </div>
       ) : props.title ? (
-        <div className="flex border-b border-zinc-800">
-          <div className="flex-1 px-4 py-2 font-mono text-xs sm:text-sm text-zinc-100 bg-zinc-50/5">
+        <div className="flex border-b border-zinc-200 dark:border-zinc-800 bg-zinc-200 dark:bg-zinc-800">
+          <div className="flex-1 px-4 py-2 font-mono text-xs sm:text-sm text-zinc-900 dark:text-zinc-100">
             {props.title}
           </div>
         </div>
@@ -95,7 +97,7 @@ export default function CodeBlock(props: CodeBlockProps) {
       <div className="flex overflow-x-auto">
         {/* Line numbers */}
         <div
-          className="shrink-0 py-4 pl-4 pr-3 text-right font-mono text-xs leading-relaxed text-zinc-600 select-none"
+          className="shrink-0 py-4 pl-4 pr-3 text-right font-mono text-xs leading-relaxed text-zinc-400 dark:text-zinc-600 select-none"
           aria-hidden
         >
           {Array.from({ length: lineCount }, (_, i) => (
@@ -110,7 +112,7 @@ export default function CodeBlock(props: CodeBlockProps) {
           />
         ) : (
           <div className="flex-1 py-4 pr-4 font-mono text-xs leading-relaxed overflow-x-auto">
-            <pre className="text-zinc-400 whitespace-pre">{code}</pre>
+            <pre className="text-zinc-700 dark:text-zinc-400 whitespace-pre">{code}</pre>
           </div>
         )}
       </div>
