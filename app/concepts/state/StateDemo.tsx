@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useId } from "react";
+import Image from "next/image";
 import { Heart, UserPlus, UserCheck } from "lucide-react";
 import Button from "@/app/components/ui/Button";
 import Input from "@/app/components/ui/Input";
@@ -29,10 +30,13 @@ export default function StateDemo() {
       <Card className="flex justify-center md:justify-between items-center w-full">
         {/* Avatar + Name + Follow + Heart */}
         <div className="w-full flex flex-col md:flex-row items-center gap-3 md:gap-4">
-          <img
+          <Image
             src={`https://api.dicebear.com/9.x/avataaars/svg?seed=${avatarSeed}`}
             alt="Harry Dresden"
+            width={56}
+            height={56}
             className="size-12 md:size-14 shrink-0 rounded-full bg-zinc-100 dark:bg-zinc-800"
+            unoptimized
           />
           <div className="w-full flex flex-col md:flex-row justify-between items-center min-w-0 gap-4 md:gap-6">
             <Input

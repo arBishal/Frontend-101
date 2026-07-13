@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Input from "@/app/components/ui/Input";
 import Card from "@/app/components/ui/Card";
 import InspectorPanel from "@/app/components/ui/InspectorPanel";
@@ -36,14 +37,13 @@ export default function AccessibilityDemo() {
       <Card className="w-full space-y-5">
         {/* Logo */}
         <div className="relative w-fit">
-          <img
+          <Image
             src="https://cdn.simpleicons.org/wikipedia"
             width={40}
             height={40}
+            alt={fixes.altText ? "Wikipedia logo" : ""}
             className="size-10 rounded-lg dark:invert"
-            {...(fixes.altText
-              ? { alt: "Wikipedia logo" }
-              : { alt: "" })}
+            unoptimized
           />
           {fixes.altText && (
             <span className="absolute top-0 left-12 font-mono text-[10px] bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-400 px-1.5 py-0.5 rounded whitespace-nowrap">

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { Loader2, Search } from "lucide-react";
 import Button from "@/app/components/ui/Button";
 import Input from "@/app/components/ui/Input";
@@ -129,11 +130,14 @@ export default function ApiDemo() {
           {status === "success" && data && (
             <div className="flex items-center gap-4">
               {data.sprite && (
-                <img
+                <Image
                   src={data.sprite}
                   alt={data.name}
-                  className="size-24 md:size-32 shrink-0 pixelated"
+                  width={128}
+                  height={128}
+                  className="size-24 md:size-32 shrink-0"
                   style={{ imageRendering: "pixelated" }}
+                  unoptimized
                 />
               )}
               <div className="space-y-2">
