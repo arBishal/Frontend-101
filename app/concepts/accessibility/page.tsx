@@ -1,6 +1,29 @@
 import type { Metadata } from "next";
+import { UserX, Scale, Code } from "lucide-react";
 import AccessibilityDemo from "./AccessibilityDemo";
 import SectionLabel from "@/app/components/ui/SectionLabel";
+import Card from "@/app/components/ui/Card";
+
+const problems = [
+  {
+    icon: UserX,
+    title: "Excluded Users",
+    description:
+      "Roughly 15% of the world\u2019s population lives with some form of disability. Inaccessible UI locks them out.",
+  },
+  {
+    icon: Scale,
+    title: "Legal Risk",
+    description:
+      "Laws like the ADA and European Accessibility Act mandate accessible digital experiences. Non-compliance carries real consequences.",
+  },
+  {
+    icon: Code,
+    title: "Worse Code",
+    description:
+      "Non-semantic HTML is harder to style, test, and maintain. Accessible code is usually better code.",
+  },
+];
 
 export const metadata: Metadata = {
   title: "Accessibility | Frontend 101",
@@ -69,6 +92,21 @@ export default function AccessibilityPage() {
           confusing for <em>everyone</em>. Fixing accessibility doesn&rsquo;t
           add complexity; it removes it.
         </p>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 !mt-4">
+          {problems.map(({ icon: Icon, title, description }) => (
+            <Card key={title} className="space-y-2 sm:p-5">
+              <div className="flex items-center gap-2.5">
+                <Icon className="size-4 text-zinc-500 dark:text-zinc-400 shrink-0" />
+                <p className="font-medium text-zinc-900 dark:text-zinc-100">
+                  {title}
+                </p>
+              </div>
+              <p className="text-zinc-500 dark:text-zinc-400 text-sm">
+                {description}
+              </p>
+            </Card>
+          ))}
+        </div>
       </div>
 
       <div>
