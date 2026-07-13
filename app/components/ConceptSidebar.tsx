@@ -76,33 +76,27 @@ function SidebarItem({ concept, pathname, isExpanded, onToggle }: SidebarItemPro
 
 export default function ConceptSidebar() {
   const pathname = usePathname();
-  const [expandedSlugs, setExpandedSlugs] = useState<Set<string>>(() => {
-    const initial = new Set<string>();
-    concepts.forEach((c) => {
-      if (c.children && pathname.startsWith(`/concepts/${c.slug}`)) {
-        initial.add(c.slug);
-      }
-    });
-    return initial;
+  const [expandedSlugs, setExpandedSlugs] = useState<string[]>(() => {
+    return concepts
+      .filter((c) => c.children && pathname.startsWith(`/concepts/${c.slug}`))
+      .map((c) => c.slug);
   });
 
   useEffect(() => {
     concepts.forEach((c) => {
       if (c.children && pathname.startsWith(`/concepts/${c.slug}`)) {
-        setExpandedSlugs((prev) => new Set(prev).add(c.slug));
+        setExpandedSlugs((prev) => (prev.includes(c.slug) ? prev : [...prev, c.slug]));
       }
     });
   }, [pathname]);
 
   function toggleExpanded(slug: string) {
     setExpandedSlugs((prev) => {
-      const next = new Set(prev);
-      if (next.has(slug)) {
-      next.delete(slug);
-    } else {
-      next.add(slug);
-    }
-      return next;
+      if (prev.includes(slug)) {
+        return prev.filter((s) => s !== slug);
+      } else {
+        return [...prev, slug];
+      }
     });
   }
 
@@ -114,7 +108,7 @@ export default function ConceptSidebar() {
             key={concept.slug}
             concept={concept}
             pathname={pathname}
-            isExpanded={expandedSlugs.has(concept.slug)}
+            isExpanded={expandedSlugs.includes(concept.slug)}
             onToggle={toggleExpanded}
           />
         ))}

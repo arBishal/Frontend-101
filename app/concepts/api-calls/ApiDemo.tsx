@@ -10,6 +10,12 @@ import InspectorPanel from "@/app/components/ui/InspectorPanel";
 
 type Status = "idle" | "loading" | "success" | "error";
 
+type PokemonApiResponse = {
+  name: string;
+  sprites: { front_default: string };
+  types: { type: { name: string } }[];
+};
+
 type PokemonData = {
   name: string;
   sprite: string;
@@ -73,11 +79,11 @@ export default function ApiDemo() {
         throw new Error("Pokemon not found");
       }
 
-      const json = await response.json();
+      const json = (await response.json()) as PokemonApiResponse;
       setData({
         name: json.name,
         sprite: json.sprites.front_default,
-        types: json.types.map((t: { type: { name: string } }) => t.type.name),
+        types: json.types.map((t) => t.type.name),
       });
       setStatus("success");
     } catch {

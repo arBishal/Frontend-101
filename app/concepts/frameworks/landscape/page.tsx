@@ -15,7 +15,17 @@ export const metadata: Metadata = {
   description: "The major frameworks and what makes each one different.",
 };
 
-const frameworks = [
+type Framework = {
+  name: string;
+  icon: { hex: string; path: string };
+  philosophy: string;
+  users: string[];
+  url: string;
+  colorOverride?: string;
+  darkInvert?: boolean;
+};
+
+const frameworks: Framework[] = [
   {
     name: "React",
     icon: siReact,
