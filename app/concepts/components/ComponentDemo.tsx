@@ -1,161 +1,205 @@
 "use client";
 
 import { useState } from "react";
-import { Search, X } from "lucide-react";
-import Button from "@/app/components/ui/Button";
+import { Rocket } from "lucide-react";
 import Card from "@/app/components/ui/Card";
+import InspectorPanel from "@/app/components/ui/InspectorPanel";
+import CodeBlock from "@/app/components/ui/CodeBlock";
 import { cn } from "@/app/lib/cn";
 
-function XRaySection({
-  label,
-  active,
+const variantStyles = {
+  solid:
+    "bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 hover:enabled:bg-zinc-700 dark:hover:enabled:bg-zinc-300",
+  outline:
+    "border border-zinc-300 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 hover:enabled:bg-zinc-100 dark:hover:enabled:bg-zinc-800",
+  ghost:
+    "text-zinc-600 dark:text-zinc-400 hover:enabled:bg-zinc-100 dark:hover:enabled:bg-zinc-800 hover:enabled:text-zinc-900 dark:hover:enabled:text-zinc-100",
+} as const;
+
+const radiusCss = {
+  rounded: { class: "rounded", value: "0.25rem" },
+  pill: { class: "rounded-full", value: "9999px" },
+  square: { class: "rounded-none", value: "0" },
+} as const;
+
+const sizeCss = {
+  sm: { class: "px-4 py-2 text-xs", padding: "0.5rem 1rem", fontSize: "0.75rem" },
+  md: { class: "px-6 py-3 text-sm", padding: "0.75rem 1.5rem", fontSize: "0.875rem" },
+  lg: { class: "px-8 py-4 text-base", padding: "1rem 2rem", fontSize: "1rem" },
+} as const;
+
+type Variant = keyof typeof variantStyles;
+type Radius = keyof typeof radiusCss;
+type Size = keyof typeof sizeCss;
+
+function DemoButton({
+  variant = "solid",
+  disabled,
+  radius = "rounded",
+  size = "md",
   children,
-  className,
 }: {
-  label: string;
-  active: boolean;
+  variant?: Variant;
+  disabled?: boolean;
+  radius?: Radius;
+  size?: Size;
   children: React.ReactNode;
-  className?: string;
 }) {
   return (
-    <div
+    <button
+      disabled={disabled}
       className={cn(
-        "relative border transition-colors duration-200 rounded-lg",
-        active ? "border-dashed border-zinc-400 dark:border-zinc-500" : "border-transparent",
-        className
+        "inline-flex items-center gap-2 font-medium transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed",
+        radiusCss[radius].class,
+        sizeCss[size].class,
+        variantStyles[variant]
       )}
     >
-      <span
-        className={cn(
-          "absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 font-mono text-xxs font-semibold uppercase tracking-wider px-1.5 py-0.5 rounded bg-zinc-900 dark:bg-zinc-100 text-zinc-100 dark:text-zinc-900 whitespace-nowrap transition-opacity duration-200",
-          active ? "opacity-100" : "opacity-0 pointer-events-none"
-        )}
-      >
-        {label}
-      </span>
       {children}
+    </button>
+  );
+}
+
+const variants: Variant[] = ["solid", "outline", "ghost"];
+
+function OptionToggle<T extends string>({
+  options,
+  value,
+  onChange,
+}: {
+  options: readonly T[];
+  value: T;
+  onChange: (v: T) => void;
+}) {
+  return (
+    <div className="flex gap-1">
+      {options.map((opt) => (
+        <button
+          key={opt}
+          onClick={() => onChange(opt)}
+          className={cn(
+            "px-2 py-1 rounded text-xs font-mono transition-colors cursor-pointer",
+            value === opt
+              ? "bg-zinc-700 dark:bg-zinc-600 text-emerald-400"
+              : "text-zinc-500 hover:text-zinc-300"
+          )}
+        >
+          {opt}
+        </button>
+      ))}
     </div>
   );
 }
 
+function buildJsxSnippet(disabledMap: Record<Variant, boolean>) {
+  return variants
+    .map((v) => {
+      const disabledAttr = disabledMap[v] ? " disabled" : "";
+      return `<Button variant="${v}"${disabledAttr}>\n  <Rocket /> Submit\n</Button>`;
+    })
+    .join("\n");
+}
+
+function buildCssSnippet(radius: Radius, size: Size) {
+  return `.button {
+  border-radius: ${radiusCss[radius].value};
+  padding: ${sizeCss[size].padding};
+  font-size: ${sizeCss[size].fontSize};
+}`;
+}
+
 export default function ComponentDemo() {
-  const [xray, setXray] = useState(false);
+  const [disabledMap, setDisabledMap] = useState<Record<Variant, boolean>>({
+    solid: false,
+    outline: false,
+    ghost: false,
+  });
+  const [radius, setRadius] = useState<Radius>("rounded");
+  const [size, setSize] = useState<Size>("md");
+
+  function toggleDisabled(variant: Variant) {
+    setDisabledMap((prev) => ({ ...prev, [variant]: !prev[variant] }));
+  }
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center justify-between">
-        <p className="text-sm text-zinc-500 dark:text-zinc-400 hidden sm:block">
-          Toggle X-ray mode to reveal the component boundaries.
-        </p>
-        <Button
-          variant="outline"
-          onClick={() => setXray(!xray)}
-          className="w-full sm:w-auto font-mono px-4 py-2 justify-center"
-        >
-          {xray ? (
-            <>
-              <X className="size-4" />
-              Hide Components
-            </>
-          ) : (
-            <>
-              <Search className="size-4" />
-              Show Components
-            </>
-          )}
-        </Button>
+      {/* Live Preview — full width */}
+      <Card className="flex flex-col xl:flex-row items-start xl:items-center xl:justify-around gap-4 xl:gap-6">
+        {variants.map((variant) => (
+          <div key={variant} className="flex items-center gap-3 xl:flex-col xl:gap-4">
+            <span className="font-mono text-xs text-zinc-400 w-16 xl:w-auto shrink-0">
+              {variant}
+            </span>
+            <DemoButton
+              variant={variant}
+              disabled={disabledMap[variant]}
+              radius={radius}
+              size={size}
+            >
+              <Rocket className="size-4" />
+              Submit
+            </DemoButton>
+          </div>
+        ))}
+      </Card>
+
+      {/* Panels — side by side at sm+ */}
+      <div className="flex flex-col sm:flex-row gap-4">
+        {/* Props Inspector */}
+        <InspectorPanel title="Props Inspector" className="w-full sm:w-full flex-1">
+          <div className="space-y-2.5 text-xs">
+            {variants.map((variant, i) => (
+              <div key={variant} className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
+                <div className="flex items-center gap-2">
+                  <span className="text-zinc-500 w-4 shrink-0">#{i + 1}</span>
+                  <span className="text-zinc-500">variant</span>
+                  <span className="text-emerald-400">&quot;{variant}&quot;</span>
+                </div>
+                <div className="flex items-center gap-2 pl-6 sm:pl-0 sm:ml-auto">
+                  <span className="text-zinc-500">disabled</span>
+                  <button
+                    onClick={() => toggleDisabled(variant)}
+                    className={cn(
+                      "font-mono transition-colors cursor-pointer",
+                      disabledMap[variant] ? "text-amber-400" : "text-amber-400/60"
+                    )}
+                  >
+                    {String(disabledMap[variant])}
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </InspectorPanel>
+
+        {/* Style Editor */}
+        <InspectorPanel title="Style Editor" className="w-full sm:w-full flex-1">
+          <div className="space-y-3 text-xs">
+            <div className="flex items-center gap-4 md:gap-6">
+              <p className="text-zinc-500 uppercase w-24 shrink-0">border-radius</p>
+              <OptionToggle
+                options={["rounded", "pill", "square"] as const}
+                value={radius}
+                onChange={setRadius}
+              />
+            </div>
+            <div className="flex items-center gap-4 md:gap-6">
+              <p className="text-zinc-500 uppercase w-24 shrink-0">size</p>
+              <OptionToggle
+                options={["sm", "md", "lg"] as const}
+                value={size}
+                onChange={setSize}
+              />
+            </div>
+          </div>
+        </InspectorPanel>
       </div>
 
-      <Card className="p-3 sm:p-4 space-y-3 sm:space-y-4">
-        {/* Navbar — full width */}
-        <XRaySection label="navbar" active={xray}>
-          <div className="rounded-lg bg-zinc-100 dark:bg-zinc-800 px-4 py-3 flex items-center justify-between gap-3">
-            <div className="size-6 rounded-full bg-zinc-300 dark:bg-zinc-600 shrink-0" />
-            <div className="hidden sm:flex gap-3">
-              <div className="h-2.5 w-12 rounded-full bg-zinc-300 dark:bg-zinc-600" />
-              <div className="h-2.5 w-12 rounded-full bg-zinc-300 dark:bg-zinc-600" />
-            </div>
-            <div className="size-5 rounded bg-zinc-300 dark:bg-zinc-600 shrink-0" />
-          </div>
-        </XRaySection>
-
-        {/* Sidebar + Main */}
-        <div className="flex">
-          {/* Sidebar */}
-          <XRaySection label="sidebar" active={xray} className="hidden sm:block self-stretch mr-3 sm:mr-4">
-            <div className="flex flex-col gap-3.5 bg-zinc-100 dark:bg-zinc-800 rounded-lg px-4 py-5 h-full">
-              <div className="flex items-center gap-2.5">
-                <div className="size-5 shrink-0 rounded bg-zinc-300 dark:bg-zinc-600" />
-                <div className="h-2 w-14 rounded-full bg-zinc-300 dark:bg-zinc-600" />
-              </div>
-              <div className="flex items-center gap-2.5">
-                <div className="size-5 shrink-0 rounded bg-zinc-200 dark:bg-zinc-700" />
-                <div className="h-2 w-12 rounded-full bg-zinc-200 dark:bg-zinc-700" />
-              </div>
-              <div className="flex items-center gap-2.5">
-                <div className="size-5 shrink-0 rounded bg-zinc-200 dark:bg-zinc-700" />
-                <div className="h-2 w-16 rounded-full bg-zinc-200 dark:bg-zinc-700" />
-              </div>
-              <div className="flex items-center gap-2.5">
-                <div className="size-5 shrink-0 rounded bg-zinc-200 dark:bg-zinc-700" />
-                <div className="h-2 w-10 rounded-full bg-zinc-200 dark:bg-zinc-700" />
-              </div>
-              <div className="flex items-center gap-2.5">
-                <div className="size-5 shrink-0 rounded bg-zinc-200 dark:bg-zinc-700" />
-                <div className="h-2 w-14 rounded-full bg-zinc-200 dark:bg-zinc-700" />
-              </div>
-            </div>
-          </XRaySection>
-
-          {/* Main content */}
-          <div className="flex-1 space-y-3 sm:space-y-4 min-w-0">
-            {/* Stat cards */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
-              {["stat card", "stat card", "stat card", "stat card"].map((label, i) => (
-                <XRaySection key={i} label={label} active={xray}>
-                  <div className="rounded-lg bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 p-3 sm:p-4 space-y-2">
-                    <div className="h-2 w-10 rounded-full bg-zinc-200 dark:bg-zinc-700" />
-                    <div className="h-4 w-12 rounded-full bg-zinc-300 dark:bg-zinc-600" />
-                  </div>
-                </XRaySection>
-              ))}
-            </div>
-
-            {/* Table */}
-            <XRaySection label="table" active={xray}>
-              <div className="rounded-lg bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 overflow-hidden">
-                {/* Table header */}
-                <div className="px-4 py-2.5 bg-zinc-100 dark:bg-zinc-800 grid grid-cols-4 gap-3">
-                  <div className="h-2 w-16 rounded-full bg-zinc-300 dark:bg-zinc-600" />
-                  <div className="h-2 w-14 rounded-full bg-zinc-300 dark:bg-zinc-600 hidden sm:block" />
-                  <div className="h-2 w-12 rounded-full bg-zinc-300 dark:bg-zinc-600 hidden sm:block" />
-                  <div className="h-2 w-10 rounded-full bg-zinc-300 dark:bg-zinc-600 ml-auto" />
-                </div>
-                {/* Table rows */}
-                {[1, 2, 3, 4].map((i) => (
-                  <div
-                    key={i}
-                    className="px-4 py-2.5 grid grid-cols-4 gap-3 border-t border-zinc-200 dark:border-zinc-700"
-                  >
-                    <div className="h-2 w-20 rounded-full bg-zinc-200 dark:bg-zinc-700" />
-                    <div className="h-2 w-16 rounded-full bg-zinc-200 dark:bg-zinc-700 hidden sm:block" />
-                    <div className="h-2 w-14 rounded-full bg-zinc-200 dark:bg-zinc-700 hidden sm:block" />
-                    <div className="h-2 w-10 rounded-full bg-zinc-200 dark:bg-zinc-700 ml-auto" />
-                  </div>
-                ))}
-              </div>
-            </XRaySection>
-          </div>
-        </div>
-
-        {/* Footer — full width */}
-        <XRaySection label="footer" active={xray}>
-          <div className="rounded-lg bg-zinc-100 dark:bg-zinc-800 px-4 py-3 flex items-center justify-between">
-            <div className="h-2.5 w-20 rounded-full bg-zinc-300 dark:bg-zinc-600" />
-            <div className="h-2 w-28 rounded-full bg-zinc-200 dark:bg-zinc-700" />
-          </div>
-        </XRaySection>
-      </Card>
+      {/* Code View */}
+      <div className="flex flex-col sm:flex-row gap-4">
+        <CodeBlock code={buildJsxSnippet(disabledMap)} lang="tsx" title="JSX" className="flex-1" />
+        <CodeBlock code={buildCssSnippet(radius, size)} lang="css" title="CSS" className="flex-1" />
+      </div>
     </div>
   );
 }

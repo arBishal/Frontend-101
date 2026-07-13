@@ -59,35 +59,40 @@ export default function ComponentsPage() {
 
       <div>
         <SectionLabel className="mb-4">Interactive demo</SectionLabel>
+        <p className="text-zinc-500 dark:text-zinc-400 text-sm mb-4">
+          The same{" "}
+          <code className="text-zinc-700 dark:text-zinc-300">Button</code>{" "}
+          component rendered three times, once per variant. Toggle{" "}
+          <code className="text-zinc-700 dark:text-zinc-300">disabled</code>{" "}
+          per instance and watch the JSX update in real time.
+        </p>
         <ComponentDemo />
       </div>
 
       <div className="text-sm lg:text-base text-zinc-600 dark:text-zinc-400 space-y-3">
         <SectionLabel>How it works</SectionLabel>
         <p>
-          Components are reusable, self-contained pieces of UI. Instead of
-          writing one giant page, you break the interface into smaller parts:
-          a sidebar, a top bar, stat cards, and a table, each responsible for
-          its own structure and style.
+          The demo renders the same{" "}
+          <code className="text-zinc-800 dark:text-zinc-200">&lt;Button&gt;</code>{" "}
+          component three times, once per variant. The code view below the
+          preview shows the actual JSX: the same component name appears on
+          every line, with only the{" "}
+          <code className="text-zinc-800 dark:text-zinc-200">variant</code> prop changing.
         </p>
         <p>
-          The dashboard above is built from distinct components. Click
-          &ldquo;Show Components&rdquo; to toggle X-ray mode and see where each
-          component begins and ends.
+          The Style Editor changes the shared CSS that all three instances
+          consume. Switch{" "}
+          <code className="text-zinc-800 dark:text-zinc-200">border-radius</code>{" "}
+          to pill and every button updates simultaneously; the CSS tab shows the
+          single rule that changed. That&rsquo;s the core promise of components:
+          one definition, many instances, and a single change propagates
+          everywhere.
         </p>
         <ul className="list-disc list-inside space-y-1.5 font-mono text-xs lg:text-sm">
-          <li><strong>Navbar</strong>: logo and nav links</li>
-          <li><strong>Sidebar</strong>: icon-based navigation rail</li>
-          <li><strong>Stat Card</strong>: repeated four times in a grid</li>
-          <li><strong>Table</strong>: header row + data rows</li>
-          <li><strong>Footer</strong>: site info and tagline</li>
+          <li><strong>variant</strong>: controls the visual style (solid, outline, ghost)</li>
+          <li><strong>disabled</strong>: blocks interaction per instance</li>
+          <li><strong>border-radius / size</strong>: shared CSS that applies to every instance at once</li>
         </ul>
-        <p>
-          Notice how components can be nested: the Sidebar sits alongside
-          the main content area, and Stat Cards repeat inside a grid. This composability is what makes
-          component-based UIs powerful: you build small pieces and combine them
-          into complex interfaces.
-        </p>
       </div>
     </div>
   );
