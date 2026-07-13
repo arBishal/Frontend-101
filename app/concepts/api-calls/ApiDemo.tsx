@@ -58,6 +58,12 @@ export default function ApiDemo() {
     const trimmed = query.trim().toLowerCase();
     if (!trimmed) return;
 
+    if (!/^[a-z0-9-]+$/.test(trimmed)) {
+      setError("Invalid input. Use letters, numbers, or hyphens only.");
+      setStatus("error");
+      return;
+    }
+
     const requestUrl = `https://pokeapi.co/api/v2/pokemon/${trimmed}`;
     setUrl(requestUrl);
     setStatus("loading");

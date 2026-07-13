@@ -172,6 +172,9 @@ export default function ResponsiveDemo() {
         {/* Drag handle — positioned at the preview's right edge */}
         <div
           onPointerDown={handlePointerDown}
+          role="separator"
+          aria-label="Resize preview"
+          aria-orientation="vertical"
           className="absolute top-0 h-full w-4 flex items-center justify-center cursor-col-resize group"
           style={{ left: (isDesktop ? maxWidth : displayWidth) - 8 }}
         >

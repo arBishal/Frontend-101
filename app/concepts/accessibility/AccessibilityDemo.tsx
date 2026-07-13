@@ -109,6 +109,8 @@ export default function AccessibilityDemo() {
             <div key={key} className="flex justify-between items-center gap-3">
               <span className="text-zinc-400">{fixLabels[key]}</span>
               <button
+                type="button"
+                aria-pressed={fixes[key]}
                 onClick={() => toggle(key)}
                 className={cn(
                   "font-mono font-medium transition-colors cursor-pointer",
