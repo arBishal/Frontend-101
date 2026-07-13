@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { codeToHtml } from "shiki";
 import { cn } from "@/app/lib/cn";
 
@@ -34,6 +34,7 @@ export default function CodeBlock(props: CodeBlockProps) {
   const isTabbedMode = !!props.tabs;
   const [activeTab, setActiveTab] = useState(0);
   const [rendered, setRendered] = useState<{ key: string; html: string } | null>(null);
+  const cache = useRef(new Map<string, string>());
 
   const code = isTabbedMode ? props.tabs[activeTab].code : props.code;
   const lang = isTabbedMode ? props.tabs[activeTab].lang : props.lang;
@@ -42,7 +43,13 @@ export default function CodeBlock(props: CodeBlockProps) {
 
   useEffect(() => {
     const key = `${lang}:${code}`;
+    const cached = cache.current.get(key);
+    if (cached) {
+      setRendered({ key, html: cached });
+      return;
+    }
     codeToHtml(code, { lang, theme: "github-dark" }).then((html) => {
+      cache.current.set(key, html);
       setRendered({ key, html });
     });
   }, [code, lang]);

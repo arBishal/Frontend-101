@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Image from "next/image";
 import { Loader2, Search } from "lucide-react";
 import Button from "@/app/components/ui/Button";
@@ -53,6 +53,7 @@ export default function ApiDemo() {
   const [responseTime, setResponseTime] = useState<number | null>(null);
   const [url, setUrl] = useState<string | null>(null);
   const [simulateDelay, setSimulateDelay] = useState(false);
+  const abortRef = useRef<AbortController | null>(null);
 
   async function handleFetch() {
     const trimmed = query.trim().toLowerCase();
@@ -63,6 +64,10 @@ export default function ApiDemo() {
       setStatus("error");
       return;
     }
+
+    abortRef.current?.abort();
+    const controller = new AbortController();
+    abortRef.current = controller;
 
     const requestUrl = `https://pokeapi.co/api/v2/pokemon/${trimmed}`;
     setUrl(requestUrl);
@@ -77,8 +82,10 @@ export default function ApiDemo() {
       await new Promise((resolve) => setTimeout(resolve, 1500));
     }
 
+    if (controller.signal.aborted) return;
+
     try {
-      const response = await fetch(requestUrl);
+      const response = await fetch(requestUrl, { signal: controller.signal });
       const elapsed = Math.round(performance.now() - start);
       setResponseTime(elapsed);
 
@@ -93,7 +100,8 @@ export default function ApiDemo() {
         types: json.types.map((t) => t.type.name),
       });
       setStatus("success");
-    } catch {
+    } catch (err) {
+      if (err instanceof Error && err.name === "AbortError") return;
       const elapsed = Math.round(performance.now() - start);
       setResponseTime(elapsed);
       setError("Pokemon not found. Try another name or ID.");
