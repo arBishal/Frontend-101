@@ -11,7 +11,7 @@ type ThemeContextValue = {
 };
 
 const ThemeContext = createContext<ThemeContextValue>({
-  resolvedTheme: "light",
+  resolvedTheme: "dark",
   setTheme: () => {},
 });
 
@@ -25,11 +25,8 @@ const themeListeners = new Set<() => void>();
 
 function subscribeToTheme(callback: () => void): () => void {
   themeListeners.add(callback);
-  const mq = window.matchMedia("(prefers-color-scheme: dark)");
-  mq.addEventListener("change", callback);
   return () => {
     themeListeners.delete(callback);
-    mq.removeEventListener("change", callback);
   };
 }
 
@@ -37,11 +34,11 @@ function getThemeSnapshot(): ResolvedTheme {
   const stored = localStorage.getItem("theme");
   if (stored === "dark") return "dark";
   if (stored === "light") return "light";
-  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  return "dark";
 }
 
 function getThemeServerSnapshot(): ResolvedTheme {
-  return "light";
+  return "dark";
 }
 
 function applyTheme(resolved: ResolvedTheme) {
