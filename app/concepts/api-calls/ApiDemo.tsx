@@ -39,10 +39,10 @@ const typeColors: Record<string, string> = {
 const defaultTypeColor = "bg-zinc-100 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300";
 
 const statusColors: Record<Status, string> = {
-  idle: "text-zinc-400",
-  loading: "text-amber-400",
-  success: "text-emerald-400",
-  error: "text-red-400",
+  idle: "text-zinc-500 dark:text-zinc-400",
+  loading: "text-amber-600 dark:text-amber-400",
+  success: "text-emerald-600 dark:text-emerald-400",
+  error: "text-red-600 dark:text-red-400",
 };
 
 export default function ApiDemo() {
@@ -136,13 +136,13 @@ export default function ApiDemo() {
         {/* Result area */}
         <div className="min-h-32 flex items-center justify-center">
           {status === "idle" && (
-            <p className="text-sm text-zinc-400 dark:text-zinc-500 text-center">
+            <p className="text-sm text-zinc-500 dark:text-zinc-400 text-center">
               Enter a Pokemon name or ID and hit Fetch.
             </p>
           )}
 
           {status === "loading" && (
-            <div className="flex items-center gap-2 text-sm text-zinc-500">
+            <div className="flex items-center gap-2 text-sm text-zinc-600">
               <Loader2 className="size-4 animate-spin" />
               Fetching...
             </div>
@@ -189,7 +189,7 @@ export default function ApiDemo() {
 
       {/* Network Inspector */}
       <InspectorPanel title="Network Inspector">
-        <label className="flex items-center gap-2 text-xs text-zinc-500 cursor-pointer select-none mb-4">
+        <label className="flex items-center gap-2 text-xs text-zinc-600 dark:text-zinc-400 cursor-pointer select-none mb-4">
           <input
             type="checkbox"
             checked={simulateDelay}
@@ -200,35 +200,35 @@ export default function ApiDemo() {
         </label>
         <div className="space-y-2 text-xs">
           <div className="flex justify-between gap-3">
-            <span className="text-zinc-400">status</span>
+            <span className="text-zinc-600 dark:text-zinc-400">status</span>
             <span className={statusColors[status]}>
               &quot;{status}&quot;
             </span>
           </div>
           <div className="flex justify-between gap-3">
-            <span className="text-zinc-400">method</span>
-            <span className="text-emerald-400">&quot;GET&quot;</span>
+            <span className="text-zinc-600 dark:text-zinc-400">method</span>
+            <span className="text-emerald-600 dark:text-emerald-400">&quot;GET&quot;</span>
           </div>
           <div className="flex justify-between gap-3">
-            <span className="text-zinc-400">url</span>
-            <span className="text-emerald-400 truncate text-right max-w-32" title={url ?? undefined}>
-              {url ? `".../${url.split("/").pop()}"` : <span className="text-zinc-600">&mdash;</span>}
+            <span className="text-zinc-600 dark:text-zinc-400">url</span>
+            <span className="text-emerald-600 dark:text-emerald-400 truncate text-right max-w-32" title={url ?? undefined}>
+              {url ? `".../${url.split("/").pop()}"` : <span className="text-zinc-500">&mdash;</span>}
             </span>
           </div>
           <div className="flex justify-between gap-3">
-            <span className="text-zinc-400">time</span>
-            <span className="text-sky-400">
-              {responseTime !== null ? `${responseTime}ms` : <span className="text-zinc-600">&mdash;</span>}
+            <span className="text-zinc-600 dark:text-zinc-400">time</span>
+            <span className="text-sky-600 dark:text-sky-400">
+              {responseTime !== null ? `${responseTime}ms` : <span className="text-zinc-500">&mdash;</span>}
             </span>
           </div>
           <div className="flex justify-between gap-3">
-            <span className="text-zinc-400">response</span>
+            <span className="text-zinc-600 dark:text-zinc-400">response</span>
             <span className="text-zinc-600">
               {status === "success" && (
-                <span className="text-emerald-400">{"{ name, types, sprites }"}</span>
+                <span className="text-emerald-600 dark:text-emerald-400">{"{ name, types, sprites }"}</span>
               )}
               {status === "error" && (
-                <span className="text-red-400">404</span>
+                <span className="text-red-600 dark:text-red-400">404</span>
               )}
               {(status === "idle" || status === "loading") && <>&mdash;</>}
             </span>

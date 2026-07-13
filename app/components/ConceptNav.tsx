@@ -19,7 +19,7 @@ export default function ConceptNav() {
       {prev ? (
         <Link
           href={`/concepts/${prev.slug}`}
-          className="flex items-center gap-2 text-sm text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+          className="flex items-center gap-2 text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
         >
           <ArrowLeft className="size-4" />
           <span>{prev.title}</span>
@@ -30,7 +30,7 @@ export default function ConceptNav() {
       {next ? (
         <Link
           href={`/concepts/${next.slug}`}
-          className="flex items-center gap-2 text-sm text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+          className="flex items-center gap-2 text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
         >
           <span>{next.title}</span>
           <ArrowRight className="size-4" />

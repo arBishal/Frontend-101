@@ -153,11 +153,11 @@ export default function FrameworkDemo() {
       {/* Live demo */}
       <Card className="space-y-4 sm:p-5">
         <div className="flex items-center justify-between">
-          <p className="font-mono text-sm md:text-base uppercase tracking-wide text-zinc-400 dark:text-zinc-300">
+          <p className="font-mono text-sm md:text-base uppercase tracking-wide text-zinc-500 dark:text-zinc-300">
             What To Do?
           </p>
           {todos.length > 0 && (
-            <span className="font-mono text-xs text-zinc-400 dark:text-zinc-500">
+            <span className="font-mono text-xs text-zinc-500 dark:text-zinc-400">
               {doneCount}/{todos.length} completed
             </span>
           )}
@@ -196,14 +196,14 @@ export default function FrameworkDemo() {
                 <span
                   className={cn(
                     "flex-1",
-                    todo.done ? "line-through text-zinc-400 dark:text-zinc-600" : "text-zinc-700 dark:text-zinc-300"
+                    todo.done ? "line-through text-zinc-500 dark:text-zinc-500" : "text-zinc-700 dark:text-zinc-300"
                   )}
                 >
                   {todo.text}
                 </span>
                 <button
                   onClick={() => remove(todo.id)}
-                  className="shrink-0 text-zinc-400 dark:text-zinc-600 hover:text-red-500 dark:hover:text-red-400 transition-colors"
+                  className="shrink-0 text-zinc-500 dark:text-zinc-500 hover:text-red-500 dark:hover:text-red-400 transition-colors"
                 >
                   <X className="size-4" />
                 </button>
@@ -211,7 +211,7 @@ export default function FrameworkDemo() {
             ))}
           </ul>
         ) : (
-          <p className="text-sm text-zinc-400 dark:text-zinc-500 italic">
+          <p className="text-sm text-zinc-500 dark:text-zinc-400 italic">
             No todos yet. Type something and press Enter or click Add.
           </p>
         )}

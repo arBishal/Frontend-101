@@ -47,6 +47,13 @@ body {
   animation-delay: 600ms;
 }
 
+/* Shiki dual-theme: switch to dark vars inside .dark */
+.dark .shiki,
+.dark .shiki span {
+  color: var(--shiki-dark) !important;
+  background-color: transparent !important;
+}
+
 @keyframes fade-in-up {
   from {
     opacity: 0;
