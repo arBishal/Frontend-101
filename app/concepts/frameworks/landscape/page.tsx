@@ -130,7 +130,7 @@ export default function LandscapePage() {
         </div>
       </div>
 
-      <p className="text-sm text-zinc-400 dark:text-zinc-500">
+      <p className="text-sm text-zinc-500 dark:text-zinc-400">
         * React is technically a UI library, not a framework — it handles rendering but leaves routing, data fetching, and structure to you. We include it here because it&rsquo;s the foundation most frameworks (like Next.js) are built on.
       </p>
 

@@ -21,7 +21,7 @@ type Props = ComponentProps<"button"> & {
   href?: string;
 };
 
-export default function Button({ variant = "solid", className = "", href, children, ...rest }: Props) {
+export default function Button({ variant = "solid", className, href, children, ...rest }: Props) {
   const classes = cn(base, variants[variant], className);
 
   if (href) {

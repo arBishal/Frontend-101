@@ -10,7 +10,7 @@ export default function GlobalError({
   return (
     <html lang="en">
       <body className="min-h-screen flex flex-col items-center justify-center gap-4 bg-white text-zinc-900">
-        <p className="font-mono text-xs uppercase tracking-widest text-zinc-400">
+        <p className="font-mono text-xs uppercase tracking-widest text-zinc-500">
           Something went wrong
         </p>
         <h2 className="text-lg font-semibold">

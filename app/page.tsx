@@ -79,7 +79,7 @@ export default function Home() {
           <span className="bg-linear-to-r from-zinc-600 to-zinc-500 dark:from-zinc-400 dark:to-zinc-500 bg-clip-text text-transparent">npx frontend-101</span>
         </div>
 
-        <h1 className="animate-fade-in-up anim-delay-150 text-4xl font-bold text-zinc-900 dark:text-zinc-50 md:text-5xl lg:7xl">
+        <h1 className="animate-fade-in-up anim-delay-150 text-4xl font-bold text-zinc-900 dark:text-zinc-50 md:text-5xl lg:text-7xl">
           Frontend Concepts,{" "}
           <span className="text-zinc-500 dark:text-zinc-400">
             Explained
@@ -109,9 +109,9 @@ export default function Home() {
 
 
       <div className="relative w-full max-w-4xl">
-        <p className="font-mono text-base md:text-lg text-zinc-500 font-light dark:text-zinc-500 mb-4 text-center uppercase tracking-widest">
+        <h2 className="font-mono text-base md:text-lg text-zinc-500 mb-4 text-center uppercase tracking-widest">
           What&apos;s covered
-        </p>
+        </h2>
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {concepts.map((concept) => {
             const Icon = concept.icon;
@@ -122,7 +122,7 @@ export default function Home() {
                 className="group p-6 transition-all hover:border-zinc-400 dark:hover:border-zinc-600 hover:-translate-y-0.5"
               >
                 <div className="flex items-center gap-3 md:gap-4 mb-1">
-                  <Icon className="size-4 md:size-5 text-zinc-400 dark:text-zinc-500 group-hover:text-zinc-600 dark:group-hover:text-zinc-300 transition-colors" />
+                  <Icon className="size-4 md:size-5 text-zinc-500 group-hover:text-zinc-600 dark:group-hover:text-zinc-300 transition-colors" />
                   <h3 className="font-medium text-base md:text-lg text-zinc-900 dark:text-zinc-100 group-hover:text-zinc-950 dark:group-hover:text-zinc-50 transition-colors">
                     {concept.title}
                   </h3>
@@ -138,7 +138,7 @@ export default function Home() {
 
       {/* What's next — sneak peek */}
       <div className="relative w-full max-w-4xl mt-24 flex flex-col items-center text-center">
-        <p className="font-mono text-base md:text-lg text-zinc-500 font-light dark:text-zinc-500 mb-4 uppercase tracking-widest">
+        <p className="font-mono text-base md:text-lg text-zinc-500 mb-4 uppercase tracking-widest">
           What&apos;s next
         </p>
         <h2 className="text-2xl md:text-3xl font-bold text-zinc-900 dark:text-zinc-50">

@@ -9,7 +9,7 @@ export default function AppError({
 }) {
   return (
     <div className="flex flex-1 flex-col items-center justify-center gap-4 py-16 text-center">
-      <p className="font-mono text-xs uppercase tracking-widest text-zinc-400 dark:text-zinc-500">
+      <p className="font-mono text-xs uppercase tracking-widest text-zinc-500 dark:text-zinc-400">
         Something went wrong
       </p>
       <h2 className="text-lg font-semibold text-zinc-900 dark:text-zinc-50">

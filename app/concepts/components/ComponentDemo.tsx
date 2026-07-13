@@ -146,17 +146,17 @@ export default function ComponentDemo() {
       {/* Panels — side by side at sm+ */}
       <div className="flex flex-col sm:flex-row gap-4">
         {/* Props Inspector */}
-        <InspectorPanel title="Props Inspector" className="w-full sm:w-full flex-1">
+        <InspectorPanel title="Props Inspector" className="flex-1">
           <div className="space-y-2.5 text-xs">
             {variants.map((variant, i) => (
               <div key={variant} className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
                 <div className="flex items-center gap-2">
-                  <span className="text-zinc-400 w-4 shrink-0">#{i + 1}</span>
-                  <span className="text-zinc-400">variant</span>
+                  <span className="text-zinc-600 dark:text-zinc-400 w-4 shrink-0">#{i + 1}</span>
+                  <span className="text-zinc-600 dark:text-zinc-400">variant</span>
                   <span className="text-emerald-600 dark:text-emerald-400">&quot;{variant}&quot;</span>
                 </div>
                 <div className="flex items-center gap-2 pl-6 sm:pl-0 sm:ml-auto">
-                  <span className="text-zinc-400">disabled</span>
+                  <span className="text-zinc-600 dark:text-zinc-400">disabled</span>
                   <button
                     onClick={() => toggleDisabled(variant)}
                     className={cn(
@@ -173,10 +173,10 @@ export default function ComponentDemo() {
         </InspectorPanel>
 
         {/* Style Editor */}
-        <InspectorPanel title="Style Editor" className="w-full sm:w-full flex-1">
+        <InspectorPanel title="Style Editor" className="flex-1">
           <div className="space-y-3 text-xs">
             <div className="flex items-center gap-4 md:gap-6">
-              <p className="text-zinc-400 uppercase w-24 shrink-0">border-radius</p>
+              <p className="text-zinc-600 dark:text-zinc-400 uppercase w-24 shrink-0">border-radius</p>
               <OptionToggle
                 options={["rounded", "pill", "square"] as const}
                 value={radius}
@@ -184,7 +184,7 @@ export default function ComponentDemo() {
               />
             </div>
             <div className="flex items-center gap-4 md:gap-6">
-              <p className="text-zinc-400 uppercase w-24 shrink-0">size</p>
+              <p className="text-zinc-600 dark:text-zinc-400 uppercase w-24 shrink-0">size</p>
               <OptionToggle
                 options={["sm", "md", "lg"] as const}
                 value={size}
