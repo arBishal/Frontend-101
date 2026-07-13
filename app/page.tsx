@@ -1,6 +1,6 @@
 import { Star } from "lucide-react";
 import Button from "@/app/components/ui/Button";
-import ConceptCard from "@/app/components/ConceptCard";
+import Card from "@/app/components/ui/Card";
 import { concepts } from "@/app/lib/concepts";
 
 export default function Home() {
@@ -39,9 +39,26 @@ export default function Home() {
           What&apos;s covered
         </p>
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {concepts.map((concept) => (
-            <ConceptCard key={concept.slug} concept={concept} />
-          ))}
+          {concepts.map((concept) => {
+            const Icon = concept.icon;
+            return (
+              <Card
+                key={concept.slug}
+                href={`/concepts/${concept.slug}`}
+                className="group p-6 transition-all hover:border-zinc-400 dark:hover:border-zinc-600 hover:-translate-y-0.5 hover:shadow-sm"
+              >
+                <div className="flex items-center gap-2.5 mb-1">
+                  <Icon className="size-4 text-zinc-400 dark:text-zinc-500 group-hover:text-zinc-600 dark:group-hover:text-zinc-300 transition-colors" />
+                  <h3 className="font-semibold text-zinc-900 dark:text-zinc-100 group-hover:text-zinc-950 dark:group-hover:text-zinc-50 transition-colors">
+                    {concept.title}
+                  </h3>
+                </div>
+                <p className="text-sm text-zinc-600 dark:text-zinc-400">
+                  {concept.description}
+                </p>
+              </Card>
+            );
+          })}
         </div>
       </div>
     </main>
