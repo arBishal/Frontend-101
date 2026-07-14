@@ -72,4 +72,4 @@ docs/
 
 ## License
 
-This project is for educational purposes.
+[MIT](./LICENSE)
