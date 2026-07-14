@@ -47,6 +47,16 @@ body {
   animation-delay: 600ms;
 }
 
+@utility dot-grid {
+  background-image: radial-gradient(#d4d4d8 1px, transparent 1px);
+  background-size: 24px 24px;
+  mask-image: linear-gradient(to bottom, black 20%, transparent 80%);
+}
+
+@utility dot-grid-dark {
+  background-image: radial-gradient(#27272a 1px, transparent 1px);
+}
+
 /* Shiki dual-theme: switch to dark vars inside .dark */
 .dark .shiki,
 .dark .shiki span {
