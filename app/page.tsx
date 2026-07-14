@@ -4,6 +4,20 @@ import Card from "@/app/components/ui/Card";
 import ThemeToggle from "@/app/components/ThemeToggle";
 import { concepts } from "@/app/lib/concepts";
 
+async function getStarCount(): Promise<number | null> {
+  try {
+    const res = await fetch(
+      "https://api.github.com/repos/arBishal/Frontend-101",
+      { next: { revalidate: 3600 } }
+    );
+    if (!res.ok) return null;
+    const data = await res.json();
+    return data.stargazers_count;
+  } catch {
+    return null;
+  }
+}
+
 function BrowserMockup() {
   return (
     <div className="w-full max-w-lg rounded-lg border border-zinc-200 dark:border-zinc-800 overflow-hidden">
@@ -63,12 +77,13 @@ function BrowserMockup() {
   );
 }
 
-export default function Home() {
+export default async function Home() {
+  const stars = await getStarCount();
   return (
     <main className="min-h-screen flex flex-col items-center justify-center p-6 overflow-hidden">
       {/* Dot grid background */}
       <div
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(#d4d4d8_1px,transparent_1px)] dark:bg-[radial-gradient(#27272a_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:linear-gradient(to_bottom,black_20%,transparent_80%)]"
+        className="pointer-events-none absolute inset-0 dot-grid dark:dot-grid-dark"
         aria-hidden="true"
       />
 
@@ -76,7 +91,7 @@ export default function Home() {
       <div className="h-dvh flex flex-col items-center justify-center text-center max-w-4xl gap-3 md:gap-4">
         <div className="animate-fade-in-up font-mono text-sm md:text-base inline-flex items-center gap-2">
           <span className="text-zinc-500 dark:text-zinc-400">$</span>
-          <span className="bg-linear-to-r from-zinc-600 to-zinc-500 dark:from-zinc-400 dark:to-zinc-500 bg-clip-text text-transparent">npx frontend-101</span>
+          <span className="bg-linear-to-l from-zinc-600 to-zinc-500 dark:from-zinc-400 dark:to-zinc-500 bg-clip-text text-transparent">npx frontend-101</span>
         </div>
 
         <h1 className="animate-fade-in-up anim-delay-150 text-4xl font-bold text-zinc-900 dark:text-zinc-50 md:text-5xl lg:text-7xl">
@@ -91,10 +106,15 @@ export default function Home() {
           runs into early on.
         </p>
 
-        <div className="animate-fade-in-up anim-delay-450 flex flex-col sm:flex-row items-stretch gap-4 mt-3 md:mt-4">
+        <div className="animate-fade-in-up anim-delay-450 flex flex-col sm:flex-row items-stretch gap-3 md:gap-4 mt-3 md:mt-4">
           <Button variant="outline" href="https://github.com/arBishal/Frontend-101" className="justify-center group/star">
-            Star on GitHub
+            {stars !== null && (
+              <span className=" tabular-nums text-zinc-500 dark:text-zinc-400">
+                {stars}
+              </span>
+            )}
             <Star className="size-4 transition-colors group-hover/star:text-yellow-400 group-hover/star:fill-yellow-400" />
+            on GitHub
           </Button>
           <Button href="/concepts/responsiveness" className="justify-center">
             Explore the demos
