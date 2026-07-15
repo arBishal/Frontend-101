@@ -106,7 +106,7 @@ export default async function Home() {
           runs into early on.
         </p>
 
-        <div className="animate-fade-in-up anim-delay-450 flex flex-col sm:flex-row items-stretch gap-3 md:gap-4 mt-3 md:mt-4">
+        <div className="animate-fade-in-up anim-delay-450 grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4 mt-3 md:mt-4">
           <Button variant="outline" href="https://github.com/arBishal/Frontend-101" className="justify-center group/star">
             {stars !== null && (
               <span className=" tabular-nums text-zinc-500 dark:text-zinc-400">
