@@ -162,7 +162,7 @@ export default function FrameworkDemo() {
             </span>
           )}
         </div>
-        <div className="flex gap-2">
+        <div className="flex flex-col sm:flex-row gap-2">
           <Input
             type="text"
             value={text}
@@ -171,7 +171,7 @@ export default function FrameworkDemo() {
             placeholder="Add a todo..."
             className="flex-1"
           />
-          <Button onClick={addTodo} className="px-4 py-2">
+          <Button onClick={addTodo} className="px-4 py-2 justify-center">
             <Plus className="size-4" />
             Add a task
           </Button>
