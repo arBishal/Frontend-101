@@ -35,7 +35,7 @@ export default function ResponsivenessPage() {
     <div className="flex flex-col gap-8 text-sm lg:text-base">
       <div className="space-y-2">
         <h1 className="text-2xl lg:text-3xl font-bold text-zinc-900 dark:text-zinc-50">
-          Responsive Design
+          Responsiveness
         </h1>
         <p className="text-zinc-600 dark:text-zinc-400">
           Drag, tap, or resize to see how layouts adapt to different screen
