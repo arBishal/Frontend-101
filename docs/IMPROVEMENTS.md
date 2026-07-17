@@ -1,7 +1,6 @@
 # CTO Review — Improvement Roadmap
 
 > Snapshot date: 2026-07-17 · Branch: `development`
-> A strategic review of frontend-101: where the product stands, and prioritized improvements across content, features, and engineering. Companion docs: [TODO.md](./TODO.md) (concept backlog + small tasks), [SHOWCASE.md](./SHOWCASE.md) (the repo as a hiring signal), [OWNERSHIP.md](./OWNERSHIP.md) (owning the "how" while building with AI), [WRITING.md](./WRITING.md) (the playbook for writing and reviewing concepts), [IMPLEMENT.md](./IMPLEMENT.md) (Claude's runbook, incl. the teaching-audit findings for legacy-page refactors).
 
 ---
 
