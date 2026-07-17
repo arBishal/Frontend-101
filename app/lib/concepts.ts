@@ -1,4 +1,5 @@
 import {
+  Network,
   Monitor,
   Puzzle,
   ToggleRight,
@@ -23,8 +24,14 @@ export type Concept = {
 
 export const concepts: Concept[] = [
   {
+    slug: "the-dom",
+    title: "The DOM",
+    description: "The live tree the browser builds from your HTML.",
+    icon: Network,
+  },
+  {
     slug: "responsiveness",
-    title: "Responsive Design",
+    title: "Responsiveness",
     description: "Making layouts adapt to any screen size.",
 
     icon: Monitor,

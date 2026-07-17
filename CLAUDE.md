@@ -1,13 +1,5 @@
 # Project: frontend-101
 
-## Project Structure
-```
-app/           # Next.js App Router pages and layouts
-  layout.tsx   # Root layout
-  page.tsx     # Home page
-  globals.css  # Global styles (Tailwind imports)
-```
-
 Path alias: `@/*` maps to the project root.
 
 ## Conventions
@@ -18,7 +10,7 @@ Path alias: `@/*` maps to the project root.
 
 ## Instructions
 - Always use standard coding practices like SOLID, DRY, KISS, YAGNI, etc.
+- Always follow already implemented aesthetics while building new UI.
 - Don't use hardcoded value for tailwind classes. Always use default utility values.
 - Don't assume and proceed if the instruction is unclear. Always confirm beforehands.
 - Don't implement something straight away. Present a solution first, the proceed after confirmation.
-
