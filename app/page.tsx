@@ -129,7 +129,7 @@ export default async function Home() {
 
 
       <div className="relative w-full max-w-4xl">
-        <h2 className="font-mono text-base md:text-lg text-zinc-500 mb-4 text-center uppercase tracking-widest">
+        <h2 className="font-mono text-base md:text-lg text-zinc-500 dark:text-zinc-400 mb-4 text-center uppercase tracking-widest">
           What&apos;s covered
         </h2>
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -142,7 +142,7 @@ export default async function Home() {
                 className="group p-6 transition-all hover:border-zinc-400 dark:hover:border-zinc-600 hover:-translate-y-0.5"
               >
                 <div className="flex items-center gap-3 md:gap-4 mb-1">
-                  <Icon className="size-4 md:size-5 text-zinc-500 group-hover:text-zinc-600 dark:group-hover:text-zinc-300 transition-colors" />
+                  <Icon className="size-4 md:size-5 text-zinc-500 dark:text-zinc-400 group-hover:text-zinc-600 dark:group-hover:text-zinc-300 transition-colors" />
                   <h3 className="font-medium text-base md:text-lg text-zinc-900 dark:text-zinc-100 group-hover:text-zinc-950 dark:group-hover:text-zinc-50 transition-colors">
                     {concept.title}
                   </h3>
@@ -158,7 +158,7 @@ export default async function Home() {
 
       {/* What's next — sneak peek */}
       <div className="relative w-full max-w-4xl mt-24 flex flex-col items-center text-center">
-        <h2 className="font-mono text-base md:text-lg text-zinc-500 mb-4 uppercase tracking-widest">
+        <h2 className="font-mono text-base md:text-lg text-zinc-500 dark:text-zinc-400 mb-4 uppercase tracking-widest">
           What&apos;s next
         </h2>
         <h3 className="text-2xl md:text-3xl font-bold text-zinc-900 dark:text-zinc-50">
