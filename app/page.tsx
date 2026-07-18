@@ -1,4 +1,4 @@
-import { Star } from "lucide-react";
+import { Star, MessageSquarePlus } from "lucide-react";
 import Button from "@/app/components/ui/Button";
 import Card from "@/app/components/ui/Card";
 import ThemeToggle from "@/app/components/ThemeToggle";
@@ -20,7 +20,7 @@ async function getStarCount(): Promise<number | null> {
 
 function BrowserMockup() {
   return (
-    <div className="w-full max-w-lg rounded-lg border border-zinc-200 dark:border-zinc-800 overflow-hidden">
+    <div className="w-full max-w-lg rounded-lg border border-zinc-200 dark:border-zinc-800 overflow-hidden" aria-hidden="true">
       {/* Title bar */}
       <div className="flex items-center gap-2 px-4 py-3 bg-zinc-100 dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-800">
         <div className="flex gap-2">
@@ -80,7 +80,7 @@ function BrowserMockup() {
 export default async function Home() {
   const stars = await getStarCount();
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center p-6 overflow-hidden">
+    <main className="min-h-screen flex flex-col items-center justify-center pt-4 pb-12 px-6 overflow-hidden">
       {/* Dot grid background */}
       <div
         className="pointer-events-none absolute inset-0 dot-grid dark:dot-grid-dark"
@@ -89,9 +89,9 @@ export default async function Home() {
 
       {/* hero */}
       <div className="h-dvh flex flex-col items-center justify-center text-center max-w-4xl gap-3 md:gap-4">
-        <div className="animate-fade-in-up font-mono text-sm md:text-base inline-flex items-center gap-2">
+        <div className="animate-fade-in-up font-mono font-medium text-sm md:text-base inline-flex items-center gap-2">
           <span className="text-zinc-500 dark:text-zinc-400">$</span>
-          <span className="bg-linear-to-l from-zinc-600 to-zinc-500 dark:from-zinc-400 dark:to-zinc-500 bg-clip-text text-transparent">npx frontend-101</span>
+          <span className="bg-linear-to-l from-zinc-600 to-zinc-500 dark:from-zinc-400 dark:to-zinc-500 bg-clip-text text-transparent">learn frontend-101</span>
         </div>
 
         <h1 className="animate-fade-in-up anim-delay-150 text-4xl font-bold text-zinc-900 dark:text-zinc-50 md:text-5xl lg:text-7xl">
@@ -116,7 +116,7 @@ export default async function Home() {
             <Star className="size-4 transition-colors group-hover/star:text-yellow-400 group-hover/star:fill-yellow-400" />
             on GitHub
           </Button>
-          <Button href="/concepts/responsiveness" className="justify-center">
+          <Button href={`/concepts/${concepts[0].slug}`} className="justify-center order-first sm:order-0">
             Explore the demos
             <span aria-hidden="true">&rarr;</span>
           </Button>
@@ -129,7 +129,7 @@ export default async function Home() {
 
 
       <div className="relative w-full max-w-4xl">
-        <h2 className="font-mono text-base md:text-lg text-zinc-500 mb-4 text-center uppercase tracking-widest">
+        <h2 className="font-mono text-base md:text-lg text-zinc-500 dark:text-zinc-400 mb-4 text-center uppercase tracking-widest">
           What&apos;s covered
         </h2>
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -142,7 +142,7 @@ export default async function Home() {
                 className="group p-6 transition-all hover:border-zinc-400 dark:hover:border-zinc-600 hover:-translate-y-0.5"
               >
                 <div className="flex items-center gap-3 md:gap-4 mb-1">
-                  <Icon className="size-4 md:size-5 text-zinc-500 group-hover:text-zinc-600 dark:group-hover:text-zinc-300 transition-colors" />
+                  <Icon className="size-4 md:size-5 text-zinc-500 dark:text-zinc-400 group-hover:text-zinc-600 dark:group-hover:text-zinc-300 transition-colors" />
                   <h3 className="font-medium text-base md:text-lg text-zinc-900 dark:text-zinc-100 group-hover:text-zinc-950 dark:group-hover:text-zinc-50 transition-colors">
                     {concept.title}
                   </h3>
@@ -158,18 +158,18 @@ export default async function Home() {
 
       {/* What's next — sneak peek */}
       <div className="relative w-full max-w-4xl mt-24 flex flex-col items-center text-center">
-        <p className="font-mono text-base md:text-lg text-zinc-500 mb-4 uppercase tracking-widest">
+        <h2 className="font-mono text-base md:text-lg text-zinc-500 dark:text-zinc-400 mb-4 uppercase tracking-widest">
           What&apos;s next
-        </p>
-        <h2 className="text-2xl md:text-3xl font-bold text-zinc-900 dark:text-zinc-50">
-          How to Approach a Component
         </h2>
+        <h3 className="text-2xl md:text-3xl font-bold text-zinc-900 dark:text-zinc-50">
+          How to Approach a Component
+        </h3>
         <p className="mt-2 text-base md:text-lg text-zinc-600 dark:text-zinc-400 max-w-md">
           Breaking down real UI challenges.
         </p>
 
         {/* Autocomplete mockup */}
-        <div className="mt-8 w-full max-w-sm">
+        <div className="mt-8 w-full max-w-sm" aria-hidden="true">
           <div className="rounded-lg border border-zinc-200 dark:border-zinc-800 overflow-hidden">
             {/* Search input */}
             <div className="flex items-center gap-3 px-4 py-3 bg-white dark:bg-zinc-950">
@@ -198,18 +198,17 @@ export default async function Home() {
         </span>
       </div>
 
-      <div className="relative mt-16 text-center text-sm md:text-base text-zinc-600 dark:text-zinc-400">
-        <p>
-          Have a suggestion or found something to improve?{" "}
-          <a
-            href="https://github.com/arBishal/Frontend-101/issues"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="underline underline-offset-2 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
-          >
-            Open an issue on GitHub
-          </a>
+      <div className="relative mt-16 flex flex-col items-center gap-4 text-center">
+        <p className="text-sm md:text-base text-zinc-600 dark:text-zinc-400">
+          Have a suggestion or found something to improve?
         </p>
+        <Button
+          variant="outline"
+          href="https://github.com/arBishal/Frontend-101/issues"
+        >
+          <MessageSquarePlus className="size-4" />
+          Open an issue on GitHub
+        </Button>
       </div>
 
       <ThemeToggle />

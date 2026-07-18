@@ -212,13 +212,13 @@ export default function ApiDemo() {
           <div className="flex justify-between gap-3">
             <span className="text-zinc-600 dark:text-zinc-400">url</span>
             <span className="text-emerald-600 dark:text-emerald-400 truncate text-right max-w-32" title={url ?? undefined}>
-              {url ? `".../${url.split("/").pop()}"` : <span className="text-zinc-500">&mdash;</span>}
+              {url ? `".../${url.split("/").pop()}"` : <span className="text-zinc-500 dark:text-zinc-400">&mdash;</span>}
             </span>
           </div>
           <div className="flex justify-between gap-3">
             <span className="text-zinc-600 dark:text-zinc-400">time</span>
             <span className="text-sky-600 dark:text-sky-400">
-              {responseTime !== null ? `${responseTime}ms` : <span className="text-zinc-500">&mdash;</span>}
+              {responseTime !== null ? `${responseTime}ms` : <span className="text-zinc-500 dark:text-zinc-400">&mdash;</span>}
             </span>
           </div>
           <div className="flex justify-between gap-3">

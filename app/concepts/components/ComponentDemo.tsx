@@ -127,7 +127,7 @@ export default function ComponentDemo() {
       <Card className="flex flex-col xl:flex-row items-start xl:items-center xl:justify-around gap-4 xl:gap-6">
         {variants.map((variant) => (
           <div key={variant} className="flex items-center gap-3 xl:flex-col xl:gap-4">
-            <span className="font-mono text-xs text-zinc-500 w-16 xl:w-auto shrink-0">
+            <span className="font-mono text-xs text-zinc-500 dark:text-zinc-400 w-16 xl:w-auto shrink-0">
               {variant}
             </span>
             <DemoButton

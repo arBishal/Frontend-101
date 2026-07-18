@@ -55,13 +55,11 @@ Write all prose under WRITING.md Pass 1 (Steps 0–7) and its voice rules. Non-n
 
 ## 5. Verify
 
+Run everything that can be checked without a browser; leave visual/interactive checks to the human (§6). Do **not** claim visual behavior was confirmed — report it as unverified and hand it off.
+
 1. `npm run lint` and `npm run build` pass.
-2. `npm run dev`: page renders; sidebar, homepage card, and prev/next nav show the concept in the right position.
-3. Demo: exercise every interaction including the break-it paths; confirm state and UI stay in sync.
-4. Dark mode: toggle and check every section and demo state.
-5. Mobile viewport: layout stacks, nothing overflows horizontally.
-6. Keyboard only: Tab through the whole page and operate the demo without a mouse.
-7. Run the **Pass 3 mechanical checklist** from WRITING.md against your own draft (duplicate-definition search, statistic count, jargon scan, voice-rule sweep, opening-paragraph grammar pass, sequence read).
+2. Run the **Pass 3 mechanical checklist** from WRITING.md against your own draft (duplicate-definition search, statistic count, jargon scan, voice-rule sweep, opening-paragraph grammar pass, sequence read).
+3. Static self-review of the diff for the code-level guarantees in §3 — correct roles/`aria-*`, `dark:` variant on every color, default-scale utilities, mobile-stacking classes present. Confirm from the code, not from running it.
 
 ## 6. Hand off
 
@@ -71,6 +69,7 @@ End the task with a report for the human's Pass 2 review:
 - The five Step 0 answers restated (so the reviewer can check fidelity without opening the plan).
 - Anything that diverged from the plan and why.
 - Open questions or known weak spots — flag them yourself; don't leave them for the reviewer to discover.
+- **A visual-check handoff list** — the things you couldn't verify without a browser, for the human to confirm: page renders and nav position, demo interactions and break-it paths, dark mode, mobile layout, keyboard operation.
 
 Do **not** commit unless asked. When revising after Pass 2 feedback: apply every reviewer note or explicitly report why one was kept as-is — never silently drop a note (WRITING.md Pass 3).
 
