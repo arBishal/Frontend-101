@@ -42,3 +42,6 @@ next-env.d.ts
 
 # claude
 CLAUDE.md
+
+# personal docs (portfolio / interview-prep — local only, not for the public repo)
+docs/pers/

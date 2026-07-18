@@ -1,6 +1,6 @@
 # Writing a Concept — The Playbook
 
-> How every concept page gets written, reviewed, and refactored. Distilled from the 2026-07 instructor's review of the eight original pages (its findings now live in [IMPLEMENT.md](./IMPLEMENT.md) §7). Companion: [OWNERSHIP.md](./OWNERSHIP.md) (renamed from LEARNING.md) — the human review pass below is where its ownership habits live. When Claude executes a concept task, it follows [IMPLEMENT.md](./IMPLEMENT.md) (the technical runbook) alongside this doc; this doc owns the prose and pedagogy rules.
+> How every concept page gets written, reviewed, and refactored. Distilled from the 2026-07 instructor's review of the eight original pages (its findings now live in [IMPLEMENT.md](./IMPLEMENT.md) §7). When Claude executes a concept task, it follows [IMPLEMENT.md](./IMPLEMENT.md) (the technical runbook) alongside this doc; this doc owns the prose and pedagogy rules.
 
 ---
 
@@ -88,11 +88,11 @@ This section keeps its established job — **telling the learner how to use the 
 
 Your pass is about the three things rules can't check. Don't copy-edit — flag and hand back.
 
-- [ ] **Ownership test** (this is OWNERSHIP.md's cold-draft habit, relocated to fit the flow): close the page and explain the concept out loud — the takeaway, the misconception, how the demo proves it. **Anything you can't explain, flag it** — either the page teaches it badly, or you've found your own gap to close before shipping. Both are wins; shipping without the test is the only loss.
+- [ ] **Ownership test** (the cold-draft habit, relocated to fit the flow): close the page and explain the concept out loud — the takeaway, the misconception, how the demo proves it. **Anything you can't explain, flag it** — either the page teaches it badly, or you've found your own gap to close before shipping. Both are wins; shipping without the test is the only loss.
 - [ ] **The desk test, out loud.** Read the prose as if saying it to a junior. Mark every sentence that sounds like documentation instead of a person. You are the site's voice — Claude approximates it; you're the authority on it.
 - [ ] **Truth check.** Is the scene believable? Is the analogy honest, or does it break down in a way a learner will discover? Are the claims/stats ones you'd defend in an interview?
 - [ ] **Step 0 fidelity.** Open the plan doc: does the page deliver the promised takeaway, misconception, scene, and demo verb — or did the draft drift?
-- [ ] Leave feedback as directional notes ("card 2 sounds generated", "this analogy breaks because ___", "I couldn't explain the debrief — go deeper"), not rewritten sentences. Pass 3 does the rewriting; your notes double as the interview-prep artifact OWNERSHIP.md wants.
+- [ ] Leave feedback as directional notes ("card 2 sounds generated", "this analogy breaks because ___", "I couldn't explain the debrief — go deeper"), not rewritten sentences. Pass 3 does the rewriting; your notes double as a useful record of why the page reads the way it does.
 
 ## Pass 3 — Revise (Claude)
 

@@ -46,12 +46,6 @@ All seven `page.tsx` files hand-copy the same structure (title block, `SectionLa
 
 Payoff: a standard page becomes a short stack of one-liners, copy-paste drift ends, and `concepts.ts` becomes the single source for title/description (currently duplicated in each page's `metadata`, prose, and the registry).
 
-### 3.4 Small correctness fixes
-- **README is stale** — it doesn't list The DOM.
-- **Homepage CTA** ("Explore the demos") links to `/concepts/responsiveness`, but The DOM is now the first concept. Link to the first entry in `concepts.ts` instead of hardcoding.
-- **`npx frontend-101` in the hero is fictional** — no such package exists. Either publish a trivial CLI that opens the site (fun, on-brand, cheap) or change the line. Shipping a fake command on an educational site undercuts trust.
-- Existing TODO items stand: favicon, CSS refactor (extract repeated zinc patterns into semantic tokens via Tailwind v4 `@theme`), theme-toggle revisit, mobile polish.
-
 ---
 
 ## 4. Content: new concepts (P1)
@@ -72,7 +66,7 @@ Deliberately out of scope (YAGNI, or better served elsewhere): tooling deep-dive
 
 ## 5. Improving existing concepts (P1–P2)
 
-- **Cross-linking.** `ConceptNav` already provides *sequential* prev/next links on every page. What's missing is *semantic* linking: inline links in prose wherever one concept mentions another (State's intro already talks about the DOM, unlinked). Do the inline links now — they're free while writing. A "Related concepts" block for non-adjacent pairs (The DOM → State, API Calls → Caching) only becomes worth it once the catalog is large enough that prev/next stops being a good proxy for relatedness — revisit around 12+ concepts.
+- **Cross-linking.** `ConceptNav` already provides *sequential* prev/next links on every page. What's missing is *semantic* linking: inline links in prose wherever one concept mentions another (State's intro already talks about the DOM, unlinked). Do the inline links now — they're free while writing.
 - **"Try it yourself" challenges.** Each page ends passively. Add 2–3 prompts per concept ("Remove the `<div>` node — what happens to its children?"). Turns reading into doing at near-zero build cost.
 - **The DOM** — add a "what the browser renders vs. your HTML source" toggle to drive home the page's own key insight.
 - **Responsiveness** — mention container queries as the modern evolution; the demo's resizable viewport is the perfect place to show them.
@@ -98,8 +92,6 @@ Deliberately deferred: in-browser code playgrounds (Sandpack et al. — heavy de
 ## 7. Growth & community (P3)
 
 - **Contribution story.** The repo is open source with an issues CTA on the homepage, but there's no `CONTRIBUTING.md` and no concept template. Publish the page formula + a concept plan doc as a template; concepts are the rare open-source contribution that non-experts can make well.
-- **"How to Approach a Component" series.** Already teased on the homepage — either schedule it (it's a distinct content type: applied breakdowns vs. concepts, likely `app/components-lab/` or similar) or pull the teaser; a long-lived "coming soon" ages badly.
-- **`npx frontend-101`** — see §3.4; as a real package it doubles as marketing.
 - **i18n** (long-term). The audience for beginner frontend content is global; the template-first architecture (§3.3) is what would make translations feasible later. Not now — content breadth first.
 
 ---
