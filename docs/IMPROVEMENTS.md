@@ -8,7 +8,7 @@
 
 **The good.** The product has a clear identity — interactive, visual explanations of frontend fundamentals for beginners — and a consistent, well-executed page formula (What is it → Why it matters → Interactive demo → How it works). Seven concepts are live (The DOM, Responsiveness, Components, State, API Calls, Frameworks ×3 pages, Accessibility). The design system is coherent (zinc palette, dark mode, shared `ui/` primitives), pages ship per-page metadata, sitemap and robots exist, and the planning discipline (per-concept plan docs, like the one used for The DOM) is genuinely good.
 
-**The gaps, in one paragraph.** Content velocity is the bottleneck (10 planned concepts untouched); Vercel's build is the only automated check — lint no longer runs anywhere (Next 16 removed it from `next build`) and there are no tests (analytics is a deliberate non-goal for now — see §6); syntax highlighting runs client-side, which ships the entire Shiki engine to the browser; each concept page re-implements the same layout by hand instead of sharing a template; and the site has no learner-retention features (search, progress, challenges) or contribution story despite being open source.
+**The gaps, in one paragraph.** Content velocity is the bottleneck (10 planned concepts untouched); Vercel's build is the only automated check — lint no longer runs anywhere (Next 16 removed it from `next build`) and there are no tests (analytics is a deliberate non-goal for now — see §6); syntax highlighting runs client-side by necessity but no longer ships the entire Shiki engine (fixed — §3.2); each concept page re-implements the same layout by hand instead of sharing a template; and the site has no learner-retention features (search, progress, challenges) or contribution story despite being open source.
 
 ---
 
@@ -16,7 +16,7 @@
 
 | Priority | Theme | Items |
 |---|---|---|
-| **P0** | Trust & foundations | Close CI gaps beyond Vercel, Shiki server-side, shared page pieces, fix small inconsistencies |
+| **P0** | Trust & foundations | Close CI gaps beyond Vercel, ~~Shiki server-side~~ (done → fine-grained bundle, §3.2), shared page pieces, fix small inconsistencies |
 | **P1** | Content velocity | Next 3 concepts (Rendering, Events, Async/Event Loop), concept cross-linking, "Try it yourself" challenges |
 | **P2** | Learner experience | Search/⌘K, progress tracking, per-concept OG images |
 | **P3** | Growth & community | Contribution guide + concept template, `npx frontend-101` CLI, component-breakdown series |
@@ -36,8 +36,20 @@ Plan:
 - Now: enable branch protection so a failing Vercel build blocks merge into `main`. Zero setup cost.
 - Defer GitHub Actions until we add tests (Playwright smoke test: every concept page renders, demo mounts; axe accessibility check — a site that *teaches* accessibility should prove its own). When that workflow lands, fold `eslint` into it. Add a lint-only workflow earlier only if unlinted merges start hurting.
 
-### 3.2 Move Shiki to the server
-`CodeBlock.tsx` is `"use client"` and calls `codeToHtml` in an effect — the full highlighter engine and grammars ship to every visitor, and code blocks flash unstyled on load. Since all code samples are static strings, highlight at build time in a server component (or an async RSC wrapper) and keep only the copy-button as a client island. This is likely the single biggest performance win available.
+### 3.2 Shrink the client Shiki bundle — done (2026-07-19)
+**Premise corrected.** A literal "move to the server" isn't possible: `DomDemo` and `ComponentDemo` highlight code generated from live client state (`treeToHtml(tree)`, `buildJsxSnippet(disabledMap)`), so highlighting must stay client-side — the server only ever sees the initial state. The real goal — stop shipping the whole engine to every visitor — was met a different way.
+
+`CodeBlock` now uses a fine-grained shared highlighter (`app/lib/highlighter.ts`): `createHighlighterCore` from `shiki/core` with only the four languages used (html, css, jsx, tsx), the two themes, and the **JavaScript regex engine** (`shiki/engine/javascript`) instead of the Oniguruma **WASM** — all loaded via dynamic `import()` so it code-splits off First Load.
+
+Measured before/after (gzipped First Load JS, from each prerendered page's chunk set):
+- **`/concepts/the-dom`: 256 KB → 203 KB (−21%)**; `/concepts/components`: 255 → 202 KB. Control page with no code block (`state`) unchanged at 206 KB.
+- Oniguruma **WASM eliminated** — no `.wasm` ships.
+- Generated client JS: 331 chunks / 12.1 MB → 31 chunks / 1.6 MB (mostly never-downloaded lazy grammar chunks).
+- The highlighter (~125 KB gzip) now loads **on-demand after first paint**, not in First Load.
+
+Full write-up: [improvements/2026-07-19-shiki-client-bundle.md](./improvements/2026-07-19-shiki-client-bundle.md).
+
+Not done (optional follow-up): server-rendering the one *static* demo (`FrameworkDemo`) to remove its first-paint highlight flash — marginal, and blocked by the client/server composition boundary.
 
 ### 3.3 Extract shared page pieces (composition, not a rigid template)
 All seven `page.tsx` files hand-copy the same structure (title block, `SectionLabel` sections, problem-card grid, demo slot). Extract the repeated *pieces*, not the page *structure*:
