@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 import Image from "next/image";
-import { Loader2, Search } from "lucide-react";
+import { Loader2, Search, RotateCcw } from "lucide-react";
 import Button from "@/app/components/ui/Button";
 import Input from "@/app/components/ui/Input";
 import Card from "@/app/components/ui/Card";
@@ -43,6 +43,16 @@ const statusColors: Record<Status, string> = {
   loading: "text-amber-600 dark:text-amber-400",
   success: "text-emerald-600 dark:text-emerald-400",
   error: "text-red-600 dark:text-red-400",
+};
+
+// Plain-language explanation of what each state means, so the reader can follow
+// what's happening without decoding the raw status word. Colored per state via
+// statusColors above. "idle" is the empty state — nothing fetched yet.
+const stateMessage: Record<Status, string> = {
+  idle: "Nothing fetched yet. The request hasn't been sent.",
+  loading: "Sending the request and waiting for the server to respond…",
+  success: "The server responded successfully, and the data is on screen.",
+  error: "The request failed. No data came back.",
 };
 
 export default function ApiDemo() {
@@ -109,6 +119,15 @@ export default function ApiDemo() {
     }
   }
 
+  function handleClear() {
+    abortRef.current?.abort();
+    setStatus("idle");
+    setData(null);
+    setError(null);
+    setUrl(null);
+    setResponseTime(null);
+  }
+
   return (
     <div className="flex flex-col sm:flex-row gap-4">
       {/* Request Card */}
@@ -133,11 +152,28 @@ export default function ApiDemo() {
           </Button>
         </div>
 
+        {/* Plain-language state — its color tracks the state as it changes */}
+        <div className="flex items-center justify-between gap-3">
+          <p className={cn("text-sm transition-colors", statusColors[status])}>
+            {stateMessage[status]}
+          </p>
+          {status !== "idle" && (
+            <button
+              type="button"
+              onClick={handleClear}
+              aria-label="Reset to empty state"
+              className="shrink-0 rounded-md p-1 text-zinc-400 hover:text-zinc-700 dark:text-zinc-500 dark:hover:text-zinc-200 transition-colors"
+            >
+              <RotateCcw className="size-4" />
+            </button>
+          )}
+        </div>
+
         {/* Result area */}
         <div className="min-h-32 flex items-center justify-center">
           {status === "idle" && (
             <p className="text-sm text-zinc-500 dark:text-zinc-400 text-center">
-              Enter a Pokemon name or ID and hit Fetch.
+              Enter a Pokémon name or ID and hit Fetch.
             </p>
           )}
 

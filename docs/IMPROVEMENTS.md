@@ -40,7 +40,7 @@ Plan:
 
 - ~~**The DOM** — add a "what the browser renders vs. your HTML source" toggle~~ (done 2026-07-20 — Source HTML vs Live DOM panels in `DomDemo`, side-by-side on desktop / tabbed on mobile).
 - ~~**Responsiveness** — mention container queries as the modern evolution~~ (done 2026-07-20 — added a "What is responsive design?" paragraph contrasting viewport-based breakpoints with `@container`, plus a "How it works" note that honestly flags the demo's breakpoint logic as JS-simulated, with a CSS snippet showing what it'd look like with real container queries).
-- **API Calls** — surface loading/error/empty states explicitly in the demo; it's the part beginners skip and the natural hook for the future Error Handling page.
+- ~~**API Calls** — surface loading/error/empty states explicitly in the demo; it's the part beginners skip and the natural hook for the future Error Handling page.~~ (done 2026-07-20 — added a plain-language state line below the demo's search bar whose color tracks the state as it changes (grey empty / amber loading / green success / red error), with a reset icon to return to empty, so the reader follows what's happening in words; rewrote the "How it works" debrief around the four states, removed the verbatim duplicate definition, added break-it challenges and a one-line teaser to the future Error Handling page.)
 - **Accessibility** — add a contrast-checker or focus-order visualizer; today it's the thinnest demo (140 lines) for one of the most important topics.
 
 ---
