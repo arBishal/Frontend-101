@@ -7,9 +7,9 @@ import { useResizable } from "@/app/lib/useResizable";
 import { cn } from "@/app/lib/cn";
 
 const PRESETS = [
-  { label: "Mobile", icon: Smartphone, range: "< 640px", width: 320 },
-  { label: "Tablet", icon: Tablet, range: "640 - 1023px", width: 640 },
-  { label: "Desktop", icon: Monitor, range: "1024px+", width: Infinity },
+  { label: "Mobile", icon: Smartphone, range: "< 512px", width: 320 },
+  { label: "Tablet", icon: Tablet, range: "512 - 895px", width: 640 },
+  { label: "Desktop", icon: Monitor, range: "896px+", width: Infinity },
 ] as const;
 
 export default function ResponsiveDemo() {
@@ -58,8 +58,8 @@ export default function ResponsiveDemo() {
 
   function getActivePreset() {
     const w = width ?? maxWidth;
-    if (w >= 1024) return "Desktop";
-    if (w >= 640) return "Tablet";
+    if (w >= 896) return "Desktop";
+    if (w >= 512) return "Tablet";
     return "Mobile";
   }
 
@@ -99,7 +99,7 @@ export default function ResponsiveDemo() {
       {/* Resizable preview */}
       <div ref={containerRef} className="relative">
         <div
-          className="relative overflow-hidden rounded-lg border border-zinc-200 dark:border-zinc-800 transition-[border-color]"
+          className="@container relative overflow-hidden rounded-lg border border-zinc-200 dark:border-zinc-800 transition-[border-color]"
           style={{ width: isDesktop ? "100%" : displayWidth, maxWidth: "100%" }}
         >
           {/* Preview content */}
@@ -107,19 +107,18 @@ export default function ResponsiveDemo() {
             {/* Mock navbar */}
             <div className="rounded-lg bg-zinc-100 dark:bg-zinc-800 px-4 py-3 flex items-center justify-between">
               <div className="size-5 rounded-full bg-zinc-400 dark:bg-zinc-600 shrink-0" />
-              {displayWidth >= 640 ? (
-                <div className="flex gap-2.5">
-                  <div className="h-2 w-10 rounded-full bg-zinc-400 dark:bg-zinc-600" />
-                  <div className="h-2 w-10 rounded-full bg-zinc-400 dark:bg-zinc-600" />
-                  <div className="h-2 w-10 rounded-full bg-zinc-400 dark:bg-zinc-600" />
-                </div>
-              ) : (
-                <div className="space-y-1">
-                  <div className="h-0.5 w-3.5 bg-zinc-400 dark:bg-zinc-500" />
-                  <div className="h-0.5 w-3.5 bg-zinc-400 dark:bg-zinc-500" />
-                  <div className="h-0.5 w-3.5 bg-zinc-400 dark:bg-zinc-500" />
-                </div>
-              )}
+              {/* Nav links — shown once the container is wide enough */}
+              <div className="hidden @lg:flex gap-2.5">
+                <div className="h-2 w-10 rounded-full bg-zinc-400 dark:bg-zinc-600" />
+                <div className="h-2 w-10 rounded-full bg-zinc-400 dark:bg-zinc-600" />
+                <div className="h-2 w-10 rounded-full bg-zinc-400 dark:bg-zinc-600" />
+              </div>
+              {/* Hamburger — collapses in on narrow containers */}
+              <div className="space-y-1 @lg:hidden">
+                <div className="h-0.5 w-3.5 bg-zinc-400 dark:bg-zinc-500" />
+                <div className="h-0.5 w-3.5 bg-zinc-400 dark:bg-zinc-500" />
+                <div className="h-0.5 w-3.5 bg-zinc-400 dark:bg-zinc-500" />
+              </div>
             </div>
 
             {/* Mock hero */}
@@ -129,18 +128,8 @@ export default function ResponsiveDemo() {
               <div className="h-2 w-1/2 mx-auto rounded-full bg-zinc-300 dark:bg-zinc-700" />
             </div>
 
-            {/* Mock cards */}
-            <div
-              className="grid gap-3"
-              style={{
-                gridTemplateColumns:
-                  displayWidth >= 1024
-                    ? "repeat(3, 1fr)"
-                    : displayWidth >= 640
-                      ? "repeat(2, 1fr)"
-                      : "1fr",
-              }}
-            >
+            {/* Mock cards — 1 / 2 / 3 columns driven by container width */}
+            <div className="grid gap-3 grid-cols-1 @lg:grid-cols-2 @4xl:grid-cols-3">
               {[1, 2, 3, 4, 5, 6].map((i) => (
                 <div
                   key={i}
@@ -153,12 +142,7 @@ export default function ResponsiveDemo() {
             </div>
 
             {/* Mock footer */}
-            <div
-              className="rounded-lg bg-zinc-100 dark:bg-zinc-800 px-4 py-4 flex items-center justify-between gap-3"
-              style={{
-                flexDirection: displayWidth >= 640 ? "row" : "column",
-              }}
-            >
+            <div className="rounded-lg bg-zinc-100 dark:bg-zinc-800 px-4 py-4 flex flex-col @lg:flex-row items-center justify-between gap-3">
               <div className="h-2 w-16 rounded-full bg-zinc-400 dark:bg-zinc-600" />
               <div className="flex gap-2.5">
                 <div className="h-2 w-8 rounded-full bg-zinc-400 dark:bg-zinc-600" />

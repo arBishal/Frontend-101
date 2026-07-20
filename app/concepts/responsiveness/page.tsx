@@ -4,6 +4,7 @@ import ResponsiveDemo from "./ResponsiveDemo";
 import SectionLabel from "@/app/components/ui/SectionLabel";
 import ConceptHeader from "@/app/components/ConceptHeader";
 import ProblemCards from "@/app/components/ProblemCards";
+import CodeBlock from "@/app/components/ui/CodeBlock";
 
 const problems = [
   {
@@ -55,6 +56,16 @@ export default function ResponsivenessPage() {
           <code className="text-zinc-800 dark:text-zinc-200">%</code> instead of fixed pixels, and images that scale
           with their container.
         </p>
+        <p>
+          A newer technique, <span className="italic text-zinc-700 dark:text-zinc-300">container queries</span>,{" "}
+          flips the breakpoint idea around: instead of checking the browser
+          viewport&rsquo;s width, <code className="text-zinc-800 dark:text-zinc-200">@container</code>{" "}lets an
+          element respond to the width of its own containing box. That matters
+          for reusable components; the same card might need three
+          columns in a wide main content area but one column when it&rsquo;s
+          dropped into a narrow sidebar, regardless of how wide the browser
+          window is.
+        </p>
       </div>
 
       <div className="text-sm lg:text-base text-zinc-600 dark:text-zinc-400 space-y-3">
@@ -82,9 +93,14 @@ export default function ResponsivenessPage() {
       <div className="text-sm lg:text-base text-zinc-600 dark:text-zinc-400 space-y-3">
         <SectionLabel>How it works</SectionLabel>
         <p>
-          CSS breakpoints let you apply different styles based on the viewport
-          width. The preview above simulates this by letting you control the
-          container width directly.
+          Here&rsquo;s a subtlety worth calling out: real{" "}
+          <code className="text-zinc-800 dark:text-zinc-200">@media</code>{" "}breakpoints only ever see the
+          browser&rsquo;s actual viewport, never an arbitrary box like the
+          preview above. Since the whole point of this demo is a box you resize
+          independently of your real window, it uses{" "}
+          <span className="italic text-zinc-700 dark:text-zinc-300">container queries</span>{" "}instead. The
+          preview is marked as a container, and its layout responds to its own
+          width. No JavaScript decides the columns; the CSS does.
         </p>
         <ul className="list-disc list-inside space-y-1.5 font-mono text-xs lg:text-sm">
           <li>
@@ -92,17 +108,35 @@ export default function ResponsivenessPage() {
             footer
           </li>
           <li>
-            <strong>tablet</strong> (640px+): two-column grid, nav links
+            <strong>tablet</strong> (512px+): two-column grid, nav links
             visible, inline footer
           </li>
           <li>
-            <strong>desktop</strong> (1024px+): three-column grid, full width
+            <strong>desktop</strong> (896px+): three-column grid, full width
           </li>
         </ul>
         <p>
           Use the device buttons to snap to common sizes, or drag the handle on
-          the right edge to resize freely and watch the layout adapt.
+          the right edge to resize freely and watch the layout adapt. Those
+          breakpoints (512px and 896px) are Tailwind&rsquo;s named container
+          sizes.
+          Written out as plain CSS, the card grid looks like this:
         </p>
+        <CodeBlock
+          lang="css"
+          title="How the demo's card grid responds to its container"
+          code={`.preview {
+  container-type: inline-size;
+}
+
+@container (min-width: 512px) {
+  .cards { grid-template-columns: repeat(2, 1fr); }
+}
+
+@container (min-width: 896px) {
+  .cards { grid-template-columns: repeat(3, 1fr); }
+}`}
+        />
       </div>
     </div>
   );
