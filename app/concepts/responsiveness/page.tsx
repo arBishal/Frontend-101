@@ -1,8 +1,9 @@
-import type { Metadata } from "next";
+import { getConcept, conceptMetadata } from "@/app/lib/concepts";
 import { TabletSmartphone, Search, Layers } from "lucide-react";
 import ResponsiveDemo from "./ResponsiveDemo";
 import SectionLabel from "@/app/components/ui/SectionLabel";
-import Card from "@/app/components/ui/Card";
+import ConceptHeader from "@/app/components/ConceptHeader";
+import ProblemCards from "@/app/components/ProblemCards";
 
 const problems = [
   {
@@ -25,25 +26,15 @@ const problems = [
   },
 ];
 
-export const metadata: Metadata = {
-  title: "Responsive Design | Frontend 101",
-  description: "Responsive layouts adapt to the screen size.",
-};
+export const metadata = conceptMetadata("responsiveness");
+const concept = getConcept("responsiveness");
 
 export default function ResponsivenessPage() {
   return (
     <div className="flex flex-col gap-8 text-sm lg:text-base">
-      <div className="space-y-2">
-        <h1 className="text-2xl lg:text-3xl font-bold text-zinc-900 dark:text-zinc-50">
-          Responsiveness
-        </h1>
-        <p className="text-zinc-600 dark:text-zinc-400">
-          Drag, tap, or resize to see how layouts adapt to different screen
-          sizes.
-        </p>
-      </div>
+      <ConceptHeader title={concept.title} subtitle={concept.description} />
 
-      <div className="text-zinc-600 dark:text-zinc-400 space-y-3">
+      <div className="text-sm lg:text-base text-zinc-600 dark:text-zinc-400 space-y-3">
         <SectionLabel>What is responsive design?</SectionLabel>
         <p>
           Responsive design is a single codebase that adapts its layout to any
@@ -66,7 +57,7 @@ export default function ResponsivenessPage() {
         </p>
       </div>
 
-      <div className="text-zinc-600 dark:text-zinc-400 space-y-3">
+      <div className="text-sm lg:text-base text-zinc-600 dark:text-zinc-400 space-y-3">
         <SectionLabel>Why it matters</SectionLabel>
         <p>
           Over half of all web traffic comes from mobile devices. If your layout
@@ -80,21 +71,7 @@ export default function ResponsivenessPage() {
           responsive codebase is also far cheaper to maintain than separate
           mobile and desktop versions.
         </p>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 !mt-4">
-          {problems.map(({ icon: Icon, title, description }) => (
-            <Card key={title} className="space-y-2 sm:p-5">
-              <div className="flex items-center gap-2.5">
-                <Icon className="size-4 text-zinc-500 dark:text-zinc-400 shrink-0" />
-                <p className="font-medium text-zinc-900 dark:text-zinc-100">
-                  {title}
-                </p>
-              </div>
-              <p className="text-zinc-500 dark:text-zinc-400 text-sm">
-                {description}
-              </p>
-            </Card>
-          ))}
-        </div>
+        <ProblemCards problems={problems} />
       </div>
 
       <div>

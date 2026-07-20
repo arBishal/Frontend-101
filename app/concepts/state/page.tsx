@@ -1,8 +1,9 @@
-import type { Metadata } from "next";
+import { getConcept, conceptMetadata } from "@/app/lib/concepts";
 import { MousePointerClick, AlertCircle, Workflow } from "lucide-react";
 import StateDemo from "./StateDemo";
 import SectionLabel from "@/app/components/ui/SectionLabel";
-import Card from "@/app/components/ui/Card";
+import ConceptHeader from "@/app/components/ConceptHeader";
+import ProblemCards from "@/app/components/ProblemCards";
 
 const problems = [
   {
@@ -25,24 +26,15 @@ const problems = [
   },
 ];
 
-export const metadata: Metadata = {
-  title: "State | Frontend 101",
-  description: "How apps remember things that change.",
-};
+export const metadata = conceptMetadata("state");
+const concept = getConcept("state");
 
 export default function StatePage() {
   return (
     <div className="flex flex-col gap-8 text-sm lg:text-base">
-      <div className="space-y-2">
-        <h1 className="text-2xl lg:text-3xl font-bold text-zinc-900 dark:text-zinc-50">
-          State
-        </h1>
-        <p className="text-zinc-600 dark:text-zinc-400">
-          How apps remember things that change.
-        </p>
-      </div>
+      <ConceptHeader title={concept.title} subtitle={concept.description} />
 
-      <div className="text-zinc-600 dark:text-zinc-400 space-y-3">
+      <div className="text-sm lg:text-base text-zinc-600 dark:text-zinc-400 space-y-3">
         <SectionLabel>What is state?</SectionLabel>
         <p>
           State is data that changes over time. A plain HTML page is static: its
@@ -63,7 +55,7 @@ export default function StatePage() {
         </p>
       </div>
 
-      <div className="text-zinc-600 dark:text-zinc-400 space-y-3">
+      <div className="text-sm lg:text-base text-zinc-600 dark:text-zinc-400 space-y-3">
         <SectionLabel>Why it matters</SectionLabel>
         <p>
           Without state management, you&rsquo;d have to manually find the right
@@ -78,21 +70,7 @@ export default function StatePage() {
           UI bugs: the screen showing something different from what the data
           says.
         </p>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 !mt-4">
-          {problems.map(({ icon: Icon, title, description }) => (
-            <Card key={title} className="space-y-2 sm:p-5">
-              <div className="flex items-center gap-2.5">
-                <Icon className="size-4 text-zinc-500 dark:text-zinc-400 shrink-0" />
-                <p className="font-medium text-zinc-900 dark:text-zinc-100">
-                  {title}
-                </p>
-              </div>
-              <p className="text-zinc-500 dark:text-zinc-400 text-sm">
-                {description}
-              </p>
-            </Card>
-          ))}
-        </div>
+        <ProblemCards problems={problems} />
       </div>
 
       <div>

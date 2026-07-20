@@ -8,6 +8,7 @@ import {
   Eye,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import type { Metadata } from "next";
 
 export type ConceptChild = {
   slug: string;
@@ -77,3 +78,16 @@ export const concepts: Concept[] = [
     icon: Eye,
   },
 ];
+
+/** Single source of truth: look a concept up by slug. Throws on unknown slug. */
+export function getConcept(slug: string): Concept {
+  const concept = concepts.find((c) => c.slug === slug);
+  if (!concept) throw new Error(`Unknown concept slug: "${slug}"`);
+  return concept;
+}
+
+/** Page metadata derived from the registry, so title/description never drift. */
+export function conceptMetadata(slug: string): Metadata {
+  const { title, description } = getConcept(slug);
+  return { title: `${title} | Frontend 101`, description };
+}

@@ -8,7 +8,7 @@
 
 **The good.** The product has a clear identity — interactive, visual explanations of frontend fundamentals for beginners — and a consistent, well-executed page formula (What is it → Why it matters → Interactive demo → How it works). Seven concepts are live (The DOM, Responsiveness, Components, State, API Calls, Frameworks ×3 pages, Accessibility). The design system is coherent (zinc palette, dark mode, shared `ui/` primitives), pages ship per-page metadata, sitemap and robots exist, and the planning discipline (per-concept plan docs, like the one used for The DOM) is genuinely good.
 
-**The gaps, in one paragraph.** Content velocity is the bottleneck (10 planned concepts untouched); Vercel's build is the only automated check — lint no longer runs anywhere (Next 16 removed it from `next build`) and there are no tests (analytics is a deliberate non-goal for now — see §6); syntax highlighting runs client-side by necessity but no longer ships the entire Shiki engine (fixed — §3.2); each concept page re-implements the same layout by hand instead of sharing a template; and the site has no learner-retention features (search, progress, challenges) or contribution story despite being open source.
+**The gaps, in one paragraph.** Content velocity is the bottleneck (10 planned concepts untouched); Vercel's build is the only automated check — lint no longer runs anywhere (Next 16 removed it from `next build`) and there are no tests (analytics is a deliberate non-goal for now — see §6); syntax highlighting runs client-side by necessity but no longer ships the entire Shiki engine (fixed — §3.2); concept pages now share extracted header/card pieces (fixed — §3.3); and the site has no learner-retention features (search, progress, challenges) or contribution story despite being open source.
 
 ---
 
@@ -16,7 +16,7 @@
 
 | Priority | Theme | Items |
 |---|---|---|
-| **P0** | Trust & foundations | Close CI gaps beyond Vercel, ~~Shiki server-side~~ (done → fine-grained bundle, §3.2), shared page pieces, fix small inconsistencies |
+| **P0** | Trust & foundations | Close CI gaps beyond Vercel, ~~Shiki server-side~~ (done → fine-grained bundle, §3.2), ~~shared page pieces~~ (done, §3.3), fix small inconsistencies |
 | **P1** | Content velocity | Next 3 concepts (Rendering, Events, Async/Event Loop), concept cross-linking, "Try it yourself" challenges |
 | **P2** | Learner experience | Search/⌘K, progress tracking, per-concept OG images |
 | **P3** | Growth & community | Contribution guide + concept template, `npx frontend-101` CLI, component-breakdown series |
@@ -36,27 +36,16 @@ Plan:
 - Now: enable branch protection so a failing Vercel build blocks merge into `main`. Zero setup cost.
 - Defer GitHub Actions until we add tests (Playwright smoke test: every concept page renders, demo mounts; axe accessibility check — a site that *teaches* accessibility should prove its own). When that workflow lands, fold `eslint` into it. Add a lint-only workflow earlier only if unlinted merges start hurting.
 
-### 3.2 Shrink the client Shiki bundle — done (2026-07-19)
-**Premise corrected.** A literal "move to the server" isn't possible: `DomDemo` and `ComponentDemo` highlight code generated from live client state (`treeToHtml(tree)`, `buildJsxSnippet(disabledMap)`), so highlighting must stay client-side — the server only ever sees the initial state. The real goal — stop shipping the whole engine to every visitor — was met a different way.
+### 3.3 Extract shared page pieces (composition, not a rigid template) — done (2026-07-19)
+The nine concept `page.tsx` files hand-copied the same title block and problem-card grid. Extracted the repeated *pieces*, not the page *structure*:
+- **`ConceptHeader`** (title + subtitle props) — now in all 9 pages; the ~8-line title block collapses to a 4-line tag.
+- **`ProblemCards`** (problems array + optional grid override) — now in the 7 pages with cards; the ~15-line card grid collapses to one line. Frameworks passes `className="sm:grid-cols-2 gap-4"`; no page imports `Card` directly anymore.
+- **Skipped `Section`** — the section wrappers legitimately vary (prose vs demo, margins, `text-sm` prefixes), so a wrapper would need enough escape hatches to become the over-abstraction this item warns against.
+- Explicitly **not** a config-driven `ConceptPageLayout` — pages keep composing pieces in plain JSX, so a divergent page just writes custom markup between them.
 
-`CodeBlock` now uses a fine-grained shared highlighter (`app/lib/highlighter.ts`): `createHighlighterCore` from `shiki/core` with only the four languages used (html, css, jsx, tsx), the two themes, and the **JavaScript regex engine** (`shiki/engine/javascript`) instead of the Oniguruma **WASM** — all loaded via dynamic `import()` so it code-splits off First Load.
+Build / TypeScript / lint clean.
 
-Measured before/after (gzipped First Load JS, from each prerendered page's chunk set):
-- **`/concepts/the-dom`: 256 KB → 203 KB (−21%)**; `/concepts/components`: 255 → 202 KB. Control page with no code block (`state`) unchanged at 206 KB.
-- Oniguruma **WASM eliminated** — no `.wasm` ships.
-- Generated client JS: 331 chunks / 12.1 MB → 31 chunks / 1.6 MB (mostly never-downloaded lazy grammar chunks).
-- The highlighter (~125 KB gzip) now loads **on-demand after first paint**, not in First Load.
-
-Full write-up: [improvements/2026-07-19-shiki-client-bundle.md](./improvements/2026-07-19-shiki-client-bundle.md).
-
-Not done (optional follow-up): server-rendering the one *static* demo (`FrameworkDemo`) to remove its first-paint highlight flash — marginal, and blocked by the client/server composition boundary.
-
-### 3.3 Extract shared page pieces (composition, not a rigid template)
-All seven `page.tsx` files hand-copy the same structure (title block, `SectionLabel` sections, problem-card grid, demo slot). Extract the repeated *pieces*, not the page *structure*:
-- `ConceptHeader` (title + subtitle, sourced from `concepts.ts`), `ProblemCards`, and a `Section` wrapper — pages keep composing them in plain JSX.
-- Explicitly **not** a config-driven `ConceptPageLayout` that takes a data object and renders the whole page. Pages will diverge (extra sections, different demo placement); because each page owns its JSX, a divergent page just writes custom markup between the shared pieces — no escape hatches to design.
-
-Payoff: a standard page becomes a short stack of one-liners, copy-paste drift ends, and `concepts.ts` becomes the single source for title/description (currently duplicated in each page's `metadata`, prose, and the registry).
+**Single source (done 2026-07-20).** `concepts.ts` now exports `getConcept(slug)` and `conceptMetadata(slug)`; the 7 registry-backed pages derive both their `metadata` and `<ConceptHeader>` from the registry, so title/description can't drift across the three former copies. This fixed a live Responsiveness inconsistency (title was "Responsive Design" in metadata vs "Responsiveness" everywhere else; three different descriptions) — now all sourced from the registry. Sub-pages (See the Difference, Landscape) aren't registry entries, so they keep their own explicit metadata. Also normalized the prose-section wrappers (all three now share the "How it works" class) and the "Interactive demo" label margin (all `mb-4`).
 
 ---
 
