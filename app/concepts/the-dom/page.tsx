@@ -1,8 +1,9 @@
-import type { Metadata } from "next";
+import { getConcept, conceptMetadata } from "@/app/lib/concepts";
 import { FileCode, GitFork, RefreshCw } from "lucide-react";
 import DomDemo from "./DomDemo";
 import SectionLabel from "@/app/components/ui/SectionLabel";
-import Card from "@/app/components/ui/Card";
+import ConceptHeader from "@/app/components/ConceptHeader";
+import ProblemCards from "@/app/components/ProblemCards";
 
 const problems = [
   {
@@ -25,24 +26,15 @@ const problems = [
   },
 ];
 
-export const metadata: Metadata = {
-  title: "The DOM | Frontend 101",
-  description: "The live tree the browser builds from your HTML.",
-};
+export const metadata = conceptMetadata("the-dom");
+const concept = getConcept("the-dom");
 
 export default function TheDomPage() {
   return (
     <div className="flex flex-col gap-8 text-sm lg:text-base">
-      <div className="space-y-2">
-        <h1 className="text-2xl lg:text-3xl font-bold text-zinc-900 dark:text-zinc-50">
-          The DOM
-        </h1>
-        <p className="text-zinc-600 dark:text-zinc-400">
-          The live tree the browser builds from your HTML.
-        </p>
-      </div>
+      <ConceptHeader title={concept.title} subtitle={concept.description} />
 
-      <div className="text-zinc-600 dark:text-zinc-400 space-y-3">
+      <div className="text-sm lg:text-base text-zinc-600 dark:text-zinc-400 space-y-3">
         <SectionLabel>What is the DOM?</SectionLabel>
         <p>
           The DOM — Document Object Model — is a tree-shaped, in-memory
@@ -69,7 +61,7 @@ export default function TheDomPage() {
         </p>
       </div>
 
-      <div className="text-zinc-600 dark:text-zinc-400 space-y-3">
+      <div className="text-sm lg:text-base text-zinc-600 dark:text-zinc-400 space-y-3">
         <SectionLabel>Why it matters</SectionLabel>
         <p>
           The DOM is the bridge between your code and what users see on screen.
@@ -77,30 +69,18 @@ export default function TheDomPage() {
           manipulates the DOM. Understanding the tree gives you a mental model
           for why UIs behave the way they do.
         </p>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 !mt-4">
-          {problems.map(({ icon: Icon, title, description }) => (
-            <Card key={title} className="space-y-2 sm:p-5">
-              <div className="flex items-center gap-2.5">
-                <Icon className="size-4 text-zinc-500 dark:text-zinc-400 shrink-0" />
-                <p className="font-medium text-zinc-900 dark:text-zinc-100">
-                  {title}
-                </p>
-              </div>
-              <p className="text-zinc-500 dark:text-zinc-400 text-sm">
-                {description}
-              </p>
-            </Card>
-          ))}
-        </div>
+        <ProblemCards problems={problems} />
       </div>
 
       <div>
-        <SectionLabel className="mb-3">Interactive demo</SectionLabel>
+        <SectionLabel className="mb-4">Interactive demo</SectionLabel>
         <p className="text-zinc-600 dark:text-zinc-400 mb-4">
           Click any node in the tree to inspect its properties. Select a node,
-          then type a tag name and add it as a child. Remove nodes with the{" "}
-          <span className="font-mono text-xs">×</span> button. The generated
-          HTML updates live as you build the tree.
+          then type a tag name (and optional text) and add it as a child.
+          Remove nodes with the{" "}
+          <span className="font-mono text-xs">×</span> button. The panels below
+          contrast the HTML you wrote with the live DOM, with the differences
+          highlighted.
         </p>
         <DomDemo />
       </div>

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ExternalLink } from "lucide-react";
 import SectionLabel from "@/app/components/ui/SectionLabel";
+import ConceptHeader from "@/app/components/ConceptHeader";
 import { cn } from "@/app/lib/cn";
 import {
   siReact,
@@ -76,14 +77,10 @@ const frameworks: Framework[] = [
 export default function LandscapePage() {
   return (
     <div className="flex flex-col gap-8 text-sm lg:text-base">
-      <div className="space-y-2">
-        <h1 className="text-2xl lg:text-3xl font-bold text-zinc-900 dark:text-zinc-50">
-          The Current Landscape
-        </h1>
-        <p className="text-zinc-600 dark:text-zinc-400">
-          The major frameworks and what makes each one different.
-        </p>
-      </div>
+      <ConceptHeader
+        title="The Current Landscape"
+        subtitle="The major frameworks and what makes each one different."
+      />
 
       <div>
         <SectionLabel className="mb-4">Major frameworks</SectionLabel>

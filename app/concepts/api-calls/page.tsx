@@ -1,8 +1,9 @@
-import type { Metadata } from "next";
+import { getConcept, conceptMetadata } from "@/app/lib/concepts";
 import { HardDrive, UserX, RefreshCw } from "lucide-react";
 import ApiDemo from "./ApiDemo";
 import SectionLabel from "@/app/components/ui/SectionLabel";
-import Card from "@/app/components/ui/Card";
+import ConceptHeader from "@/app/components/ConceptHeader";
+import ProblemCards from "@/app/components/ProblemCards";
 
 const problems = [
   {
@@ -25,24 +26,15 @@ const problems = [
   },
 ];
 
-export const metadata: Metadata = {
-  title: "API Calls | Frontend 101",
-  description: "How the frontend asks a server for data.",
-};
+export const metadata = conceptMetadata("api-calls");
+const concept = getConcept("api-calls");
 
 export default function ApiCallsPage() {
   return (
     <div className="flex flex-col gap-8 text-sm lg:text-base">
-      <div className="space-y-2">
-        <h1 className="text-2xl lg:text-3xl font-bold text-zinc-900 dark:text-zinc-50">
-          API Calls
-        </h1>
-        <p className="text-zinc-600 dark:text-zinc-400">
-          How the frontend asks a server for data.
-        </p>
-      </div>
+      <ConceptHeader title={concept.title} subtitle={concept.description} />
 
-      <div className="text-zinc-600 dark:text-zinc-400 space-y-3">
+      <div className="text-sm lg:text-base text-zinc-600 dark:text-zinc-400 space-y-3">
         <SectionLabel>What is an API call?</SectionLabel>
         <p>
           An API call is how the frontend asks a server for data. Your app
@@ -72,7 +64,7 @@ export default function ApiCallsPage() {
         </p>
       </div>
 
-      <div className="text-zinc-600 dark:text-zinc-400 space-y-3">
+      <div className="text-sm lg:text-base text-zinc-600 dark:text-zinc-400 space-y-3">
         <SectionLabel>Why it matters</SectionLabel>
         <p>
           Almost every real application depends on external data. A social feed
@@ -86,27 +78,13 @@ export default function ApiCallsPage() {
           essential for building UIs that feel reliable even when the network
           is slow or the server is down.
         </p>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 !mt-4">
-          {problems.map(({ icon: Icon, title, description }) => (
-            <Card key={title} className="space-y-2 sm:p-5">
-              <div className="flex items-center gap-2.5">
-                <Icon className="size-4 text-zinc-500 dark:text-zinc-400 shrink-0" />
-                <p className="font-medium text-zinc-900 dark:text-zinc-100">
-                  {title}
-                </p>
-              </div>
-              <p className="text-zinc-500 dark:text-zinc-400 text-sm">
-                {description}
-              </p>
-            </Card>
-          ))}
-        </div>
+        <ProblemCards problems={problems} />
       </div>
 
       <div>
         <SectionLabel className="mb-4">Interactive demo</SectionLabel>
         <p className="text-zinc-500 dark:text-zinc-400 text-sm mb-4">
-          This demo fetches a random Pokémon from{" "}
+          This demo fetches a Pokémon by name or ID from{" "}
           <a
             href="https://pokeapi.co"
             target="_blank"
@@ -115,7 +93,10 @@ export default function ApiCallsPage() {
           >
             PokéAPI
           </a>
-          {" "}(a free, public REST API). Hit the button and watch the full request lifecycle play out.
+          {" "}— a free, public REST API with no sign-up. Before you fetch:
+          which of the four states — empty, loading, success, error — is on
+          screen right now, and which one shows up if you search a name that
+          doesn&rsquo;t exist?
         </p>
         <ApiDemo />
       </div>
@@ -123,15 +104,24 @@ export default function ApiCallsPage() {
       <div className="text-sm lg:text-base text-zinc-600 dark:text-zinc-400 space-y-3">
         <SectionLabel>How it works</SectionLabel>
         <p>
-          An API call is how the frontend asks a server for data. Instead of
-          having everything built into the page, the UI sends a request over
-          the network and waits for a response.
+          Type a name or ID and hit Fetch. Flip on{" "}
+          <span className="italic text-zinc-700 dark:text-zinc-300">Simulate Slow Network</span>{" "}
+          to stretch the loading state long enough to actually watch it. Two
+          things move in step: the line just below the search bar says in plain
+          words what&rsquo;s happening, and its color shifts with the state —
+          grey when empty, amber while loading, green on success, red on error.
+          The reset icon next to it drops you back to empty. The Network
+          Inspector beside it shows the raw request data, the same information
+          you&rsquo;d find in your browser&rsquo;s DevTools Network tab.
         </p>
         <p>
-          Every API call follows the same lifecycle. It starts{" "}
-          <strong>idle</strong>, moves to <strong>loading</strong> when the
-          request is sent, and resolves as either <strong>success</strong>{" "}
-          (data arrives) or <strong>error</strong> (something went wrong).
+          Every fetch lands in one of four states, and beginners tend to build
+          only the last one. <strong>Empty</strong> is the screen before anyone
+          asks for data. <strong>Loading</strong> is the wait. <strong>Success</strong>{" "}
+          is the happy path — the part that&rsquo;s easy to remember. <strong>Error</strong>{" "}
+          is the 404, the dropped connection, the mistyped name. Ship only the
+          success case and your UI shows a blank box on a slow network and a
+          dead screen when the server is down.
         </p>
         <ul className="list-disc list-inside space-y-1.5 font-mono text-xs lg:text-sm">
           <li>
@@ -147,10 +137,29 @@ export default function ApiCallsPage() {
             JSON into a JavaScript object
           </li>
         </ul>
+        <p className="text-zinc-700 dark:text-zinc-300">Try breaking it:</p>
+        <ul className="list-disc list-inside space-y-1.5">
+          <li>
+            Fetch <code className="text-zinc-800 dark:text-zinc-200">pikachu</code>,
+            then fetch{" "}
+            <code className="text-zinc-800 dark:text-zinc-200">notapokemon</code>{" "}
+            — watch the state line flip from green success to red error.
+          </li>
+          <li>
+            Turn on Slow Network and read the amber loading line before the data
+            lands — the state most beginners never design a screen for.
+          </li>
+          <li>
+            With Slow Network on, hit Fetch twice quickly. Only the second
+            request resolves — the first is aborted so a stale response
+            can&rsquo;t overwrite a newer one.
+          </li>
+        </ul>
         <p>
-          The demo uses PokeAPI, a free public REST API. The Network Inspector
-          shows what&apos;s happening behind the scenes, the same information
-          you&apos;d see in your browser&apos;s DevTools Network tab.
+          Turning that error state from a red line into something a user can
+          recover from — a retry, a fallback, a message that explains what went
+          wrong — is its own topic, and it&rsquo;s where a future Error Handling
+          page will pick up.
         </p>
       </div>
     </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { codeToHtml } from "shiki";
+import { getHighlighter } from "@/app/lib/highlighter";
 import { cn } from "@/app/lib/cn";
 
 type Tab = {
@@ -48,14 +48,23 @@ export default function CodeBlock(props: CodeBlockProps) {
       setRendered({ key, html: cached });
       return;
     }
-    codeToHtml(code, { lang, themes: { light: "github-light", dark: "github-dark" } })
-      .then((html) => {
+    let cancelled = false;
+    getHighlighter()
+      .then((highlighter) => {
+        if (cancelled) return;
+        const html = highlighter.codeToHtml(code, {
+          lang,
+          themes: { light: "github-light", dark: "github-dark" },
+        });
         cache.current.set(key, html);
         setRendered({ key, html });
       })
       .catch((err) => {
         console.error("Shiki highlighting failed:", err);
       });
+    return () => {
+      cancelled = true;
+    };
   }, [code, lang]);
 
   function handleTabChange(index: number) {
@@ -77,8 +86,8 @@ export default function CodeBlock(props: CodeBlockProps) {
               className={cn(
                 "flex-1 px-4 py-2 font-mono text-xs sm:text-sm transition-colors",
                 activeTab === i
-                  ? "text-zinc-900 dark:text-zinc-100 bg-zinc-50 dark:bg-zinc-900"
-                  : "text-zinc-500 dark:text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-200"
+                  ? "text-zinc-900 dark:text-zinc-100 bg-zinc-200 dark:bg-zinc-800"
+                  : "text-zinc-500 dark:text-zinc-400 bg-zinc-50 dark:bg-zinc-900 hover:text-zinc-800 dark:hover:text-zinc-200"
               )}
             >
               {tab.label}

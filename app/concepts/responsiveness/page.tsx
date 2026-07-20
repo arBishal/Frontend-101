@@ -1,8 +1,10 @@
-import type { Metadata } from "next";
+import { getConcept, conceptMetadata } from "@/app/lib/concepts";
 import { TabletSmartphone, Search, Layers } from "lucide-react";
 import ResponsiveDemo from "./ResponsiveDemo";
 import SectionLabel from "@/app/components/ui/SectionLabel";
-import Card from "@/app/components/ui/Card";
+import ConceptHeader from "@/app/components/ConceptHeader";
+import ProblemCards from "@/app/components/ProblemCards";
+import CodeBlock from "@/app/components/ui/CodeBlock";
 
 const problems = [
   {
@@ -25,25 +27,15 @@ const problems = [
   },
 ];
 
-export const metadata: Metadata = {
-  title: "Responsive Design | Frontend 101",
-  description: "Responsive layouts adapt to the screen size.",
-};
+export const metadata = conceptMetadata("responsiveness");
+const concept = getConcept("responsiveness");
 
 export default function ResponsivenessPage() {
   return (
     <div className="flex flex-col gap-8 text-sm lg:text-base">
-      <div className="space-y-2">
-        <h1 className="text-2xl lg:text-3xl font-bold text-zinc-900 dark:text-zinc-50">
-          Responsiveness
-        </h1>
-        <p className="text-zinc-600 dark:text-zinc-400">
-          Drag, tap, or resize to see how layouts adapt to different screen
-          sizes.
-        </p>
-      </div>
+      <ConceptHeader title={concept.title} subtitle={concept.description} />
 
-      <div className="text-zinc-600 dark:text-zinc-400 space-y-3">
+      <div className="text-sm lg:text-base text-zinc-600 dark:text-zinc-400 space-y-3">
         <SectionLabel>What is responsive design?</SectionLabel>
         <p>
           Responsive design is a single codebase that adapts its layout to any
@@ -64,9 +56,19 @@ export default function ResponsivenessPage() {
           <code className="text-zinc-800 dark:text-zinc-200">%</code> instead of fixed pixels, and images that scale
           with their container.
         </p>
+        <p>
+          A newer technique, <span className="italic text-zinc-700 dark:text-zinc-300">container queries</span>,{" "}
+          flips the breakpoint idea around: instead of checking the browser
+          viewport&rsquo;s width, <code className="text-zinc-800 dark:text-zinc-200">@container</code>{" "}lets an
+          element respond to the width of its own containing box. That matters
+          for reusable components; the same card might need three
+          columns in a wide main content area but one column when it&rsquo;s
+          dropped into a narrow sidebar, regardless of how wide the browser
+          window is.
+        </p>
       </div>
 
-      <div className="text-zinc-600 dark:text-zinc-400 space-y-3">
+      <div className="text-sm lg:text-base text-zinc-600 dark:text-zinc-400 space-y-3">
         <SectionLabel>Why it matters</SectionLabel>
         <p>
           Over half of all web traffic comes from mobile devices. If your layout
@@ -80,21 +82,7 @@ export default function ResponsivenessPage() {
           responsive codebase is also far cheaper to maintain than separate
           mobile and desktop versions.
         </p>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 !mt-4">
-          {problems.map(({ icon: Icon, title, description }) => (
-            <Card key={title} className="space-y-2 sm:p-5">
-              <div className="flex items-center gap-2.5">
-                <Icon className="size-4 text-zinc-500 dark:text-zinc-400 shrink-0" />
-                <p className="font-medium text-zinc-900 dark:text-zinc-100">
-                  {title}
-                </p>
-              </div>
-              <p className="text-zinc-500 dark:text-zinc-400 text-sm">
-                {description}
-              </p>
-            </Card>
-          ))}
-        </div>
+        <ProblemCards problems={problems} />
       </div>
 
       <div>
@@ -105,9 +93,14 @@ export default function ResponsivenessPage() {
       <div className="text-sm lg:text-base text-zinc-600 dark:text-zinc-400 space-y-3">
         <SectionLabel>How it works</SectionLabel>
         <p>
-          CSS breakpoints let you apply different styles based on the viewport
-          width. The preview above simulates this by letting you control the
-          container width directly.
+          Here&rsquo;s a subtlety worth calling out: real{" "}
+          <code className="text-zinc-800 dark:text-zinc-200">@media</code>{" "}breakpoints only ever see the
+          browser&rsquo;s actual viewport, never an arbitrary box like the
+          preview above. Since the whole point of this demo is a box you resize
+          independently of your real window, it uses{" "}
+          <span className="italic text-zinc-700 dark:text-zinc-300">container queries</span>{" "}instead. The
+          preview is marked as a container, and its layout responds to its own
+          width. No JavaScript decides the columns; the CSS does.
         </p>
         <ul className="list-disc list-inside space-y-1.5 font-mono text-xs lg:text-sm">
           <li>
@@ -115,17 +108,35 @@ export default function ResponsivenessPage() {
             footer
           </li>
           <li>
-            <strong>tablet</strong> (640px+): two-column grid, nav links
+            <strong>tablet</strong> (512px+): two-column grid, nav links
             visible, inline footer
           </li>
           <li>
-            <strong>desktop</strong> (1024px+): three-column grid, full width
+            <strong>desktop</strong> (896px+): three-column grid, full width
           </li>
         </ul>
         <p>
           Use the device buttons to snap to common sizes, or drag the handle on
-          the right edge to resize freely and watch the layout adapt.
+          the right edge to resize freely and watch the layout adapt. Those
+          breakpoints (512px and 896px) are Tailwind&rsquo;s named container
+          sizes.
+          Written out as plain CSS, the card grid looks like this:
         </p>
+        <CodeBlock
+          lang="css"
+          title="How the demo's card grid responds to its container"
+          code={`.preview {
+  container-type: inline-size;
+}
+
+@container (min-width: 512px) {
+  .cards { grid-template-columns: repeat(2, 1fr); }
+}
+
+@container (min-width: 896px) {
+  .cards { grid-template-columns: repeat(3, 1fr); }
+}`}
+        />
       </div>
     </div>
   );

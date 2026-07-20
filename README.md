@@ -28,6 +28,7 @@ Frontend 101 is an educational site that teaches fundamental frontend developmen
 - **Design system in utilities.** Tailwind CSS v4 with a zinc palette and class-based dark mode (a tiny inline script sets the theme before paint to avoid a flash). Shared primitives live in `app/components/ui/` and are reused rather than re-styled per page.
 - **Syntax highlighting** via [Shiki](https://shiki.style/) with paired light/dark themes.
 - **SEO/discovery.** Per-page metadata, a generated `sitemap.xml` and `robots.txt`, and an Open Graph image.
+- **Analytics** via [Vercel Analytics](https://vercel.com/analytics), wired into the root layout.
 
 **Why this stack:** the App Router + Server Components give static-first performance without giving up interactivity; Tailwind provides a consistent design language without pulling in a component library; TypeScript is used throughout.
 
@@ -45,6 +46,7 @@ Static generation plus server components keep the shipped JavaScript small — m
 - [Tailwind CSS v4](https://tailwindcss.com/)
 - [Shiki](https://shiki.style/) for syntax highlighting
 - [Lucide](https://lucide.dev/) for icons
+- [Simple Icons](https://simpleicons.org/) for brand/framework logos
 
 ## How this project is built
 
@@ -54,6 +56,7 @@ This repo is planned and documented in the open — the `docs/` folder is part o
 - [`docs/WRITING.md`](./docs/WRITING.md) — the playbook for writing and reviewing a concept page
 - [`docs/IMPLEMENT.md`](./docs/IMPLEMENT.md) — the technical runbook for building a concept
 - [`docs/AUDIT_PLAN.md`](./docs/AUDIT_PLAN.md) — the monthly technical-audit runbook
+- [`docs/improvements/`](./docs/improvements/) — dated write-ups for sppecific impprovements
 
 Development is AI-assisted with a plan → build → review loop; the conventions that guide it live in [`CLAUDE.md`](./CLAUDE.md).
 
@@ -82,28 +85,32 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ```
 app/
-  layout.tsx                  # Root layout + theme provider
+  layout.tsx                  # Root layout + theme provider + analytics
   page.tsx                    # Landing page
   globals.css                 # Global styles, Tailwind theme, keyframes
   sitemap.ts / robots.ts      # Generated SEO routes
   opengraph-image.tsx         # Social share image
+  error.tsx / global-error.tsx / not-found.tsx  # Error and 404 boundaries
   components/
     ui/                       # Reusable primitives (Button, Card, CodeBlock, ...)
-    ThemeProvider.tsx         # Dark/light theme management
+    ThemeProvider.tsx / ThemeToggle.tsx  # Dark/light theme management
     Navbar.tsx / Footer.tsx   # Chrome
     ConceptSidebar.tsx        # Concept page sidebar
     ConceptNav.tsx            # Prev/next concept navigation
+    ConceptHeader.tsx         # Concept page title + subtitle
+    ProblemCards.tsx          # "Why it matters" problem-card grid
   concepts/
     the-dom/                  # The DOM concept + demo
     responsiveness/           # Responsive design concept + demo
     components/               # Components concept + demo
     state/                    # State concept + demo
     api-calls/                # API calls concept + demo
-    accessibility/            # Accessibility concept + demo
     frameworks/               # Frameworks overview, landscape, and diff demo
+    accessibility/            # Accessibility concept + demo
   lib/
     concepts.ts               # Concept registry (single source of truth)
     useResizable.ts           # Custom hook for the responsive demo
+    highlighter.ts            # Shared, code-split Shiki highlighter instance
     cn.ts                     # Class-name helper
 docs/                         # Roadmap, playbooks, and planning docs
 ```

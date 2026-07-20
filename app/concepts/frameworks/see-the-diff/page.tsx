@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import FrameworkDemo from "./FrameworkDemo";
 import SectionLabel from "@/app/components/ui/SectionLabel";
+import ConceptHeader from "@/app/components/ConceptHeader";
 
 export const metadata: Metadata = {
   title: "See the Difference | Frontend 101",
@@ -12,15 +13,10 @@ export const metadata: Metadata = {
 export default function SeeTheDiffPage() {
   return (
     <div className="flex flex-col gap-8 text-sm lg:text-base">
-      <div className="space-y-2">
-        <h1 className="text-2xl lg:text-3xl font-bold text-zinc-900 dark:text-zinc-50">
-          See the Difference
-        </h1>
-        <p className="text-zinc-600 dark:text-zinc-400">
-          The same task, two approaches. Toggle between vanilla JavaScript and
-          React to see how a framework changes the experience.
-        </p>
-      </div>
+      <ConceptHeader
+        title="See the Difference"
+        subtitle="The same task, two approaches. Toggle between vanilla JavaScript and React to see how a framework changes the experience."
+      />
 
       <div>
         <SectionLabel className="mb-4">Interactive demo</SectionLabel>

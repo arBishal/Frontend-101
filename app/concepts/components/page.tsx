@@ -1,8 +1,9 @@
-import type { Metadata } from "next";
+import { getConcept, conceptMetadata } from "@/app/lib/concepts";
 import { Copy, TriangleAlert, Package } from "lucide-react";
 import ComponentDemo from "./ComponentDemo";
 import SectionLabel from "@/app/components/ui/SectionLabel";
-import Card from "@/app/components/ui/Card";
+import ConceptHeader from "@/app/components/ConceptHeader";
+import ProblemCards from "@/app/components/ProblemCards";
 
 const problems = [
   {
@@ -25,24 +26,15 @@ const problems = [
   },
 ];
 
-export const metadata: Metadata = {
-  title: "Components | Frontend 101",
-  description: "Why we build UIs out of reusable pieces.",
-};
+export const metadata = conceptMetadata("components");
+const concept = getConcept("components");
 
 export default function ComponentsPage() {
   return (
     <div className="flex flex-col gap-8 text-sm lg:text-base">
-      <div className="space-y-2">
-        <h1 className="text-2xl lg:text-3xl font-bold text-zinc-900 dark:text-zinc-50">
-          Components
-        </h1>
-        <p className="text-zinc-600 dark:text-zinc-400">
-          Why we build UIs out of reusable pieces.
-        </p>
-      </div>
+      <ConceptHeader title={concept.title} subtitle={concept.description} />
 
-      <div className="text-zinc-600 dark:text-zinc-400 space-y-3">
+      <div className="text-sm lg:text-base text-zinc-600 dark:text-zinc-400 space-y-3">
         <SectionLabel>What is a component?</SectionLabel>
         <p>
           A component is a self-contained, reusable piece of UI. Instead of
@@ -64,7 +56,7 @@ export default function ComponentsPage() {
         </p>
       </div>
 
-      <div className="text-zinc-600 dark:text-zinc-400 space-y-3">
+      <div className="text-sm lg:text-base text-zinc-600 dark:text-zinc-400 space-y-3">
         <SectionLabel>Why it matters</SectionLabel>
         <p>
           Without components, you&rsquo;d copy-paste the same HTML everywhere.
@@ -78,21 +70,7 @@ export default function ComponentsPage() {
           works: teams build a shared library of components (buttons, modals,
           form fields) that the entire app consumes.
         </p>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 !mt-4">
-          {problems.map(({ icon: Icon, title, description }) => (
-            <Card key={title} className="space-y-2 sm:p-5">
-              <div className="flex items-center gap-2.5">
-                <Icon className="size-4 text-zinc-500 dark:text-zinc-400 shrink-0" />
-                <p className="font-medium text-zinc-900 dark:text-zinc-100">
-                  {title}
-                </p>
-              </div>
-              <p className="text-zinc-500 dark:text-zinc-400 text-sm">
-                {description}
-              </p>
-            </Card>
-          ))}
-        </div>
+        <ProblemCards problems={problems} />
       </div>
 
       <div>
