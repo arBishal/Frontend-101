@@ -6,7 +6,6 @@ import Card from "@/app/components/ui/Card";
 import InspectorPanel from "@/app/components/ui/InspectorPanel";
 import Input from "@/app/components/ui/Input";
 import Button from "@/app/components/ui/Button";
-import CodeBlock from "@/app/components/ui/CodeBlock";
 import { cn } from "@/app/lib/cn";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -80,14 +79,62 @@ function addChild(tree: DomNode, parentId: string, child: DomNode): DomNode {
 
 function treeToHtml(node: DomNode, indent = 0): string {
   const pad = "  ".repeat(indent);
-  if (node.text && node.children.length === 0) {
-    return `${pad}<${node.tag}>${node.text}</${node.tag}>`;
-  }
   if (node.children.length === 0) {
+    if (node.text) return `${pad}<${node.tag}>${node.text}</${node.tag}>`;
     return `${pad}<${node.tag}></${node.tag}>`;
   }
+  // A node can have both text and children (e.g. <p>First paragraph<span>…</span></p>)
+  // — render the text as its own line before the children, never drop it.
+  const childPad = "  ".repeat(indent + 1);
+  const textLine = node.text ? `${childPad}${node.text}\n` : "";
   const inner = node.children.map((c) => treeToHtml(c, indent + 1)).join("\n");
-  return `${pad}<${node.tag}>\n${inner}\n${pad}</${node.tag}>`;
+  return `${pad}<${node.tag}>\n${textLine}${inner}\n${pad}</${node.tag}>`;
+}
+
+// The source never changes once the page loads — computed once, not per render.
+const SOURCE_HTML = treeToHtml(INITIAL_TREE);
+
+type DiffRow = { source: string | null; live: string | null; type: "same" | "added" | "removed" };
+
+// Line-level LCS diff between the frozen source and the live DOM's generated
+// HTML. Rows are aligned so both columns render the same number of lines —
+// a line that exists on only one side leaves a blank placeholder on the other.
+function diffHtml(before: string, after: string): DiffRow[] {
+  const a = before.split("\n");
+  const b = after.split("\n");
+  const m = a.length;
+  const n = b.length;
+  const dp: number[][] = Array.from({ length: m + 1 }, () => new Array<number>(n + 1).fill(0));
+  for (let i = m - 1; i >= 0; i--) {
+    for (let j = n - 1; j >= 0; j--) {
+      dp[i][j] = a[i] === b[j] ? dp[i + 1][j + 1] + 1 : Math.max(dp[i + 1][j], dp[i][j + 1]);
+    }
+  }
+  const rows: DiffRow[] = [];
+  let i = 0;
+  let j = 0;
+  while (i < m && j < n) {
+    if (a[i] === b[j]) {
+      rows.push({ source: a[i], live: b[j], type: "same" });
+      i++;
+      j++;
+    } else if (dp[i + 1][j] >= dp[i][j + 1]) {
+      rows.push({ source: a[i], live: null, type: "removed" });
+      i++;
+    } else {
+      rows.push({ source: null, live: b[j], type: "added" });
+      j++;
+    }
+  }
+  while (i < m) {
+    rows.push({ source: a[i], live: null, type: "removed" });
+    i++;
+  }
+  while (j < n) {
+    rows.push({ source: null, live: b[j], type: "added" });
+    j++;
+  }
+  return rows;
 }
 
 // ─── TreeNode (recursive) ─────────────────────────────────────────────────────
@@ -175,12 +222,81 @@ function TreeNode({ node, selectedId, onSelect, onRemove }: TreeNodeProps) {
   );
 }
 
+// ─── Diff view (source vs live) ────────────────────────────────────────────────
+
+function DiffLines({ rows, side }: { rows: DiffRow[]; side: "source" | "live" }) {
+  return (
+    <div className="py-2 font-mono text-xs leading-relaxed overflow-x-auto">
+      {rows.map((row, i) => {
+        const text = side === "source" ? row.source : row.live;
+        const isHighlighted = side === "source" ? row.type === "removed" : row.type === "added";
+        const prefix = text === null ? "" : row.type === "same" ? "  " : side === "source" ? "- " : "+ ";
+        return (
+          <div
+            key={i}
+            className={cn(
+              "px-4 whitespace-pre",
+              isHighlighted && side === "source" && "bg-red-50 dark:bg-red-950/40 text-red-700 dark:text-red-400",
+              isHighlighted && side === "live" && "bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400",
+              !isHighlighted && "text-zinc-600 dark:text-zinc-400"
+            )}
+          >
+            {text !== null ? `${prefix}${text}` : " "}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+function DiffPanelHeader({ label }: { label: string }) {
+  return (
+    <div className="px-4 py-2 font-mono text-xs sm:text-sm text-zinc-900 dark:text-zinc-100 bg-zinc-200 dark:bg-zinc-800 border-b border-zinc-200 dark:border-zinc-800">
+      {label}
+    </div>
+  );
+}
+
+function DiffPanel({ rows }: { rows: DiffRow[] }) {
+  return (
+    <div
+      className="rounded-lg bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 overflow-hidden"
+      role="group"
+      aria-label="Comparison of source HTML and live DOM"
+    >
+      {/* Side by side on large screens */}
+      <div className="hidden lg:grid lg:grid-cols-2 divide-x divide-zinc-200 dark:divide-zinc-800">
+        <div>
+          <DiffPanelHeader label="Source HTML" />
+          <DiffLines rows={rows} side="source" />
+        </div>
+        <div>
+          <DiffPanelHeader label="Live DOM" />
+          <DiffLines rows={rows} side="live" />
+        </div>
+      </div>
+      {/* Stacked below large screens */}
+      <div className="lg:hidden divide-y divide-zinc-200 dark:divide-zinc-800">
+        <div>
+          <DiffPanelHeader label="Source HTML" />
+          <DiffLines rows={rows} side="source" />
+        </div>
+        <div>
+          <DiffPanelHeader label="Live DOM" />
+          <DiffLines rows={rows} side="live" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // ─── DomDemo ──────────────────────────────────────────────────────────────────
 
 export default function DomDemo() {
   const [tree, setTree] = useState<DomNode>(INITIAL_TREE);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [newTag, setNewTag] = useState("");
+  const [newText, setNewText] = useState("");
   const nextId = useRef(7);
 
   const selectedNode = selectedId ? findNode(tree, selectedId) : null;
@@ -198,9 +314,11 @@ export default function DomDemo() {
   function handleAddChild() {
     const tag = newTag.trim().toLowerCase();
     if (!tag || !selectedId) return;
-    const child: DomNode = { id: String(nextId.current++), tag, children: [] };
+    const text = newText.trim();
+    const child: DomNode = { id: String(nextId.current++), tag, children: [], ...(text && { text }) };
     setTree((t) => addChild(t, selectedId, child));
     setNewTag("");
+    setNewText("");
   }
 
   return (
@@ -251,15 +369,23 @@ export default function DomDemo() {
                 </div>
               </div>
 
-              <div className="border-t border-zinc-200 dark:border-zinc-800 pt-3 mt-3">
-                <p className="text-xs text-zinc-500 dark:text-zinc-400 mb-2">Add child</p>
+              <div className="border-t border-zinc-200 dark:border-zinc-800 pt-3 mt-3 space-y-2">
+                <p className="text-xs text-zinc-500 dark:text-zinc-400">Add child</p>
+                <Input
+                  value={newTag}
+                  onChange={(e) => setNewTag(e.target.value)}
+                  onKeyDown={(e) => e.key === "Enter" && handleAddChild()}
+                  placeholder="Tag, e.g. p, div, span"
+                  aria-label="Tag name"
+                  className="w-full text-xs py-1.5 px-2"
+                />
                 <div className="flex gap-2">
                   <Input
-                    value={newTag}
-                    onChange={(e) => setNewTag(e.target.value)}
+                    value={newText}
+                    onChange={(e) => setNewText(e.target.value)}
                     onKeyDown={(e) => e.key === "Enter" && handleAddChild()}
-                    placeholder="e.g. p, div, span"
-                    aria-label="Tag name"
+                    placeholder="Text (optional)"
+                    aria-label="Text content"
                     className="flex-1 text-xs py-1.5 px-2"
                   />
                   <Button
@@ -277,12 +403,21 @@ export default function DomDemo() {
         </InspectorPanel>
       </div>
 
-      {/* Generated HTML */}
-      <CodeBlock
-        title="Generated HTML"
-        lang="html"
-        code={treeToHtml(tree)}
-      />
+      {/* Source HTML vs live DOM — makes the page's key insight visible */}
+      <div className="space-y-3">
+        <p className="text-xs lg:text-sm text-zinc-500 dark:text-zinc-400">
+          The{" "}
+          <span className="font-medium text-zinc-700 dark:text-zinc-300">source</span>{" "}
+          is the HTML you wrote — it never changes. The{" "}
+          <span className="font-medium text-zinc-700 dark:text-zinc-300">live DOM</span>{" "}
+          is what the browser renders right now. Lines only in the source are{" "}
+          <span className="text-red-600 dark:text-red-400 font-medium">red</span>{" "}
+          — removed from the live DOM. Lines only in the live DOM are{" "}
+          <span className="text-emerald-600 dark:text-emerald-400 font-medium">green</span>{" "}
+          — added since the source was written.
+        </p>
+        <DiffPanel rows={diffHtml(SOURCE_HTML, treeToHtml(tree))} />
+      </div>
     </div>
   );
 }

@@ -15,6 +15,8 @@ Conceptual frontend topics to implement, each with interactive demos and explana
 - [ ] **Performance** — what makes a page feel fast or slow, and what you can control
 - [ ] **Build & Bundle** — why frontend code gets transformed before it ships to the browser
 - [ ] **Testing** — why and how we verify UI works: unit, integration, visual, e2e
+- [ ] **Browser Storage** — cookies vs localStorage vs sessionStorage vs IndexedDB, and when to use each
+- [ ] **Web Security Basics** — XSS, CSRF, and same-origin policy, explained conceptually
 
 ## Tasks
 
@@ -22,3 +24,5 @@ Conceptual frontend topics to implement, each with interactive demos and explana
 - [ ] Refactor CSS
 - [ ] Revisit theme toggling
 - [ ] Polish mobile ui
+- [ ] Add a "last updated" date to concept pages
+- [ ] Add "Try it yourself" challenges (2-3 per concept) to each concept page

@@ -76,9 +76,11 @@ export default function TheDomPage() {
         <SectionLabel className="mb-4">Interactive demo</SectionLabel>
         <p className="text-zinc-600 dark:text-zinc-400 mb-4">
           Click any node in the tree to inspect its properties. Select a node,
-          then type a tag name and add it as a child. Remove nodes with the{" "}
-          <span className="font-mono text-xs">×</span> button. The generated
-          HTML updates live as you build the tree.
+          then type a tag name (and optional text) and add it as a child.
+          Remove nodes with the{" "}
+          <span className="font-mono text-xs">×</span> button. The panels below
+          contrast the HTML you wrote with the live DOM, with the differences
+          highlighted.
         </p>
         <DomDemo />
       </div>
