@@ -159,9 +159,9 @@ export default function ResponsivenessPage() {
       </div>
 
       <p className="text-zinc-700 dark:text-zinc-300">
-        <strong>If you remember one thing:</strong> you write one layout that
-        reshapes itself to the space it&rsquo;s given, instead of a separate site
-        for every screen.
+        <strong>If you remember one thing:</strong> build one layout that adapts
+        to the space it&rsquo;s given, and it works on every screen, without
+        detecting the device or keeping a separate mobile site.
       </p>
     </div>
   );

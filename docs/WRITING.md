@@ -75,6 +75,7 @@ This section keeps its established job — **telling the learner how to use the 
 ### Step 7 — The close
 - The Step 0 takeaway line, verbatim: "If you remember one thing: ___."
 - Not a list. Not a summary paragraph. One line.
+- **Don't restate the opening or the definition.** The takeaway lands the one insight (often the misconception-killer), phrased differently from how the page opened. If it echoes the subtitle or the opening line, rewrite it.
 
 ### Voice rules (every sentence, every pass)
 1. **The desk test.** Would a person say this to a junior across a desk? If not, rewrite until they would.

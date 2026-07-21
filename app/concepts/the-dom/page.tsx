@@ -165,8 +165,8 @@ export default function TheDomPage() {
 
       <p className="text-zinc-700 dark:text-zinc-300">
         <strong>If you remember one thing:</strong> the DOM is not the HTML you
-        wrote. It&rsquo;s the live tree the browser builds from it, and that tree
-        is what your code changes.
+        wrote; it&rsquo;s what the browser actually renders, and what your code
+        changes.
       </p>
     </div>
   );
