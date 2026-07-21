@@ -8,21 +8,21 @@ import ProblemCards from "@/app/components/ProblemCards";
 const problems = [
   {
     icon: FileCode,
-    title: "It's Not the HTML",
+    title: "Gone on reload",
     description:
-      "Developers often assume the DOM is their HTML. It's actually a live object model the browser constructs, and JavaScript can change it after the page loads.",
+      "Add a row with JavaScript and it appears at once. Reload the page and it has vanished. The DOM changed; the file it was built from never did, so nothing survived the refresh.",
   },
   {
     icon: GitFork,
-    title: "Invisible Structure",
+    title: "Grab the wrong node",
     description:
-      "Without understanding the tree, selecting the right element, traversing to a parent, or inserting a node feels like guesswork.",
+      "Target the wrong element and your click handler runs on nothing, silently.",
   },
   {
     icon: RefreshCw,
-    title: "Performance Blind Spots",
+    title: "Slow when it's sloppy",
     description:
-      "Every DOM mutation can trigger layout recalculation and repaint. Not knowing how the tree works leads to janky, slow UIs.",
+      "Every change to the tree makes the browser re-check what to draw. A handful of edits costs nothing. Rebuild the whole list on every keystroke and the page starts to stutter under the user's fingers.",
   },
 ];
 
@@ -37,37 +37,49 @@ export default function TheDomPage() {
       <div className="text-sm lg:text-base text-zinc-600 dark:text-zinc-400 space-y-3">
         <SectionLabel>What is the DOM?</SectionLabel>
         <p>
-          The DOM — Document Object Model — is a tree-shaped, in-memory
-          representation of your page. When the browser loads an HTML file, it
-          doesn&rsquo;t just display the text; it parses it and builds a live
-          data structure of objects called <em className="text-zinc-700 dark:text-zinc-300">nodes</em>.
-        </p>
-        <p>
-          Every HTML element becomes a node in that tree. Nesting in your markup
-          becomes parent-child relationships in the tree: a{" "}
+          The DOM (Document Object Model) is the live tree of objects the browser
+          builds from your HTML and holds in memory. When a page loads, the
+          browser reads your markup once and turns it into a structure it can
+          change on the fly. Every element becomes a{" "}
+          <em className="text-zinc-700 dark:text-zinc-300">node</em>, an object
+          in that tree, and the nesting in your HTML becomes parent-and-child
+          links between nodes: a{" "}
           <code className="text-zinc-800 dark:text-zinc-200">&lt;p&gt;</code>{" "}
           inside a{" "}
           <code className="text-zinc-800 dark:text-zinc-200">&lt;div&gt;</code>{" "}
-          becomes a child node of that div node.
+          is a child of that div node.
         </p>
         <p>
-          JavaScript interacts with this tree directly — not with the HTML
-          source. Methods like{" "}
-          <code className="text-zinc-800 dark:text-zinc-200">document.querySelector</code>,{" "}
-          <code className="text-zinc-800 dark:text-zinc-200">element.textContent</code>, and{" "}
-          <code className="text-zinc-800 dark:text-zinc-200">element.appendChild</code>{" "}
-          all read from or write to the DOM. The HTML file on disk stays
-          untouched — the DOM is what the browser actually renders.
+          Here is what trips people up: that live tree and your HTML file are not
+          the same thing. The file is read once to build the tree and then set
+          aside. Everything after that happens in the DOM. A row you add in
+          JavaScript shows up on screen instantly, while the HTML on disk still
+          shows the empty list you first shipped. Right-click a busy page, choose
+          View Source, and hunt for something you can plainly see on screen. If
+          JavaScript put it there, it is not in the source at all.
+        </p>
+        <p>
+          A useful way to picture it: your HTML is a printed recipe and the DOM
+          is the plated dish on the table. The recipe is written once and never
+          changes on the page. The dish is what people actually eat, and the cook
+          (your JavaScript) keeps adjusting it after it leaves the kitchen,
+          adding a garnish here, swapping a side there. The recipe card on the
+          counter never updates to match.
         </p>
       </div>
 
       <div className="text-sm lg:text-base text-zinc-600 dark:text-zinc-400 space-y-3">
         <SectionLabel>Why it matters</SectionLabel>
         <p>
-          The DOM is the bridge between your code and what users see on screen.
-          Every UI library and framework — React, Vue, Svelte — ultimately
-          manipulates the DOM. Understanding the tree gives you a mental model
-          for why UIs behave the way they do.
+          The DOM is the bridge between your code and what a user sees on screen.
+          Every UI framework, from React to Svelte, ultimately reads and writes
+          the DOM; once you can picture the tree, you have a model for why an
+          interface behaves the way it does and where to reach in to change it.
+        </p>
+        <p>
+          Miss that model and the everyday work turns into guesswork: selecting
+          the right element, walking up to its parent, dropping a new node in the
+          right place. The problems below are the ones that bite first.
         </p>
         <ProblemCards problems={problems} />
       </div>
@@ -75,22 +87,53 @@ export default function TheDomPage() {
       <div>
         <SectionLabel className="mb-4">Interactive demo</SectionLabel>
         <p className="text-zinc-600 dark:text-zinc-400 mb-4">
-          Click any node in the tree to inspect its properties. Select a node,
-          then type a tag name (and optional text) and add it as a child.
-          Remove nodes with the{" "}
-          <span className="font-mono text-xs">×</span> button. The panels below
-          contrast the HTML you wrote with the live DOM, with the differences
-          highlighted.
+          Before you touch it: if you delete the{" "}
+          <code className="text-zinc-800 dark:text-zinc-200">&lt;div&gt;</code>,
+          what happens to the{" "}
+          <code className="text-zinc-800 dark:text-zinc-200">&lt;p&gt;</code> and{" "}
+          <code className="text-zinc-800 dark:text-zinc-200">&lt;span&gt;</code>{" "}
+          nested inside it? Click a node to inspect it, add or remove nodes, and
+          watch the panels below compare the HTML you wrote against the live DOM.
         </p>
         <DomDemo />
+        <p className="text-zinc-700 dark:text-zinc-300 mt-6 mb-2">Try breaking it:</p>
+        <ul className="list-disc list-inside space-y-1.5 text-zinc-600 dark:text-zinc-400">
+          <li>
+            Delete the{" "}
+            <code className="text-zinc-800 dark:text-zinc-200">&lt;div&gt;</code>.
+            Its{" "}
+            <code className="text-zinc-800 dark:text-zinc-200">&lt;p&gt;</code> and{" "}
+            <code className="text-zinc-800 dark:text-zinc-200">&lt;span&gt;</code>{" "}
+            go with it, and the Source panel turns red while the live DOM drops
+            those lines.
+          </li>
+          <li>
+            Add a{" "}
+            <code className="text-zinc-800 dark:text-zinc-200">&lt;button&gt;</code>{" "}
+            under{" "}
+            <code className="text-zinc-800 dark:text-zinc-200">&lt;body&gt;</code>.
+            It shows up green in the live DOM and never appears in the Source,
+            because the Source is frozen at what you first wrote.
+          </li>
+          <li>
+            Select a node, add a child to it, then select its parent and watch{" "}
+            <code className="text-zinc-800 dark:text-zinc-200">children</code>{" "}
+            climb by one in the inspector.
+          </li>
+        </ul>
       </div>
 
       <div className="text-sm lg:text-base text-zinc-600 dark:text-zinc-400 space-y-3">
         <SectionLabel>How it works</SectionLabel>
         <p>
-          The demo renders the DOM as a visual tree. Each node is clickable —
-          selecting one opens the inspector on the right, which shows the same
-          properties the browser exposes to JavaScript.
+          The tree on the left is the DOM. Click any node to open the inspector,
+          which reports the same properties the browser hands your JavaScript.
+          Type a tag name and optional text to add a child to the selected node,
+          or use the{" "}
+          <span className="font-mono text-xs">×</span> to remove one. The two
+          panels underneath hold the frozen source next to the live DOM, the
+          recipe held up against the actual plate, so you can see exactly where
+          they have drifted apart.
         </p>
         <ul className="list-disc list-inside space-y-1.5 font-mono text-xs lg:text-sm">
           <li>
@@ -108,11 +151,23 @@ export default function TheDomPage() {
           </li>
         </ul>
         <p>
-          Adding or removing a node is an immutable update — a new tree is
-          computed and React re-renders just what changed. This mirrors how
-          virtual DOM libraries like React work under the hood.
+          Notice that the source panel never moved, no matter how much you
+          edited. That is the whole point: your HTML is read once to build the
+          tree, and every edit after that lives in the DOM alone. The browser
+          renders the tree, not the file.
+        </p>
+        <p>
+          Writing those tree edits by hand gets tedious fast, which is the job
+          frameworks like React take over for you, a story the Frameworks page
+          picks up.
         </p>
       </div>
+
+      <p className="text-zinc-700 dark:text-zinc-300">
+        <strong>If you remember one thing:</strong> the DOM is not the HTML you
+        wrote. It&rsquo;s the live tree the browser builds from it, and that tree
+        is what your code changes.
+      </p>
     </div>
   );
 }
