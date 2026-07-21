@@ -11,27 +11,27 @@ const concept = getConcept("frameworks");
 const problems = [
   {
     icon: MousePointerClick,
-    title: "DOM Manipulation",
+    title: "DOM manipulation",
     description:
-      "Manually creating, updating, and removing HTML elements is tedious and error-prone. Frameworks do it automatically.",
+      "Creating, updating, and removing HTML elements by hand is tedious and easy to get wrong. A framework does it for you.",
   },
   {
     icon: RefreshCw,
-    title: "State \u2194 UI Sync",
+    title: "State to UI sync",
     description:
-      "When data changes, the UI must update. Frameworks track this relationship so you don\u2019t have to.",
+      "When the data changes, the screen has to change with it. Frameworks track that relationship so you never wire it up yourself.",
   },
   {
     icon: Puzzle,
-    title: "Component Reuse",
+    title: "Component reuse",
     description:
-      "Build a button once, use it everywhere. Frameworks make composition natural.",
+      "Build a button once, use it everywhere.",
   },
   {
     icon: Route,
-    title: "Routing & Structure",
+    title: "Routing and structure",
     description:
-      "Multi-page apps need navigation, layouts, data loading. Frameworks provide conventions for all of this.",
+      "Real apps need navigation, shared layouts, and data loading. Rather than invent conventions for each one, you inherit a set that already works.",
   },
 ];
 
@@ -43,43 +43,45 @@ export default function FrameworksPage() {
       <div className="text-sm lg:text-base text-zinc-600 dark:text-zinc-400 space-y-3">
         <SectionLabel>What is a framework?</SectionLabel>
         <p>
-          A framework is a pre-built foundation that handles the repetitive,
-          error-prone parts of building UIs &mdash; DOM updates, state
-          management, routing, event handling.
+          Writing vanilla HTML and JavaScript is like giving a driver
+          turn-by-turn directions: turn here, update this element, now remove
+          that one. A framework is like getting in and saying &ldquo;take me to
+          the airport.&rdquo; You say where you want to end up, and it handles
+          the route.
         </p>
         <p>
-          Instead of telling the browser <em>how</em> to update the page step by
-          step, you describe <em>what</em> the UI should look like. The
-          framework figures out the rest.
-        </p>
-        <p>
-          Think of it this way: writing vanilla HTML and JavaScript is like
-          giving turn-by-turn directions. A framework is like saying &ldquo;take
-          me to the airport&rdquo; &mdash; it handles the route.
+          That is what a framework is: a pre-built foundation that handles the
+          repetitive, error-prone parts of building a UI, from DOM updates to
+          state management to routing. Instead of telling the browser{" "}
+          <em className="text-zinc-700 dark:text-zinc-300">how</em> to change the
+          page step by step, you describe{" "}
+          <em className="text-zinc-700 dark:text-zinc-300">what</em> it should
+          look like, and the framework works out the steps.
         </p>
       </div>
 
       <div className="text-sm lg:text-base text-zinc-600 dark:text-zinc-400 space-y-3">
         <SectionLabel>Why it matters</SectionLabel>
         <p>
-          Without a framework, you&rsquo;d manually create, update, and remove
-          HTML elements every time data changes. For a simple counter
-          that&rsquo;s manageable. For a real app with forms, navigation, and
-          live data, it quickly becomes a tangled mess of DOM manipulation.
+          Without a framework, you create, update, and remove HTML elements by
+          hand every time the data changes. For a lone counter that is fine. For
+          a real app juggling forms, navigation, and live data, it turns into a
+          tangle of DOM code where every new feature risks breaking the last.
         </p>
         <p>
-          Frameworks solve this by keeping your UI in sync with your data
-          automatically. They also give you component reuse, routing
-          conventions, and structure &mdash; so you&rsquo;re not reinventing the
-          wheel every time you start a project.
-        </p>
-        <ProblemCards problems={problems} className="sm:grid-cols-2 gap-4" />
-        <p>
-          Frameworks aren&rsquo;t magic &mdash; they&rsquo;re JavaScript
-          libraries with smart abstractions. This entire site is built with{" "}
+          A framework is not magic. Under the hood it is a JavaScript library
+          with a well-chosen set of abstractions that keep the UI in step with
+          the data and hand you reusable structure instead of a blank page. This
+          entire site runs on{" "}
           <strong className="text-zinc-900 dark:text-zinc-100">Next.js</strong>,
           which is built on{" "}
           <strong className="text-zinc-900 dark:text-zinc-100">React</strong>.
+        </p>
+        <ProblemCards problems={problems} className="sm:grid-cols-2 gap-4" />
+        <p className="text-zinc-700 dark:text-zinc-300">
+          <strong>If you remember one thing:</strong> a framework keeps your UI
+          in sync with your data, so you describe what the screen should show
+          instead of writing every step to update it.
         </p>
         <Link
           href="/concepts/frameworks/see-the-diff"
