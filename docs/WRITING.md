@@ -118,6 +118,8 @@ If Pass 3 makes substantive changes (not typo-level), the page goes back through
 
 Avoid emdashes as much as possible. If it's unavoidable, don't use spaces before and after the emdash.
 
+---
+
 ## Refactoring an existing concept
 
 The eight live pages predate this playbook. When refactoring one:
