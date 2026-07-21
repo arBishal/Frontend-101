@@ -1,5 +1,5 @@
 import { getConcept, conceptMetadata } from "@/app/lib/concepts";
-import { HardDrive, UserX, RefreshCw } from "lucide-react";
+import { EyeOff, Loader, Signal } from "lucide-react";
 import ApiDemo from "./ApiDemo";
 import SectionLabel from "@/app/components/ui/SectionLabel";
 import ConceptHeader from "@/app/components/ConceptHeader";
@@ -7,22 +7,22 @@ import ProblemCards from "@/app/components/ProblemCards";
 
 const problems = [
   {
-    icon: HardDrive,
-    title: "Hardcoded Data",
+    icon: EyeOff,
+    title: "The blank six seconds",
     description:
-      "Without APIs, every piece of data would need to be baked into the page. No dynamic content at all.",
+      "On hotel wifi your profile page takes six seconds to load its data. You only built the success screen, so for those six seconds the user stares at an empty rectangle with no spinner, unable to tell whether it is broken or just busy.",
   },
   {
-    icon: UserX,
-    title: "No Personalization",
+    icon: Loader,
+    title: "The spinner with no exit",
     description:
-      "User profiles, preferences, and account data all live on a server. No API means no user-specific experience.",
+      "The request fails, but nothing was written to catch a failure, so the loading spinner just spins forever.",
   },
   {
-    icon: RefreshCw,
-    title: "No Live Updates",
+    icon: Signal,
+    title: "Works on your machine",
     description:
-      "Prices change, feeds refresh, notifications arrive. Without API calls, your UI shows stale data forever.",
+      "It is instant every time you test it, because you test it on fast wifi sitting next to the router. Then a real user opens it on a moving train and it falls apart. The network is the one part of your app you do not control.",
   },
 ];
 
@@ -37,54 +37,98 @@ export default function ApiCallsPage() {
       <div className="text-sm lg:text-base text-zinc-600 dark:text-zinc-400 space-y-3">
         <SectionLabel>What is an API call?</SectionLabel>
         <p>
-          An API call is how the frontend asks a server for data. Your app
-          doesn&rsquo;t store everything locally: user profiles, product
-          listings, weather forecasts. That data lives on a server. The frontend
-          sends an HTTP request, the server processes it, and sends back a
-          response (usually JSON).
+          Open a weather app and it shows 14&deg;C for your city. That number was
+          not baked into the app when you installed it, and it changes by the
+          hour, so where does it come from? The app asks a server for it, every
+          time you open the screen. That request is an API call.
         </p>
         <p>
-          The browser has a built-in function for this:{" "}
-          <code className="text-zinc-800 dark:text-zinc-200">fetch()</code>. You give it a URL, it sends a request,
-          and returns a promise that resolves with the server&rsquo;s response.
-          The four standard request types are:
+          Most of what an app shows does not live inside the app. Your profile
+          photo, the prices in a store, the weather on your lock screen, the
+          unread badge on an inbox, none of it ships with the app; it sits on a
+          server and gets fetched. The frontend sends a request over the network
+          (the same kind
+          of request your browser makes when it loads a page), the server does
+          its work, and it sends back a response, usually as{" "}
+          <span className="italic text-zinc-700 dark:text-zinc-300">JSON</span>, a
+          plain-text format for structured data that JavaScript can read straight
+          into an object. The browser has a built-in function for making that
+          request:{" "}
+          <code className="text-zinc-800 dark:text-zinc-200">fetch()</code>. You
+          give it a URL, it sends the request, and it hands you the response when
+          the server answers.
         </p>
-        <ul className="list-disc list-inside space-y-1.5 font-mono text-xs lg:text-sm">
-          <li><span className="italic text-zinc-700 dark:text-zinc-300">GET</span> — read data</li>
-          <li><span className="italic text-zinc-700 dark:text-zinc-300">POST</span> — create data</li>
-          <li><span className="italic text-zinc-700 dark:text-zinc-300">PUT</span> — update data</li>
-          <li><span className="italic text-zinc-700 dark:text-zinc-300">DELETE</span> — remove data</li>
-        </ul>
         <p>
-          API stands for Application Programming Interface, a contract that
-          defines how two systems talk to each other. A REST API
-          organizes its data into URLs called endpoints:{" "}
-          <code className="text-zinc-800 dark:text-zinc-200">/users/42</code>{" "}returns user #42,{" "}
-          <code className="text-zinc-800 dark:text-zinc-200">/pokemon/pikachu</code>{" "}returns Pikachu&rsquo;s stats.
+          Think of it like ordering at a restaurant. You never walk into the
+          kitchen; you give your order to a waiter, who carries it back and
+          returns with the dish. The kitchen is the server, the order is your
+          request, the dish is the response, and the menu is the set of things
+          you are allowed to ask for. Two things about that trip matter more than
+          beginners expect: it takes time, and sometimes the kitchen is out of
+          the salmon. A request can come back slowly, and it can come back with
+          nothing at all.
         </p>
       </div>
 
       <div className="text-sm lg:text-base text-zinc-600 dark:text-zinc-400 space-y-3">
         <SectionLabel>Why it matters</SectionLabel>
         <p>
-          Almost every real application depends on external data. A social feed
-          loads posts from a server. A weather app fetches forecasts from an
-          API. A checkout page sends your order to a payment service.
+          Almost every real app runs on data it fetches. Open a social feed and
+          every post in it arrived from a server a moment before you saw it.
+          Learn to fetch data and you can build the part of the frontend that
+          actually does something.
         </p>
         <p>
-          Without APIs, every piece of data would need to be hardcoded into the
-          page: no dynamic content, no personalization, no real-time updates.
-          Understanding the request lifecycle (idle, loading, success, error) is
-          essential for building UIs that feel reliable even when the network
-          is slow or the server is down.
+          The catch is the round trip. Reading a value already in your code is
+          instant and certain; a fetch is neither. It travels out over a network
+          you do not control and comes back later, or slowly, or not at all. So a
+          screen that fetches data is really four screens: before the request,
+          during the wait, on success, and on failure. Beginners build the third
+          one and forget the other three, and the gaps below are what users hit
+          first.
         </p>
         <ProblemCards problems={problems} />
+      </div>
+
+      <div className="text-sm lg:text-base text-zinc-600 dark:text-zinc-400 space-y-3">
+        <SectionLabel>The four request methods</SectionLabel>
+        <p>
+          Every API call carries a{" "}
+          <span className="italic text-zinc-700 dark:text-zinc-300">method</span>:
+          one word that tells the server what you want done. Four of them cover
+          almost everything you will do:
+        </p>
+        <ul className="list-disc list-inside space-y-1.5">
+          <li>
+            <code className="text-zinc-800 dark:text-zinc-200">GET</code> reads
+            data that already exists, without changing it (load the profile data).
+          </li>
+          <li>
+            <code className="text-zinc-800 dark:text-zinc-200">POST</code> creates
+            something new (submit the login form).
+          </li>
+          <li>
+            <code className="text-zinc-800 dark:text-zinc-200">PUT</code> updates
+            an existing item with new values (edit that post).
+          </li>
+          <li>
+            <code className="text-zinc-800 dark:text-zinc-200">DELETE</code>{" "}
+            removes an item (delete the comment for good).
+          </li>
+        </ul>
+        <p>
+          <code className="text-zinc-800 dark:text-zinc-200">GET</code> only
+          reads; the other three change data, so they only work against a server
+          built to accept those changes. The demo below sticks to{" "}
+          <code className="text-zinc-800 dark:text-zinc-200">GET</code>, the
+          request every app makes most and the easiest one to watch happen.
+        </p>
       </div>
 
       <div>
         <SectionLabel className="mb-4">Interactive demo</SectionLabel>
         <p className="text-zinc-500 dark:text-zinc-400 text-sm mb-4">
-          This demo fetches a Pokémon by name or ID from{" "}
+          This demo fetches a Pok&eacute;mon by name or ID from{" "}
           <a
             href="https://pokeapi.co"
             target="_blank"
@@ -93,12 +137,33 @@ export default function ApiCallsPage() {
           >
             PokéAPI
           </a>
-          {" "}— a free, public REST API with no sign-up. Before you fetch:
-          which of the four states — empty, loading, success, error — is on
-          screen right now, and which one shows up if you search a name that
-          doesn&rsquo;t exist?
+          , a free public API with no sign-up. Before you fetch: which of the
+          four states (idle, loading, success, error) is on screen right now, and
+          which one do you think shows up if you search a name that does not
+          exist?
         </p>
         <ApiDemo />
+        <p className="text-zinc-700 dark:text-zinc-300 mt-6 mb-2">Try breaking it:</p>
+        <ul className="list-disc list-inside space-y-1.5 text-zinc-600 dark:text-zinc-400">
+          <li>
+            Fetch{" "}
+            <code className="text-zinc-800 dark:text-zinc-200">pikachu</code>,
+            then fetch{" "}
+            <code className="text-zinc-800 dark:text-zinc-200">notapokemon</code>.
+            Watch the state line go from green success to red error, and the
+            response in the inspector switch to 404.
+          </li>
+          <li>
+            Turn on Simulate Slow Network and fetch again. The amber loading line
+            is the state most beginners never build a screen for. What would a
+            user see here if you had not?
+          </li>
+          <li>
+            With Slow Network still on, hit Fetch twice quickly. Only the second
+            request resolves; the first is thrown away so a stale answer
+            can&rsquo;t overwrite a newer one.
+          </li>
+        </ul>
       </div>
 
       <div className="text-sm lg:text-base text-zinc-600 dark:text-zinc-400 space-y-3">
@@ -106,62 +171,47 @@ export default function ApiCallsPage() {
         <p>
           Type a name or ID and hit Fetch. Flip on{" "}
           <span className="italic text-zinc-700 dark:text-zinc-300">Simulate Slow Network</span>{" "}
-          to stretch the loading state long enough to actually watch it. Two
-          things move in step: the line just below the search bar says in plain
-          words what&rsquo;s happening, and its color shifts with the state —
-          grey when empty, amber while loading, green on success, red on error.
-          The reset icon next to it drops you back to empty. The Network
-          Inspector beside it shows the raw request data, the same information
-          you&rsquo;d find in your browser&rsquo;s DevTools Network tab.
+          to stretch the loading state long enough to actually watch it, and use
+          the reset icon to drop back to idle. Two things move together: the line
+          under the search bar says in plain words what is happening, and its
+          color tracks the state, grey when idle, amber while loading, green on
+          success, red on error. The Network Inspector beside it shows the raw
+          request, the same information your browser&rsquo;s DevTools Network tab
+          would.
         </p>
         <p>
-          Every fetch lands in one of four states, and beginners tend to build
-          only the last one. <strong>Empty</strong> is the screen before anyone
-          asks for data. <strong>Loading</strong> is the wait. <strong>Success</strong>{" "}
-          is the happy path — the part that&rsquo;s easy to remember. <strong>Error</strong>{" "}
-          is the 404, the dropped connection, the mistyped name. Ship only the
-          success case and your UI shows a blank box on a slow network and a
-          dead screen when the server is down.
+          That color-changing line is the whole lesson in miniature. Every fetch
+          moves through four states, and the demo makes you visit each one on
+          purpose:{" "}
+          <strong>idle</strong> is the screen before anyone asks for data,{" "}
+          <strong>loading</strong> is the wait, <strong>success</strong> is the
+          happy path that is easy to remember, and <strong>error</strong> is the
+          404, the dropped connection, the mistyped name. Ship only success and
+          your UI shows a blank box on a slow network and a dead screen when the
+          server is down.
         </p>
-        <ul className="list-disc list-inside space-y-1.5 font-mono text-xs lg:text-sm">
-          <li>
-            <strong>fetch()</strong>: the browser&apos;s built-in function for
-            making HTTP requests
-          </li>
-          <li>
-            <strong>GET</strong>: the HTTP method used to read data from a
-            server
-          </li>
-          <li>
-            <strong>response</strong>: the server&apos;s answer, parsed from
-            JSON into a JavaScript object
-          </li>
-        </ul>
-        <p className="text-zinc-700 dark:text-zinc-300">Try breaking it:</p>
-        <ul className="list-disc list-inside space-y-1.5">
-          <li>
-            Fetch <code className="text-zinc-800 dark:text-zinc-200">pikachu</code>,
-            then fetch{" "}
-            <code className="text-zinc-800 dark:text-zinc-200">notapokemon</code>{" "}
-            — watch the state line flip from green success to red error.
-          </li>
-          <li>
-            Turn on Slow Network and read the amber loading line before the data
-            lands — the state most beginners never design a screen for.
-          </li>
-          <li>
-            With Slow Network on, hit Fetch twice quickly. Only the second
-            request resolves — the first is aborted so a stale response
-            can&rsquo;t overwrite a newer one.
-          </li>
-        </ul>
         <p>
-          Turning that error state from a red line into something a user can
-          recover from — a retry, a fallback, a message that explains what went
-          wrong — is its own topic, and it&rsquo;s where a future Error Handling
-          page will pick up.
+          The url the inspector shows is an{" "}
+          <span className="italic text-zinc-700 dark:text-zinc-300">endpoint</span>,
+          an address that names one thing on the server:{" "}
+          <code className="text-zinc-800 dark:text-zinc-200">/pokemon/pikachu</code>{" "}
+          returns Pikachu&rsquo;s stats, <code className="text-zinc-800 dark:text-zinc-200">/users/42</code>{" "}
+          returns user #42. An API that organizes its data into addresses like
+          these is called a REST API, and it is by far the most common kind you
+          will meet.
+        </p>
+        <p>
+          Turning that red error line into something a user can recover from, a
+          retry button or a message that explains what went wrong, is its own
+          topic, and it is where a future Error Handling page will pick up.
         </p>
       </div>
+
+      <p className="text-zinc-700 dark:text-zinc-300">
+        <strong>If you remember one thing:</strong> a fetch is a request over a
+        network, so it takes time and it can fail; build the waiting and the
+        failing, not just the moment the data lands.
+      </p>
     </div>
   );
 }
