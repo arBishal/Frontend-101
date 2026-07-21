@@ -8,21 +8,21 @@ import ProblemCards from "@/app/components/ProblemCards";
 const problems = [
   {
     icon: Copy,
-    title: "Code Duplication",
+    title: "Edit it eight times",
     description:
-      "Without components, the same HTML is copy-pasted everywhere. One change means updating every copy by hand.",
+      "Ship a copy-pasted card in eight places, then get asked to add one line of text to it. That is eight separate edits, and eight chances to fat-finger one.",
   },
   {
     icon: TriangleAlert,
-    title: "Inconsistency",
+    title: "The one you missed",
     description:
-      "Miss one copy during an update and the UI breaks. Users see different styles for the same element.",
+      "The single copy you forget renders last month's design right next to this month's.",
   },
   {
     icon: Package,
-    title: "No Reuse",
+    title: "Rebuilt from scratch",
     description:
-      "Every new feature starts from scratch instead of composing from a shared library of tested parts.",
+      "New features should start from pieces you already trust. Without a shared library, each one rebuilds its own modal from scratch, and the tenth still carries bugs the first nine already fixed.",
   },
 ];
 
@@ -38,78 +38,124 @@ export default function ComponentsPage() {
         <SectionLabel>What is a component?</SectionLabel>
         <p>
           A component is a self-contained, reusable piece of UI. Instead of
-          writing one massive page, you break the interface into smaller parts:
-          a button, a card, and a sidebar, each responsible for its own markup
-          and style.
+          writing one massive page top to bottom, you break the interface into
+          smaller parts and build each one once. A comment box is a component:
+          the avatar, the text field, the post button, and the logic tying them
+          together, packaged under a single name you can drop in anywhere.
         </p>
         <p>
-          Think of components like LEGO bricks. Each brick has a specific shape
-          and purpose, but you can snap them together in countless combinations
-          to build something complex. A single <code className="text-zinc-800 dark:text-zinc-200">&lt;StatCard&gt;</code> component can be
-          reused four times in a grid, with the same structure but different data.
+          Think of components like LEGO bricks, but notice{" "}
+          <em className="text-zinc-700 dark:text-zinc-300">why</em> they snap
+          together. It is the stud, one standardized bump every brick agrees on,
+          so a piece from one set fits a piece from another. A component&rsquo;s{" "}
+          <span className="italic text-zinc-700 dark:text-zinc-300">props</span>{" "}
+          are that stud: the small, agreed-on set of inputs it accepts.
+          Anything can use the component by supplying those inputs, without
+          knowing a thing about what is inside it.
         </p>
         <p>
-          Components accept <span className="italic text-zinc-700 dark:text-zinc-300">props</span>, inputs that let you
-          customize what they render. A <code className="text-zinc-800 dark:text-zinc-200">&lt;Button&gt;</code> component might
-          accept a <code className="text-zinc-800 dark:text-zinc-200">variant</code> prop to switch between &ldquo;primary&rdquo; and
-          &ldquo;outline&rdquo; styles. Same component, different look, zero code duplication.
+          So a{" "}
+          <code className="text-zinc-800 dark:text-zinc-200">&lt;Button&gt;</code>{" "}
+          might accept a{" "}
+          <code className="text-zinc-800 dark:text-zinc-200">variant</code> prop
+          to switch between &ldquo;primary&rdquo; and &ldquo;outline&rdquo;
+          looks. Same component, supplied different props, rendering a different
+          result each time. Write it once; reuse it four times in a grid with
+          four different labels.
         </p>
       </div>
 
       <div className="text-sm lg:text-base text-zinc-600 dark:text-zinc-400 space-y-3">
         <SectionLabel>Why it matters</SectionLabel>
         <p>
-          Without components, you&rsquo;d copy-paste the same HTML everywhere.
-          Need to change how a card looks? Update it in every single place. Miss
-          one? You have a visual inconsistency.
+          Picture styling a Submit button forty times across an app by hand. A
+          request comes in to round the corners. You change it in twelve files,
+          ship, and a screenshot comes back with three square buttons still
+          sitting in the checkout flow. That is the tax on copy-pasted markup:
+          every change is a manual hunt, and the copies you miss are the ones
+          users find.
         </p>
         <p>
-          With components, you change the code once and every instance updates
-          automatically. This is the DRY principle (Don&rsquo;t Repeat Yourself)
-          applied to your UI. It&rsquo;s also how every modern design system
-          works: teams build a shared library of components (buttons, modals,
-          form fields) that the entire app consumes.
+          Define that button once as a component and the math flips: you change
+          the definition, and every place that uses it updates at once. This is
+          the DRY principle (Don&rsquo;t Repeat Yourself) applied to your UI, and
+          it is how design systems work, a shared library of trusted pieces that
+          the whole app pulls from instead of reinventing.
         </p>
         <ProblemCards problems={problems} />
       </div>
 
       <div>
         <SectionLabel className="mb-4">Interactive demo</SectionLabel>
-        <p className="text-zinc-500 dark:text-zinc-400 text-sm mb-4">
-          The same{" "}
-          <code className="text-zinc-700 dark:text-zinc-300">Button</code>{" "}
-          component rendered three times, once per variant. Toggle{" "}
-          <code className="text-zinc-700 dark:text-zinc-300">disabled</code>{" "}
-          per instance and watch the JSX update in real time.
+        <p className="text-zinc-600 dark:text-zinc-400 mb-4">
+          Before you touch it: if you switch{" "}
+          <code className="text-zinc-800 dark:text-zinc-200">border-radius</code>{" "}
+          to pill, how many of the three buttons change, and how many CSS rules
+          does it take? Toggle{" "}
+          <code className="text-zinc-800 dark:text-zinc-200">disabled</code> per
+          button and edit the shared style, then read the two code panels.
         </p>
         <ComponentDemo />
+        <p className="text-zinc-700 dark:text-zinc-300 mt-6 mb-2">Try breaking it:</p>
+        <ul className="list-disc list-inside space-y-1.5 text-zinc-600 dark:text-zinc-400">
+          <li>
+            Set border-radius to square and size to lg. All three buttons change
+            at once, and the CSS panel shows a single rule did it, not three.
+          </li>
+          <li>
+            Disable just the outline button. Only its line in the JSX gains{" "}
+            <code className="text-zinc-800 dark:text-zinc-200">disabled</code>;
+            the other two are untouched. Same component, different props.
+          </li>
+          <li>
+            Disable all three. They are still one component. You changed three
+            props, not three buttons.
+          </li>
+        </ul>
       </div>
 
       <div className="text-sm lg:text-base text-zinc-600 dark:text-zinc-400 space-y-3">
         <SectionLabel>How it works</SectionLabel>
         <p>
-          The demo renders the same{" "}
-          <code className="text-zinc-800 dark:text-zinc-200">&lt;Button&gt;</code>{" "}
-          component three times, once per variant. The code view below the
-          preview shows the actual JSX: the same component name appears on
-          every line, with only the{" "}
-          <code className="text-zinc-800 dark:text-zinc-200">variant</code> prop changing.
-        </p>
-        <p>
-          The Style Editor changes the shared CSS that all three instances
-          consume. Switch{" "}
+          Toggle{" "}
+          <code className="text-zinc-800 dark:text-zinc-200">disabled</code> on
+          any row of the Props Inspector, or change{" "}
           <code className="text-zinc-800 dark:text-zinc-200">border-radius</code>{" "}
-          to pill and every button updates simultaneously; the CSS tab shows the
-          single rule that changed. That&rsquo;s the core promise of components:
-          one definition, many instances, and a single change propagates
-          everywhere.
+          and size in the Style Editor. The live buttons and both code panels
+          update together: the JSX (React&rsquo;s HTML-in-JavaScript syntax) on
+          one side, the CSS on the other.
         </p>
         <ul className="list-disc list-inside space-y-1.5 font-mono text-xs lg:text-sm">
           <li><strong>variant</strong>: controls the visual style (solid, outline, ghost)</li>
           <li><strong>disabled</strong>: blocks interaction per instance</li>
           <li><strong>border-radius / size</strong>: shared CSS that applies to every instance at once</li>
         </ul>
+        <p>
+          The split between the two editors is the thing to notice.{" "}
+          <code className="text-zinc-800 dark:text-zinc-200">disabled</code> is a
+          prop, set per instance, so you can switch off one button and leave the
+          rest alone. Border-radius lives in the shared style every instance
+          reads, so one edit moves all three. Props vary from one use to the
+          next; the definition underneath stays the same.
+        </p>
+        <p>
+          Props are inputs passed in from outside. When a piece of UI needs to
+          remember something on its own, that is{" "}
+          <a
+            href="/concepts/state"
+            className="underline underline-offset-2 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+          >
+            state
+          </a>
+          , the next concept.
+        </p>
       </div>
+
+      <p className="text-zinc-700 dark:text-zinc-300">
+        <strong>If you remember one thing:</strong> define a piece of UI once,
+        give it a few inputs, and reuse it everywhere, so one change updates
+        every copy.
+      </p>
     </div>
   );
 }
