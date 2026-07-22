@@ -30,4 +30,3 @@ Conceptual frontend topics to implement, each with interactive demos and explana
 - [ ] i18n (long-term) — translate concept pages once the template-first architecture stabilizes; content breadth comes first, not now
 - [ ] ⌘K search / command palette — static client-side index over `concepts.ts`, no service needed; also improves keyboard-navigation story
 - [ ] `CONTRIBUTING.md` + concept template — publish the page formula + a concept plan doc as a template, since concepts are the rare open-source contribution non-experts can make well
-- [ ] `ConceptSidebar.tsx:96` fails `npm run lint`: `setExpandedSlugs` is called synchronously inside an effect (`react-hooks/set-state-in-effect`). Pre-existing; blocks a clean lint run. Derive the expanded state during render or move the update into the navigation handler instead of an effect.
