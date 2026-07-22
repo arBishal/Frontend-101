@@ -101,11 +101,9 @@ export default function TheDomPage() {
           <li>
             Delete the{" "}
             <code className="text-zinc-800 dark:text-zinc-200">&lt;div&gt;</code>.
-            Its{" "}
-            <code className="text-zinc-800 dark:text-zinc-200">&lt;p&gt;</code> and{" "}
-            <code className="text-zinc-800 dark:text-zinc-200">&lt;span&gt;</code>{" "}
-            go with it, and the Source panel turns red while the live DOM drops
-            those lines.
+            The live DOM drops it and everything nested inside, so why does the
+            Source panel turn red over those lines instead of simply removing
+            them?
           </li>
           <li>
             Add a{" "}

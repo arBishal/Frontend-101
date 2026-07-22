@@ -68,7 +68,7 @@ const frameworks: Framework[] = [
   {
     name: "Svelte",
     icon: siSvelte,
-    philosophy: "Does its work when you build the app rather than in the browser, so it ships very little code. Praised for how little boilerplate it asks for.",
+    philosophy: "Does its work in a compile step when you build the app, rather than in the browser, so it ships very little code. Praised for how little boilerplate it asks for.",
     users: ["The New York Times", "GoDaddy"],
     url: "https://svelte.dev",
   },

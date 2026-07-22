@@ -101,19 +101,20 @@ export default function ApiCallsPage() {
         <ul className="list-disc list-inside space-y-1.5">
           <li>
             <code className="text-zinc-800 dark:text-zinc-200">GET</code> reads
-            data that already exists, without changing it (load the profile data).
+            data that already exists, without changing it (load the comments on a
+            post).
           </li>
           <li>
             <code className="text-zinc-800 dark:text-zinc-200">POST</code> creates
-            something new (submit the login form).
+            something new (post a new comment).
           </li>
           <li>
             <code className="text-zinc-800 dark:text-zinc-200">PUT</code> updates
-            an existing item with new values (edit that post).
+            an existing item with new values (edit that comment).
           </li>
           <li>
             <code className="text-zinc-800 dark:text-zinc-200">DELETE</code>{" "}
-            removes an item (delete the comment for good).
+            removes an item (delete that comment).
           </li>
         </ul>
         <p>
@@ -147,11 +148,11 @@ export default function ApiCallsPage() {
         <ul className="list-disc list-inside space-y-1.5 text-zinc-600 dark:text-zinc-400">
           <li>
             Fetch{" "}
-            <code className="text-zinc-800 dark:text-zinc-200">pikachu</code>,
-            then fetch{" "}
+            <code className="text-zinc-800 dark:text-zinc-200">pikachu</code>, then
+            fetch{" "}
             <code className="text-zinc-800 dark:text-zinc-200">notapokemon</code>.
-            Watch the state line go from green success to red error, and the
-            response in the inspector switch to 404.
+            Which of the four states does the line land on this time, and what does
+            the inspector show for the response?
           </li>
           <li>
             Turn on Simulate Slow Network and fetch again. The amber loading line
@@ -159,9 +160,9 @@ export default function ApiCallsPage() {
             user see here if you had not?
           </li>
           <li>
-            With Slow Network still on, hit Fetch twice quickly. Only the second
-            request resolves; the first is thrown away so a stale answer
-            can&rsquo;t overwrite a newer one.
+            With Slow Network still on, hit Fetch twice in quick succession. Both
+            requests go out, but only one updates the screen: the first to come
+            back, or the one you asked for last?
           </li>
         </ul>
       </div>
@@ -181,8 +182,9 @@ export default function ApiCallsPage() {
         </p>
         <p>
           That color-changing line is the whole lesson in miniature. Every fetch
-          moves through four states, and the demo makes you visit each one on
-          purpose:{" "}
+          moves through four states, the four screens from &ldquo;Why it
+          matters&rdquo; seen from the request&rsquo;s side, and the demo makes
+          you visit each one on purpose:{" "}
           <strong>idle</strong> is the screen before anyone asks for data,{" "}
           <strong>loading</strong> is the wait, <strong>success</strong> is the
           happy path that is easy to remember, and <strong>error</strong> is the
@@ -191,7 +193,7 @@ export default function ApiCallsPage() {
           server is down.
         </p>
         <p>
-          The url the inspector shows is an{" "}
+          The URL the inspector shows is an{" "}
           <span className="italic text-zinc-700 dark:text-zinc-300">endpoint</span>,
           an address that names one thing on the server:{" "}
           <code className="text-zinc-800 dark:text-zinc-200">/pokemon/pikachu</code>{" "}

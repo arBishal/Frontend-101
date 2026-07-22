@@ -99,8 +99,9 @@ export default function ComponentsPage() {
         <p className="text-zinc-700 dark:text-zinc-300 mt-6 mb-2">Try breaking it:</p>
         <ul className="list-disc list-inside space-y-1.5 text-zinc-600 dark:text-zinc-400">
           <li>
-            Set border-radius to square and size to lg. All three buttons change
-            at once, and the CSS panel shows a single rule did it, not three.
+            Set border-radius to square. The three buttons carry different
+            variants and labels, so why does this one edit reshape all of them at
+            once?
           </li>
           <li>
             Disable just the outline button. Only its line in the JSX gains{" "}

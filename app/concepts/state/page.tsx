@@ -87,11 +87,15 @@ export default function StatePage() {
         <p className="text-zinc-700 dark:text-zinc-300 mt-6 mb-2">Try breaking it:</p>
         <ul className="list-disc list-inside space-y-1.5 text-zinc-600 dark:text-zinc-400">
           <li>
-            Clear the name entirely.{" "}
-            <code className="text-zinc-800 dark:text-zinc-200">name</code> becomes
-            an empty string{" "}
-            <code className="text-zinc-800 dark:text-zinc-200">&quot;&quot;</code>,
-            not gone. The state still exists; it just holds nothing.
+            Type a number like{" "}
+            <code className="text-zinc-800 dark:text-zinc-200">42</code> into the
+            name field, then read the inspector. Does{" "}
+            <code className="text-zinc-800 dark:text-zinc-200">name</code> hold the
+            number{" "}
+            <code className="text-zinc-800 dark:text-zinc-200">42</code> or the
+            text{" "}
+            <code className="text-zinc-800 dark:text-zinc-200">&quot;42&quot;</code>,
+            and what in the inspector tells you which?
           </li>
           <li>
             Tap the heart ten times fast. Each tap is a separate state update, so{" "}

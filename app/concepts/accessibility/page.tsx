@@ -20,7 +20,7 @@ const problems = [
   },
   {
     icon: Scale,
-    title: "Later becomes court",
+    title: "Later, then a lawsuit",
     description:
       "Ship an inaccessible public service and the first formal complaint turns “later” into “now.”",
   },
@@ -102,10 +102,10 @@ export default function AccessibilityPage() {
         <p className="text-zinc-700 dark:text-zinc-300 mt-6 mb-2">Try breaking it:</p>
         <ul className="list-disc list-inside space-y-1.5 text-zinc-600 dark:text-zinc-400">
           <li>
-            Leave every fix off and press Tab a few times. Focus jumps from the
-            fields straight past Log In, because a{" "}
-            <code className="text-zinc-800 dark:text-zinc-200">&lt;div&gt;</code>{" "}
-            can&rsquo;t hold focus. Turn keyboard on and it joins the tab order.
+            Turn alt text on and a green{" "}
+            <code className="text-zinc-800 dark:text-zinc-200">alt</code> badge
+            appears on the logo; turn it off and it is gone. With it off, what is
+            left for a screen reader to announce when it reaches that image?
           </li>
           <li>
             With form labels off, click the text sitting above a field. Nothing

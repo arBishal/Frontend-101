@@ -156,6 +156,17 @@ export default function ResponsivenessPage() {
   .cards { grid-template-columns: repeat(3, 1fr); }
 }`}
         />
+        <p>
+          On a real page you react to the whole window instead of a box, so you
+          swap{" "}
+          <code className="text-zinc-800 dark:text-zinc-200">@container</code> for{" "}
+          <code className="text-zinc-800 dark:text-zinc-200">
+            @media (min-width: 896px)
+          </code>
+          , keyed to the viewport rather than the preview. That{" "}
+          <code className="text-zinc-800 dark:text-zinc-200">@media</code> form is
+          the one you&rsquo;ll type most.
+        </p>
       </div>
 
       <p className="text-zinc-700 dark:text-zinc-300">
