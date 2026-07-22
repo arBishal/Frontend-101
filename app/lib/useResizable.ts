@@ -7,18 +7,25 @@ type UseResizableOptions = {
   containerRef: React.RefObject<HTMLDivElement | null>;
   maxWidth: number;
   minWidth?: number;
+  /** Current width, so keyboard stepping knows where to move from. */
+  width: number;
   onResize: (width: number) => void;
 };
 
 type UseResizableReturn = {
   isDragging: boolean;
   handlePointerDown: (e: React.PointerEvent) => void;
+  handleKeyDown: (e: React.KeyboardEvent) => void;
 };
+
+/** How many pixels each arrow-key press nudges the width. */
+const KEYBOARD_STEP = 10;
 
 export function useResizable({
   containerRef,
   maxWidth,
   minWidth = 280,
+  width,
   onResize,
 }: UseResizableOptions): UseResizableReturn {
   const [isDragging, setIsDragging] = useState(false);
@@ -47,5 +54,32 @@ export function useResizable({
     [containerRef, maxWidth, minWidth, onResize]
   );
 
-  return { isDragging, handlePointerDown };
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent) => {
+      let next: number;
+      switch (e.key) {
+        case "ArrowLeft":
+        case "ArrowDown":
+          next = width - KEYBOARD_STEP;
+          break;
+        case "ArrowRight":
+        case "ArrowUp":
+          next = width + KEYBOARD_STEP;
+          break;
+        case "Home":
+          next = minWidth;
+          break;
+        case "End":
+          next = maxWidth;
+          break;
+        default:
+          return;
+      }
+      e.preventDefault();
+      onResize(Math.max(minWidth, Math.min(next, maxWidth)));
+    },
+    [width, minWidth, maxWidth, onResize]
+  );
+
+  return { isDragging, handlePointerDown, handleKeyDown };
 }
