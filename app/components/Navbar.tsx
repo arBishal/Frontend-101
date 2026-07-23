@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { Link2, Check } from "lucide-react";
+import ThemeToggleButton from "@/app/components/ThemeToggleButton";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { concepts, type Concept } from "@/app/lib/concepts";
@@ -72,6 +73,7 @@ export default function Navbar() {
               )}
             </button>
           )}
+          <ThemeToggleButton className="rounded p-1.5 hover:bg-zinc-100 dark:hover:bg-zinc-800" />
         </div>
       </div>
       {isConceptPage && (
