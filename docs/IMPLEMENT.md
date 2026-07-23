@@ -87,7 +87,7 @@ This section preserves the instructor's audit of the eight pages shipped before 
 
 ### 7.2 Cross-cutting defects to hunt in every legacy page
 
-- Definition-first opening (all eight) → switch type per WRITING Step 2.
+- All eight open the same flat dictionary way → vary the opening type per WRITING Step 2 (definition, scene, example, question) and, if it's a definition, make it concrete. The fix is the monotony, not the teaching order: leading with what-it-is is correct, and the misconception still comes after the definition, never as the opener.
 - Debrief restates the page's own definition — API Calls has its opening sentence **verbatim twice**; Accessibility and State also re-define.
 - Cards duplicate prose; stats appear twice (State's "#1 source of UI bugs"; Responsiveness's "half of web traffic" and the search-ranking claim).
 - No questions, predictions, or break-it challenges anywhere.
@@ -99,7 +99,7 @@ This section preserves the instructor's audit of the eight pages shipped before 
 |---|---|---|
 | **Accessibility** | Permanent/temporary/situational framing; tab-with-keyboard-off exercise | **First sentence is grammatically broken (no main verb) — fix immediately**; debrief re-defines |
 | **API Calls** | Pokémon demo (say *why*: real API, free, no auth, fun) | Weakest prose; verbatim duplicate definition; GET/POST/PUT/DELETE list arrives before learner cares — move after demo; no analogy (restaurant order works if made to teach) |
-| **The DOM** | Misconception material ("It's Not the HTML") — strongest teaching content on the site | Promote the misconception to the opening; no analogy (recipe vs. plated dish); debrief's "immutable update / virtual DOM" leap is two levels above the page — cut or soften to a Frameworks teaser |
+| **The DOM** | Misconception material ("It's Not the HTML") — strongest teaching content on the site | Open by teaching what the DOM *is*, then turn to the "It's Not the HTML" misconception once it has landed (don't lead with it); no analogy (recipe vs. plated dish); debrief's "immutable update / virtual DOM" leap is two levels above the page — cut or soften to a Frameworks teaser |
 | **Responsiveness** | Breakpoint explanation; snap + free-drag demo | Subtitle is a demo instruction, should be a definition; "SEO Penalty" card is fear-based — replace with human cost (pinch-zoom, mis-tap, give up); de-dup stats |
 | **Components** | Progressive build (definition → analogy → props); Style Editor debrief | LEGO analogy is worn — extend it until it teaches (the standardized stud = the props interface) or replace; demo intro sentence duplicated in debrief |
 | **State** | **The model page** — concrete intro examples, debrief that actually debriefs ("a mini React DevTools") | Only the duplicated stat and the re-defining debrief opener |

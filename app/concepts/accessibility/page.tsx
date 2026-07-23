@@ -1,5 +1,5 @@
 import { getConcept, conceptMetadata } from "@/app/lib/concepts";
-import { UserX, Scale, Code } from "lucide-react";
+import { UserX, Palette, Scale } from "lucide-react";
 import AccessibilityDemo from "./AccessibilityDemo";
 import SectionLabel from "@/app/components/ui/SectionLabel";
 import ConceptHeader from "@/app/components/ConceptHeader";
@@ -8,21 +8,21 @@ import ProblemCards from "@/app/components/ProblemCards";
 const problems = [
   {
     icon: UserX,
-    title: "Excluded Users",
+    title: "Announced as a filename",
     description:
-      "Roughly 15% of the world\u2019s population lives with some form of disability. Inaccessible UI locks them out.",
+      "A screen reader hits your hero image and, with no alt text, reads out “IMG_2048.png.” The user has no idea what they just missed.",
+  },
+  {
+    icon: Palette,
+    title: "Red, and nothing else",
+    description:
+      "A form marks the failed field in red and adds no icon, no text. To a colorblind user, or anyone on a sun-washed screen, the field looks perfectly fine.",
   },
   {
     icon: Scale,
-    title: "Legal Risk",
+    title: "Later, then a lawsuit",
     description:
-      "Laws like the ADA and European Accessibility Act mandate accessible digital experiences. Non-compliance carries real consequences.",
-  },
-  {
-    icon: Code,
-    title: "Worse Code",
-    description:
-      "Non-semantic HTML is harder to style, test, and maintain. Accessible code is usually better code.",
+      "Ship an inaccessible public service and the first formal complaint turns “later” into “now.”",
   },
 ];
 
@@ -37,100 +37,141 @@ export default function AccessibilityPage() {
       <div className="text-sm lg:text-base text-zinc-600 dark:text-zinc-400 space-y-3">
         <SectionLabel>What is accessibility?</SectionLabel>
         <p>
-          Accessibility, often shortened to{" "}
-          <span className="italic text-zinc-700 dark:text-zinc-300">a11y</span>{" "}
-          (a, then 11 letters, then y), meaning everyone can use your UI,
-          including people with disabilities. That includes users who navigate with a keyboard instead
-          of a mouse, people who rely on screen readers to hear what&rsquo;s on
-          screen, and users with low vision who need sufficient color contrast.
+          Accessibility (often shortened to{" "}
+          <span className="italic text-zinc-700 dark:text-zinc-300">a11y</span>,
+          for the a, then 11 letters, then y) means everyone can use your UI,
+          including people with disabilities. That covers someone navigating by
+          keyboard instead of a mouse, someone using a screen reader to hear
+          what is on screen, and someone with low vision who needs strong color
+          contrast.
         </p>
         <p>
-          It&rsquo;s not a niche concern. Accessibility covers a wide spectrum:
+          Accessibility covers a far wider spectrum than most people picture:
           permanent disabilities (blindness, motor impairments), temporary ones
-          (a broken arm), and situational ones (using your phone in bright
-          sunlight). Designing for accessibility means designing for all of
-          these.
+          (a broken arm), and situational ones (bright sunlight on your phone).
+          Designing for it means designing for all of these, which turns out to
+          be nearly everyone at some point.
         </p>
         <p>
-          The web has built-in accessibility features: semantic HTML elements
-          like{" "}
+          The good news is that the web has accessibility built in. Semantic
+          HTML elements like{" "}
           <code className="text-zinc-800 dark:text-zinc-200">&lt;button&gt;</code>,{" "}
-          <code className="text-zinc-800 dark:text-zinc-200">&lt;label&gt;</code>, and{" "}
-          <code className="text-zinc-800 dark:text-zinc-200">&lt;nav&gt;</code> carry meaning that assistive technology
-          can read. The most common failures aren&rsquo;t hard problems; they&rsquo;re
-          simple oversights: missing alt text, low contrast,
-          clickable <code className="text-zinc-800 dark:text-zinc-200">&lt;div&gt;</code>s instead of{" "}
-          <code className="text-zinc-800 dark:text-zinc-200">&lt;button&gt;</code>s, inputs without labels.
+          <code className="text-zinc-800 dark:text-zinc-200">&lt;label&gt;</code>,
+          and{" "}
+          <code className="text-zinc-800 dark:text-zinc-200">&lt;nav&gt;</code>{" "}
+          carry meaning that assistive tools can read out. The most common
+          failures aren&rsquo;t hard problems, they&rsquo;re simple oversights:
+          missing alt text, low contrast, a clickable{" "}
+          <code className="text-zinc-800 dark:text-zinc-200">&lt;div&gt;</code>{" "}
+          where a{" "}
+          <code className="text-zinc-800 dark:text-zinc-200">&lt;button&gt;</code>{" "}
+          belongs, an input with no label.
         </p>
       </div>
 
       <div className="text-sm lg:text-base text-zinc-600 dark:text-zinc-400 space-y-3">
         <SectionLabel>Why it matters</SectionLabel>
         <p>
-          Roughly 15% of the world&rsquo;s population lives with some form of
-          disability. Building an inaccessible UI means excluding real people
-          from using your product.
+          The WHO puts it around 15% of the world&rsquo;s population, more than
+          a billion people, living with some form of disability. Build an
+          inaccessible UI and you are not just annoying those users, you are
+          locking them out of the thing entirely.
         </p>
         <p>
-          Beyond ethics, it&rsquo;s often a legal requirement. Laws like the
-          ADA in the US and the European Accessibility Act mandate accessible
-          digital experiences, and WCAG (Web Content Accessibility Guidelines)
-          is the standard they reference.
-        </p>
-        <p>
-          The good news: accessible code is usually <em>better</em> code.
-          Semantic HTML is easier to style, test, and maintain. A logical focus
-          order makes keyboard shortcuts possible. Clear labels make forms less
-          confusing for <em>everyone</em>. Fixing accessibility doesn&rsquo;t
-          add complexity; it removes it.
+          It is also, increasingly, the law: the ADA in the US and the European
+          Accessibility Act require accessible digital experiences, with WCAG
+          (the Web Content Accessibility Guidelines) as the standard they point
+          to. And fixing these problems usually makes the code simpler, not more
+          complex. A real{" "}
+          <code className="text-zinc-800 dark:text-zinc-200">&lt;button&gt;</code>{" "}
+          needs less styling and JavaScript than a{" "}
+          <code className="text-zinc-800 dark:text-zinc-200">&lt;div&gt;</code>{" "}
+          rigged to act like one.
         </p>
         <ProblemCards problems={problems} />
       </div>
 
       <div>
         <SectionLabel className="mb-4">Interactive demo</SectionLabel>
+        <p className="text-zinc-600 dark:text-zinc-400 mb-4">
+          Before you toggle anything: with every fix off, Tab through the form.
+          Can you reach the Log In button? Make a guess, then try it, then start
+          flipping the switches in the audit panel.
+        </p>
         <AccessibilityDemo />
+        <p className="text-zinc-700 dark:text-zinc-300 mt-6 mb-2">Try breaking it:</p>
+        <ul className="list-disc list-inside space-y-1.5 text-zinc-600 dark:text-zinc-400">
+          <li>
+            Turn alt text on and a green{" "}
+            <code className="text-zinc-800 dark:text-zinc-200">alt</code> badge
+            appears on the logo; turn it off and it is gone. With it off, what is
+            left for a screen reader to announce when it reaches that image?
+          </li>
+          <li>
+            With form labels off, click the text sitting above a field. Nothing
+            focuses. Turn labels on and the same click lands in the input,
+            because the label is now tied to it.
+          </li>
+          <li>
+            Turn contrast off and read the heading. That is the same text at a
+            ratio that fails for low-vision users, even if you can still just
+            about make it out.
+          </li>
+        </ul>
       </div>
 
       <div className="text-sm lg:text-base text-zinc-600 dark:text-zinc-400 space-y-3">
         <SectionLabel>How it works</SectionLabel>
         <p>
-          Accessibility (a11y) means everyone can use your UI, including people
-          who rely on screen readers, keyboard navigation, or have low vision.
-        </p>
-        <p>
-          The four issues in the demo represent the most common real-world
-          problems:
+          Flip each switch in the Accessibility Audit and the form changes to
+          match; the score counts how many of the four you have fixed. Each one
+          maps to a real-world failure:
         </p>
         <ul className="list-disc list-inside space-y-1.5 font-mono text-xs lg:text-sm">
           <li>
-            <strong>alt text</strong>: describes images for screen readers so
-            non-sighted users know what&apos;s on screen
+            <strong>alt text</strong>: describes images for screen readers, so
+            non-sighted users know what is on screen
           </li>
           <li>
-            <strong>contrast</strong>: ensures text is readable for everyone,
-            including users with low vision or in bright environments
+            <strong>contrast</strong>: keeps text readable for low vision and in
+            bright environments
           </li>
           <li>
-            <strong>form labels</strong>: connects inputs to their descriptions
-            so screen readers can announce them, and clicking a label focuses its
-            input
+            <strong>form labels</strong>: tie each input to its description, so
+            screen readers can announce it and clicking the label focuses the
+            field
           </li>
           <li>
-            <strong>keyboard access</strong>: using{" "}
+            <strong>keyboard access</strong>: a real{" "}
             <code className="text-zinc-800 dark:text-zinc-200">&lt;button&gt;</code>{" "}
-            instead of{" "}
+            can be reached and pressed without a mouse; a{" "}
             <code className="text-zinc-800 dark:text-zinc-200">&lt;div&gt;</code>{" "}
-            enables keyboard navigation and communicates purpose to assistive
-            technology
+            cannot
           </li>
         </ul>
         <p>
-          Try Tabbing through the form with &quot;keyboard&quot; toggled off,
-          then on: notice how the Sign Up button becomes reachable. These fixes
-          are small but make a big difference.
+          The keyboard fix is the one to feel rather than read. Tab through with
+          it off and focus skips the Log In control entirely, because it is a{" "}
+          <code className="text-zinc-800 dark:text-zinc-200">&lt;div&gt;</code>.
+          Turn it on and the same control becomes a real{" "}
+          <code className="text-zinc-800 dark:text-zinc-200">&lt;button&gt;</code>,
+          in the tab order and announced as a button. None of these fixes are new
+          tools; they are the semantic HTML the{" "}
+          <a
+            href="/concepts/the-dom"
+            className="underline underline-offset-2 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+          >
+            DOM
+          </a>{" "}
+          is already built from.
         </p>
       </div>
+
+      <p className="text-zinc-700 dark:text-zinc-300">
+        <strong>If you remember one thing:</strong> most accessibility is small,
+        boring correctness (the right element, a real label, enough contrast),
+        and it decides whether some people can use your UI at all.
+      </p>
     </div>
   );
 }

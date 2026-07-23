@@ -34,7 +34,7 @@ export default function AccessibilityDemo() {
 
   return (
     <div className="flex flex-col sm:flex-row gap-4">
-      {/* Signup Form */}
+      {/* Login Form */}
       <Card className="w-full space-y-5">
         {/* Logo */}
         <div className="relative w-fit">
@@ -131,7 +131,7 @@ export default function AccessibilityDemo() {
             )}
           >
             {score} / {fixKeys.length}
-            {score === fixKeys.length && " — Perfect!"}
+            {score === fixKeys.length && ", Perfect!"}
           </span>
         </div>
       </InspectorPanel>

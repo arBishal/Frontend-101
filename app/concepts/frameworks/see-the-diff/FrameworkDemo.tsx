@@ -8,7 +8,9 @@ import Card from "@/app/components/ui/Card";
 import { Plus, X, Check } from "lucide-react";
 import { cn } from "@/app/lib/cn";
 
-
+// NOTE: the See the Difference page prose (page.tsx) cites these snippets' line
+// counts (~70 vanilla / ~40 React, ~50 of the vanilla being the single add-todo
+// handler). If you edit either snippet, update those numbers there.
 const vanillaCode = `<script>
 const input = document.getElementById("todo-input");
 const addBtn = document.getElementById("add-btn");

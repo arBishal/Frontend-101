@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ChevronDown, ChevronRight } from "lucide-react";
 import { concepts, type Concept, type ConceptChild } from "@/app/lib/concepts";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { cn } from "@/app/lib/cn";
 
 type SidebarItemProps = {
@@ -81,33 +81,19 @@ function SidebarItem({ concept, pathname, isExpanded, onToggle, mobileExpanded }
 export default function ConceptSidebar() {
   const pathname = usePathname();
   const [mobileExpanded, setMobileExpanded] = useState(false);
-  const [expandedSlugs, setExpandedSlugs] = useState<string[]>(() => {
-    return concepts
-      .filter((c) => c.children && pathname.startsWith(`/concepts/${c.slug}`))
-      .map((c) => c.slug);
-  });
+  // Explicit user toggles, keyed by slug. A slug with no entry follows whether its
+  // section is the active route, so open state is derived from the pathname during
+  // render — no effect syncing state to the URL, and no cascading setState.
+  const [overrides, setOverrides] = useState<Record<string, boolean>>({});
 
-  useEffect(() => {
-    const toExpand = concepts
-      .filter((c) => c.children && pathname.startsWith(`/concepts/${c.slug}`))
-      .map((c) => c.slug);
-
-    if (toExpand.length > 0) {
-      setExpandedSlugs((prev) => {
-        const newSlugs = toExpand.filter((s) => !prev.includes(s));
-        return newSlugs.length > 0 ? [...prev, ...newSlugs] : prev;
-      });
-    }
-  }, [pathname]);
+  const isExpanded = (slug: string) =>
+    overrides[slug] ?? pathname.startsWith(`/concepts/${slug}`);
 
   function toggleExpanded(slug: string) {
-    setExpandedSlugs((prev) => {
-      if (prev.includes(slug)) {
-        return prev.filter((s) => s !== slug);
-      } else {
-        return [...prev, slug];
-      }
-    });
+    setOverrides((prev) => ({
+      ...prev,
+      [slug]: !(prev[slug] ?? pathname.startsWith(`/concepts/${slug}`)),
+    }));
   }
 
   return (
@@ -121,7 +107,7 @@ export default function ConceptSidebar() {
                 key={concept.slug}
                 concept={concept}
                 pathname={pathname}
-                isExpanded={expandedSlugs.includes(concept.slug)}
+                isExpanded={isExpanded(concept.slug)}
                 onToggle={toggleExpanded}
                 mobileExpanded={true}
               />
@@ -137,7 +123,7 @@ export default function ConceptSidebar() {
             key={concept.slug}
             concept={concept}
             pathname={pathname}
-            isExpanded={expandedSlugs.includes(concept.slug)}
+            isExpanded={isExpanded(concept.slug)}
             onToggle={toggleExpanded}
             mobileExpanded={false}
           />

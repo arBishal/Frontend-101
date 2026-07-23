@@ -8,21 +8,21 @@ import ProblemCards from "@/app/components/ProblemCards";
 const problems = [
   {
     icon: MousePointerClick,
-    title: "Manual DOM Updates",
+    title: "Miss the fourth spot",
     description:
-      "Without state, you manually find DOM elements and update their content every time something changes.",
+      "You update a display name where the profile shows it, then in the nav, then the welcome toast. You miss the fourth spot, and it's the one the user is staring at.",
   },
   {
     icon: AlertCircle,
     title: "Stale UI",
     description:
-      "The screen shows something different from what the data says. This is the #1 source of UI bugs.",
+      "The data says the cart is empty; the badge still shows 3.",
   },
   {
     icon: Workflow,
-    title: "Tangled Logic",
+    title: "Tangled logic",
     description:
-      "Forms with validation, conditional fields, and error messages become an unmanageable mess of imperative code.",
+      "A signup form starts simple. Then come password rules, a confirm field that has to match, an error under each input, a submit that only enables once all of it passes. Wire that by hand and every new rule threatens the last one.",
   },
 ];
 
@@ -39,56 +39,86 @@ export default function StatePage() {
         <p>
           State is data that changes over time. A plain HTML page is static: its
           content is baked in and never moves. State is what makes a UI{" "}
-          <em>interactive</em>: a counter that increments, a toggle that opens a
-          menu, a text field that updates as you type.
+          <em className="text-zinc-700 dark:text-zinc-300">interactive</em>, the
+          value behind a counter that climbs, a menu that knows whether it is
+          open, a text field that updates as you type.
         </p>
         <p>
-          In frameworks like React, state is a special kind of variable. When
-          you update it, the framework automatically re-renders the parts of the
-          UI that depend on it. You don&rsquo;t touch the DOM yourself; you
-          change the data, and the screen follows.
+          In frameworks like React, state is a special kind of variable. When you
+          change it, the framework re-renders the parts of the UI that read it,
+          rebuilding just those pieces of the screen. You don&rsquo;t touch the
+          DOM yourself; you change the data, and the screen follows.
         </p>
         <p>
-          Common examples of state: whether a user is logged in, the items in a
-          shopping cart, the current value of a search input, which tab is
-          selected.
+          Once you start looking, state is everywhere: whether a user is logged
+          in, the items in a shopping cart, the current value of a search input,
+          which tab is selected, whether a modal is showing.
         </p>
       </div>
 
       <div className="text-sm lg:text-base text-zinc-600 dark:text-zinc-400 space-y-3">
         <SectionLabel>Why it matters</SectionLabel>
         <p>
-          Without state management, you&rsquo;d have to manually find the right
-          DOM element and update its content every time something changes. For a
-          simple counter, that&rsquo;s manageable. For a form with validation,
-          conditional fields, and error messages, it quickly becomes a tangled
-          mess.
+          Without state, keeping the screen current means finding the right DOM
+          element and rewriting it by hand every time something changes. For a
+          lone counter that is manageable. Add a dozen pieces that can each
+          change the others, and the by-hand approach turns into a knot nobody
+          wants to touch.
         </p>
         <p>
-          State is the single source of truth for your UI. When state and
-          rendering stay in sync automatically, you eliminate the #1 source of
-          UI bugs: the screen showing something different from what the data
-          says.
+          State is the single source of truth for your UI: one place the data
+          lives, with the screen derived from it. When the two stay in sync
+          automatically, you close off the most common UI bug there is, the
+          screen showing something different from what the data actually says.
         </p>
         <ProblemCards problems={problems} />
       </div>
 
       <div>
         <SectionLabel className="mb-4">Interactive demo</SectionLabel>
+        <p className="text-zinc-600 dark:text-zinc-400 mb-4">
+          Before you touch it: clear the name field completely. What do you think
+          the inspector shows for{" "}
+          <code className="text-zinc-800 dark:text-zinc-200">name</code>, and what
+          does the card render in its place? Edit the name, toggle Follow, and tap
+          the heart, then check the panel on the right.
+        </p>
         <StateDemo />
+        <p className="text-zinc-700 dark:text-zinc-300 mt-6 mb-2">Try breaking it:</p>
+        <ul className="list-disc list-inside space-y-1.5 text-zinc-600 dark:text-zinc-400">
+          <li>
+            Type a number like{" "}
+            <code className="text-zinc-800 dark:text-zinc-200">42</code> into the
+            name field, then read the inspector. Does{" "}
+            <code className="text-zinc-800 dark:text-zinc-200">name</code> hold the
+            number{" "}
+            <code className="text-zinc-800 dark:text-zinc-200">42</code> or the
+            text{" "}
+            <code className="text-zinc-800 dark:text-zinc-200">&quot;42&quot;</code>,
+            and what in the inspector tells you which?
+          </li>
+          <li>
+            Tap the heart ten times fast. Each tap is a separate state update, so{" "}
+            <code className="text-zinc-800 dark:text-zinc-200">likes</code> climbs
+            one at a time and never skips a number.
+          </li>
+          <li>
+            Toggle Follow on and off. Only{" "}
+            <code className="text-zinc-800 dark:text-zinc-200">following</code>{" "}
+            flips between{" "}
+            <code className="text-zinc-800 dark:text-zinc-200">true</code> and{" "}
+            <code className="text-zinc-800 dark:text-zinc-200">false</code>; the
+            name and like count sit untouched.
+          </li>
+        </ul>
       </div>
 
       <div className="text-sm lg:text-base text-zinc-600 dark:text-zinc-400 space-y-3">
         <SectionLabel>How it works</SectionLabel>
         <p>
-          State is data that can change over time. Every time state changes, the
-          UI re-renders to reflect the new value; this is the core loop of
-          every interactive interface.
-        </p>
-        <p>
-          The profile card above is driven by three pieces of state. The
-          inspector panel on the right shows the raw values that the card is
-          reading, updating in real time as you interact.
+          The profile card is driven by three pieces of state. Edit the name,
+          toggle Follow, or tap the heart, and the State Inspector on the right
+          updates in step, showing the raw values the card reads from.
         </p>
         <ul className="list-disc list-inside space-y-1.5 font-mono text-xs lg:text-sm">
           <li>
@@ -102,11 +132,24 @@ export default function StatePage() {
           </li>
         </ul>
         <p>
-          Each click or keystroke calls a state update, which triggers a
-          re-render, which updates the UI. The inspector makes this invisible
-          process visible, like a mini version of React DevTools.
+          Each keystroke or tap calls a state update, which triggers a re-render,
+          which redraws what you see. You never reach into the page and edit it by
+          hand, that is the shift the{" "}
+          <a
+            href="/concepts/the-dom"
+            className="underline underline-offset-2 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+          >
+            DOM
+          </a>{" "}
+          page sets up. The inspector makes that invisible loop visible, a mini
+          version of React DevTools.
         </p>
       </div>
+
+      <p className="text-zinc-700 dark:text-zinc-300">
+        <strong>If you remember one thing:</strong> change the state and the UI
+        redraws itself, no hand-editing the page required.
+      </p>
     </div>
   );
 }

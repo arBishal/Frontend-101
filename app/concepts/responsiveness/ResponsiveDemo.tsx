@@ -12,6 +12,8 @@ const PRESETS = [
   { label: "Desktop", icon: Monitor, range: "896px+", width: Infinity },
 ] as const;
 
+const MIN_WIDTH = 280;
+
 export default function ResponsiveDemo() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [width, setWidth] = useState<number | null>(null);
@@ -49,10 +51,13 @@ export default function ResponsiveDemo() {
     setIsDesktop(clamped === maxWidth);
   }, [maxWidth]);
 
-  const { isDragging, handlePointerDown } = useResizable({
+  const displayWidth = width ?? maxWidth;
+
+  const { isDragging, handlePointerDown, handleKeyDown } = useResizable({
     containerRef,
     maxWidth,
-    minWidth: 280,
+    minWidth: MIN_WIDTH,
+    width: displayWidth,
     onResize,
   });
 
@@ -64,7 +69,6 @@ export default function ResponsiveDemo() {
   }
 
   const activePreset = getActivePreset();
-  const displayWidth = width ?? maxWidth;
 
   return (
     <div className="flex flex-col gap-6">
@@ -156,10 +160,16 @@ export default function ResponsiveDemo() {
         {/* Drag handle — positioned at the preview's right edge */}
         <div
           onPointerDown={handlePointerDown}
+          onKeyDown={handleKeyDown}
           role="separator"
+          tabIndex={0}
           aria-label="Resize preview"
           aria-orientation="vertical"
-          className="absolute top-0 h-full w-4 flex items-center justify-center cursor-col-resize group"
+          aria-valuenow={displayWidth}
+          aria-valuemin={MIN_WIDTH}
+          aria-valuemax={maxWidth}
+          aria-valuetext={`${displayWidth} pixels`}
+          className="absolute top-0 h-full w-4 flex items-center justify-center cursor-col-resize group rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-500 dark:focus-visible:ring-zinc-400"
           style={{ left: (isDesktop ? maxWidth : displayWidth) - 8 }}
         >
           <div
@@ -167,7 +177,7 @@ export default function ResponsiveDemo() {
               "h-12 w-1.5 rounded-full transition-colors",
               isDragging
                 ? "bg-zinc-900 dark:bg-zinc-100"
-                : "bg-zinc-300 dark:bg-zinc-600 group-hover:bg-zinc-500 dark:group-hover:bg-zinc-400"
+                : "bg-zinc-300 dark:bg-zinc-600 group-hover:bg-zinc-500 dark:group-hover:bg-zinc-400 group-focus-visible:bg-zinc-900 dark:group-focus-visible:bg-zinc-100"
             )}
           />
         </div>

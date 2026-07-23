@@ -15,36 +15,45 @@ export default function SeeTheDiffPage() {
     <div className="flex flex-col gap-8 text-sm lg:text-base">
       <ConceptHeader
         title="See the Difference"
-        subtitle="The same task, two approaches. Toggle between vanilla JavaScript and React to see how a framework changes the experience."
+        subtitle="The same task, two approaches."
       />
 
       <div>
         <SectionLabel className="mb-4">Interactive demo</SectionLabel>
+        <p className="text-zinc-600 dark:text-zinc-400 mb-4">
+          Below is the same todo list built twice: once in vanilla JavaScript,
+          once in React. The live list is at the top; under it, the two
+          implementations sit side by side (tabbed on narrow screens). Before you
+          read them: which version do you think is shorter, and by how much?
+        </p>
         <FrameworkDemo />
       </div>
 
       <div className="text-sm lg:text-base text-zinc-600 dark:text-zinc-400 space-y-3">
         <SectionLabel>What to notice</SectionLabel>
         <p>
-          The live demo above is identical in both modes &mdash; a todo list
-          where you can add, complete, and delete items. But look at the code
-          underneath:
+          The live demo is the same in both worlds: a todo list you can add to,
+          complete, and delete. The code underneath is where they part ways.
         </p>
         <ul className="list-disc list-inside space-y-1.5 font-mono text-xs lg:text-sm">
           <li>
-            <strong>Vanilla JS</strong> &mdash; you manually create DOM
-            elements, wire up event listeners for each button, toggle classes
-            and styles, remove nodes, and update the counter yourself
+            <strong>Vanilla JS</strong>, about 70 lines: you create each DOM
+            element, wire an event listener to every button, toggle classes and
+            inline styles, remove nodes, and recount the total yourself. Roughly
+            50 of those lines are the single &ldquo;add a todo&rdquo; handler.
           </li>
           <li>
-            <strong>React</strong> &mdash; you update an array in state and
-            return JSX. Adding, toggling, and deleting are one-liners.
+            <strong>React</strong>, about 40 lines: you update an array in state
+            and return JSX. Add, complete, and delete are three short functions,
+            a dozen lines between them.
           </li>
         </ul>
         <p>
-          This gap only grows as the UI gets more complex. Frameworks let you
-          focus on <em>what</em> to show instead of <em>how</em> to update the
-          page.
+          Same behavior, less than half the hand-written wiring, and that gap
+          only widens as the UI grows. The framework lets you spend your
+          attention on <em className="text-zinc-700 dark:text-zinc-300">what</em>{" "}
+          to show instead of <em className="text-zinc-700 dark:text-zinc-300">how</em>{" "}
+          to update the page.
         </p>
         <Link
           href="/concepts/frameworks/landscape"

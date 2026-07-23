@@ -61,7 +61,8 @@ export const concepts: Concept[] = [
   {
     slug: "frameworks",
     title: "Frameworks",
-    description: "The manual pain frameworks were built to remove.",
+    description:
+      "A pre-built foundation that handles the repetitive parts of building an app.",
 
     icon: Code,
     children: [

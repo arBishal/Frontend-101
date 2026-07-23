@@ -25,7 +25,7 @@ The pass structure exists so no single author's blind spots ship: Claude writes 
 Before any prose, answer these **in the concept's `PLAN-*.md`** so both reviewers can later check the page against them:
 
 - [ ] **The one takeaway.** "If you remember one thing: ___." The whole page exists to earn this line; it closes the page verbatim.
-- [ ] **The misconception.** What do beginners *wrongly believe* before learning this? (The DOM ≠ your HTML file; async ≠ multithreading.) Usually your opening.
+- [ ] **The misconception.** What do beginners *wrongly believe* before learning this? (The DOM ≠ your HTML file; async ≠ multithreading.) It lands *after* the reader knows what the thing is, never as the opening (see Step 2).
 - [ ] **The scene.** One concrete story beat with specifics — a number, a consequence, a small humiliation. "You change the button in three places. There were four."
 - [ ] **The assumed knowledge.** The reader knows HTML/CSS basics and has seen JavaScript. They have NOT met: virtual DOM, SSR, promises, immutability, bundlers. Anything from that second list gets one plain-language clause or gets cut.
 - [ ] **The demo verb.** What will the learner *do* — not watch? If the answer is "observe," redesign until they can break something.
@@ -35,14 +35,17 @@ Before any prose, answer these **in the concept's `PLAN-*.md`** so both reviewer
 - The same line goes in `concepts.ts` (description), page `metadata`, and the subtitle. Write once, use three times, keep identical.
 
 ### Step 2 — The opening (pick ONE, rotate across pages)
-Never open with "X is Y" — definitions answer questions the learner hasn't asked yet. Rotate between:
+**Teach what the concept *is* before you challenge what the reader believes about it.** The opening's job is to give the reader a foothold on the thing itself; a myth-buster only works once they have something to hold. So never open with the misconception. It is powerful, but it comes later on the page, after the definition has landed.
 
-1. **Misconception-first** — "Most beginners assume ___. It isn't, and here's the moment you see why."
-2. **Question-first** — "When you click 'Add to cart', where does that number live?"
-3. **Scene-first** — the Step 0 scene, then zoom out.
-4. **Demo-first** — demo right after the title, explanation after. (See the Difference reads this way, but note *why* it can: its What and Why live on the Frameworks overview page — see "Multi-page concepts" below.)
+Open with whatever teaches what-it-is most directly, and rotate the type across pages so the site doesn't read like a dictionary:
 
-Check the previous two concepts' openings; never the same type three pages in a row. The definition still appears — a paragraph or two in, once the learner wants it.
+1. **Definition-first** — a plain, *concrete* one-line definition (not a dictionary drone: "the live tree the browser builds from your HTML" beats "an interface that represents documents").
+2. **Scene-first** — the Step 0 scene, then zoom out to the definition.
+3. **Example-first** — a tiny concrete example of the thing in action, named for what it is.
+4. **Question-first** — "When you click 'Add to cart', where does that number live?"
+5. **Demo-first** — demo right after the title, explanation after. (See the Difference reads this way, but note *why* it can: its What and Why live on the Frameworks overview page — see "Multi-page concepts" below.)
+
+Check the previous two concepts' openings; never the same type three pages in a row. The misconception still gets its moment, but as a turn the page takes *after* the reader knows what the thing is, never the first thing they read.
 
 ### Step 3 — "What is it?"
 - 2–3 paragraphs, building: plain-words definition → how it actually behaves → the one analogy.
@@ -72,6 +75,7 @@ This section keeps its established job — **telling the learner how to use the 
 ### Step 7 — The close
 - The Step 0 takeaway line, verbatim: "If you remember one thing: ___."
 - Not a list. Not a summary paragraph. One line.
+- **Don't restate the opening or the definition.** The takeaway lands the one insight (often the misconception-killer), phrased differently from how the page opened. If it echoes the subtitle or the opening line, rewrite it.
 
 ### Voice rules (every sentence, every pass)
 1. **The desk test.** Would a person say this to a junior across a desk? If not, rewrite until they would.
@@ -108,6 +112,12 @@ Apply the human's notes, then run the mechanical checklist:
 - [ ] **Report honestly**: list what changed, what was flagged but deliberately kept (with the reason), and anything the human should re-check. Never silently drop a reviewer note.
 
 If Pass 3 makes substantive changes (not typo-level), the page goes back through Pass 2 — a short second look, not a full re-review.
+
+---
+
+## Emdash rule
+
+Avoid emdashes as much as possible. If it's unavoidable, don't use spaces before and after the emdash.
 
 ---
 

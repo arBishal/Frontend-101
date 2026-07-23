@@ -1,5 +1,5 @@
 import { getConcept, conceptMetadata } from "@/app/lib/concepts";
-import { TabletSmartphone, Search, Layers } from "lucide-react";
+import { TabletSmartphone, Hand, Layers } from "lucide-react";
 import ResponsiveDemo from "./ResponsiveDemo";
 import SectionLabel from "@/app/components/ui/SectionLabel";
 import ConceptHeader from "@/app/components/ConceptHeader";
@@ -9,21 +9,21 @@ import CodeBlock from "@/app/components/ui/CodeBlock";
 const problems = [
   {
     icon: TabletSmartphone,
-    title: "Locked-Out Users",
+    title: "Off the edge",
     description:
-      "Over half of web traffic is mobile. A desktop-only layout is unusable for the majority of your audience.",
+      "Your signup form is perfect on a laptop. On a phone the submit button sits past the right edge, and no amount of scrolling down brings it into reach.",
   },
   {
-    icon: Search,
-    title: "SEO Penalty",
+    icon: Hand,
+    title: "Fat-finger taps",
     description:
-      "Search engines penalize non-responsive sites, pushing you down in results regardless of your content.",
+      "Links spaced for a mouse cursor land a thumb-width too close, so every tap catches the wrong one.",
   },
   {
     icon: Layers,
-    title: "Double Maintenance",
+    title: "Fixed twice, or not at all",
     description:
-      "Separate mobile and desktop codebases means every change is done twice, and bugs are found half as fast.",
+      "A separate mobile site means every fix happens twice. You patch the broken nav link on desktop, ship it, and a week later a phone user hits the same dead link, because the mobile copy never got the change.",
   },
 ];
 
@@ -38,69 +38,82 @@ export default function ResponsivenessPage() {
       <div className="text-sm lg:text-base text-zinc-600 dark:text-zinc-400 space-y-3">
         <SectionLabel>What is responsive design?</SectionLabel>
         <p>
-          Responsive design is a single codebase that adapts its layout to any
-          screen size (phone, tablet, or desktop). Instead of building separate
-          mobile and desktop versions of your site, you write one set of HTML
-          and CSS that reorganizes itself based on the available space.
+          You built a three-column dashboard that looks sharp on a 27-inch
+          monitor. A teammate opens it on their phone: the third column runs off
+          the right edge, the headings wrap to one word per line, and they close
+          the tab. Responsive design is what keeps that from happening.
         </p>
         <p>
-          The core tool is the <span className="italic text-zinc-700 dark:text-zinc-300">CSS breakpoint:</span>{" "}a rule that
-          says &ldquo;when the screen is wider than X pixels, apply these
-          styles.&rdquo; Below that width, a different set of styles takes over.
-          This is how a three-column desktop grid can collapse into a
-          single-column mobile stack without changing any HTML.
+          It is a single codebase whose layout reshapes itself to the width it is
+          given. Instead of building a phone version and a desktop version, you
+          write one set of HTML and CSS that reorganizes itself based on the
+          space available. The core tool is the{" "}
+          <span className="italic text-zinc-700 dark:text-zinc-300">breakpoint</span>:
+          a CSS rule that says &ldquo;once the screen is wider than X pixels,
+          apply these styles.&rdquo; Below that width a different set takes over.
+          That is how a three-column grid collapses into a single-column stack
+          without touching the HTML.
         </p>
         <p>
-          Other key techniques: flexible grids where columns resize
-          proportionally, relative units like <code className="text-zinc-800 dark:text-zinc-200">rem</code> and{" "}
-          <code className="text-zinc-800 dark:text-zinc-200">%</code> instead of fixed pixels, and images that scale
-          with their container.
-        </p>
-        <p>
-          A newer technique, <span className="italic text-zinc-700 dark:text-zinc-300">container queries</span>,{" "}
-          flips the breakpoint idea around: instead of checking the browser
-          viewport&rsquo;s width, <code className="text-zinc-800 dark:text-zinc-200">@container</code>{" "}lets an
-          element respond to the width of its own containing box. That matters
-          for reusable components; the same card might need three
-          columns in a wide main content area but one column when it&rsquo;s
-          dropped into a narrow sidebar, regardless of how wide the browser
-          window is.
+          The word &ldquo;responsive&rdquo; misleads a lot of beginners into
+          thinking something detects the phone and loads a separate mobile site.
+          Nothing detects anything. There is no second site and no JavaScript
+          checking the screen; the same CSS simply reacts to how much width it
+          currently has to work with.
         </p>
       </div>
 
       <div className="text-sm lg:text-base text-zinc-600 dark:text-zinc-400 space-y-3">
         <SectionLabel>Why it matters</SectionLabel>
         <p>
-          Over half of all web traffic comes from mobile devices. If your layout
-          only works on a desktop monitor, you&rsquo;re locking out the majority
-          of your users.
+          More than half of all web traffic is on phones. A layout that only
+          holds together on a desktop monitor doesn&rsquo;t just look off on a
+          phone; it quietly locks out most of the people trying to use what you
+          built.
         </p>
         <p>
-          Responsive design isn&rsquo;t a bonus feature; it&rsquo;s the
-          expected baseline. Search engines penalize non-responsive sites, and
-          users will leave if they have to pinch-zoom to read text. One
-          responsive codebase is also far cheaper to maintain than separate
-          mobile and desktop versions.
+          A responsive codebase isn&rsquo;t a bonus feature, it&rsquo;s the
+          expected baseline, and it is far cheaper to live with than two sites
+          that drift apart every time someone ships a change to one and forgets
+          the other.
         </p>
         <ProblemCards problems={problems} />
       </div>
 
       <div>
         <SectionLabel className="mb-4">Interactive demo</SectionLabel>
+        <p className="text-zinc-600 dark:text-zinc-400 mb-4">
+          Before you drag: at what width do you think the three columns give up
+          and drop to two? Grab the handle on the right edge, resize the preview,
+          and find the pixel where it happens.
+        </p>
         <ResponsiveDemo />
+        <p className="text-zinc-700 dark:text-zinc-300 mt-6 mb-2">Try breaking it:</p>
+        <ul className="list-disc list-inside space-y-1.5 text-zinc-600 dark:text-zinc-400">
+          <li>
+            Drag from wide to narrow and watch the nav links vanish into a
+            hamburger and the columns fold from three to two to one. Which
+            breakpoint also switches the footer from a row to a stack?
+          </li>
+          <li>
+            Cross 512px slowly. The jump from one column to two happens in a
+            single pixel step, not a smooth slide. That step is the breakpoint.
+          </li>
+          <li>
+            Park the width at 900px, then nudge below 896. The third column
+            disappears. That 896 line is a choice, not a law: you decide where
+            the layout should change.
+          </li>
+        </ul>
       </div>
 
       <div className="text-sm lg:text-base text-zinc-600 dark:text-zinc-400 space-y-3">
         <SectionLabel>How it works</SectionLabel>
         <p>
-          Here&rsquo;s a subtlety worth calling out: real{" "}
-          <code className="text-zinc-800 dark:text-zinc-200">@media</code>{" "}breakpoints only ever see the
-          browser&rsquo;s actual viewport, never an arbitrary box like the
-          preview above. Since the whole point of this demo is a box you resize
-          independently of your real window, it uses{" "}
-          <span className="italic text-zinc-700 dark:text-zinc-300">container queries</span>{" "}instead. The
-          preview is marked as a container, and its layout responds to its own
-          width. No JavaScript decides the columns; the CSS does.
+          Use the device buttons to snap to common sizes, or drag the handle on
+          the right edge to resize freely and watch the layout reflow. The width
+          readout tracks the preview&rsquo;s current size as you go. The layout
+          lands in one of three arrangements:
         </p>
         <ul className="list-disc list-inside space-y-1.5 font-mono text-xs lg:text-sm">
           <li>
@@ -116,11 +129,17 @@ export default function ResponsivenessPage() {
           </li>
         </ul>
         <p>
-          Use the device buttons to snap to common sizes, or drag the handle on
-          the right edge to resize freely and watch the layout adapt. Those
+          Here is the part worth noticing: a real{" "}
+          <code className="text-zinc-800 dark:text-zinc-200">@media</code>{" "}
+          breakpoint only ever sees the browser&rsquo;s actual viewport (the
+          visible area of the window), never an arbitrary box like the preview
+          above. Since the whole point of this demo is a box you resize
+          independently of your real window, it uses{" "}
+          <span className="italic text-zinc-700 dark:text-zinc-300">container queries</span>{" "}
+          instead: the preview is marked as a container, and its layout responds
+          to its own width. No JavaScript decides the columns; the CSS does. The
           breakpoints (512px and 896px) are Tailwind&rsquo;s named container
-          sizes.
-          Written out as plain CSS, the card grid looks like this:
+          sizes. Written out as plain CSS, the card grid looks like this:
         </p>
         <CodeBlock
           lang="css"
@@ -137,7 +156,24 @@ export default function ResponsivenessPage() {
   .cards { grid-template-columns: repeat(3, 1fr); }
 }`}
         />
+        <p>
+          On a real page you react to the whole window instead of a box, so you
+          swap{" "}
+          <code className="text-zinc-800 dark:text-zinc-200">@container</code> for{" "}
+          <code className="text-zinc-800 dark:text-zinc-200">
+            @media (min-width: 896px)
+          </code>
+          , keyed to the viewport rather than the preview. That{" "}
+          <code className="text-zinc-800 dark:text-zinc-200">@media</code> form is
+          the one you&rsquo;ll type most.
+        </p>
       </div>
+
+      <p className="text-zinc-700 dark:text-zinc-300">
+        <strong>If you remember one thing:</strong> build one layout that adapts
+        to the space it&rsquo;s given, and it works on every screen, without
+        detecting the device or keeping a separate mobile site.
+      </p>
     </div>
   );
 }
