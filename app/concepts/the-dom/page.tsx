@@ -1,4 +1,5 @@
 import { getConcept, conceptMetadata } from "@/app/lib/concepts";
+import Takeaway from "@/app/components/ui/Takeaway";
 import { FileCode, GitFork, RefreshCw } from "lucide-react";
 import DomDemo from "./DomDemo";
 import SectionLabel from "@/app/components/ui/SectionLabel";
@@ -135,7 +136,7 @@ export default function TheDomPage() {
         </p>
         <ul className="list-disc list-inside space-y-1.5 font-mono text-xs lg:text-sm">
           <li>
-            <strong>tagName</strong>: the element&rsquo;s HTML tag (e.g.{" "}
+            <strong>tagName</strong>: the element’s HTML tag (e.g.{" "}
             <code>div</code>, <code>h1</code>)
           </li>
           <li>
@@ -161,11 +162,10 @@ export default function TheDomPage() {
         </p>
       </div>
 
-      <p className="text-zinc-700 dark:text-zinc-300">
-        <strong>If you remember one thing:</strong> the DOM is not the HTML you
-        wrote; it&rsquo;s what the browser actually renders, and what your code
-        changes.
-      </p>
+      <Takeaway>
+        The DOM is not the HTML you wrote; it’s what the browser actually
+        renders, and what your code changes.
+      </Takeaway>
     </div>
   );
 }

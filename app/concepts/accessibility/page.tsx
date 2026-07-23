@@ -1,4 +1,5 @@
 import { getConcept, conceptMetadata } from "@/app/lib/concepts";
+import Takeaway from "@/app/components/ui/Takeaway";
 import { UserX, Palette, Scale } from "lucide-react";
 import AccessibilityDemo from "./AccessibilityDemo";
 import SectionLabel from "@/app/components/ui/SectionLabel";
@@ -60,7 +61,7 @@ export default function AccessibilityPage() {
           and{" "}
           <code className="text-zinc-800 dark:text-zinc-200">&lt;nav&gt;</code>{" "}
           carry meaning that assistive tools can read out. The most common
-          failures aren&rsquo;t hard problems, they&rsquo;re simple oversights:
+          failures aren’t hard problems, they’re simple oversights:
           missing alt text, low contrast, a clickable{" "}
           <code className="text-zinc-800 dark:text-zinc-200">&lt;div&gt;</code>{" "}
           where a{" "}
@@ -72,7 +73,7 @@ export default function AccessibilityPage() {
       <div className="text-sm lg:text-base text-zinc-600 dark:text-zinc-400 space-y-3">
         <SectionLabel>Why it matters</SectionLabel>
         <p>
-          The WHO puts it around 15% of the world&rsquo;s population, more than
+          The WHO puts it around 15% of the world’s population, more than
           a billion people, living with some form of disability. Build an
           inaccessible UI and you are not just annoying those users, you are
           locking them out of the thing entirely.
@@ -167,11 +168,11 @@ export default function AccessibilityPage() {
         </p>
       </div>
 
-      <p className="text-zinc-700 dark:text-zinc-300">
-        <strong>If you remember one thing:</strong> most accessibility is small,
-        boring correctness (the right element, a real label, enough contrast),
-        and it decides whether some people can use your UI at all.
-      </p>
+      <Takeaway>
+        Most accessibility is small, boring correctness (the right element, a
+        real label, enough contrast), and it decides whether some people can use
+        your UI at all.
+      </Takeaway>
     </div>
   );
 }

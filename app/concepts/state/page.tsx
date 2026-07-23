@@ -1,4 +1,5 @@
 import { getConcept, conceptMetadata } from "@/app/lib/concepts";
+import Takeaway from "@/app/components/ui/Takeaway";
 import { MousePointerClick, AlertCircle, Workflow } from "lucide-react";
 import StateDemo from "./StateDemo";
 import SectionLabel from "@/app/components/ui/SectionLabel";
@@ -46,7 +47,7 @@ export default function StatePage() {
         <p>
           In frameworks like React, state is a special kind of variable. When you
           change it, the framework re-renders the parts of the UI that read it,
-          rebuilding just those pieces of the screen. You don&rsquo;t touch the
+          rebuilding just those pieces of the screen. You don’t touch the
           DOM yourself; you change the data, and the screen follows.
         </p>
         <p>
@@ -146,10 +147,10 @@ export default function StatePage() {
         </p>
       </div>
 
-      <p className="text-zinc-700 dark:text-zinc-300">
-        <strong>If you remember one thing:</strong> change the state and the UI
-        redraws itself, no hand-editing the page required.
-      </p>
+      <Takeaway>
+        Change the state and the UI redraws itself, no hand-editing the page
+        required.
+      </Takeaway>
     </div>
   );
 }

@@ -15,7 +15,7 @@ export default function ConceptNav() {
   const next = currentIndex < concepts.length - 1 ? concepts[currentIndex + 1] : null;
 
   return (
-    <div className="mt-8 flex items-center justify-between border-t border-zinc-200 dark:border-zinc-800 pt-6">
+    <div className="flex items-center justify-between pt-6">
       {prev ? (
         <Link
           href={`/concepts/${prev.slug}`}

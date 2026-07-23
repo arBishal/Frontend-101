@@ -1,4 +1,5 @@
 import { getConcept, conceptMetadata } from "@/app/lib/concepts";
+import Takeaway from "@/app/components/ui/Takeaway";
 import { Copy, TriangleAlert, Package } from "lucide-react";
 import ComponentDemo from "./ComponentDemo";
 import SectionLabel from "@/app/components/ui/SectionLabel";
@@ -47,7 +48,7 @@ export default function ComponentsPage() {
           Think of components like LEGO bricks, but notice{" "}
           <em className="text-zinc-700 dark:text-zinc-300">why</em> they snap
           together. It is the stud, one standardized bump every brick agrees on,
-          so a piece from one set fits a piece from another. A component&rsquo;s{" "}
+          so a piece from one set fits a piece from another. A component’s{" "}
           <span className="italic text-zinc-700 dark:text-zinc-300">props</span>{" "}
           are that stud: the small, agreed-on set of inputs it accepts.
           Anything can use the component by supplying those inputs, without
@@ -58,7 +59,7 @@ export default function ComponentsPage() {
           <code className="text-zinc-800 dark:text-zinc-200">&lt;Button&gt;</code>{" "}
           might accept a{" "}
           <code className="text-zinc-800 dark:text-zinc-200">variant</code> prop
-          to switch between &ldquo;primary&rdquo; and &ldquo;outline&rdquo;
+          to switch between “primary” and “outline”
           looks. Same component, supplied different props, rendering a different
           result each time. Write it once; reuse it four times in a grid with
           four different labels.
@@ -78,7 +79,7 @@ export default function ComponentsPage() {
         <p>
           Define that button once as a component and the math flips: you change
           the definition, and every place that uses it updates at once. This is
-          the DRY principle (Don&rsquo;t Repeat Yourself) applied to your UI, and
+          the DRY principle (Don’t Repeat Yourself) applied to your UI, and
           it is how design systems work, a shared library of trusted pieces that
           the whole app pulls from instead of reinventing.
         </p>
@@ -123,7 +124,7 @@ export default function ComponentsPage() {
           any row of the Props Inspector, or change{" "}
           <code className="text-zinc-800 dark:text-zinc-200">border-radius</code>{" "}
           and size in the Style Editor. The live buttons and both code panels
-          update together: the JSX (React&rsquo;s HTML-in-JavaScript syntax) on
+          update together: the JSX (React’s HTML-in-JavaScript syntax) on
           one side, the CSS on the other.
         </p>
         <ul className="list-disc list-inside space-y-1.5 font-mono text-xs lg:text-sm">
@@ -152,11 +153,10 @@ export default function ComponentsPage() {
         </p>
       </div>
 
-      <p className="text-zinc-700 dark:text-zinc-300">
-        <strong>If you remember one thing:</strong> define a piece of UI once,
-        give it a few inputs, and reuse it everywhere, so one change updates
-        every copy.
-      </p>
+      <Takeaway>
+        Define a piece of UI once, give it a few inputs, and reuse it
+        everywhere, so one change updates every copy.
+      </Takeaway>
     </div>
   );
 }

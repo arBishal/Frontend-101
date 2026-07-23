@@ -1,4 +1,5 @@
 import { getConcept, conceptMetadata } from "@/app/lib/concepts";
+import Takeaway from "@/app/components/ui/Takeaway";
 import { EyeOff, Loader, Signal } from "lucide-react";
 import ApiDemo from "./ApiDemo";
 import SectionLabel from "@/app/components/ui/SectionLabel";
@@ -37,7 +38,7 @@ export default function ApiCallsPage() {
       <div className="text-sm lg:text-base text-zinc-600 dark:text-zinc-400 space-y-3">
         <SectionLabel>What is an API call?</SectionLabel>
         <p>
-          Open a weather app and it shows 14&deg;C for your city. That number was
+          Open a weather app and it shows 14°C for your city. That number was
           not baked into the app when you installed it, and it changes by the
           hour, so where does it come from? The app asks a server for it, every
           time you open the screen. That request is an API call.
@@ -129,7 +130,7 @@ export default function ApiCallsPage() {
       <div>
         <SectionLabel className="mb-4">Interactive demo</SectionLabel>
         <p className="text-zinc-500 dark:text-zinc-400 text-sm mb-4">
-          This demo fetches a Pok&eacute;mon by name or ID from{" "}
+          This demo fetches a Pokémon by name or ID from{" "}
           <a
             href="https://pokeapi.co"
             target="_blank"
@@ -177,13 +178,13 @@ export default function ApiCallsPage() {
           under the search bar says in plain words what is happening, and its
           color tracks the state, grey when idle, amber while loading, green on
           success, red on error. The Network Inspector beside it shows the raw
-          request, the same information your browser&rsquo;s DevTools Network tab
+          request, the same information your browser’s DevTools Network tab
           would.
         </p>
         <p>
           That color-changing line is the whole lesson in miniature. Every fetch
-          moves through four states, the four screens from &ldquo;Why it
-          matters&rdquo; seen from the request&rsquo;s side, and the demo makes
+          moves through four states, the four screens from “Why it
+          matters” seen from the request’s side, and the demo makes
           you visit each one on purpose:{" "}
           <strong>idle</strong> is the screen before anyone asks for data,{" "}
           <strong>loading</strong> is the wait, <strong>success</strong> is the
@@ -197,7 +198,7 @@ export default function ApiCallsPage() {
           <span className="italic text-zinc-700 dark:text-zinc-300">endpoint</span>,
           an address that names one thing on the server:{" "}
           <code className="text-zinc-800 dark:text-zinc-200">/pokemon/pikachu</code>{" "}
-          returns Pikachu&rsquo;s stats, <code className="text-zinc-800 dark:text-zinc-200">/users/42</code>{" "}
+          returns Pikachu’s stats, <code className="text-zinc-800 dark:text-zinc-200">/users/42</code>{" "}
           returns user #42. An API that organizes its data into addresses like
           these is called a REST API, and it is by far the most common kind you
           will meet.
@@ -209,11 +210,10 @@ export default function ApiCallsPage() {
         </p>
       </div>
 
-      <p className="text-zinc-700 dark:text-zinc-300">
-        <strong>If you remember one thing:</strong> a fetch is a request over a
-        network, so it takes time and it can fail; build the waiting and the
-        failing, not just the moment the data lands.
-      </p>
+      <Takeaway>
+        A fetch is a request over a network, so it takes time and it can fail;
+        build the waiting and the failing, not just the moment the data lands.
+      </Takeaway>
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import { getConcept, conceptMetadata } from "@/app/lib/concepts";
+import Takeaway from "@/app/components/ui/Takeaway";
 import Link from "next/link";
 import { ArrowRight, MousePointerClick, RefreshCw, Puzzle, Route } from "lucide-react";
 import SectionLabel from "@/app/components/ui/SectionLabel";
@@ -45,8 +46,8 @@ export default function FrameworksPage() {
         <p>
           Writing vanilla HTML and JavaScript is like giving a driver
           turn-by-turn directions: turn here, update this element, now remove
-          that one. A framework is like getting in and saying &ldquo;take me to
-          the airport.&rdquo; You say where you want to end up, and it handles
+          that one. A framework is like getting in and saying “take me to
+          the airport.” You say where you want to end up, and it handles
           the route.
         </p>
         <p>
@@ -78,11 +79,10 @@ export default function FrameworksPage() {
           <strong className="text-zinc-900 dark:text-zinc-100">React</strong>.
         </p>
         <ProblemCards problems={problems} className="sm:grid-cols-2 gap-4" />
-        <p className="text-zinc-700 dark:text-zinc-300">
-          <strong>If you remember one thing:</strong> a framework keeps your UI
-          in sync with your data, so you describe what the screen should show
-          instead of writing every step to update it.
-        </p>
+        <Takeaway>
+          A framework keeps your UI in sync with your data, so you describe what
+          the screen should show instead of writing every step to update it.
+        </Takeaway>
         <Link
           href="/concepts/frameworks/see-the-diff"
           className="inline-flex items-center gap-2 text-sm font-medium text-zinc-900 dark:text-zinc-100 hover:underline"

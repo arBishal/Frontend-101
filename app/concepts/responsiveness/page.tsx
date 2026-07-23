@@ -1,4 +1,5 @@
 import { getConcept, conceptMetadata } from "@/app/lib/concepts";
+import Takeaway from "@/app/components/ui/Takeaway";
 import { TabletSmartphone, Hand, Layers } from "lucide-react";
 import ResponsiveDemo from "./ResponsiveDemo";
 import SectionLabel from "@/app/components/ui/SectionLabel";
@@ -49,13 +50,13 @@ export default function ResponsivenessPage() {
           write one set of HTML and CSS that reorganizes itself based on the
           space available. The core tool is the{" "}
           <span className="italic text-zinc-700 dark:text-zinc-300">breakpoint</span>:
-          a CSS rule that says &ldquo;once the screen is wider than X pixels,
-          apply these styles.&rdquo; Below that width a different set takes over.
+          a CSS rule that says “once the screen is wider than X pixels,
+          apply these styles.” Below that width a different set takes over.
           That is how a three-column grid collapses into a single-column stack
           without touching the HTML.
         </p>
         <p>
-          The word &ldquo;responsive&rdquo; misleads a lot of beginners into
+          The word “responsive” misleads a lot of beginners into
           thinking something detects the phone and loads a separate mobile site.
           Nothing detects anything. There is no second site and no JavaScript
           checking the screen; the same CSS simply reacts to how much width it
@@ -67,12 +68,12 @@ export default function ResponsivenessPage() {
         <SectionLabel>Why it matters</SectionLabel>
         <p>
           More than half of all web traffic is on phones. A layout that only
-          holds together on a desktop monitor doesn&rsquo;t just look off on a
+          holds together on a desktop monitor doesn’t just look off on a
           phone; it quietly locks out most of the people trying to use what you
           built.
         </p>
         <p>
-          A responsive codebase isn&rsquo;t a bonus feature, it&rsquo;s the
+          A responsive codebase isn’t a bonus feature, it’s the
           expected baseline, and it is far cheaper to live with than two sites
           that drift apart every time someone ships a change to one and forgets
           the other.
@@ -112,7 +113,7 @@ export default function ResponsivenessPage() {
         <p>
           Use the device buttons to snap to common sizes, or drag the handle on
           the right edge to resize freely and watch the layout reflow. The width
-          readout tracks the preview&rsquo;s current size as you go. The layout
+          readout tracks the preview’s current size as you go. The layout
           lands in one of three arrangements:
         </p>
         <ul className="list-disc list-inside space-y-1.5 font-mono text-xs lg:text-sm">
@@ -131,14 +132,14 @@ export default function ResponsivenessPage() {
         <p>
           Here is the part worth noticing: a real{" "}
           <code className="text-zinc-800 dark:text-zinc-200">@media</code>{" "}
-          breakpoint only ever sees the browser&rsquo;s actual viewport (the
+          breakpoint only ever sees the browser’s actual viewport (the
           visible area of the window), never an arbitrary box like the preview
           above. Since the whole point of this demo is a box you resize
           independently of your real window, it uses{" "}
           <span className="italic text-zinc-700 dark:text-zinc-300">container queries</span>{" "}
           instead: the preview is marked as a container, and its layout responds
           to its own width. No JavaScript decides the columns; the CSS does. The
-          breakpoints (512px and 896px) are Tailwind&rsquo;s named container
+          breakpoints (512px and 896px) are Tailwind’s named container
           sizes. Written out as plain CSS, the card grid looks like this:
         </p>
         <CodeBlock
@@ -165,15 +166,15 @@ export default function ResponsivenessPage() {
           </code>
           , keyed to the viewport rather than the preview. That{" "}
           <code className="text-zinc-800 dark:text-zinc-200">@media</code> form is
-          the one you&rsquo;ll type most.
+          the one you’ll type most.
         </p>
       </div>
 
-      <p className="text-zinc-700 dark:text-zinc-300">
-        <strong>If you remember one thing:</strong> build one layout that adapts
-        to the space it&rsquo;s given, and it works on every screen, without
-        detecting the device or keeping a separate mobile site.
-      </p>
+      <Takeaway>
+        Build one layout that adapts to the space it’s given, and it works on
+        every screen, without detecting the device or keeping a separate mobile
+        site.
+      </Takeaway>
     </div>
   );
 }
