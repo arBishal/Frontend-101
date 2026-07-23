@@ -1,7 +1,6 @@
 import { Star, MessageSquarePlus } from "lucide-react";
 import Button from "@/app/components/ui/Button";
 import Card from "@/app/components/ui/Card";
-import ThemeToggle from "@/app/components/ThemeToggle";
 import { concepts } from "@/app/lib/concepts";
 
 async function getStarCount(): Promise<number | null> {
@@ -210,8 +209,6 @@ export default async function Home() {
           Open an issue on GitHub
         </Button>
       </div>
-
-      <ThemeToggle />
     </main>
   );
 }

@@ -1,8 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Sun, Moon, Link2, Check } from "lucide-react";
-import { useTheme } from "@/app/components/ThemeProvider";
+import { Link2, Check } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { concepts, type Concept } from "@/app/lib/concepts";
@@ -37,7 +36,6 @@ function useCopyLink() {
 }
 
 export default function Navbar() {
-  const { resolvedTheme, setTheme } = useTheme();
   const pathname = usePathname();
   const isConceptPage = pathname.startsWith("/concepts/");
   const { copied, handleShare } = useCopyLink();
@@ -74,14 +72,6 @@ export default function Navbar() {
               )}
             </button>
           )}
-          <button
-            onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
-            className="rounded p-1.5 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
-            aria-label="Toggle theme"
-          >
-            <Sun className="size-4 hidden dark:block" />
-            <Moon className="size-4 block dark:hidden" />
-          </button>
         </div>
       </div>
       {isConceptPage && (
