@@ -25,7 +25,7 @@ export default function ThemeToggle() {
   return (
     <ThemeToggleButton
       className={cn(
-        "fixed top-4 right-4 z-50 rounded-full p-2.5 text-zinc-500 hover:text-zinc-700 dark:text-zinc-500 dark:hover:text-zinc-300 bg-zinc-100/80 dark:bg-zinc-900/80 backdrop-blur-sm border border-zinc-200 dark:border-zinc-800 transition duration-300",
+        "fixed top-4 right-3 lg:right-5 z-50 rounded-full p-2.5 text-zinc-500 hover:text-zinc-700 dark:text-zinc-500 dark:hover:text-zinc-300 bg-zinc-100/80 dark:bg-zinc-900/80 backdrop-blur-sm transition duration-300",
         atNav && "opacity-0 pointer-events-none"
       )}
       aria-hidden={atNav}
