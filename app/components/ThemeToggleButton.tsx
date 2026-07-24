@@ -10,7 +10,10 @@ type ThemeToggleButtonProps = {
   "aria-hidden"?: boolean;
 };
 
-export default function ThemeToggleButton({ className, ...rest }: ThemeToggleButtonProps) {
+export default function ThemeToggleButton({
+  className,
+  ...rest
+}: ThemeToggleButtonProps) {
   const { resolvedTheme, setTheme } = useTheme();
 
   return (
@@ -20,8 +23,8 @@ export default function ThemeToggleButton({ className, ...rest }: ThemeToggleBut
       aria-label="Toggle theme"
       {...rest}
     >
-      <Sun className="size-4 hidden dark:block" />
-      <Moon className="size-4 block dark:hidden" />
+      <Sun className="hidden size-4 dark:block" />
+      <Moon className="block size-4 dark:hidden" />
     </button>
   );
 }

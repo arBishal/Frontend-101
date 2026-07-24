@@ -12,14 +12,15 @@ export default function ConceptNav() {
     return pathname === href || pathname.startsWith(href + "/");
   });
   const prev = currentIndex > 0 ? concepts[currentIndex - 1] : null;
-  const next = currentIndex < concepts.length - 1 ? concepts[currentIndex + 1] : null;
+  const next =
+    currentIndex < concepts.length - 1 ? concepts[currentIndex + 1] : null;
 
   return (
     <div className="flex items-center justify-between pt-6">
       {prev ? (
         <Link
           href={`/concepts/${prev.slug}`}
-          className="flex items-center gap-2 text-sm text-muted hover:text-strong transition-colors"
+          className="text-muted hover:text-strong flex items-center gap-2 text-sm transition-colors"
         >
           <ArrowLeft className="size-4" />
           <span>{prev.title}</span>
@@ -30,7 +31,7 @@ export default function ConceptNav() {
       {next ? (
         <Link
           href={`/concepts/${next.slug}`}
-          className="flex items-center gap-2 text-sm text-muted hover:text-strong transition-colors"
+          className="text-muted hover:text-strong flex items-center gap-2 text-sm transition-colors"
         >
           <span>{next.title}</span>
           <ArrowRight className="size-4" />

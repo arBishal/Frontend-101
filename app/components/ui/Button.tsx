@@ -7,8 +7,7 @@ const variants = {
     "bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 hover:bg-zinc-700 dark:hover:bg-zinc-300",
   outline:
     "border border-zinc-300 dark:border-zinc-700 text-body hover:bg-inset",
-  ghost:
-    "text-muted hover:bg-inset hover:text-strong",
+  ghost: "text-muted hover:bg-inset hover:text-strong",
 } as const;
 
 const base =
@@ -21,19 +20,38 @@ type Props = ComponentProps<"button"> & {
   href?: string;
 };
 
-export default function Button({ variant = "solid", className, href, children, ...rest }: Props) {
+export default function Button({
+  variant = "solid",
+  className,
+  href,
+  children,
+  ...rest
+}: Props) {
   const classes = cn(base, variants[variant], className);
 
   if (href) {
     if (href.startsWith("http")) {
       return (
-        <a href={href} className={classes} target="_blank" rel="noopener noreferrer">
+        <a
+          href={href}
+          className={classes}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           {children}
         </a>
       );
     }
-    return <Link href={href} className={classes}>{children}</Link>;
+    return (
+      <Link href={href} className={classes}>
+        {children}
+      </Link>
+    );
   }
 
-  return <button className={classes} {...rest}>{children}</button>;
+  return (
+    <button className={classes} {...rest}>
+      {children}
+    </button>
+  );
 }

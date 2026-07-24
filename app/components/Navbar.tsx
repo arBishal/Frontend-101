@@ -40,18 +40,20 @@ export default function Navbar() {
   const pathname = usePathname();
   const isConceptPage = pathname.startsWith("/concepts/");
   const { copied, handleShare } = useCopyLink();
-  const progressPct = isConceptPage ? getProgressPct(pathname, availableConcepts) : 0;
+  const progressPct = isConceptPage
+    ? getProgressPct(pathname, availableConcepts)
+    : 0;
 
   return (
-    <nav className="relative border-b border-default px-4 py-2 lg:px-6 lg:py-4">
+    <nav className="border-default relative border-b px-4 py-2 lg:px-6 lg:py-4">
       <div className="mx-auto flex items-center justify-between">
         <Link
           href="/"
-          className="font-mono text-base lg:text-lg font-semibold tracking-tight"
+          className="font-mono text-base font-semibold tracking-tight lg:text-lg"
         >
           frontend-101
         </Link>
-        <div className="flex items-center gap-3 text-sm text-muted">
+        <div className="text-muted flex items-center gap-3 text-sm">
           <a
             href="https://github.com/arBishal/Frontend-101"
             target="_blank"
@@ -63,7 +65,7 @@ export default function Navbar() {
           {isConceptPage && (
             <button
               onClick={handleShare}
-              className="rounded p-1.5 hover:bg-inset transition-colors"
+              className="hover:bg-inset rounded p-1.5 transition-colors"
               aria-label="Copy link"
             >
               {copied ? (
@@ -73,11 +75,11 @@ export default function Navbar() {
               )}
             </button>
           )}
-          <ThemeToggleButton className="rounded p-1.5 hover:bg-inset" />
+          <ThemeToggleButton className="hover:bg-inset rounded p-1.5" />
         </div>
       </div>
       {isConceptPage && (
-        <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-inset">
+        <div className="bg-inset absolute right-0 bottom-0 left-0 h-0.5">
           <div
             className="h-full bg-emerald-500 transition-all duration-500 ease-out"
             style={{ width: `${progressPct}%` }}

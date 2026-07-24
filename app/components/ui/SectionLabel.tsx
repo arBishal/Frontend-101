@@ -5,9 +5,17 @@ type SectionLabelProps = {
   className?: string;
 };
 
-export default function SectionLabel({ children, className }: SectionLabelProps) {
+export default function SectionLabel({
+  children,
+  className,
+}: SectionLabelProps) {
   return (
-    <p className={cn("font-mono uppercase tracking-wide font-medium text-zinc-600 dark:text-zinc-300", className)}>
+    <p
+      className={cn(
+        "font-mono font-medium tracking-wide text-zinc-600 uppercase dark:text-zinc-300",
+        className,
+      )}
+    >
       {children}
     </p>
   );

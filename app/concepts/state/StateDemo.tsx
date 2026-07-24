@@ -9,7 +9,13 @@ import Card from "@/app/components/ui/Card";
 import InspectorPanel from "@/app/components/ui/InspectorPanel";
 import { cn } from "@/app/lib/cn";
 
-function ValueDisplay({ type, children }: { type: "string" | "boolean" | "number"; children: React.ReactNode }) {
+function ValueDisplay({
+  type,
+  children,
+}: {
+  type: "string" | "boolean" | "number";
+  children: React.ReactNode;
+}) {
   const color = {
     string: "text-emerald-600 dark:text-emerald-400",
     boolean: "text-amber-600 dark:text-amber-400",
@@ -26,20 +32,20 @@ export default function StateDemo() {
   const avatarSeed = useId();
 
   return (
-    <div className="flex flex-col sm:flex-row gap-4">
+    <div className="flex flex-col gap-4 sm:flex-row">
       {/* Profile Card */}
-      <Card className="flex justify-center md:justify-between items-center w-full">
+      <Card className="flex w-full items-center justify-center md:justify-between">
         {/* Avatar + Name + Follow + Heart */}
-        <div className="w-full flex flex-col md:flex-row items-center gap-3 md:gap-4">
+        <div className="flex w-full flex-col items-center gap-3 md:flex-row md:gap-4">
           <Image
             src={`https://api.dicebear.com/9.x/avataaars/svg?seed=${avatarSeed}`}
             alt={`${name}'s avatar`}
             width={56}
             height={56}
-            className="size-12 md:size-14 shrink-0 rounded-full bg-inset"
+            className="bg-inset size-12 shrink-0 rounded-full md:size-14"
             unoptimized
           />
-          <div className="w-full flex flex-col md:flex-row justify-between items-center min-w-0 gap-4 md:gap-6">
+          <div className="flex w-full min-w-0 flex-col items-center justify-between gap-4 md:flex-row md:gap-6">
             <Input
               type="text"
               value={name}
@@ -51,7 +57,7 @@ export default function StateDemo() {
               <Button
                 variant="ghost"
                 onClick={() => setFollowing(!following)}
-                className="text-xs px-1 py-1"
+                className="px-1 py-1 text-xs"
               >
                 {following ? (
                   <>
@@ -68,10 +74,13 @@ export default function StateDemo() {
               <Button
                 variant="ghost"
                 onClick={() => setLikes((prev) => prev + 1)}
-                className="text-xs px-1 py-1"
+                className="px-1 py-1 text-xs"
               >
                 <Heart
-                  className={cn("size-3.5 transition-colors", likes > 0 && "fill-red-500 text-red-500")}
+                  className={cn(
+                    "size-3.5 transition-colors",
+                    likes > 0 && "fill-red-500 text-red-500",
+                  )}
                 />
                 {likes}
               </Button>

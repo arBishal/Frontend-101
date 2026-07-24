@@ -23,19 +23,19 @@ export default function SeeTheDiffPage() {
         <p className="text-muted mb-4">
           Below is the same todo list built twice: once in vanilla JavaScript,
           once in React. The live list is at the top; under it, the two
-          implementations sit side by side (tabbed on narrow screens). Before you
-          read them: which version do you think is shorter, and by how much?
+          implementations sit side by side (tabbed on narrow screens). Before
+          you read them: which version do you think is shorter, and by how much?
         </p>
         <FrameworkDemo />
       </div>
 
-      <div className="text-sm lg:text-base text-muted space-y-3">
+      <div className="text-muted space-y-3 text-sm lg:text-base">
         <SectionLabel>What to notice</SectionLabel>
         <p>
           The live demo is the same in both worlds: a todo list you can add to,
           complete, and delete. The code underneath is where they part ways.
         </p>
-        <ul className="list-disc list-inside space-y-1.5 font-mono text-xs lg:text-sm">
+        <ul className="list-inside list-disc space-y-1.5 font-mono text-xs lg:text-sm">
           <li>
             <strong>Vanilla JS</strong>, about 70 lines: you create each DOM
             element, wire an event listener to every button, toggle classes and
@@ -51,13 +51,12 @@ export default function SeeTheDiffPage() {
         <p>
           Same behavior, less than half the hand-written wiring, and that gap
           only widens as the UI grows. The framework lets you spend your
-          attention on <em className="text-body">what</em>{" "}
-          to show instead of <em className="text-body">how</em>{" "}
-          to update the page.
+          attention on <em className="text-body">what</em> to show instead of{" "}
+          <em className="text-body">how</em> to update the page.
         </p>
         <Link
           href="/concepts/frameworks/landscape"
-          className="inline-flex items-center gap-2 text-sm font-medium text-strong hover:underline"
+          className="text-strong inline-flex items-center gap-2 text-sm font-medium hover:underline"
         >
           Next, explore the framework landscape
           <ArrowRight className="size-4" />

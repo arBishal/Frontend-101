@@ -6,15 +6,19 @@ type InspectorPanelProps = {
   className?: string;
 };
 
-export default function InspectorPanel({ title, children, className }: InspectorPanelProps) {
+export default function InspectorPanel({
+  title,
+  children,
+  className,
+}: InspectorPanelProps) {
   return (
     <div
       className={cn(
-        "w-full sm:w-1/3 shrink-0 rounded-lg bg-raised border border-default p-4 font-mono text-sm",
-        className
+        "bg-raised border-default w-full shrink-0 rounded-lg border p-4 font-mono text-sm sm:w-1/3",
+        className,
       )}
     >
-      <p className="text-xs uppercase tracking-widest text-subtle mb-3">
+      <p className="text-subtle mb-3 text-xs tracking-widest uppercase">
         {title}
       </p>
       {children}

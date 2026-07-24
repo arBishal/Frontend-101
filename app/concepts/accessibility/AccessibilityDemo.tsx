@@ -33,7 +33,7 @@ export default function AccessibilityDemo() {
   const score = fixKeys.filter((k) => fixes[k]).length;
 
   return (
-    <div className="flex flex-col sm:flex-row gap-4">
+    <div className="flex flex-col gap-4 sm:flex-row">
       {/* Login Form */}
       <Card className="w-full space-y-5">
         {/* Logo */}
@@ -47,7 +47,7 @@ export default function AccessibilityDemo() {
             unoptimized
           />
           {fixes.altText && (
-            <span className="absolute top-0 left-12 font-mono text-xxs bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-400 px-1.5 py-0.5 rounded whitespace-nowrap">
+            <span className="text-xxs absolute top-0 left-12 rounded bg-emerald-100 px-1.5 py-0.5 font-mono whitespace-nowrap text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-400">
               alt: Wikipedia logo
             </span>
           )}
@@ -56,8 +56,8 @@ export default function AccessibilityDemo() {
         {/* Heading */}
         <h2
           className={cn(
-            "text-lg md:text-xl font-semibold transition-colors duration-200",
-            fixes.contrast ? "text-strong" : "text-zinc-300 dark:text-zinc-600"
+            "text-lg font-semibold transition-colors duration-200 md:text-xl",
+            fixes.contrast ? "text-strong" : "text-zinc-300 dark:text-zinc-600",
           )}
         >
           Log in to your account
@@ -66,14 +66,24 @@ export default function AccessibilityDemo() {
         {/* Form fields */}
         <div className="space-y-3">
           {[
-            { id: "demo-email", label: "Email address", placeholder: "Email address", type: "email" },
-            { id: "demo-password", label: "Password", placeholder: "Password", type: "password" },
+            {
+              id: "demo-email",
+              label: "Email address",
+              placeholder: "Email address",
+              type: "email",
+            },
+            {
+              id: "demo-password",
+              label: "Password",
+              placeholder: "Password",
+              type: "password",
+            },
           ].map((field) => (
             <div key={field.id}>
               {fixes.labels && (
                 <label
                   htmlFor={field.id}
-                  className="block text-sm font-medium text-body mb-1"
+                  className="text-body mb-1 block text-sm font-medium"
                 >
                   {field.label}
                 </label>
@@ -91,11 +101,11 @@ export default function AccessibilityDemo() {
         {/* Log In button */}
         <div className="flex justify-end">
           {fixes.keyboard ? (
-            <button className="w-full sm:w-auto bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 rounded-md px-6 py-2 text-sm font-medium text-center transition-colors hover:bg-zinc-700 dark:hover:bg-zinc-300 focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-zinc-900 outline-none">
+            <button className="w-full rounded-md bg-zinc-900 px-6 py-2 text-center text-sm font-medium text-white transition-colors outline-none hover:bg-zinc-700 focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 focus:ring-offset-white sm:w-auto dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-300 dark:focus:ring-offset-zinc-900">
               Log In
             </button>
           ) : (
-            <div className="w-full sm:w-auto bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 rounded-md px-6 py-2 text-sm font-medium text-center cursor-pointer select-none">
+            <div className="w-full cursor-pointer rounded-md bg-zinc-900 px-6 py-2 text-center text-sm font-medium text-white select-none sm:w-auto dark:bg-zinc-100 dark:text-zinc-900">
               Log In
             </div>
           )}
@@ -106,15 +116,17 @@ export default function AccessibilityDemo() {
       <InspectorPanel title="Accessibility Audit">
         <div className="space-y-2 text-xs">
           {fixKeys.map((key) => (
-            <div key={key} className="flex justify-between items-center gap-3">
+            <div key={key} className="flex items-center justify-between gap-3">
               <span className="text-muted">{fixLabels[key]}</span>
               <button
                 type="button"
                 aria-pressed={fixes[key]}
                 onClick={() => toggle(key)}
                 className={cn(
-                  "font-mono font-medium transition-colors cursor-pointer",
-                  fixes[key] ? "text-emerald-600 dark:text-emerald-400" : "text-red-600 dark:text-red-400"
+                  "cursor-pointer font-mono font-medium transition-colors",
+                  fixes[key]
+                    ? "text-emerald-600 dark:text-emerald-400"
+                    : "text-red-600 dark:text-red-400",
                 )}
               >
                 {fixes[key] ? "ON" : "OFF"}
@@ -122,12 +134,16 @@ export default function AccessibilityDemo() {
             </div>
           ))}
         </div>
-        <div className="border-t border-default mt-4 pt-3 flex justify-between items-center text-xs">
+        <div className="border-default mt-4 flex items-center justify-between border-t pt-3 text-xs">
           <span className="text-muted">score</span>
           <span
             className={cn(
               "font-medium",
-              score === 0 ? "text-red-600 dark:text-red-400" : score <= 2 ? "text-amber-600 dark:text-amber-400" : "text-emerald-600 dark:text-emerald-400"
+              score === 0
+                ? "text-red-600 dark:text-red-400"
+                : score <= 2
+                  ? "text-amber-600 dark:text-amber-400"
+                  : "text-emerald-600 dark:text-emerald-400",
             )}
           >
             {score} / {fixKeys.length}
