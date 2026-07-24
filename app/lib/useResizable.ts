@@ -38,7 +38,10 @@ export function useResizable({
       const onPointerMove = (ev: PointerEvent) => {
         if (!containerRef.current) return;
         const rect = containerRef.current.getBoundingClientRect();
-        const clamped = Math.max(minWidth, Math.min(Math.round(ev.clientX - rect.left), maxWidth));
+        const clamped = Math.max(
+          minWidth,
+          Math.min(Math.round(ev.clientX - rect.left), maxWidth),
+        );
         onResize(clamped);
       };
 
@@ -51,7 +54,7 @@ export function useResizable({
       document.addEventListener("pointermove", onPointerMove);
       document.addEventListener("pointerup", onPointerUp);
     },
-    [containerRef, maxWidth, minWidth, onResize]
+    [containerRef, maxWidth, minWidth, onResize],
   );
 
   const handleKeyDown = useCallback(
@@ -78,7 +81,7 @@ export function useResizable({
       e.preventDefault();
       onResize(Math.max(minWidth, Math.min(next, maxWidth)));
     },
-    [width, minWidth, maxWidth, onResize]
+    [width, minWidth, maxWidth, onResize],
   );
 
   return { isDragging, handlePointerDown, handleKeyDown };

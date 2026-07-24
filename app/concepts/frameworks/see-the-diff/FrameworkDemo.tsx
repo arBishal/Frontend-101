@@ -136,12 +136,17 @@ export default function FrameworkDemo() {
 
   const addTodo = useCallback(() => {
     if (!text.trim()) return;
-    setTodos((prev) => [...prev, { id: crypto.randomUUID(), text: text.trim(), done: false }]);
+    setTodos((prev) => [
+      ...prev,
+      { id: crypto.randomUUID(), text: text.trim(), done: false },
+    ]);
     setText("");
   }, [text]);
 
   const toggle = useCallback((id: string) => {
-    setTodos((prev) => prev.map((t) => (t.id === id ? { ...t, done: !t.done } : t)));
+    setTodos((prev) =>
+      prev.map((t) => (t.id === id ? { ...t, done: !t.done } : t)),
+    );
   }, []);
 
   const remove = useCallback((id: string) => {
@@ -155,16 +160,16 @@ export default function FrameworkDemo() {
       {/* Live demo */}
       <Card className="space-y-4 sm:p-5">
         <div className="flex items-center justify-between">
-          <p className="font-mono text-sm md:text-base uppercase tracking-wide text-zinc-500 dark:text-zinc-300">
+          <p className="font-mono text-sm tracking-wide text-zinc-500 uppercase md:text-base dark:text-zinc-300">
             What To Do?
           </p>
           {todos.length > 0 && (
-            <span className="font-mono text-xs text-zinc-500 dark:text-zinc-400">
+            <span className="text-subtle font-mono text-xs">
               {doneCount}/{todos.length} completed
             </span>
           )}
         </div>
-        <div className="flex flex-col sm:flex-row gap-2">
+        <div className="flex flex-col gap-2 sm:flex-row">
           <Input
             type="text"
             value={text}
@@ -173,7 +178,7 @@ export default function FrameworkDemo() {
             placeholder="Add a todo..."
             className="flex-1"
           />
-          <Button onClick={addTodo} className="px-4 py-2 justify-center">
+          <Button onClick={addTodo} className="justify-center px-4 py-2">
             <Plus className="size-4" />
             Add a task
           </Button>
@@ -183,7 +188,7 @@ export default function FrameworkDemo() {
             {todos.map((todo) => (
               <li
                 key={todo.id}
-                className="flex items-center gap-3 rounded border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-800/50 px-3 py-2.5 text-sm"
+                className="border-default flex items-center gap-3 rounded border bg-zinc-50 px-3 py-2.5 text-sm dark:bg-zinc-800/50"
               >
                 <button
                   onClick={() => toggle(todo.id)}
@@ -198,14 +203,16 @@ export default function FrameworkDemo() {
                 <span
                   className={cn(
                     "flex-1",
-                    todo.done ? "line-through text-zinc-500 dark:text-zinc-500" : "text-zinc-700 dark:text-zinc-300"
+                    todo.done
+                      ? "text-zinc-500 line-through dark:text-zinc-500"
+                      : "text-body",
                   )}
                 >
                   {todo.text}
                 </span>
                 <button
                   onClick={() => remove(todo.id)}
-                  className="shrink-0 text-zinc-500 dark:text-zinc-500 hover:text-red-500 dark:hover:text-red-400 transition-colors"
+                  className="shrink-0 text-zinc-500 transition-colors hover:text-red-500 dark:text-zinc-500 dark:hover:text-red-400"
                 >
                   <X className="size-4" />
                 </button>
@@ -213,7 +220,7 @@ export default function FrameworkDemo() {
             ))}
           </ul>
         ) : (
-          <p className="text-sm text-zinc-500 dark:text-zinc-400 italic">
+          <p className="text-subtle text-sm italic">
             No todos yet. Type something and press Enter or click Add.
           </p>
         )}
@@ -221,8 +228,18 @@ export default function FrameworkDemo() {
 
       {/* Code — side by side on md+, tabbed below md */}
       <div className="hidden lg:grid lg:grid-cols-2">
-        <CodeBlock code={vanillaCode} lang="html" title="Vanilla JS" className="rounded-r-none border-r-0" />
-        <CodeBlock code={reactCode} lang="jsx" title="React" className="rounded-l-none" />
+        <CodeBlock
+          code={vanillaCode}
+          lang="html"
+          title="Vanilla JS"
+          className="rounded-r-none border-r-0"
+        />
+        <CodeBlock
+          code={reactCode}
+          lang="jsx"
+          title="React"
+          className="rounded-l-none"
+        />
       </div>
       <div className="lg:hidden">
         <CodeBlock
@@ -234,8 +251,8 @@ export default function FrameworkDemo() {
       </div>
 
       {/* Callout */}
-      <Card className="bg-zinc-50 dark:bg-zinc-800/50 px-5 py-4 sm:px-5 sm:py-4">
-        <p className="text-sm text-zinc-600 dark:text-zinc-400">
+      <Card className="bg-zinc-50 px-5 py-4 sm:px-5 sm:py-4 dark:bg-zinc-800/50">
+        <p className="text-muted text-sm">
           Both do the same thing. The framework version is shorter, declarative,
           and automatically keeps the UI in sync with the data.
         </p>

@@ -6,11 +6,35 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+
+  /* Semantic chrome tokens — light. Each flips in .dark below, so utilities
+     (text-strong, border-default, bg-inset…) need no dark: variant. */
+  --fg-strong: #18181b; /* zinc-900 */
+  --fg-body: #3f3f46; /* zinc-700 */
+  --fg-muted: #52525b; /* zinc-600 */
+  --fg-subtle: #71717a; /* zinc-500 */
+  --fg-code: #27272a; /* zinc-800 — inline <code> */
+  --border: #e4e4e7; /* zinc-200 */
+  --surface: #ffffff; /* white  */
+  --raised: #fafafa; /* zinc-50 */
+  --inset: #f4f4f5; /* zinc-100 */
+  --header: #e4e4e7; /* zinc-200 — panel/tab header fill */
 }
 
 .dark {
   --background: #0a0a0a;
   --foreground: #ededed;
+
+  --fg-strong: #fafafa; /* zinc-50  */
+  --fg-body: #d4d4d8; /* zinc-300 */
+  --fg-muted: #a1a1aa; /* zinc-400 */
+  --fg-subtle: #a1a1aa; /* zinc-400 */
+  --fg-code: #e4e4e7; /* zinc-200 — inline <code> */
+  --border: #27272a; /* zinc-800 */
+  --surface: #09090b; /* zinc-950 */
+  --raised: #18181b; /* zinc-900 */
+  --inset: #27272a; /* zinc-800 */
+  --header: #27272a; /* zinc-800 */
 }
 
 @theme inline {
@@ -19,6 +43,19 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --text-xxs: 0.625rem;
+
+  /* Chrome tokens → utilities: text-{strong,body,muted,subtle},
+     border-default, bg-{surface,raised,inset}. */
+  --color-strong: var(--fg-strong);
+  --color-body: var(--fg-body);
+  --color-muted: var(--fg-muted);
+  --color-subtle: var(--fg-subtle);
+  --color-code: var(--fg-code);
+  --color-default: var(--border);
+  --color-surface: var(--surface);
+  --color-raised: var(--raised);
+  --color-inset: var(--inset);
+  --color-header: var(--header);
 }
 
 body {
@@ -48,13 +85,13 @@ body {
 }
 
 @utility dot-grid {
-  background-image: radial-gradient(#d4d4d8 1px, transparent 1px);
+  background-image: radial-gradient(var(--color-zinc-300) 1px, transparent 1px);
   background-size: 24px 24px;
   mask-image: linear-gradient(to bottom, black 20%, transparent 80%);
 }
 
 @utility dot-grid-dark {
-  background-image: radial-gradient(#27272a 1px, transparent 1px);
+  background-image: radial-gradient(var(--color-zinc-800) 1px, transparent 1px);
 }
 
 /* Shiki dual-theme: switch to dark vars inside .dark */

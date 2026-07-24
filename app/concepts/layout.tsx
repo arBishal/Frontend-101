@@ -9,11 +9,11 @@ type ConceptsLayoutProps = {
 
 export default function ConceptsLayout({ children }: ConceptsLayoutProps) {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="flex min-h-screen flex-col">
       <Navbar />
-      <div className="flex-1 flex">
+      <div className="flex flex-1">
         <ConceptSidebar />
-        <main className="flex-1 min-w-0 p-6 lg:p-8 flex flex-col">
+        <main className="flex min-w-0 flex-1 flex-col p-6 lg:p-8">
           <div className="flex-1">{children}</div>
           <ConceptNav />
         </main>

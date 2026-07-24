@@ -1,6 +1,12 @@
 "use client";
 
-import { createContext, useContext, useEffect, useCallback, useSyncExternalStore } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useCallback,
+  useSyncExternalStore,
+} from "react";
 
 type Theme = "light" | "dark" | "system";
 type ResolvedTheme = "light" | "dark";
@@ -45,11 +51,15 @@ function applyTheme(resolved: ResolvedTheme) {
   document.documentElement.classList.toggle("dark", resolved === "dark");
 }
 
-export default function ThemeProvider({ children }: { children: React.ReactNode }) {
+export default function ThemeProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const resolvedTheme = useSyncExternalStore(
     subscribeToTheme,
     getThemeSnapshot,
-    getThemeServerSnapshot
+    getThemeServerSnapshot,
   );
 
   // Sync the DOM class whenever the resolved theme changes.

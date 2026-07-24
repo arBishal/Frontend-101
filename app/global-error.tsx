@@ -9,8 +9,8 @@ export default function GlobalError({
 }) {
   return (
     <html lang="en">
-      <body className="min-h-screen flex flex-col items-center justify-center gap-4 bg-white text-zinc-900">
-        <p className="font-mono text-xs uppercase tracking-widest text-zinc-500">
+      <body className="flex min-h-screen flex-col items-center justify-center gap-4 bg-white text-zinc-900">
+        <p className="font-mono text-xs tracking-widest text-zinc-500 uppercase">
           Something went wrong
         </p>
         <h2 className="text-lg font-semibold">
@@ -18,7 +18,7 @@ export default function GlobalError({
         </h2>
         <button
           onClick={unstable_retry}
-          className="mt-2 text-sm font-medium underline underline-offset-4 hover:text-zinc-600 transition-colors"
+          className="mt-2 text-sm font-medium underline underline-offset-4 transition-colors hover:text-zinc-600"
         >
           Try again
         </button>

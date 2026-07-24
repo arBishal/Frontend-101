@@ -18,7 +18,7 @@ Next.js 16 (App Router) · React 19 · TypeScript · Tailwind v4 · deployed on 
 ## Style
 
 - Tailwind utilities at default scale only — no arbitrary `[...]` values, no inline styles.
-- Zinc palette; every color has a `dark:` variant. Match the aesthetics of existing pages before introducing anything new.
+- Zinc palette. For structural "chrome" — surfaces, borders, and text — use the semantic tokens in `globals.css` (`text-{strong,body,muted,subtle,code}`, `border-default`, `bg-{surface,raised,inset}`); they flip per-theme, so **no `dark:` variant**. Only reach for raw `zinc-*` pairs (with a `dark:` variant) for colors a token doesn't cover: status (`text-red-600 dark:text-red-400`), data, single-shade accents (`emerald-500`), and one-off control fills. Match existing pages before introducing anything new.
 - Every demo must work keyboard-only, in dark mode, and on mobile. This site teaches accessibility; it cannot fail its own lesson.
 
 ## Workflow

@@ -15,10 +15,18 @@ type SidebarItemProps = {
   mobileExpanded: boolean;
 };
 
-function SidebarItem({ concept, pathname, isExpanded, onToggle, mobileExpanded }: SidebarItemProps) {
+function SidebarItem({
+  concept,
+  pathname,
+  isExpanded,
+  onToggle,
+  mobileExpanded,
+}: SidebarItemProps) {
   const href = `/concepts/${concept.slug}`;
   const hasChildren = concept.children && concept.children.length > 0;
-  const isParentHighlighted = hasChildren ? pathname.startsWith(href) : pathname === href;
+  const isParentHighlighted = hasChildren
+    ? pathname.startsWith(href)
+    : pathname === href;
   const isActive = !hasChildren && pathname === href;
   const Icon = concept.icon;
 
@@ -28,15 +36,25 @@ function SidebarItem({ concept, pathname, isExpanded, onToggle, mobileExpanded }
         className={cn(
           "flex items-center gap-3 rounded px-2.5 py-2 transition-colors",
           isActive
-            ? "bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100"
+            ? "bg-inset text-strong"
             : isParentHighlighted
-              ? "text-zinc-900 dark:text-zinc-100"
-              : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-50 dark:hover:bg-zinc-800/50"
+              ? "text-strong"
+              : "text-muted hover:text-strong hover:bg-zinc-50 dark:hover:bg-zinc-800/50",
         )}
       >
-        <Link href={href} title={concept.title} className="flex items-center gap-3 flex-1 min-w-0">
+        <Link
+          href={href}
+          title={concept.title}
+          className="flex min-w-0 flex-1 items-center gap-3"
+        >
           <Icon className="size-4 shrink-0" />
-          <span className={cn("text-sm truncate", mobileExpanded ? "block" : "hidden lg:block", isParentHighlighted && "font-medium")}>
+          <span
+            className={cn(
+              "truncate text-sm",
+              mobileExpanded ? "block" : "hidden lg:block",
+              isParentHighlighted && "font-medium",
+            )}
+          >
             {concept.title}
           </span>
         </Link>
@@ -44,16 +62,27 @@ function SidebarItem({ concept, pathname, isExpanded, onToggle, mobileExpanded }
           <button
             onClick={() => onToggle(concept.slug)}
             aria-label="Toggle submenu"
-            className={cn("shrink-0 p-0.5 -mr-0.5", mobileExpanded ? "flex" : "hidden lg:flex")}
+            className={cn(
+              "-mr-0.5 shrink-0 p-0.5",
+              mobileExpanded ? "flex" : "hidden lg:flex",
+            )}
           >
             <ChevronDown
-              className={cn("size-3.5 transition-transform", isExpanded ? "rotate-0" : "-rotate-90")}
+              className={cn(
+                "size-3.5 transition-transform",
+                isExpanded ? "rotate-0" : "-rotate-90",
+              )}
             />
           </button>
         )}
       </div>
       {isExpanded && concept.children && (
-        <div className={cn("flex-col gap-0.5 ml-7 mt-0.5", mobileExpanded ? "flex" : "hidden lg:flex")}>
+        <div
+          className={cn(
+            "mt-0.5 ml-7 flex-col gap-0.5",
+            mobileExpanded ? "flex" : "hidden lg:flex",
+          )}
+        >
           {concept.children.map((child: ConceptChild) => {
             const childHref = `/concepts/${child.slug}`;
             const isChildActive = pathname === childHref;
@@ -64,8 +93,8 @@ function SidebarItem({ concept, pathname, isExpanded, onToggle, mobileExpanded }
                 className={cn(
                   "rounded px-2.5 py-1.5 text-sm transition-colors",
                   isChildActive
-                    ? "bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 font-medium"
-                    : "text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100"
+                    ? "bg-inset text-strong font-medium"
+                    : "text-subtle hover:text-strong",
                 )}
               >
                 {child.title}
@@ -97,10 +126,10 @@ export default function ConceptSidebar() {
   }
 
   return (
-    <aside className="relative z-10 shrink-0 w-14 lg:w-64 border-r border-zinc-200 dark:border-zinc-800 overflow-visible sticky top-0 h-screen">
+    <aside className="border-default relative sticky top-0 z-10 h-screen w-14 shrink-0 overflow-visible border-r lg:w-64">
       {/* Mobile overlay panel */}
       {mobileExpanded && (
-        <div className="lg:hidden absolute left-0 top-0 h-full w-48 z-20 bg-white dark:bg-zinc-950 border-r border-zinc-200 dark:border-zinc-800">
+        <div className="bg-surface border-default absolute top-0 left-0 z-20 h-full w-48 border-r lg:hidden">
           <nav className="flex flex-col gap-1 px-2 py-6">
             {concepts.map((concept) => (
               <SidebarItem
@@ -134,9 +163,17 @@ export default function ConceptSidebar() {
       <button
         onClick={() => setMobileExpanded((v) => !v)}
         aria-label={mobileExpanded ? "Collapse sidebar" : "Expand sidebar"}
-        className={cn("lg:hidden fixed top-1/2 -translate-y-1/2 -translate-x-1/2 z-50 flex items-center justify-center size-6 rounded-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 shadow-sm transition-[left] duration-200", mobileExpanded ? "left-48" : "left-14")}
+        className={cn(
+          "border-default fixed top-1/2 z-50 flex size-6 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border bg-white text-zinc-400 shadow-sm transition-all duration-200 hover:text-zinc-600 lg:hidden dark:bg-zinc-900 dark:hover:text-zinc-300",
+          mobileExpanded ? "left-48" : "left-14",
+        )}
       >
-        <ChevronRight className={cn("size-3 transition-transform", mobileExpanded && "rotate-180")} />
+        <ChevronRight
+          className={cn(
+            "size-3 transition-transform",
+            mobileExpanded && "rotate-180",
+          )}
+        />
       </button>
     </aside>
   );

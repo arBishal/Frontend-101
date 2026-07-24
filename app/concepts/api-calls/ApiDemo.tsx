@@ -26,20 +26,25 @@ type PokemonData = {
 const typeColors: Record<string, string> = {
   fire: "bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400",
   water: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400",
-  grass: "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400",
-  electric: "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400",
-  poison: "bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400",
+  grass:
+    "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400",
+  electric:
+    "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400",
+  poison:
+    "bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400",
   bug: "bg-lime-100 text-lime-700 dark:bg-lime-900/30 dark:text-lime-400",
   normal: "bg-zinc-100 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300",
   flying: "bg-sky-100 text-sky-700 dark:bg-sky-900/30 dark:text-sky-400",
   psychic: "bg-pink-100 text-pink-700 dark:bg-pink-900/30 dark:text-pink-400",
-  ground: "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400",
+  ground:
+    "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400",
 };
 
-const defaultTypeColor = "bg-zinc-100 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300";
+const defaultTypeColor =
+  "bg-zinc-100 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300";
 
 const statusColors: Record<Status, string> = {
-  idle: "text-zinc-500 dark:text-zinc-400",
+  idle: "text-subtle",
   loading: "text-amber-600 dark:text-amber-400",
   success: "text-emerald-600 dark:text-emerald-400",
   error: "text-red-600 dark:text-red-400",
@@ -129,7 +134,7 @@ export default function ApiDemo() {
   }
 
   return (
-    <div className="flex flex-col sm:flex-row gap-4">
+    <div className="flex flex-col gap-4 sm:flex-row">
       {/* Request Card */}
       <Card className="w-full space-y-5">
         <div className="flex gap-2">
@@ -139,7 +144,7 @@ export default function ApiDemo() {
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleFetch()}
             placeholder="Example: Snorlax"
-            className="flex-1 min-w-0"
+            className="min-w-0 flex-1"
             aria-label="Pokemon name or ID"
           />
           <Button
@@ -162,7 +167,7 @@ export default function ApiDemo() {
               type="button"
               onClick={handleClear}
               aria-label="Reset to empty state"
-              className="shrink-0 rounded-md p-1 text-zinc-400 hover:text-zinc-700 dark:text-zinc-500 dark:hover:text-zinc-200 transition-colors"
+              className="shrink-0 rounded-md p-1 text-zinc-400 transition-colors hover:text-zinc-700 dark:text-zinc-500 dark:hover:text-zinc-200"
             >
               <RotateCcw className="size-4" />
             </button>
@@ -170,15 +175,15 @@ export default function ApiDemo() {
         </div>
 
         {/* Result area */}
-        <div className="min-h-32 flex items-center justify-center">
+        <div className="flex min-h-32 items-center justify-center">
           {status === "idle" && (
-            <p className="text-sm text-zinc-500 dark:text-zinc-400 text-center">
+            <p className="text-subtle text-center text-sm">
               Enter a Pokémon name or ID and hit Fetch.
             </p>
           )}
 
           {status === "loading" && (
-            <div className="flex items-center gap-2 text-sm text-zinc-600">
+            <div className="text-muted flex items-center gap-2 text-sm">
               <Loader2 className="size-4 animate-spin" />
               Fetching...
             </div>
@@ -192,20 +197,23 @@ export default function ApiDemo() {
                   alt={data.name}
                   width={128}
                   height={128}
-                  className="size-24 md:size-32 shrink-0"
+                  className="size-24 shrink-0 md:size-32"
                   style={{ imageRendering: "pixelated" }}
                   unoptimized
                 />
               )}
               <div className="space-y-2">
-                <p className="text-base font-semibold text-zinc-900 dark:text-zinc-50 capitalize">
+                <p className="text-strong text-base font-semibold capitalize">
                   {data.name}
                 </p>
                 <div className="flex flex-wrap gap-1.5">
                   {data.types.map((type) => (
                     <span
                       key={type}
-                      className={cn("px-2 py-0.5 rounded-full text-xs font-medium capitalize", typeColors[type] ?? defaultTypeColor)}
+                      className={cn(
+                        "rounded-full px-2 py-0.5 text-xs font-medium capitalize",
+                        typeColors[type] ?? defaultTypeColor,
+                      )}
                     >
                       {type}
                     </span>
@@ -216,7 +224,7 @@ export default function ApiDemo() {
           )}
 
           {status === "error" && (
-            <p className="text-sm text-red-500 dark:text-red-400 text-center">
+            <p className="text-center text-sm text-red-500 dark:text-red-400">
               {error}
             </p>
           )}
@@ -225,7 +233,7 @@ export default function ApiDemo() {
 
       {/* Network Inspector */}
       <InspectorPanel title="Network Inspector">
-        <label className="flex items-center gap-2 text-xs text-zinc-600 dark:text-zinc-400 cursor-pointer select-none mb-4">
+        <label className="text-muted mb-4 flex cursor-pointer items-center gap-2 text-xs select-none">
           <input
             type="checkbox"
             checked={simulateDelay}
@@ -236,32 +244,45 @@ export default function ApiDemo() {
         </label>
         <div className="space-y-2 text-xs">
           <div className="flex justify-between gap-3">
-            <span className="text-zinc-600 dark:text-zinc-400">status</span>
-            <span className={statusColors[status]}>
-              &quot;{status}&quot;
+            <span className="text-muted">status</span>
+            <span className={statusColors[status]}>&quot;{status}&quot;</span>
+          </div>
+          <div className="flex justify-between gap-3">
+            <span className="text-muted">method</span>
+            <span className="text-emerald-600 dark:text-emerald-400">
+              &quot;GET&quot;
             </span>
           </div>
           <div className="flex justify-between gap-3">
-            <span className="text-zinc-600 dark:text-zinc-400">method</span>
-            <span className="text-emerald-600 dark:text-emerald-400">&quot;GET&quot;</span>
-          </div>
-          <div className="flex justify-between gap-3">
-            <span className="text-zinc-600 dark:text-zinc-400">url</span>
-            <span className="text-emerald-600 dark:text-emerald-400 truncate text-right max-w-32" title={url ?? undefined}>
-              {url ? `".../${url.split("/").pop()}"` : <span className="text-zinc-500 dark:text-zinc-400">&mdash;</span>}
+            <span className="text-muted">url</span>
+            <span
+              className="max-w-32 truncate text-right text-emerald-600 dark:text-emerald-400"
+              title={url ?? undefined}
+            >
+              {url ? (
+                `".../${url.split("/").pop()}"`
+              ) : (
+                <span className="text-subtle">&mdash;</span>
+              )}
             </span>
           </div>
           <div className="flex justify-between gap-3">
-            <span className="text-zinc-600 dark:text-zinc-400">time</span>
+            <span className="text-muted">time</span>
             <span className="text-sky-600 dark:text-sky-400">
-              {responseTime !== null ? `${responseTime}ms` : <span className="text-zinc-500 dark:text-zinc-400">&mdash;</span>}
+              {responseTime !== null ? (
+                `${responseTime}ms`
+              ) : (
+                <span className="text-subtle">&mdash;</span>
+              )}
             </span>
           </div>
           <div className="flex justify-between gap-3">
-            <span className="text-zinc-600 dark:text-zinc-400">response</span>
-            <span className="text-zinc-600">
+            <span className="text-muted">response</span>
+            <span className="text-muted">
               {status === "success" && (
-                <span className="text-emerald-600 dark:text-emerald-400">{"{ name, types, sprites }"}</span>
+                <span className="text-emerald-600 dark:text-emerald-400">
+                  {"{ name, types, sprites }"}
+                </span>
               )}
               {status === "error" && (
                 <span className="text-red-600 dark:text-red-400">404</span>

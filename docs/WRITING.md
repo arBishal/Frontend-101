@@ -121,6 +121,14 @@ Avoid emdashes as much as possible. If it's unavoidable, don't use spaces before
 
 ---
 
+## Typographic characters — literals, not entities
+
+Write real typographic characters directly in prose — `’` `‘` `“` `”` `°` `é` and the like — never their HTML entities (`&rsquo;`, `&ldquo;`, `&deg;`…). Entities are a fallback *only* for characters that can't be literals: `&lt;`/`&gt;` (a literal `<`/`>` breaks JSX) and a straight `&quot;` shown inside `<code>` (a literal `"` trips `react/no-unescaped-entities`).
+
+**Why:** when a JSX text node contains an HTML entity, the SWC compiler silently drops the single space between it and a preceding inline element, so `…one thing:</strong> the DOM` ships as `…one thing:</strong>the DOM`. Literals don't trigger it. Detection: the render-grep guard tracked in [TODO.md](./TODO.md).
+
+---
+
 ## Refactoring an existing concept
 
 The eight live pages predate this playbook. When refactoring one:

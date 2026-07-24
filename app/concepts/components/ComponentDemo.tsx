@@ -11,9 +11,9 @@ const variantStyles = {
   solid:
     "bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 hover:enabled:bg-zinc-700 dark:hover:enabled:bg-zinc-300",
   outline:
-    "border border-zinc-300 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 hover:enabled:bg-zinc-100 dark:hover:enabled:bg-zinc-800",
+    "border border-zinc-300 dark:border-zinc-700 text-body hover:enabled:bg-zinc-100 dark:hover:enabled:bg-zinc-800",
   ghost:
-    "text-zinc-600 dark:text-zinc-400 hover:enabled:bg-zinc-100 dark:hover:enabled:bg-zinc-800 hover:enabled:text-zinc-900 dark:hover:enabled:text-zinc-100",
+    "text-muted hover:enabled:bg-zinc-100 dark:hover:enabled:bg-zinc-800 hover:enabled:text-zinc-900 dark:hover:enabled:text-zinc-100",
 } as const;
 
 const radiusCss = {
@@ -23,8 +23,16 @@ const radiusCss = {
 } as const;
 
 const sizeCss = {
-  sm: { class: "px-4 py-2 text-xs", padding: "0.5rem 1rem", fontSize: "0.75rem" },
-  md: { class: "px-6 py-3 text-sm", padding: "0.75rem 1.5rem", fontSize: "0.875rem" },
+  sm: {
+    class: "px-4 py-2 text-xs",
+    padding: "0.5rem 1rem",
+    fontSize: "0.75rem",
+  },
+  md: {
+    class: "px-6 py-3 text-sm",
+    padding: "0.75rem 1.5rem",
+    fontSize: "0.875rem",
+  },
   lg: { class: "px-8 py-4 text-base", padding: "1rem 2rem", fontSize: "1rem" },
 } as const;
 
@@ -49,10 +57,10 @@ function DemoButton({
     <button
       disabled={disabled}
       className={cn(
-        "inline-flex items-center gap-2 font-medium transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed",
+        "inline-flex cursor-pointer items-center gap-2 font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-50",
         radiusCss[radius].class,
         sizeCss[size].class,
-        variantStyles[variant]
+        variantStyles[variant],
       )}
     >
       {children}
@@ -78,10 +86,10 @@ function OptionToggle<T extends string>({
           key={opt}
           onClick={() => onChange(opt)}
           className={cn(
-            "px-2 py-1 rounded text-xs font-mono transition-colors cursor-pointer",
+            "cursor-pointer rounded px-2 py-1 font-mono text-xs transition-colors",
             value === opt
-              ? "bg-zinc-200 dark:bg-zinc-700 text-emerald-700 dark:text-emerald-400"
-              : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200"
+              ? "bg-zinc-200 text-emerald-700 dark:bg-zinc-700 dark:text-emerald-400"
+              : "text-muted hover:text-zinc-900 dark:hover:text-zinc-200",
           )}
         >
           {opt}
@@ -124,10 +132,13 @@ export default function ComponentDemo() {
   return (
     <div className="space-y-4">
       {/* Live Preview — full width */}
-      <Card className="flex flex-col xl:flex-row items-start xl:items-center xl:justify-around gap-4 xl:gap-6">
+      <Card className="flex flex-col items-start gap-4 xl:flex-row xl:items-center xl:justify-around xl:gap-6">
         {variants.map((variant) => (
-          <div key={variant} className="flex items-center gap-3 xl:flex-col xl:gap-4">
-            <span className="font-mono text-xs text-zinc-500 dark:text-zinc-400 w-16 xl:w-auto shrink-0">
+          <div
+            key={variant}
+            className="flex items-center gap-3 xl:flex-col xl:gap-4"
+          >
+            <span className="text-subtle w-16 shrink-0 font-mono text-xs xl:w-auto">
               {variant}
             </span>
             <DemoButton
@@ -144,24 +155,31 @@ export default function ComponentDemo() {
       </Card>
 
       {/* Panels — side by side at sm+ */}
-      <div className="flex flex-col sm:flex-row gap-4">
+      <div className="flex flex-col gap-4 sm:flex-row">
         {/* Props Inspector */}
         <InspectorPanel title="Props Inspector" className="flex-1">
           <div className="space-y-2.5 text-xs">
             {variants.map((variant, i) => (
-              <div key={variant} className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
+              <div
+                key={variant}
+                className="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-3"
+              >
                 <div className="flex items-center gap-2">
-                  <span className="text-zinc-600 dark:text-zinc-400 w-4 shrink-0">#{i + 1}</span>
-                  <span className="text-zinc-600 dark:text-zinc-400">variant</span>
-                  <span className="text-emerald-600 dark:text-emerald-400">&quot;{variant}&quot;</span>
+                  <span className="text-muted w-4 shrink-0">#{i + 1}</span>
+                  <span className="text-muted">variant</span>
+                  <span className="text-emerald-600 dark:text-emerald-400">
+                    &quot;{variant}&quot;
+                  </span>
                 </div>
-                <div className="flex items-center gap-2 pl-6 sm:pl-0 sm:ml-auto">
-                  <span className="text-zinc-600 dark:text-zinc-400">disabled</span>
+                <div className="flex items-center gap-2 pl-6 sm:ml-auto sm:pl-0">
+                  <span className="text-muted">disabled</span>
                   <button
                     onClick={() => toggleDisabled(variant)}
                     className={cn(
-                      "font-mono transition-colors cursor-pointer",
-                      disabledMap[variant] ? "text-amber-600 dark:text-amber-400" : "text-amber-600/50 dark:text-amber-400/60"
+                      "cursor-pointer font-mono transition-colors",
+                      disabledMap[variant]
+                        ? "text-amber-600 dark:text-amber-400"
+                        : "text-amber-600/50 dark:text-amber-400/60",
                     )}
                   >
                     {String(disabledMap[variant])}
@@ -176,7 +194,9 @@ export default function ComponentDemo() {
         <InspectorPanel title="Style Editor" className="flex-1">
           <div className="space-y-3 text-xs">
             <div className="flex items-center gap-4 md:gap-6">
-              <p className="text-zinc-600 dark:text-zinc-400 uppercase w-24 shrink-0">border-radius</p>
+              <p className="text-muted w-24 shrink-0 uppercase">
+                border-radius
+              </p>
               <OptionToggle
                 options={["rounded", "pill", "square"] as const}
                 value={radius}
@@ -184,7 +204,7 @@ export default function ComponentDemo() {
               />
             </div>
             <div className="flex items-center gap-4 md:gap-6">
-              <p className="text-zinc-600 dark:text-zinc-400 uppercase w-24 shrink-0">size</p>
+              <p className="text-muted w-24 shrink-0 uppercase">size</p>
               <OptionToggle
                 options={["sm", "md", "lg"] as const}
                 value={size}
@@ -196,9 +216,19 @@ export default function ComponentDemo() {
       </div>
 
       {/* Code View */}
-      <div className="flex flex-col sm:flex-row gap-4">
-        <CodeBlock code={buildJsxSnippet(disabledMap)} lang="tsx" title="JSX" className="flex-1" />
-        <CodeBlock code={buildCssSnippet(radius, size)} lang="css" title="CSS" className="flex-1" />
+      <div className="flex flex-col gap-4 sm:flex-row">
+        <CodeBlock
+          code={buildJsxSnippet(disabledMap)}
+          lang="tsx"
+          title="JSX"
+          className="flex-1"
+        />
+        <CodeBlock
+          code={buildCssSnippet(radius, size)}
+          lang="css"
+          title="CSS"
+          className="flex-1"
+        />
       </div>
     </div>
   );

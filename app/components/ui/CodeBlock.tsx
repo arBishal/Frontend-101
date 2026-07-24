@@ -33,7 +33,10 @@ type CodeBlockProps = SingleProps | TabbedProps;
 export default function CodeBlock(props: CodeBlockProps) {
   const isTabbedMode = !!props.tabs;
   const [activeTab, setActiveTab] = useState(0);
-  const [rendered, setRendered] = useState<{ key: string; html: string } | null>(null);
+  const [rendered, setRendered] = useState<{
+    key: string;
+    html: string;
+  } | null>(null);
   const cache = useRef(new Map<string, string>());
 
   const code = isTabbedMode ? props.tabs[activeTab].code : props.code;
@@ -75,19 +78,24 @@ export default function CodeBlock(props: CodeBlockProps) {
   const lineCount = code.split("\n").length;
 
   return (
-    <div className={cn("rounded-lg bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 overflow-hidden", props.className)}>
+    <div
+      className={cn(
+        "bg-raised border-default overflow-hidden rounded-lg border",
+        props.className,
+      )}
+    >
       {/* Header — tabs or title */}
       {isTabbedMode ? (
-        <div className="flex border-b border-zinc-200 dark:border-zinc-800 bg-zinc-200 dark:bg-zinc-800">
+        <div className="border-default bg-header flex border-b">
           {props.tabs.map((tab, i) => (
             <button
               key={tab.label}
               onClick={() => handleTabChange(i)}
               className={cn(
-                "flex-1 px-4 py-2 font-mono text-xs sm:text-sm transition-colors",
+                "flex-1 px-4 py-2 font-mono text-xs transition-colors sm:text-sm",
                 activeTab === i
-                  ? "text-zinc-900 dark:text-zinc-100 bg-zinc-200 dark:bg-zinc-800"
-                  : "text-zinc-500 dark:text-zinc-400 bg-zinc-50 dark:bg-zinc-900 hover:text-zinc-800 dark:hover:text-zinc-200"
+                  ? "text-strong bg-header"
+                  : "text-subtle bg-raised hover:text-zinc-800 dark:hover:text-zinc-200",
               )}
             >
               {tab.label}
@@ -95,8 +103,8 @@ export default function CodeBlock(props: CodeBlockProps) {
           ))}
         </div>
       ) : props.title ? (
-        <div className="flex border-b border-zinc-200 dark:border-zinc-800 bg-zinc-200 dark:bg-zinc-800">
-          <div className="flex-1 px-4 py-2 font-mono text-xs sm:text-sm text-zinc-900 dark:text-zinc-100">
+        <div className="border-default bg-header flex border-b">
+          <div className="text-strong flex-1 px-4 py-2 font-mono text-xs sm:text-sm">
             {props.title}
           </div>
         </div>
@@ -106,7 +114,7 @@ export default function CodeBlock(props: CodeBlockProps) {
       <div className="flex overflow-x-auto">
         {/* Line numbers */}
         <div
-          className="shrink-0 py-4 pl-4 pr-3 text-right font-mono text-xs leading-relaxed text-zinc-400 dark:text-zinc-600 select-none"
+          className="shrink-0 py-4 pr-3 pl-4 text-right font-mono text-xs leading-relaxed text-zinc-400 select-none dark:text-zinc-600"
           aria-hidden
         >
           {Array.from({ length: lineCount }, (_, i) => (
@@ -116,12 +124,14 @@ export default function CodeBlock(props: CodeBlockProps) {
         {/* Code */}
         {activeHtml ? (
           <div
-            className="flex-1 py-4 pr-4 font-mono text-xs leading-relaxed overflow-x-auto [&_pre]:!bg-transparent [&_pre]:!m-0 [&_pre]:!p-0 [&_code]:!bg-transparent"
+            className="flex-1 overflow-x-auto py-4 pr-4 font-mono text-xs leading-relaxed [&_code]:!bg-transparent [&_pre]:!m-0 [&_pre]:!bg-transparent [&_pre]:!p-0"
             dangerouslySetInnerHTML={{ __html: activeHtml }}
           />
         ) : (
-          <div className="flex-1 py-4 pr-4 font-mono text-xs leading-relaxed overflow-x-auto">
-            <pre className="text-zinc-700 dark:text-zinc-400 whitespace-pre">{code}</pre>
+          <div className="flex-1 overflow-x-auto py-4 pr-4 font-mono text-xs leading-relaxed">
+            <pre className="whitespace-pre text-zinc-700 dark:text-zinc-400">
+              {code}
+            </pre>
           </div>
         )}
       </div>
