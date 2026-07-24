@@ -251,7 +251,7 @@ function DiffLines({ rows, side }: { rows: DiffRow[]; side: "source" | "live" })
 
 function DiffPanelHeader({ label }: { label: string }) {
   return (
-    <div className="px-4 py-2 font-mono text-xs sm:text-sm text-strong bg-zinc-200 dark:bg-zinc-800 border-b border-default">
+    <div className="px-4 py-2 font-mono text-xs sm:text-sm text-strong bg-header border-b border-default">
       {label}
     </div>
   );

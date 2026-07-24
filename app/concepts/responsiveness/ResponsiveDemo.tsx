@@ -103,7 +103,7 @@ export default function ResponsiveDemo() {
       {/* Resizable preview */}
       <div ref={containerRef} className="relative">
         <div
-          className="@container relative overflow-hidden rounded-lg border border-default transition-[border-color]"
+          className="@container relative overflow-hidden rounded-lg border border-default transition-colors"
           style={{ width: isDesktop ? "100%" : displayWidth, maxWidth: "100%" }}
         >
           {/* Preview content */}

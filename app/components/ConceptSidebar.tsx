@@ -134,7 +134,7 @@ export default function ConceptSidebar() {
       <button
         onClick={() => setMobileExpanded((v) => !v)}
         aria-label={mobileExpanded ? "Collapse sidebar" : "Expand sidebar"}
-        className={cn("lg:hidden fixed top-1/2 -translate-y-1/2 -translate-x-1/2 z-50 flex items-center justify-center size-6 rounded-full bg-white dark:bg-zinc-900 border border-default text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 shadow-sm transition-[left] duration-200", mobileExpanded ? "left-48" : "left-14")}
+        className={cn("lg:hidden fixed top-1/2 -translate-y-1/2 -translate-x-1/2 z-50 flex items-center justify-center size-6 rounded-full bg-white dark:bg-zinc-900 border border-default text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 shadow-sm transition-all duration-200", mobileExpanded ? "left-48" : "left-14")}
       >
         <ChevronRight className={cn("size-3 transition-transform", mobileExpanded && "rotate-180")} />
       </button>

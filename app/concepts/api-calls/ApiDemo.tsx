@@ -178,7 +178,7 @@ export default function ApiDemo() {
           )}
 
           {status === "loading" && (
-            <div className="flex items-center gap-2 text-sm text-zinc-600">
+            <div className="flex items-center gap-2 text-sm text-muted">
               <Loader2 className="size-4 animate-spin" />
               Fetching...
             </div>
@@ -259,7 +259,7 @@ export default function ApiDemo() {
           </div>
           <div className="flex justify-between gap-3">
             <span className="text-muted">response</span>
-            <span className="text-zinc-600">
+            <span className="text-muted">
               {status === "success" && (
                 <span className="text-emerald-600 dark:text-emerald-400">{"{ name, types, sprites }"}</span>
               )}

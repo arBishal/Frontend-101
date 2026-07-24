@@ -78,7 +78,7 @@ export default function CodeBlock(props: CodeBlockProps) {
     <div className={cn("rounded-lg bg-raised border border-default overflow-hidden", props.className)}>
       {/* Header — tabs or title */}
       {isTabbedMode ? (
-        <div className="flex border-b border-default bg-zinc-200 dark:bg-zinc-800">
+        <div className="flex border-b border-default bg-header">
           {props.tabs.map((tab, i) => (
             <button
               key={tab.label}
@@ -86,7 +86,7 @@ export default function CodeBlock(props: CodeBlockProps) {
               className={cn(
                 "flex-1 px-4 py-2 font-mono text-xs sm:text-sm transition-colors",
                 activeTab === i
-                  ? "text-strong bg-zinc-200 dark:bg-zinc-800"
+                  ? "text-strong bg-header"
                   : "text-subtle bg-raised hover:text-zinc-800 dark:hover:text-zinc-200"
               )}
             >
@@ -95,7 +95,7 @@ export default function CodeBlock(props: CodeBlockProps) {
           ))}
         </div>
       ) : props.title ? (
-        <div className="flex border-b border-default bg-zinc-200 dark:bg-zinc-800">
+        <div className="flex border-b border-default bg-header">
           <div className="flex-1 px-4 py-2 font-mono text-xs sm:text-sm text-strong">
             {props.title}
           </div>

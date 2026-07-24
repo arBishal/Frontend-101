@@ -49,7 +49,7 @@ function DemoButton({
     <button
       disabled={disabled}
       className={cn(
-        "inline-flex items-center gap-2 font-medium transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed",
+        "inline-flex items-center gap-2 font-medium transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed",
         radiusCss[radius].class,
         sizeCss[size].class,
         variantStyles[variant]

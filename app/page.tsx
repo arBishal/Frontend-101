@@ -138,7 +138,7 @@ export default async function Home() {
               <Card
                 key={concept.slug}
                 href={`/concepts/${concept.slug}`}
-                className="group p-6 transition-all hover:border-zinc-400 dark:hover:border-zinc-600 hover:-translate-y-0.5"
+                className="group p-6 transition hover:border-zinc-400 dark:hover:border-zinc-600 hover:-translate-y-0.5"
               >
                 <div className="flex items-center gap-3 md:gap-4 mb-1">
                   <Icon className="size-4 md:size-5 text-subtle group-hover:text-zinc-600 dark:group-hover:text-zinc-300 transition-colors" />

@@ -18,6 +18,7 @@
   --surface: #ffffff; /* white  */
   --raised: #fafafa; /* zinc-50 */
   --inset: #f4f4f5; /* zinc-100 */
+  --header: #e4e4e7; /* zinc-200 — panel/tab header fill */
 }
 
 .dark {
@@ -33,6 +34,7 @@
   --surface: #09090b; /* zinc-950 */
   --raised: #18181b; /* zinc-900 */
   --inset: #27272a; /* zinc-800 */
+  --header: #27272a; /* zinc-800 */
 }
 
 @theme inline {
@@ -53,6 +55,7 @@
   --color-surface: var(--surface);
   --color-raised: var(--raised);
   --color-inset: var(--inset);
+  --color-header: var(--header);
 }
 
 body {
@@ -82,13 +85,13 @@ body {
 }
 
 @utility dot-grid {
-  background-image: radial-gradient(#d4d4d8 1px, transparent 1px);
+  background-image: radial-gradient(var(--color-zinc-300) 1px, transparent 1px);
   background-size: 24px 24px;
   mask-image: linear-gradient(to bottom, black 20%, transparent 80%);
 }
 
 @utility dot-grid-dark {
-  background-image: radial-gradient(#27272a 1px, transparent 1px);
+  background-image: radial-gradient(var(--color-zinc-800) 1px, transparent 1px);
 }
 
 /* Shiki dual-theme: switch to dark vars inside .dark */
