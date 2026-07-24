@@ -20,8 +20,6 @@ Conceptual frontend topics to implement, each with interactive demos and explana
 
 ## Tasks
 
-- [ ] Refactor CSS
-- [ ] Revisit theme toggling
 - [ ] Polish mobile ui
 - [ ] Add a "last updated" date to concept pages
 - [ ] Add "Try it yourself" challenges (2-3 per concept) to each concept page
