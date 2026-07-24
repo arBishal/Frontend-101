@@ -92,10 +92,10 @@ export default function ResponsiveDemo() {
 
       {/* Width indicator */}
       <div>
-        <p className="font-mono uppercase tracking-wide text-xs font-medium text-zinc-500 dark:text-zinc-400 mb-1">
+        <p className="font-mono uppercase tracking-wide text-xs font-medium text-subtle mb-1">
           Viewport width
         </p>
-        <span className="font-mono text-xl md:text-2xl font-medium text-zinc-900 dark:text-zinc-50 tabular-nums">
+        <span className="font-mono text-xl md:text-2xl font-medium text-strong tabular-nums">
           {displayWidth}px
         </span>
       </div>
@@ -103,13 +103,13 @@ export default function ResponsiveDemo() {
       {/* Resizable preview */}
       <div ref={containerRef} className="relative">
         <div
-          className="@container relative overflow-hidden rounded-lg border border-zinc-200 dark:border-zinc-800 transition-[border-color]"
+          className="@container relative overflow-hidden rounded-lg border border-default transition-[border-color]"
           style={{ width: isDesktop ? "100%" : displayWidth, maxWidth: "100%" }}
         >
           {/* Preview content */}
           <div className="p-4 space-y-3">
             {/* Mock navbar */}
-            <div className="rounded-lg bg-zinc-100 dark:bg-zinc-800 px-4 py-3 flex items-center justify-between">
+            <div className="rounded-lg bg-inset px-4 py-3 flex items-center justify-between">
               <div className="size-5 rounded-full bg-zinc-400 dark:bg-zinc-600 shrink-0" />
               {/* Nav links — shown once the container is wide enough */}
               <div className="hidden @lg:flex gap-2.5">
@@ -126,7 +126,7 @@ export default function ResponsiveDemo() {
             </div>
 
             {/* Mock hero */}
-            <div className="rounded-lg bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 px-5 py-8 text-center space-y-2.5">
+            <div className="rounded-lg bg-zinc-50 dark:bg-zinc-800/50 border border-default px-5 py-8 text-center space-y-2.5">
               <div className="h-3.5 w-1/3 mx-auto rounded-full bg-zinc-400 dark:bg-zinc-600" />
               <div className="h-2 w-2/3 mx-auto rounded-full bg-zinc-300 dark:bg-zinc-700" />
               <div className="h-2 w-1/2 mx-auto rounded-full bg-zinc-300 dark:bg-zinc-700" />
@@ -137,7 +137,7 @@ export default function ResponsiveDemo() {
               {[1, 2, 3, 4, 5, 6].map((i) => (
                 <div
                   key={i}
-                  className="rounded-lg bg-zinc-100 dark:bg-zinc-800 p-4 space-y-2.5"
+                  className="rounded-lg bg-inset p-4 space-y-2.5"
                 >
                   <div className="h-2.5 w-14 rounded-full bg-zinc-400 dark:bg-zinc-600" />
                   <div className="h-2 w-full rounded-full bg-zinc-300 dark:bg-zinc-700" />
@@ -146,7 +146,7 @@ export default function ResponsiveDemo() {
             </div>
 
             {/* Mock footer */}
-            <div className="rounded-lg bg-zinc-100 dark:bg-zinc-800 px-4 py-4 flex flex-col @lg:flex-row items-center justify-between gap-3">
+            <div className="rounded-lg bg-inset px-4 py-4 flex flex-col @lg:flex-row items-center justify-between gap-3">
               <div className="h-2 w-16 rounded-full bg-zinc-400 dark:bg-zinc-600" />
               <div className="flex gap-2.5">
                 <div className="h-2 w-8 rounded-full bg-zinc-400 dark:bg-zinc-600" />

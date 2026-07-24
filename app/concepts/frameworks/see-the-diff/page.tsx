@@ -20,7 +20,7 @@ export default function SeeTheDiffPage() {
 
       <div>
         <SectionLabel className="mb-4">Interactive demo</SectionLabel>
-        <p className="text-zinc-600 dark:text-zinc-400 mb-4">
+        <p className="text-muted mb-4">
           Below is the same todo list built twice: once in vanilla JavaScript,
           once in React. The live list is at the top; under it, the two
           implementations sit side by side (tabbed on narrow screens). Before you
@@ -29,7 +29,7 @@ export default function SeeTheDiffPage() {
         <FrameworkDemo />
       </div>
 
-      <div className="text-sm lg:text-base text-zinc-600 dark:text-zinc-400 space-y-3">
+      <div className="text-sm lg:text-base text-muted space-y-3">
         <SectionLabel>What to notice</SectionLabel>
         <p>
           The live demo is the same in both worlds: a todo list you can add to,
@@ -51,13 +51,13 @@ export default function SeeTheDiffPage() {
         <p>
           Same behavior, less than half the hand-written wiring, and that gap
           only widens as the UI grows. The framework lets you spend your
-          attention on <em className="text-zinc-700 dark:text-zinc-300">what</em>{" "}
-          to show instead of <em className="text-zinc-700 dark:text-zinc-300">how</em>{" "}
+          attention on <em className="text-body">what</em>{" "}
+          to show instead of <em className="text-body">how</em>{" "}
           to update the page.
         </p>
         <Link
           href="/concepts/frameworks/landscape"
-          className="inline-flex items-center gap-2 text-sm font-medium text-zinc-900 dark:text-zinc-100 hover:underline"
+          className="inline-flex items-center gap-2 text-sm font-medium text-strong hover:underline"
         >
           Next, explore the framework landscape
           <ArrowRight className="size-4" />

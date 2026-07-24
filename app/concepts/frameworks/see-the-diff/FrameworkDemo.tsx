@@ -159,7 +159,7 @@ export default function FrameworkDemo() {
             What To Do?
           </p>
           {todos.length > 0 && (
-            <span className="font-mono text-xs text-zinc-500 dark:text-zinc-400">
+            <span className="font-mono text-xs text-subtle">
               {doneCount}/{todos.length} completed
             </span>
           )}
@@ -183,7 +183,7 @@ export default function FrameworkDemo() {
             {todos.map((todo) => (
               <li
                 key={todo.id}
-                className="flex items-center gap-3 rounded border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-800/50 px-3 py-2.5 text-sm"
+                className="flex items-center gap-3 rounded border border-default bg-zinc-50 dark:bg-zinc-800/50 px-3 py-2.5 text-sm"
               >
                 <button
                   onClick={() => toggle(todo.id)}
@@ -198,7 +198,7 @@ export default function FrameworkDemo() {
                 <span
                   className={cn(
                     "flex-1",
-                    todo.done ? "line-through text-zinc-500 dark:text-zinc-500" : "text-zinc-700 dark:text-zinc-300"
+                    todo.done ? "line-through text-zinc-500 dark:text-zinc-500" : "text-body"
                   )}
                 >
                   {todo.text}
@@ -213,7 +213,7 @@ export default function FrameworkDemo() {
             ))}
           </ul>
         ) : (
-          <p className="text-sm text-zinc-500 dark:text-zinc-400 italic">
+          <p className="text-sm text-subtle italic">
             No todos yet. Type something and press Enter or click Add.
           </p>
         )}
@@ -235,7 +235,7 @@ export default function FrameworkDemo() {
 
       {/* Callout */}
       <Card className="bg-zinc-50 dark:bg-zinc-800/50 px-5 py-4 sm:px-5 sm:py-4">
-        <p className="text-sm text-zinc-600 dark:text-zinc-400">
+        <p className="text-sm text-muted">
           Both do the same thing. The framework version is shorter, declarative,
           and automatically keeps the UI in sync with the data.
         </p>

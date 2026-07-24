@@ -35,7 +35,7 @@ export default function ComponentsPage() {
     <div className="flex flex-col gap-8 text-sm lg:text-base">
       <ConceptHeader title={concept.title} subtitle={concept.description} />
 
-      <div className="text-sm lg:text-base text-zinc-600 dark:text-zinc-400 space-y-3">
+      <div className="text-sm lg:text-base text-muted space-y-3">
         <SectionLabel>What is a component?</SectionLabel>
         <p>
           A component is a self-contained, reusable piece of UI. Instead of
@@ -46,19 +46,19 @@ export default function ComponentsPage() {
         </p>
         <p>
           Think of components like LEGO bricks, but notice{" "}
-          <em className="text-zinc-700 dark:text-zinc-300">why</em> they snap
+          <em className="text-body">why</em> they snap
           together. It is the stud, one standardized bump every brick agrees on,
           so a piece from one set fits a piece from another. A component’s{" "}
-          <span className="italic text-zinc-700 dark:text-zinc-300">props</span>{" "}
+          <span className="italic text-body">props</span>{" "}
           are that stud: the small, agreed-on set of inputs it accepts.
           Anything can use the component by supplying those inputs, without
           knowing a thing about what is inside it.
         </p>
         <p>
           So a{" "}
-          <code className="text-zinc-800 dark:text-zinc-200">&lt;Button&gt;</code>{" "}
+          <code className="text-code">&lt;Button&gt;</code>{" "}
           might accept a{" "}
-          <code className="text-zinc-800 dark:text-zinc-200">variant</code> prop
+          <code className="text-code">variant</code> prop
           to switch between “primary” and “outline”
           looks. Same component, supplied different props, rendering a different
           result each time. Write it once; reuse it four times in a grid with
@@ -66,7 +66,7 @@ export default function ComponentsPage() {
         </p>
       </div>
 
-      <div className="text-sm lg:text-base text-zinc-600 dark:text-zinc-400 space-y-3">
+      <div className="text-sm lg:text-base text-muted space-y-3">
         <SectionLabel>Why it matters</SectionLabel>
         <p>
           Picture styling a Submit button forty times across an app by hand. A
@@ -88,17 +88,17 @@ export default function ComponentsPage() {
 
       <div>
         <SectionLabel className="mb-4">Interactive demo</SectionLabel>
-        <p className="text-zinc-600 dark:text-zinc-400 mb-4">
+        <p className="text-muted mb-4">
           Before you touch it: if you switch{" "}
-          <code className="text-zinc-800 dark:text-zinc-200">border-radius</code>{" "}
+          <code className="text-code">border-radius</code>{" "}
           to pill, how many of the three buttons change, and how many CSS rules
           does it take? Toggle{" "}
-          <code className="text-zinc-800 dark:text-zinc-200">disabled</code> per
+          <code className="text-code">disabled</code> per
           button and edit the shared style, then read the two code panels.
         </p>
         <ComponentDemo />
-        <p className="text-zinc-700 dark:text-zinc-300 mt-6 mb-2">Try breaking it:</p>
-        <ul className="list-disc list-inside space-y-1.5 text-zinc-600 dark:text-zinc-400">
+        <p className="text-body mt-6 mb-2">Try breaking it:</p>
+        <ul className="list-disc list-inside space-y-1.5 text-muted">
           <li>
             Set border-radius to square. The three buttons carry different
             variants and labels, so why does this one edit reshape all of them at
@@ -106,7 +106,7 @@ export default function ComponentsPage() {
           </li>
           <li>
             Disable just the outline button. Only its line in the JSX gains{" "}
-            <code className="text-zinc-800 dark:text-zinc-200">disabled</code>;
+            <code className="text-code">disabled</code>;
             the other two are untouched. Same component, different props.
           </li>
           <li>
@@ -116,13 +116,13 @@ export default function ComponentsPage() {
         </ul>
       </div>
 
-      <div className="text-sm lg:text-base text-zinc-600 dark:text-zinc-400 space-y-3">
+      <div className="text-sm lg:text-base text-muted space-y-3">
         <SectionLabel>How it works</SectionLabel>
         <p>
           Toggle{" "}
-          <code className="text-zinc-800 dark:text-zinc-200">disabled</code> on
+          <code className="text-code">disabled</code> on
           any row of the Props Inspector, or change{" "}
-          <code className="text-zinc-800 dark:text-zinc-200">border-radius</code>{" "}
+          <code className="text-code">border-radius</code>{" "}
           and size in the Style Editor. The live buttons and both code panels
           update together: the JSX (React’s HTML-in-JavaScript syntax) on
           one side, the CSS on the other.
@@ -134,7 +134,7 @@ export default function ComponentsPage() {
         </ul>
         <p>
           The split between the two editors is the thing to notice.{" "}
-          <code className="text-zinc-800 dark:text-zinc-200">disabled</code> is a
+          <code className="text-code">disabled</code> is a
           prop, set per instance, so you can switch off one button and leave the
           rest alone. Border-radius lives in the shared style every instance
           reads, so one edit moves all three. Props vary from one use to the
@@ -145,7 +145,7 @@ export default function ComponentsPage() {
           remember something on its own, that is{" "}
           <a
             href="/concepts/state"
-            className="underline underline-offset-2 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+            className="underline underline-offset-2 hover:text-strong transition-colors"
           >
             state
           </a>

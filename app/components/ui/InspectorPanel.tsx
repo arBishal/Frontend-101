@@ -10,11 +10,11 @@ export default function InspectorPanel({ title, children, className }: Inspector
   return (
     <div
       className={cn(
-        "w-full sm:w-1/3 shrink-0 rounded-lg bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 p-4 font-mono text-sm",
+        "w-full sm:w-1/3 shrink-0 rounded-lg bg-raised border border-default p-4 font-mono text-sm",
         className
       )}
     >
-      <p className="text-xs uppercase tracking-widest text-zinc-500 dark:text-zinc-400 mb-3">
+      <p className="text-xs uppercase tracking-widest text-subtle mb-3">
         {title}
       </p>
       {children}

@@ -75,10 +75,10 @@ export default function CodeBlock(props: CodeBlockProps) {
   const lineCount = code.split("\n").length;
 
   return (
-    <div className={cn("rounded-lg bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 overflow-hidden", props.className)}>
+    <div className={cn("rounded-lg bg-raised border border-default overflow-hidden", props.className)}>
       {/* Header — tabs or title */}
       {isTabbedMode ? (
-        <div className="flex border-b border-zinc-200 dark:border-zinc-800 bg-zinc-200 dark:bg-zinc-800">
+        <div className="flex border-b border-default bg-zinc-200 dark:bg-zinc-800">
           {props.tabs.map((tab, i) => (
             <button
               key={tab.label}
@@ -86,8 +86,8 @@ export default function CodeBlock(props: CodeBlockProps) {
               className={cn(
                 "flex-1 px-4 py-2 font-mono text-xs sm:text-sm transition-colors",
                 activeTab === i
-                  ? "text-zinc-900 dark:text-zinc-100 bg-zinc-200 dark:bg-zinc-800"
-                  : "text-zinc-500 dark:text-zinc-400 bg-zinc-50 dark:bg-zinc-900 hover:text-zinc-800 dark:hover:text-zinc-200"
+                  ? "text-strong bg-zinc-200 dark:bg-zinc-800"
+                  : "text-subtle bg-raised hover:text-zinc-800 dark:hover:text-zinc-200"
               )}
             >
               {tab.label}
@@ -95,8 +95,8 @@ export default function CodeBlock(props: CodeBlockProps) {
           ))}
         </div>
       ) : props.title ? (
-        <div className="flex border-b border-zinc-200 dark:border-zinc-800 bg-zinc-200 dark:bg-zinc-800">
-          <div className="flex-1 px-4 py-2 font-mono text-xs sm:text-sm text-zinc-900 dark:text-zinc-100">
+        <div className="flex border-b border-default bg-zinc-200 dark:bg-zinc-800">
+          <div className="flex-1 px-4 py-2 font-mono text-xs sm:text-sm text-strong">
             {props.title}
           </div>
         </div>

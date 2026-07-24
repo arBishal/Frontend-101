@@ -57,7 +57,7 @@ export default function AccessibilityDemo() {
         <h2
           className={cn(
             "text-lg md:text-xl font-semibold transition-colors duration-200",
-            fixes.contrast ? "text-zinc-900 dark:text-zinc-50" : "text-zinc-300 dark:text-zinc-600"
+            fixes.contrast ? "text-strong" : "text-zinc-300 dark:text-zinc-600"
           )}
         >
           Log in to your account
@@ -73,7 +73,7 @@ export default function AccessibilityDemo() {
               {fixes.labels && (
                 <label
                   htmlFor={field.id}
-                  className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-1"
+                  className="block text-sm font-medium text-body mb-1"
                 >
                   {field.label}
                 </label>
@@ -107,7 +107,7 @@ export default function AccessibilityDemo() {
         <div className="space-y-2 text-xs">
           {fixKeys.map((key) => (
             <div key={key} className="flex justify-between items-center gap-3">
-              <span className="text-zinc-600 dark:text-zinc-400">{fixLabels[key]}</span>
+              <span className="text-muted">{fixLabels[key]}</span>
               <button
                 type="button"
                 aria-pressed={fixes[key]}
@@ -122,12 +122,12 @@ export default function AccessibilityDemo() {
             </div>
           ))}
         </div>
-        <div className="border-t border-zinc-200 dark:border-zinc-700 mt-4 pt-3 flex justify-between items-center text-xs">
-          <span className="text-zinc-600 dark:text-zinc-400">score</span>
+        <div className="border-t border-default mt-4 pt-3 flex justify-between items-center text-xs">
+          <span className="text-muted">score</span>
           <span
             className={cn(
               "font-medium",
-              score === 0 ? "text-red-400" : score <= 2 ? "text-amber-400" : "text-emerald-400"
+              score === 0 ? "text-red-600 dark:text-red-400" : score <= 2 ? "text-amber-600 dark:text-amber-400" : "text-emerald-600 dark:text-emerald-400"
             )}
           >
             {score} / {fixKeys.length}

@@ -43,7 +43,7 @@ export default function Navbar() {
   const progressPct = isConceptPage ? getProgressPct(pathname, availableConcepts) : 0;
 
   return (
-    <nav className="relative border-b border-zinc-200 dark:border-zinc-800 px-4 py-2 lg:px-6 lg:py-4">
+    <nav className="relative border-b border-default px-4 py-2 lg:px-6 lg:py-4">
       <div className="mx-auto flex items-center justify-between">
         <Link
           href="/"
@@ -51,19 +51,19 @@ export default function Navbar() {
         >
           frontend-101
         </Link>
-        <div className="flex items-center gap-3 text-sm text-zinc-600 dark:text-zinc-400">
+        <div className="flex items-center gap-3 text-sm text-muted">
           <a
             href="https://github.com/arBishal/Frontend-101"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+            className="hover:text-strong transition-colors"
           >
             GitHub
           </a>
           {isConceptPage && (
             <button
               onClick={handleShare}
-              className="rounded p-1.5 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+              className="rounded p-1.5 hover:bg-inset transition-colors"
               aria-label="Copy link"
             >
               {copied ? (
@@ -73,11 +73,11 @@ export default function Navbar() {
               )}
             </button>
           )}
-          <ThemeToggleButton className="rounded p-1.5 hover:bg-zinc-100 dark:hover:bg-zinc-800" />
+          <ThemeToggleButton className="rounded p-1.5 hover:bg-inset" />
         </div>
       </div>
       {isConceptPage && (
-        <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-zinc-100 dark:bg-zinc-800">
+        <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-inset">
           <div
             className="h-full bg-emerald-500 transition-all duration-500 ease-out"
             style={{ width: `${progressPct}%` }}

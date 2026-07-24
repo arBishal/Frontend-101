@@ -35,19 +35,19 @@ export default function TheDomPage() {
     <div className="flex flex-col gap-8 text-sm lg:text-base">
       <ConceptHeader title={concept.title} subtitle={concept.description} />
 
-      <div className="text-sm lg:text-base text-zinc-600 dark:text-zinc-400 space-y-3">
+      <div className="text-sm lg:text-base text-muted space-y-3">
         <SectionLabel>What is the DOM?</SectionLabel>
         <p>
           The DOM (Document Object Model) is the live tree of objects the browser
           builds from your HTML and holds in memory. When a page loads, the
           browser reads your markup once and turns it into a structure it can
           change on the fly. Every element becomes a{" "}
-          <em className="text-zinc-700 dark:text-zinc-300">node</em>, an object
+          <em className="text-body">node</em>, an object
           in that tree, and the nesting in your HTML becomes parent-and-child
           links between nodes: a{" "}
-          <code className="text-zinc-800 dark:text-zinc-200">&lt;p&gt;</code>{" "}
+          <code className="text-code">&lt;p&gt;</code>{" "}
           inside a{" "}
-          <code className="text-zinc-800 dark:text-zinc-200">&lt;div&gt;</code>{" "}
+          <code className="text-code">&lt;div&gt;</code>{" "}
           is a child of that div node.
         </p>
         <p>
@@ -69,7 +69,7 @@ export default function TheDomPage() {
         </p>
       </div>
 
-      <div className="text-sm lg:text-base text-zinc-600 dark:text-zinc-400 space-y-3">
+      <div className="text-sm lg:text-base text-muted space-y-3">
         <SectionLabel>Why it matters</SectionLabel>
         <p>
           The DOM is the bridge between your code and what a user sees on screen.
@@ -87,42 +87,42 @@ export default function TheDomPage() {
 
       <div>
         <SectionLabel className="mb-4">Interactive demo</SectionLabel>
-        <p className="text-zinc-600 dark:text-zinc-400 mb-4">
+        <p className="text-muted mb-4">
           Before you touch it: if you delete the{" "}
-          <code className="text-zinc-800 dark:text-zinc-200">&lt;div&gt;</code>,
+          <code className="text-code">&lt;div&gt;</code>,
           what happens to the{" "}
-          <code className="text-zinc-800 dark:text-zinc-200">&lt;p&gt;</code> and{" "}
-          <code className="text-zinc-800 dark:text-zinc-200">&lt;span&gt;</code>{" "}
+          <code className="text-code">&lt;p&gt;</code> and{" "}
+          <code className="text-code">&lt;span&gt;</code>{" "}
           nested inside it? Click a node to inspect it, add or remove nodes, and
           watch the panels below compare the HTML you wrote against the live DOM.
         </p>
         <DomDemo />
-        <p className="text-zinc-700 dark:text-zinc-300 mt-6 mb-2">Try breaking it:</p>
-        <ul className="list-disc list-inside space-y-1.5 text-zinc-600 dark:text-zinc-400">
+        <p className="text-body mt-6 mb-2">Try breaking it:</p>
+        <ul className="list-disc list-inside space-y-1.5 text-muted">
           <li>
             Delete the{" "}
-            <code className="text-zinc-800 dark:text-zinc-200">&lt;div&gt;</code>.
+            <code className="text-code">&lt;div&gt;</code>.
             The live DOM drops it and everything nested inside, so why does the
             Source panel turn red over those lines instead of simply removing
             them?
           </li>
           <li>
             Add a{" "}
-            <code className="text-zinc-800 dark:text-zinc-200">&lt;button&gt;</code>{" "}
+            <code className="text-code">&lt;button&gt;</code>{" "}
             under{" "}
-            <code className="text-zinc-800 dark:text-zinc-200">&lt;body&gt;</code>.
+            <code className="text-code">&lt;body&gt;</code>.
             It shows up green in the live DOM and never appears in the Source,
             because the Source is frozen at what you first wrote.
           </li>
           <li>
             Select a node, add a child to it, then select its parent and watch{" "}
-            <code className="text-zinc-800 dark:text-zinc-200">children</code>{" "}
+            <code className="text-code">children</code>{" "}
             climb by one in the inspector.
           </li>
         </ul>
       </div>
 
-      <div className="text-sm lg:text-base text-zinc-600 dark:text-zinc-400 space-y-3">
+      <div className="text-sm lg:text-base text-muted space-y-3">
         <SectionLabel>How it works</SectionLabel>
         <p>
           The tree on the left is the DOM. Click any node to open the inspector,

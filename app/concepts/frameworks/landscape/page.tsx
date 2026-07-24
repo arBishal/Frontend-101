@@ -94,7 +94,7 @@ export default function LandscapePage() {
               href={url}
               target="_blank"
               rel="noopener noreferrer"
-              className="group rounded-lg border border-zinc-200 dark:border-zinc-800 p-5 space-y-3 transition-colors hover:border-zinc-400 dark:hover:border-zinc-600"
+              className="group rounded-lg border border-default p-5 space-y-3 transition-colors hover:border-zinc-400 dark:hover:border-zinc-600"
             >
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2.5">
@@ -106,20 +106,20 @@ export default function LandscapePage() {
                   >
                     <path d={icon.path} />
                   </svg>
-                  <p className="font-semibold text-zinc-900 dark:text-zinc-100">
+                  <p className="font-semibold text-strong">
                     {name}
                   </p>
                 </div>
                 <ExternalLink className="size-3.5 text-zinc-400 dark:text-zinc-500 opacity-0 group-hover:opacity-100 transition-opacity" />
               </div>
-              <p className="text-sm text-zinc-500 dark:text-zinc-400">
+              <p className="text-sm text-subtle">
                 {philosophy}
               </p>
               <div className="flex flex-wrap gap-1.5">
                 {users.map((user) => (
                   <span
                     key={user}
-                    className="rounded bg-zinc-100 dark:bg-zinc-800 px-2 py-0.5 font-mono text-xs text-zinc-500 dark:text-zinc-400"
+                    className="rounded bg-inset px-2 py-0.5 font-mono text-xs text-subtle"
                   >
                     {user}
                   </span>
@@ -130,14 +130,14 @@ export default function LandscapePage() {
         </div>
       </div>
 
-      <p className="text-sm text-zinc-500 dark:text-zinc-400">
+      <p className="text-sm text-subtle">
         * React is technically a UI library, not a framework: it handles
         rendering but leaves routing, data fetching, and structure to you. We
         include it here because it&rsquo;s the foundation most frameworks (like
         Next.js) are built on.
       </p>
 
-      <div className="text-sm lg:text-base text-zinc-600 dark:text-zinc-400 space-y-3">
+      <div className="text-sm lg:text-base text-muted space-y-3">
         <SectionLabel>Which one should you pick?</SectionLabel>
         <p>
           The best framework is the one your team knows and your project needs.

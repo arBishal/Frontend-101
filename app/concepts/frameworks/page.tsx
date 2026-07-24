@@ -41,7 +41,7 @@ export default function FrameworksPage() {
     <div className="flex flex-col gap-8 text-sm lg:text-base">
       <ConceptHeader title={concept.title} subtitle={concept.description} />
 
-      <div className="text-sm lg:text-base text-zinc-600 dark:text-zinc-400 space-y-3">
+      <div className="text-sm lg:text-base text-muted space-y-3">
         <SectionLabel>What is a framework?</SectionLabel>
         <p>
           Writing vanilla HTML and JavaScript is like giving a driver
@@ -54,14 +54,14 @@ export default function FrameworksPage() {
           That is what a framework is: a pre-built foundation that handles the
           repetitive, error-prone parts of building a UI, from DOM updates to
           state management to routing. Instead of telling the browser{" "}
-          <em className="text-zinc-700 dark:text-zinc-300">how</em> to change the
+          <em className="text-body">how</em> to change the
           page step by step, you describe{" "}
-          <em className="text-zinc-700 dark:text-zinc-300">what</em> it should
+          <em className="text-body">what</em> it should
           look like, and the framework works out the steps.
         </p>
       </div>
 
-      <div className="text-sm lg:text-base text-zinc-600 dark:text-zinc-400 space-y-3">
+      <div className="text-sm lg:text-base text-muted space-y-3">
         <SectionLabel>Why it matters</SectionLabel>
         <p>
           Without a framework, you create, update, and remove HTML elements by
@@ -74,9 +74,9 @@ export default function FrameworksPage() {
           with a well-chosen set of abstractions that keep the UI in step with
           the data and hand you reusable structure instead of a blank page. This
           entire site runs on{" "}
-          <strong className="text-zinc-900 dark:text-zinc-100">Next.js</strong>,
+          <strong className="text-strong">Next.js</strong>,
           which is built on{" "}
-          <strong className="text-zinc-900 dark:text-zinc-100">React</strong>.
+          <strong className="text-strong">React</strong>.
         </p>
         <ProblemCards problems={problems} className="sm:grid-cols-2 gap-4" />
         <Takeaway>
@@ -85,7 +85,7 @@ export default function FrameworksPage() {
         </Takeaway>
         <Link
           href="/concepts/frameworks/see-the-diff"
-          className="inline-flex items-center gap-2 text-sm font-medium text-zinc-900 dark:text-zinc-100 hover:underline"
+          className="inline-flex items-center gap-2 text-sm font-medium text-strong hover:underline"
         >
           See the difference for yourself
           <ArrowRight className="size-4" />

@@ -35,7 +35,7 @@ export default function ApiCallsPage() {
     <div className="flex flex-col gap-8 text-sm lg:text-base">
       <ConceptHeader title={concept.title} subtitle={concept.description} />
 
-      <div className="text-sm lg:text-base text-zinc-600 dark:text-zinc-400 space-y-3">
+      <div className="text-sm lg:text-base text-muted space-y-3">
         <SectionLabel>What is an API call?</SectionLabel>
         <p>
           Open a weather app and it shows 14°C for your city. That number was
@@ -51,11 +51,11 @@ export default function ApiCallsPage() {
           (the same kind
           of request your browser makes when it loads a page), the server does
           its work, and it sends back a response, usually as{" "}
-          <span className="italic text-zinc-700 dark:text-zinc-300">JSON</span>, a
+          <span className="italic text-body">JSON</span>, a
           plain-text format for structured data that JavaScript can read straight
           into an object. The browser has a built-in function for making that
           request:{" "}
-          <code className="text-zinc-800 dark:text-zinc-200">fetch()</code>. You
+          <code className="text-code">fetch()</code>. You
           give it a URL, it sends the request, and it hands you the response when
           the server answers.
         </p>
@@ -71,7 +71,7 @@ export default function ApiCallsPage() {
         </p>
       </div>
 
-      <div className="text-sm lg:text-base text-zinc-600 dark:text-zinc-400 space-y-3">
+      <div className="text-sm lg:text-base text-muted space-y-3">
         <SectionLabel>Why it matters</SectionLabel>
         <p>
           Almost every real app runs on data it fetches. Open a social feed and
@@ -91,51 +91,51 @@ export default function ApiCallsPage() {
         <ProblemCards problems={problems} />
       </div>
 
-      <div className="text-sm lg:text-base text-zinc-600 dark:text-zinc-400 space-y-3">
+      <div className="text-sm lg:text-base text-muted space-y-3">
         <SectionLabel>The four request methods</SectionLabel>
         <p>
           Every API call carries a{" "}
-          <span className="italic text-zinc-700 dark:text-zinc-300">method</span>:
+          <span className="italic text-body">method</span>:
           one word that tells the server what you want done. Four of them cover
           almost everything you will do:
         </p>
         <ul className="list-disc list-inside space-y-1.5">
           <li>
-            <code className="text-zinc-800 dark:text-zinc-200">GET</code> reads
+            <code className="text-code">GET</code> reads
             data that already exists, without changing it (load the comments on a
             post).
           </li>
           <li>
-            <code className="text-zinc-800 dark:text-zinc-200">POST</code> creates
+            <code className="text-code">POST</code> creates
             something new (post a new comment).
           </li>
           <li>
-            <code className="text-zinc-800 dark:text-zinc-200">PUT</code> updates
+            <code className="text-code">PUT</code> updates
             an existing item with new values (edit that comment).
           </li>
           <li>
-            <code className="text-zinc-800 dark:text-zinc-200">DELETE</code>{" "}
+            <code className="text-code">DELETE</code>{" "}
             removes an item (delete that comment).
           </li>
         </ul>
         <p>
-          <code className="text-zinc-800 dark:text-zinc-200">GET</code> only
+          <code className="text-code">GET</code> only
           reads; the other three change data, so they only work against a server
           built to accept those changes. The demo below sticks to{" "}
-          <code className="text-zinc-800 dark:text-zinc-200">GET</code>, the
+          <code className="text-code">GET</code>, the
           request every app makes most and the easiest one to watch happen.
         </p>
       </div>
 
       <div>
         <SectionLabel className="mb-4">Interactive demo</SectionLabel>
-        <p className="text-zinc-500 dark:text-zinc-400 text-sm mb-4">
+        <p className="text-subtle text-sm mb-4">
           This demo fetches a Pokémon by name or ID from{" "}
           <a
             href="https://pokeapi.co"
             target="_blank"
             rel="noopener noreferrer"
-            className="underline underline-offset-2 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+            className="underline underline-offset-2 hover:text-strong transition-colors"
           >
             PokéAPI
           </a>
@@ -145,13 +145,13 @@ export default function ApiCallsPage() {
           exist?
         </p>
         <ApiDemo />
-        <p className="text-zinc-700 dark:text-zinc-300 mt-6 mb-2">Try breaking it:</p>
-        <ul className="list-disc list-inside space-y-1.5 text-zinc-600 dark:text-zinc-400">
+        <p className="text-body mt-6 mb-2">Try breaking it:</p>
+        <ul className="list-disc list-inside space-y-1.5 text-muted">
           <li>
             Fetch{" "}
-            <code className="text-zinc-800 dark:text-zinc-200">pikachu</code>, then
+            <code className="text-code">pikachu</code>, then
             fetch{" "}
-            <code className="text-zinc-800 dark:text-zinc-200">notapokemon</code>.
+            <code className="text-code">notapokemon</code>.
             Which of the four states does the line land on this time, and what does
             the inspector show for the response?
           </li>
@@ -168,11 +168,11 @@ export default function ApiCallsPage() {
         </ul>
       </div>
 
-      <div className="text-sm lg:text-base text-zinc-600 dark:text-zinc-400 space-y-3">
+      <div className="text-sm lg:text-base text-muted space-y-3">
         <SectionLabel>How it works</SectionLabel>
         <p>
           Type a name or ID and hit Fetch. Flip on{" "}
-          <span className="italic text-zinc-700 dark:text-zinc-300">Simulate Slow Network</span>{" "}
+          <span className="italic text-body">Simulate Slow Network</span>{" "}
           to stretch the loading state long enough to actually watch it, and use
           the reset icon to drop back to idle. Two things move together: the line
           under the search bar says in plain words what is happening, and its
@@ -195,10 +195,10 @@ export default function ApiCallsPage() {
         </p>
         <p>
           The URL the inspector shows is an{" "}
-          <span className="italic text-zinc-700 dark:text-zinc-300">endpoint</span>,
+          <span className="italic text-body">endpoint</span>,
           an address that names one thing on the server:{" "}
-          <code className="text-zinc-800 dark:text-zinc-200">/pokemon/pikachu</code>{" "}
-          returns Pikachu’s stats, <code className="text-zinc-800 dark:text-zinc-200">/users/42</code>{" "}
+          <code className="text-code">/pokemon/pikachu</code>{" "}
+          returns Pikachu’s stats, <code className="text-code">/users/42</code>{" "}
           returns user #42. An API that organizes its data into addresses like
           these is called a REST API, and it is by far the most common kind you
           will meet.

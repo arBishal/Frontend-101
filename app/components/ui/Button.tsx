@@ -6,9 +6,9 @@ const variants = {
   solid:
     "bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 hover:bg-zinc-700 dark:hover:bg-zinc-300",
   outline:
-    "border border-zinc-300 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800",
+    "border border-zinc-300 dark:border-zinc-700 text-body hover:bg-inset",
   ghost:
-    "text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-100",
+    "text-muted hover:bg-inset hover:text-strong",
 } as const;
 
 const base =

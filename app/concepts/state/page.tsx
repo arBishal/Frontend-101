@@ -35,12 +35,12 @@ export default function StatePage() {
     <div className="flex flex-col gap-8 text-sm lg:text-base">
       <ConceptHeader title={concept.title} subtitle={concept.description} />
 
-      <div className="text-sm lg:text-base text-zinc-600 dark:text-zinc-400 space-y-3">
+      <div className="text-sm lg:text-base text-muted space-y-3">
         <SectionLabel>What is state?</SectionLabel>
         <p>
           State is data that changes over time. A plain HTML page is static: its
           content is baked in and never moves. State is what makes a UI{" "}
-          <em className="text-zinc-700 dark:text-zinc-300">interactive</em>, the
+          <em className="text-body">interactive</em>, the
           value behind a counter that climbs, a menu that knows whether it is
           open, a text field that updates as you type.
         </p>
@@ -57,7 +57,7 @@ export default function StatePage() {
         </p>
       </div>
 
-      <div className="text-sm lg:text-base text-zinc-600 dark:text-zinc-400 space-y-3">
+      <div className="text-sm lg:text-base text-muted space-y-3">
         <SectionLabel>Why it matters</SectionLabel>
         <p>
           Without state, keeping the screen current means finding the right DOM
@@ -77,44 +77,44 @@ export default function StatePage() {
 
       <div>
         <SectionLabel className="mb-4">Interactive demo</SectionLabel>
-        <p className="text-zinc-600 dark:text-zinc-400 mb-4">
+        <p className="text-muted mb-4">
           Before you touch it: clear the name field completely. What do you think
           the inspector shows for{" "}
-          <code className="text-zinc-800 dark:text-zinc-200">name</code>, and what
+          <code className="text-code">name</code>, and what
           does the card render in its place? Edit the name, toggle Follow, and tap
           the heart, then check the panel on the right.
         </p>
         <StateDemo />
-        <p className="text-zinc-700 dark:text-zinc-300 mt-6 mb-2">Try breaking it:</p>
-        <ul className="list-disc list-inside space-y-1.5 text-zinc-600 dark:text-zinc-400">
+        <p className="text-body mt-6 mb-2">Try breaking it:</p>
+        <ul className="list-disc list-inside space-y-1.5 text-muted">
           <li>
             Type a number like{" "}
-            <code className="text-zinc-800 dark:text-zinc-200">42</code> into the
+            <code className="text-code">42</code> into the
             name field, then read the inspector. Does{" "}
-            <code className="text-zinc-800 dark:text-zinc-200">name</code> hold the
+            <code className="text-code">name</code> hold the
             number{" "}
-            <code className="text-zinc-800 dark:text-zinc-200">42</code> or the
+            <code className="text-code">42</code> or the
             text{" "}
-            <code className="text-zinc-800 dark:text-zinc-200">&quot;42&quot;</code>,
+            <code className="text-code">&quot;42&quot;</code>,
             and what in the inspector tells you which?
           </li>
           <li>
             Tap the heart ten times fast. Each tap is a separate state update, so{" "}
-            <code className="text-zinc-800 dark:text-zinc-200">likes</code> climbs
+            <code className="text-code">likes</code> climbs
             one at a time and never skips a number.
           </li>
           <li>
             Toggle Follow on and off. Only{" "}
-            <code className="text-zinc-800 dark:text-zinc-200">following</code>{" "}
+            <code className="text-code">following</code>{" "}
             flips between{" "}
-            <code className="text-zinc-800 dark:text-zinc-200">true</code> and{" "}
-            <code className="text-zinc-800 dark:text-zinc-200">false</code>; the
+            <code className="text-code">true</code> and{" "}
+            <code className="text-code">false</code>; the
             name and like count sit untouched.
           </li>
         </ul>
       </div>
 
-      <div className="text-sm lg:text-base text-zinc-600 dark:text-zinc-400 space-y-3">
+      <div className="text-sm lg:text-base text-muted space-y-3">
         <SectionLabel>How it works</SectionLabel>
         <p>
           The profile card is driven by three pieces of state. Edit the name,
@@ -138,7 +138,7 @@ export default function StatePage() {
           hand, that is the shift the{" "}
           <a
             href="/concepts/the-dom"
-            className="underline underline-offset-2 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+            className="underline underline-offset-2 hover:text-strong transition-colors"
           >
             DOM
           </a>{" "}

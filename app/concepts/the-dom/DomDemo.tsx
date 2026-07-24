@@ -158,7 +158,7 @@ function TreeNode({ node, selectedId, onSelect, onRemove }: TreeNodeProps) {
         className={cn(
           "group flex items-center gap-1 rounded px-1.5 py-0.5 cursor-pointer select-none text-xs font-mono",
           isSelected
-            ? "bg-zinc-100 dark:bg-zinc-800"
+            ? "bg-inset"
             : "hover:bg-zinc-50 dark:hover:bg-zinc-800/50"
         )}
         onClick={() => onSelect(node.id)}
@@ -178,7 +178,7 @@ function TreeNode({ node, selectedId, onSelect, onRemove }: TreeNodeProps) {
         </button>
 
         {/* Tag label */}
-        <span className="text-zinc-700 dark:text-zinc-300">
+        <span className="text-body">
           &lt;{node.tag}&gt;
         </span>
 
@@ -205,7 +205,7 @@ function TreeNode({ node, selectedId, onSelect, onRemove }: TreeNodeProps) {
       {hasChildren && expanded && (
         <ul
           role="group"
-          className="pl-4 border-l border-zinc-200 dark:border-zinc-800 ml-2.5"
+          className="pl-4 border-l border-default ml-2.5"
         >
           {node.children.map((child) => (
             <TreeNode
@@ -238,7 +238,7 @@ function DiffLines({ rows, side }: { rows: DiffRow[]; side: "source" | "live" })
               "px-4 whitespace-pre",
               isHighlighted && side === "source" && "bg-red-50 dark:bg-red-950/40 text-red-700 dark:text-red-400",
               isHighlighted && side === "live" && "bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400",
-              !isHighlighted && "text-zinc-600 dark:text-zinc-400"
+              !isHighlighted && "text-muted"
             )}
           >
             {text !== null ? `${prefix}${text}` : " "}
@@ -251,7 +251,7 @@ function DiffLines({ rows, side }: { rows: DiffRow[]; side: "source" | "live" })
 
 function DiffPanelHeader({ label }: { label: string }) {
   return (
-    <div className="px-4 py-2 font-mono text-xs sm:text-sm text-zinc-900 dark:text-zinc-100 bg-zinc-200 dark:bg-zinc-800 border-b border-zinc-200 dark:border-zinc-800">
+    <div className="px-4 py-2 font-mono text-xs sm:text-sm text-strong bg-zinc-200 dark:bg-zinc-800 border-b border-default">
       {label}
     </div>
   );
@@ -260,7 +260,7 @@ function DiffPanelHeader({ label }: { label: string }) {
 function DiffPanel({ rows }: { rows: DiffRow[] }) {
   return (
     <div
-      className="rounded-lg bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 overflow-hidden"
+      className="rounded-lg bg-raised border border-default overflow-hidden"
       role="group"
       aria-label="Comparison of source HTML and live DOM"
     >
@@ -347,30 +347,30 @@ export default function DomDemo() {
             <>
               <div className="space-y-2 text-xs">
                 <div className="flex justify-between gap-3">
-                  <span className="text-zinc-500 dark:text-zinc-400">tagName</span>
+                  <span className="text-subtle">tagName</span>
                   <span className="text-emerald-600 dark:text-emerald-400">&quot;{selectedNode.tag}&quot;</span>
                 </div>
                 <div className="flex justify-between gap-3">
-                  <span className="text-zinc-500 dark:text-zinc-400">children</span>
+                  <span className="text-subtle">children</span>
                   <span className="text-sky-600 dark:text-sky-400">{selectedNode.children.length}</span>
                 </div>
                 <div className="flex justify-between gap-3">
-                  <span className="text-zinc-500 dark:text-zinc-400">textContent</span>
+                  <span className="text-subtle">textContent</span>
                   {selectedNode.text
                     ? <span className="text-emerald-600 dark:text-emerald-400 truncate max-w-28">&quot;{selectedNode.text}&quot;</span>
                     : <span className="text-amber-600 dark:text-amber-400">null</span>
                   }
                 </div>
                 <div className="flex justify-between gap-3">
-                  <span className="text-zinc-500 dark:text-zinc-400">parentNode</span>
+                  <span className="text-subtle">parentNode</span>
                   <span className="text-emerald-600 dark:text-emerald-400">
                     {parentNode ? `"${parentNode.tag}"` : "null"}
                   </span>
                 </div>
               </div>
 
-              <div className="border-t border-zinc-200 dark:border-zinc-800 pt-3 mt-3 space-y-2">
-                <p className="text-xs text-zinc-500 dark:text-zinc-400">Add child</p>
+              <div className="border-t border-default pt-3 mt-3 space-y-2">
+                <p className="text-xs text-subtle">Add child</p>
                 <Input
                   value={newTag}
                   onChange={(e) => setNewTag(e.target.value)}
@@ -405,11 +405,11 @@ export default function DomDemo() {
 
       {/* Source HTML vs live DOM — makes the page's key insight visible */}
       <div className="space-y-3">
-        <p className="text-xs lg:text-sm text-zinc-500 dark:text-zinc-400">
+        <p className="text-xs lg:text-sm text-subtle">
           The{" "}
-          <span className="font-medium text-zinc-700 dark:text-zinc-300">source</span>{" "}
+          <span className="font-medium text-body">source</span>{" "}
           is the HTML you wrote — it never changes. The{" "}
-          <span className="font-medium text-zinc-700 dark:text-zinc-300">live DOM</span>{" "}
+          <span className="font-medium text-body">live DOM</span>{" "}
           is what the browser renders right now. Lines only in the source are{" "}
           <span className="text-red-600 dark:text-red-400 font-medium">red</span>{" "}
           — removed from the live DOM. Lines only in the live DOM are{" "}

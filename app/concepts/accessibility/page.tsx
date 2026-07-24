@@ -35,11 +35,11 @@ export default function AccessibilityPage() {
     <div className="flex flex-col gap-8 text-sm lg:text-base">
       <ConceptHeader title={concept.title} subtitle={concept.description} />
 
-      <div className="text-sm lg:text-base text-zinc-600 dark:text-zinc-400 space-y-3">
+      <div className="text-sm lg:text-base text-muted space-y-3">
         <SectionLabel>What is accessibility?</SectionLabel>
         <p>
           Accessibility (often shortened to{" "}
-          <span className="italic text-zinc-700 dark:text-zinc-300">a11y</span>,
+          <span className="italic text-body">a11y</span>,
           for the a, then 11 letters, then y) means everyone can use your UI,
           including people with disabilities. That covers someone navigating by
           keyboard instead of a mouse, someone using a screen reader to hear
@@ -56,21 +56,21 @@ export default function AccessibilityPage() {
         <p>
           The good news is that the web has accessibility built in. Semantic
           HTML elements like{" "}
-          <code className="text-zinc-800 dark:text-zinc-200">&lt;button&gt;</code>,{" "}
-          <code className="text-zinc-800 dark:text-zinc-200">&lt;label&gt;</code>,
+          <code className="text-code">&lt;button&gt;</code>,{" "}
+          <code className="text-code">&lt;label&gt;</code>,
           and{" "}
-          <code className="text-zinc-800 dark:text-zinc-200">&lt;nav&gt;</code>{" "}
+          <code className="text-code">&lt;nav&gt;</code>{" "}
           carry meaning that assistive tools can read out. The most common
           failures aren’t hard problems, they’re simple oversights:
           missing alt text, low contrast, a clickable{" "}
-          <code className="text-zinc-800 dark:text-zinc-200">&lt;div&gt;</code>{" "}
+          <code className="text-code">&lt;div&gt;</code>{" "}
           where a{" "}
-          <code className="text-zinc-800 dark:text-zinc-200">&lt;button&gt;</code>{" "}
+          <code className="text-code">&lt;button&gt;</code>{" "}
           belongs, an input with no label.
         </p>
       </div>
 
-      <div className="text-sm lg:text-base text-zinc-600 dark:text-zinc-400 space-y-3">
+      <div className="text-sm lg:text-base text-muted space-y-3">
         <SectionLabel>Why it matters</SectionLabel>
         <p>
           The WHO puts it around 15% of the world’s population, more than
@@ -84,9 +84,9 @@ export default function AccessibilityPage() {
           (the Web Content Accessibility Guidelines) as the standard they point
           to. And fixing these problems usually makes the code simpler, not more
           complex. A real{" "}
-          <code className="text-zinc-800 dark:text-zinc-200">&lt;button&gt;</code>{" "}
+          <code className="text-code">&lt;button&gt;</code>{" "}
           needs less styling and JavaScript than a{" "}
-          <code className="text-zinc-800 dark:text-zinc-200">&lt;div&gt;</code>{" "}
+          <code className="text-code">&lt;div&gt;</code>{" "}
           rigged to act like one.
         </p>
         <ProblemCards problems={problems} />
@@ -94,17 +94,17 @@ export default function AccessibilityPage() {
 
       <div>
         <SectionLabel className="mb-4">Interactive demo</SectionLabel>
-        <p className="text-zinc-600 dark:text-zinc-400 mb-4">
+        <p className="text-muted mb-4">
           Before you toggle anything: with every fix off, Tab through the form.
           Can you reach the Log In button? Make a guess, then try it, then start
           flipping the switches in the audit panel.
         </p>
         <AccessibilityDemo />
-        <p className="text-zinc-700 dark:text-zinc-300 mt-6 mb-2">Try breaking it:</p>
-        <ul className="list-disc list-inside space-y-1.5 text-zinc-600 dark:text-zinc-400">
+        <p className="text-body mt-6 mb-2">Try breaking it:</p>
+        <ul className="list-disc list-inside space-y-1.5 text-muted">
           <li>
             Turn alt text on and a green{" "}
-            <code className="text-zinc-800 dark:text-zinc-200">alt</code> badge
+            <code className="text-code">alt</code> badge
             appears on the logo; turn it off and it is gone. With it off, what is
             left for a screen reader to announce when it reaches that image?
           </li>
@@ -121,7 +121,7 @@ export default function AccessibilityPage() {
         </ul>
       </div>
 
-      <div className="text-sm lg:text-base text-zinc-600 dark:text-zinc-400 space-y-3">
+      <div className="text-sm lg:text-base text-muted space-y-3">
         <SectionLabel>How it works</SectionLabel>
         <p>
           Flip each switch in the Accessibility Audit and the form changes to
@@ -144,23 +144,23 @@ export default function AccessibilityPage() {
           </li>
           <li>
             <strong>keyboard access</strong>: a real{" "}
-            <code className="text-zinc-800 dark:text-zinc-200">&lt;button&gt;</code>{" "}
+            <code className="text-code">&lt;button&gt;</code>{" "}
             can be reached and pressed without a mouse; a{" "}
-            <code className="text-zinc-800 dark:text-zinc-200">&lt;div&gt;</code>{" "}
+            <code className="text-code">&lt;div&gt;</code>{" "}
             cannot
           </li>
         </ul>
         <p>
           The keyboard fix is the one to feel rather than read. Tab through with
           it off and focus skips the Log In control entirely, because it is a{" "}
-          <code className="text-zinc-800 dark:text-zinc-200">&lt;div&gt;</code>.
+          <code className="text-code">&lt;div&gt;</code>.
           Turn it on and the same control becomes a real{" "}
-          <code className="text-zinc-800 dark:text-zinc-200">&lt;button&gt;</code>,
+          <code className="text-code">&lt;button&gt;</code>,
           in the tab order and announced as a button. None of these fixes are new
           tools; they are the semantic HTML the{" "}
           <a
             href="/concepts/the-dom"
-            className="underline underline-offset-2 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+            className="underline underline-offset-2 hover:text-strong transition-colors"
           >
             DOM
           </a>{" "}

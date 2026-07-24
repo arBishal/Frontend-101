@@ -36,7 +36,7 @@ export default function StateDemo() {
             alt={`${name}'s avatar`}
             width={56}
             height={56}
-            className="size-12 md:size-14 shrink-0 rounded-full bg-zinc-100 dark:bg-zinc-800"
+            className="size-12 md:size-14 shrink-0 rounded-full bg-inset"
             unoptimized
           />
           <div className="w-full flex flex-col md:flex-row justify-between items-center min-w-0 gap-4 md:gap-6">
@@ -84,15 +84,15 @@ export default function StateDemo() {
       <InspectorPanel title="State Inspector">
         <div className="space-y-2 text-xs">
           <div className="flex justify-between gap-3">
-            <span className="text-zinc-600 dark:text-zinc-400">name</span>
+            <span className="text-muted">name</span>
             <ValueDisplay type="string">&quot;{name}&quot;</ValueDisplay>
           </div>
           <div className="flex justify-between gap-3">
-            <span className="text-zinc-600 dark:text-zinc-400">following</span>
+            <span className="text-muted">following</span>
             <ValueDisplay type="boolean">{String(following)}</ValueDisplay>
           </div>
           <div className="flex justify-between gap-3">
-            <span className="text-zinc-600 dark:text-zinc-400">likes</span>
+            <span className="text-muted">likes</span>
             <ValueDisplay type="number">{likes}</ValueDisplay>
           </div>
         </div>
