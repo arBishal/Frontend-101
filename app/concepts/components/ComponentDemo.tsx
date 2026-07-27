@@ -193,7 +193,7 @@ export default function ComponentDemo() {
         {/* Style Editor */}
         <InspectorPanel title="Style Editor" className="flex-1">
           <div className="space-y-3 text-xs">
-            <div className="flex items-center gap-4 md:gap-6">
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 md:gap-x-6">
               <p className="text-muted w-24 shrink-0 uppercase">
                 border-radius
               </p>
@@ -203,7 +203,7 @@ export default function ComponentDemo() {
                 onChange={setRadius}
               />
             </div>
-            <div className="flex items-center gap-4 md:gap-6">
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 md:gap-x-6">
               <p className="text-muted w-24 shrink-0 uppercase">size</p>
               <OptionToggle
                 options={["sm", "md", "lg"] as const}

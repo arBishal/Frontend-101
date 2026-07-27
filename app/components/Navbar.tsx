@@ -45,7 +45,7 @@ export default function Navbar() {
     : 0;
 
   return (
-    <nav className="border-default relative border-b px-4 py-2 lg:px-6 lg:py-4">
+    <nav className="border-default relative border-b px-4 py-3 lg:px-6 lg:py-5">
       <div className="mx-auto flex items-center justify-between">
         <Link
           href="/"

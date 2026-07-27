@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-/* Required for next-themes class-based dark mode toggling */
+/* Enables class-based dark mode: ThemeProvider toggles .dark on <html>. */
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
