@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import ThemeToggleButton from "@/app/components/ThemeToggleButton";
 import { cn } from "@/app/lib/cn";
 
-export default function ThemeTogglingFloat() {
+export default function ThemeToggleFloat() {
   const pathname = usePathname();
   const [atNav, setAtNav] = useState(false);
 

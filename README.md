@@ -18,7 +18,7 @@ Frontend 101 is an educational site that teaches fundamental frontend developmen
 | **Components** | Why we build UIs out of reusable pieces |
 | **State** | How apps remember things that change |
 | **API Calls** | How the frontend asks a server for data |
-| **Frameworks** | The manual pain frameworks were built to remove |
+| **Frameworks** | A pre-built foundation that handles the repetitive parts of building an app |
 | **Accessibility** | Making sure the UI works for everyone |
 
 ## Architecture
@@ -47,6 +47,7 @@ Static generation plus server components keep the shipped JavaScript small — m
 - [Shiki](https://shiki.style/) for syntax highlighting
 - [Lucide](https://lucide.dev/) for icons
 - [Simple Icons](https://simpleicons.org/) for brand/framework logos
+- [Prettier](https://prettier.io/) (with `prettier-plugin-tailwindcss`) for formatting
 
 ## How this project is built
 
@@ -56,7 +57,7 @@ This repo is planned and documented in the open — the `docs/` folder is part o
 - [`docs/WRITING.md`](./docs/WRITING.md) — the playbook for writing and reviewing a concept page
 - [`docs/IMPLEMENT.md`](./docs/IMPLEMENT.md) — the technical runbook for building a concept
 - [`docs/AUDIT_PLAN.md`](./docs/AUDIT_PLAN.md) — the monthly technical-audit runbook
-- [`docs/improvements/`](./docs/improvements/) — dated write-ups for sppecific impprovements
+- [`docs/improvements/`](./docs/improvements/) — dated write-ups for specific improvements
 
 Development is AI-assisted with a plan → build → review loop; the conventions that guide it live in [`CLAUDE.md`](./CLAUDE.md).
 
@@ -76,10 +77,11 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 | Command         | Description              |
 | --------------- | ------------------------ |
-| `npm run dev`   | Start development server |
-| `npm run build` | Production build         |
-| `npm start`     | Serve production build   |
-| `npm run lint`  | Run ESLint (not part of `next build` in Next 16 — run it separately) |
+| `npm run dev`    | Start development server |
+| `npm run build`  | Production build         |
+| `npm start`      | Serve production build   |
+| `npm run lint`   | Run ESLint + Prettier check (not part of `next build` in Next 16 — run it separately) |
+| `npm run format` | Format all files with Prettier |
 
 ## Project structure
 
@@ -87,13 +89,16 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 app/
   layout.tsx                  # Root layout + theme provider + analytics
   page.tsx                    # Landing page
+  BrowserMockup.tsx           # Decorative hero visual (landing page)
   globals.css                 # Global styles, Tailwind theme, keyframes
   sitemap.ts / robots.ts      # Generated SEO routes
   opengraph-image.tsx         # Social share image
   error.tsx / global-error.tsx / not-found.tsx  # Error and 404 boundaries
   components/
     ui/                       # Reusable primitives (Button, Card, CodeBlock, ...)
-    ThemeProvider.tsx / ThemeToggle.tsx  # Dark/light theme management
+    ThemeProvider.tsx         # Dark/light theme state (localStorage + system)
+    ThemeToggleButton.tsx     # Reusable sun/moon toggle button
+    ThemeToggleFloat.tsx      # Floating scroll-aware theme toggle
     Navbar.tsx / Footer.tsx   # Chrome
     ConceptSidebar.tsx        # Concept page sidebar
     ConceptNav.tsx            # Prev/next concept navigation
