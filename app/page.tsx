@@ -43,7 +43,7 @@ async function getStarCount(): Promise<number | null> {
 export default async function Home() {
   const stars = await getStarCount();
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 pb-12">
+    <main className="flex min-h-screen flex-col items-center justify-center overflow-hidden px-6">
       {/* Dot grid background */}
       <div
         className="dot-grid dark:dot-grid-dark pointer-events-none absolute inset-0"
