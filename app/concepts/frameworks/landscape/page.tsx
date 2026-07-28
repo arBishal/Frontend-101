@@ -91,7 +91,7 @@ export default function LandscapePage() {
       <div>
         <div className="mb-4 flex items-center justify-between">
           <SectionLabel>Major frameworks</SectionLabel>
-          <span className="text-xs text-zinc-400 dark:text-zinc-500">
+          <span className="text-xs text-zinc-500 dark:text-zinc-400">
             Last reviewed July 2026
           </span>
         </div>
@@ -116,7 +116,7 @@ export default function LandscapePage() {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2.5">
                     <svg
-                      role="img"
+                      aria-hidden="true"
                       viewBox="0 0 24 24"
                       className={cn(
                         "size-5 shrink-0",
@@ -135,7 +135,7 @@ export default function LandscapePage() {
                   {users.map((user) => (
                     <span
                       key={user}
-                      className="bg-inset text-subtle rounded px-2 py-0.5 font-mono text-xs"
+                      className="bg-inset text-muted rounded px-2 py-0.5 font-mono text-xs"
                     >
                       {user}
                     </span>

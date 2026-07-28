@@ -233,7 +233,7 @@ function TreeNode({ node, selectedId, onSelect, onRemove }: TreeNodeProps) {
 
           {/* Text preview */}
           {node.text && (
-            <span className="max-w-24 truncate text-zinc-400 dark:text-zinc-500">
+            <span className="max-w-24 truncate text-zinc-500 dark:text-zinc-400">
               {node.text}
             </span>
           )}
@@ -415,7 +415,7 @@ export default function DomDemo() {
         {/* Inspector */}
         <InspectorPanel title="Node Inspector">
           {!selectedNode ? (
-            <p className="text-xs text-zinc-400 italic dark:text-zinc-500">
+            <p className="text-xs text-zinc-500 italic dark:text-zinc-400">
               Click a node to inspect it
             </p>
           ) : (
@@ -423,31 +423,31 @@ export default function DomDemo() {
               <div className="space-y-2 text-xs">
                 <div className="flex justify-between gap-3">
                   <span className="text-subtle">tagName</span>
-                  <span className="text-emerald-600 dark:text-emerald-400">
+                  <span className="text-emerald-700 dark:text-emerald-400">
                     &quot;{selectedNode.tag}&quot;
                   </span>
                 </div>
                 <div className="flex justify-between gap-3">
                   <span className="text-subtle">children</span>
-                  <span className="text-sky-600 dark:text-sky-400">
+                  <span className="text-sky-700 dark:text-sky-400">
                     {selectedNode.children.length}
                   </span>
                 </div>
                 <div className="flex justify-between gap-3">
                   <span className="text-subtle">textContent</span>
                   {selectedNode.text ? (
-                    <span className="max-w-28 truncate text-emerald-600 dark:text-emerald-400">
+                    <span className="max-w-28 truncate text-emerald-700 dark:text-emerald-400">
                       &quot;{selectedNode.text}&quot;
                     </span>
                   ) : (
-                    <span className="text-amber-600 dark:text-amber-400">
+                    <span className="text-amber-700 dark:text-amber-400">
                       null
                     </span>
                   )}
                 </div>
                 <div className="flex justify-between gap-3">
                   <span className="text-subtle">parentNode</span>
-                  <span className="text-emerald-600 dark:text-emerald-400">
+                  <span className="text-emerald-700 dark:text-emerald-400">
                     {parentNode ? `"${parentNode.tag}"` : "null"}
                   </span>
                 </div>
@@ -477,6 +477,7 @@ export default function DomDemo() {
                     onClick={handleAddChild}
                     className="px-3 py-1.5"
                     disabled={!newTag.trim()}
+                    aria-label="Add child node"
                   >
                     <Plus className="size-3.5" />
                   </Button>
@@ -498,7 +499,7 @@ export default function DomDemo() {
             red
           </span>{" "}
           — removed from the live DOM. Lines only in the live DOM are{" "}
-          <span className="font-medium text-emerald-600 dark:text-emerald-400">
+          <span className="font-medium text-emerald-700 dark:text-emerald-400">
             green
           </span>{" "}
           — added since the source was written.

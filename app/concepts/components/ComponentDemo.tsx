@@ -88,7 +88,7 @@ function OptionToggle<T extends string>({
           className={cn(
             "cursor-pointer rounded px-2 py-1 font-mono text-xs transition-colors",
             value === opt
-              ? "bg-zinc-200 text-emerald-700 dark:bg-zinc-700 dark:text-emerald-400"
+              ? "bg-zinc-200 text-emerald-800 dark:bg-zinc-700 dark:text-emerald-400"
               : "text-muted hover:text-zinc-900 dark:hover:text-zinc-200",
           )}
         >
@@ -167,7 +167,7 @@ export default function ComponentDemo() {
                 <div className="flex items-center gap-2">
                   <span className="text-muted w-4 shrink-0">#{i + 1}</span>
                   <span className="text-muted">variant</span>
-                  <span className="text-emerald-600 dark:text-emerald-400">
+                  <span className="text-emerald-700 dark:text-emerald-400">
                     &quot;{variant}&quot;
                   </span>
                 </div>
@@ -178,8 +178,8 @@ export default function ComponentDemo() {
                     className={cn(
                       "cursor-pointer font-mono transition-colors",
                       disabledMap[variant]
-                        ? "text-amber-600 dark:text-amber-400"
-                        : "text-amber-600/50 dark:text-amber-400/60",
+                        ? "text-amber-700 dark:text-amber-400"
+                        : "text-amber-600/60 dark:text-amber-400/70",
                     )}
                   >
                     {String(disabledMap[variant])}

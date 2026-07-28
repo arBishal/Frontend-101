@@ -17,9 +17,9 @@ function ValueDisplay({
   children: React.ReactNode;
 }) {
   const color = {
-    string: "text-emerald-600 dark:text-emerald-400",
-    boolean: "text-amber-600 dark:text-amber-400",
-    number: "text-sky-600 dark:text-sky-400",
+    string: "text-emerald-700 dark:text-emerald-400",
+    boolean: "text-amber-700 dark:text-amber-400",
+    number: "text-sky-700 dark:text-sky-400",
   }[type];
 
   return <span className={color}>{children}</span>;

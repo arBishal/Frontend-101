@@ -114,7 +114,7 @@ export default function CodeBlock(props: CodeBlockProps) {
       <div className="flex overflow-x-auto">
         {/* Line numbers */}
         <div
-          className="shrink-0 py-4 pr-3 pl-4 text-right font-mono text-xs leading-relaxed text-zinc-400 select-none dark:text-zinc-600"
+          className="shrink-0 py-4 pr-3 pl-4 text-right font-mono text-xs leading-relaxed text-zinc-500 select-none dark:text-zinc-400"
           aria-hidden
         >
           {Array.from({ length: lineCount }, (_, i) => (
