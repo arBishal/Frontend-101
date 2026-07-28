@@ -26,5 +26,5 @@ Next.js 16 (App Router) · React 19 · TypeScript · Tailwind v4 · deployed on 
 
 - Concept pages (build or refactor): follow `docs/IMPLEMENT.md` (mechanics) with `docs/WRITING.md` (prose and pedagogy).
 - Plan → confirm → implement. Present the approach and wait for confirmation before writing code. Ambiguous instructions: ask, never assume.
-- Smallest change that works. No speculative abstractions; no drive-by refactors — out-of-scope findings go to `docs/TODO.md`.
+- Smallest change that works. No speculative abstractions; no drive-by refactors — out-of-scope findings go to `docs/BACKLOG.md`.
 - Never commit unless asked. One concern per commit.

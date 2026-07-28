@@ -53,7 +53,7 @@ Static generation plus server components keep the shipped JavaScript small — m
 
 This repo is planned and documented in the open — the `docs/` folder is part of the work, not an afterthought. The workflow is deliberate: plan a change, build it, review it.
 
-- [`docs/TODO.md`](./docs/TODO.md) — concept backlog and smaller tasks
+- [`docs/BACKLOG.md`](./docs/BACKLOG.md) — concept backlog and smaller tasks
 - [`docs/WRITING.md`](./docs/WRITING.md) — the playbook for writing and reviewing a concept page
 - [`docs/IMPLEMENT.md`](./docs/IMPLEMENT.md) — the technical runbook for building a concept
 - [`docs/AUDIT_PLAN.md`](./docs/AUDIT_PLAN.md) — the monthly technical-audit runbook

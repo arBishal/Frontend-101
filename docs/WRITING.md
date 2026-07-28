@@ -125,7 +125,7 @@ Avoid emdashes as much as possible. If it's unavoidable, don't use spaces before
 
 Write real typographic characters directly in prose — `’` `‘` `“` `”` `°` `é` and the like — never their HTML entities (`&rsquo;`, `&ldquo;`, `&deg;`…). Entities are a fallback *only* for characters that can't be literals: `&lt;`/`&gt;` (a literal `<`/`>` breaks JSX) and a straight `&quot;` shown inside `<code>` (a literal `"` trips `react/no-unescaped-entities`).
 
-**Why:** when a JSX text node contains an HTML entity, the SWC compiler silently drops the single space between it and a preceding inline element, so `…one thing:</strong> the DOM` ships as `…one thing:</strong>the DOM`. Literals don't trigger it. Detection: the render-grep guard tracked in [TODO.md](./TODO.md).
+**Why:** when a JSX text node contains an HTML entity, the SWC compiler silently drops the single space between it and a preceding inline element, so `…one thing:</strong> the DOM` ships as `…one thing:</strong>the DOM`. Literals don't trigger it. Detection: the render-grep guard tracked in [BACKLOG.md](./BACKLOG.md).
 
 ---
 
@@ -137,7 +137,7 @@ The eight live pages predate this playbook. When refactoring one:
 2. **Keep the demo, rewrite the prose.** The demos are the right demos; refactors are prose-first. Demo changes (prediction prompts, break-it challenges) ride along only if small.
 3. **Run it as the same three passes.** Pass 1 is "rewrite under Steps 0–7" — including writing the five Step 0 answers retroactively; they didn't exist for these pages, and forcing them surfaces what the page was never sure about.
 4. **One page per refactor.** No batch rewrites — voice work degrades when parallelized, and sequential pages are how opening-type rotation stays checkable.
-5. **Diff discipline:** the refactor commit touches one concept's prose. Anything discovered outside it (a UI bug, a shared component itch) goes to TODO.md, not the same commit.
+5. **Diff discipline:** the refactor commit touches one concept's prose. Anything discovered outside it (a UI bug, a shared component itch) goes to BACKLOG.md, not the same commit.
 
 ---
 
