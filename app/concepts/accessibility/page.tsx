@@ -1,5 +1,6 @@
 import { getConcept, conceptMetadata } from "@/app/lib/concepts";
 import Takeaway from "@/app/components/ui/Takeaway";
+import Link from "next/link";
 import { UserX, Palette, Scale } from "lucide-react";
 import AccessibilityDemo from "./AccessibilityDemo";
 import SectionLabel from "@/app/components/ui/SectionLabel";
@@ -150,12 +151,12 @@ export default function AccessibilityPage() {
           <code className="text-code">&lt;button&gt;</code>, in the tab order
           and announced as a button. None of these fixes are new tools; they are
           the semantic HTML the{" "}
-          <a
+          <Link
             href="/concepts/the-dom"
             className="hover:text-strong underline underline-offset-2 transition-colors"
           >
             DOM
-          </a>{" "}
+          </Link>{" "}
           is already built from.
         </p>
       </div>

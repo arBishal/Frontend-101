@@ -1,5 +1,6 @@
 import { getConcept, conceptMetadata } from "@/app/lib/concepts";
 import Takeaway from "@/app/components/ui/Takeaway";
+import Link from "next/link";
 import { Copy, TriangleAlert, Package } from "lucide-react";
 import ComponentDemo from "./ComponentDemo";
 import SectionLabel from "@/app/components/ui/SectionLabel";
@@ -145,12 +146,12 @@ export default function ComponentsPage() {
         <p>
           Props are inputs passed in from outside. When a piece of UI needs to
           remember something on its own, that is{" "}
-          <a
+          <Link
             href="/concepts/state"
             className="hover:text-strong underline underline-offset-2 transition-colors"
           >
             state
-          </a>
+          </Link>
           , the next concept.
         </p>
       </div>

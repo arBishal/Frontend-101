@@ -36,11 +36,20 @@ function subscribeToTheme(callback: () => void): () => void {
   };
 }
 
-function getThemeSnapshot(): ResolvedTheme {
-  const stored = localStorage.getItem("theme");
+// Resolve a stored preference to a concrete theme. An unset or "system" value
+// follows the OS, and this rule must match the pre-paint script in layout.tsx
+// EXACTLY: if the two disagree, the client re-resolves after hydration and
+// flips the theme, which is a visible first-paint flash.
+function resolveTheme(stored: string | null): ResolvedTheme {
   if (stored === "dark") return "dark";
   if (stored === "light") return "light";
-  return "dark";
+  return window.matchMedia("(prefers-color-scheme: dark)").matches
+    ? "dark"
+    : "light";
+}
+
+function getThemeSnapshot(): ResolvedTheme {
+  return resolveTheme(localStorage.getItem("theme"));
 }
 
 function getThemeServerSnapshot(): ResolvedTheme {

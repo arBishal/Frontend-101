@@ -33,8 +33,8 @@ async function getStarCount(): Promise<number | null> {
       { next: { revalidate: 3600 } },
     );
     if (!res.ok) return null;
-    const data = await res.json();
-    return data.stargazers_count;
+    const data = (await res.json()) as { stargazers_count?: number };
+    return data.stargazers_count ?? null;
   } catch {
     return null;
   }
@@ -200,8 +200,7 @@ export default async function Home() {
               >
                 <div className="size-3 rounded-sm bg-zinc-300 dark:bg-zinc-700" />
                 <div
-                  className="h-2.5 rounded-full bg-zinc-300 dark:bg-zinc-800"
-                  style={{ width: `${100 - i * 20}%` }}
+                  className={`h-2.5 rounded-full bg-zinc-300 dark:bg-zinc-800 ${["w-4/5", "w-3/5", "w-2/5"][i - 1]}`}
                 />
               </div>
             ))}

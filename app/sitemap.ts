@@ -1,7 +1,6 @@
 import type { MetadataRoute } from "next";
 import { concepts } from "@/app/lib/concepts";
-
-const BASE_URL = "https://frontend101.vercel.app";
+import { BASE_URL } from "@/app/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const conceptEntries: MetadataRoute.Sitemap = concepts.flatMap((concept) => {

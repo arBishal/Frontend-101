@@ -1,5 +1,6 @@
 import { getConcept, conceptMetadata } from "@/app/lib/concepts";
 import Takeaway from "@/app/components/ui/Takeaway";
+import Link from "next/link";
 import { MousePointerClick, AlertCircle, Workflow } from "lucide-react";
 import StateDemo from "./StateDemo";
 import SectionLabel from "@/app/components/ui/SectionLabel";
@@ -130,12 +131,12 @@ export default function StatePage() {
           Each keystroke or tap calls a state update, which triggers a
           re-render, which redraws what you see. You never reach into the page
           and edit it by hand, that is the shift the{" "}
-          <a
+          <Link
             href="/concepts/the-dom"
             className="hover:text-strong underline underline-offset-2 transition-colors"
           >
             DOM
-          </a>{" "}
+          </Link>{" "}
           page sets up. The inspector makes that invisible loop visible, a mini
           version of React DevTools.
         </p>

@@ -4,6 +4,7 @@ import { Analytics } from "@vercel/analytics/next";
 import ThemeProvider from "@/app/components/ThemeProvider";
 import ThemeToggleFloat from "@/app/components/ThemeToggleFloat";
 import { cn } from "@/app/lib/cn";
+import { BASE_URL } from "@/app/lib/site";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -17,6 +18,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(BASE_URL),
   title: "Frontend 101",
   description:
     "Interactive, visual explanations of core frontend concepts for new developers.",

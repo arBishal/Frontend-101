@@ -27,7 +27,13 @@ function useCopyLink() {
   }, []);
 
   async function handleShare() {
-    await navigator.clipboard.writeText(window.location.href);
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+    } catch {
+      // Clipboard unavailable (insecure context or denied permission) — don't
+      // flip to the "copied" confirmation for a write that didn't happen.
+      return;
+    }
     setCopied(true);
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
     timeoutRef.current = setTimeout(() => setCopied(false), 2000);
