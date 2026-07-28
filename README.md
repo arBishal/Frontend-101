@@ -36,7 +36,10 @@ Frontend 101 is an educational site that teaches fundamental frontend developmen
 
 Static generation plus server components keep the shipped JavaScript small — most routes are prerendered HTML with demos hydrated as isolated islands.
 
-**Lighthouse** (mobile, 2026‑07‑18) — Performance **92** · Accessibility **96** · Best Practices **100** · SEO **100**.
+**Lighthouse** (2026‑07‑29):
+
+- **Mobile** — Performance **92** · Accessibility **100** · Best Practices **100** · SEO **100**
+- **Desktop** — Performance **98** · Accessibility **100** · Best Practices **100** · SEO **100**
 
 ## Tech stack
 

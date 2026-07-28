@@ -195,7 +195,7 @@ function TreeNode({ node, selectedId, onSelect, onRemove }: TreeNodeProps) {
     <li>
       <div
         className={cn(
-          "group flex items-center gap-1 rounded px-1.5 py-0.5 font-mono text-xs select-none",
+          "group flex items-center gap-1 rounded px-1.5 font-mono text-xs select-none",
           isSelected
             ? "bg-inset"
             : "hover:bg-zinc-50 dark:hover:bg-zinc-800/50",
@@ -226,7 +226,7 @@ function TreeNode({ node, selectedId, onSelect, onRemove }: TreeNodeProps) {
           onKeyDown={handleKeyDown}
           aria-pressed={isSelected}
           aria-expanded={hasChildren ? expanded : undefined}
-          className="flex min-w-0 flex-1 cursor-pointer items-center gap-1 rounded text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-500 dark:focus-visible:ring-zinc-400"
+          className="flex min-w-0 flex-1 cursor-pointer items-center gap-1 rounded py-1.5 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-500 dark:focus-visible:ring-zinc-400"
         >
           {/* Tag label */}
           <span className="text-body">&lt;{node.tag}&gt;</span>
