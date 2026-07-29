@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import ThemeProvider from "@/app/components/ThemeProvider";
-import ThemeToggle from "@/app/components/ThemeToggle";
+import ThemeToggleFloat from "@/app/components/ThemeToggleFloat";
 import { cn } from "@/app/lib/cn";
+import { BASE_URL } from "@/app/lib/site";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -17,6 +18,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(BASE_URL),
   title: "Frontend 101",
   description:
     "Interactive, visual explanations of core frontend concepts for new developers.",
@@ -57,7 +59,7 @@ export default function RootLayout({
       <body className="flex min-h-full flex-col">
         <ThemeProvider>
           {children}
-          <ThemeToggle />
+          <ThemeToggleFloat />
         </ThemeProvider>
         <Analytics />
       </body>

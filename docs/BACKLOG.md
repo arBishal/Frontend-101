@@ -1,4 +1,4 @@
-# TODO
+# Backlog
 
 ## Concepts
 
@@ -20,7 +20,6 @@ Conceptual frontend topics to implement, each with interactive demos and explana
 
 ## Tasks
 
-- [ ] Polish mobile ui
 - [ ] Add a "last updated" date to concept pages
 - [ ] Add "Try it yourself" challenges (2-3 per concept) to each concept page
 - [ ] Add external resources for each concept
@@ -28,5 +27,4 @@ Conceptual frontend topics to implement, each with interactive demos and explana
 - [ ] i18n (long-term) — translate concept pages once the template-first architecture stabilizes; content breadth comes first, not now
 - [ ] ⌘K search / command palette — static client-side index over `concepts.ts`, no service needed; also improves keyboard-navigation story
 - [ ] `CONTRIBUTING.md` + concept template — publish the page formula + a concept plan doc as a template, since concepts are the rare open-source contribution non-experts can make well
-- [ ] Apply  i18y
 - [ ] Guard against the SWC entity/space-strip bug: render-grep the built pages for `</(strong|em|b|i|code|a)>[A-Za-z]` (an inline close tag glued to a word = a swallowed space) as a postbuild/CI check. See the typographic-characters rule in WRITING.md.

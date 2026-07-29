@@ -1,6 +1,5 @@
 import type { MetadataRoute } from "next";
-
-const BASE_URL = "https://frontend101.vercel.app";
+import { BASE_URL } from "@/app/lib/site";
 
 export default function robots(): MetadataRoute.Robots {
   return {

@@ -89,7 +89,7 @@ export default function ResponsiveDemo() {
           >
             <Icon className="size-4" />
             {label}
-            <span className="font-mono text-xs opacity-60">{range}</span>
+            <span className="font-mono text-xs opacity-80">{range}</span>
           </Button>
         ))}
       </div>

@@ -88,7 +88,7 @@ function OptionToggle<T extends string>({
           className={cn(
             "cursor-pointer rounded px-2 py-1 font-mono text-xs transition-colors",
             value === opt
-              ? "bg-zinc-200 text-emerald-700 dark:bg-zinc-700 dark:text-emerald-400"
+              ? "bg-zinc-200 text-emerald-800 dark:bg-zinc-700 dark:text-emerald-400"
               : "text-muted hover:text-zinc-900 dark:hover:text-zinc-200",
           )}
         >
@@ -167,7 +167,7 @@ export default function ComponentDemo() {
                 <div className="flex items-center gap-2">
                   <span className="text-muted w-4 shrink-0">#{i + 1}</span>
                   <span className="text-muted">variant</span>
-                  <span className="text-emerald-600 dark:text-emerald-400">
+                  <span className="text-emerald-700 dark:text-emerald-400">
                     &quot;{variant}&quot;
                   </span>
                 </div>
@@ -178,8 +178,8 @@ export default function ComponentDemo() {
                     className={cn(
                       "cursor-pointer font-mono transition-colors",
                       disabledMap[variant]
-                        ? "text-amber-600 dark:text-amber-400"
-                        : "text-amber-600/50 dark:text-amber-400/60",
+                        ? "text-amber-700 dark:text-amber-400"
+                        : "text-amber-600/60 dark:text-amber-400/70",
                     )}
                   >
                     {String(disabledMap[variant])}
@@ -193,7 +193,7 @@ export default function ComponentDemo() {
         {/* Style Editor */}
         <InspectorPanel title="Style Editor" className="flex-1">
           <div className="space-y-3 text-xs">
-            <div className="flex items-center gap-4 md:gap-6">
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 md:gap-x-6">
               <p className="text-muted w-24 shrink-0 uppercase">
                 border-radius
               </p>
@@ -203,7 +203,7 @@ export default function ComponentDemo() {
                 onChange={setRadius}
               />
             </div>
-            <div className="flex items-center gap-4 md:gap-6">
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 md:gap-x-6">
               <p className="text-muted w-24 shrink-0 uppercase">size</p>
               <OptionToggle
                 options={["sm", "md", "lg"] as const}

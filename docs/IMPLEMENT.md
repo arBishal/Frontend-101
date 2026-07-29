@@ -29,7 +29,7 @@ Present the plan and **wait for confirmation before implementing** (per project 
 | `app/concepts/<slug>/page.tsx` | Create — server component, follows the section skeleton in WRITING.md |
 | `app/concepts/<slug>/<Name>Demo.tsx` | Create — `"use client"` interactive demo |
 | `app/lib/concepts.ts` | Add entry: `slug`, `title`, `description`, lucide `icon`; `children` array only for multi-page concepts (see the `frameworks` entry) |
-| `docs/TODO.md` | Check the concept off under "Concepts" |
+| `docs/BACKLOG.md` | Check the concept off under "Concepts" |
 | `docs/plans/PLAN-<slug>.md` | Created in §1; update if the build diverges |
 
 Sidebar, homepage cards, and prev/next nav all derive from `concepts.ts` — no manual wiring. Insert the entry at the position matching the intended learning order.
@@ -75,7 +75,7 @@ Do **not** commit unless asked. When revising after Pass 2 feedback: apply every
 
 ## 7. Refactoring the legacy pages (teaching-audit findings, 2026-07-17)
 
-This section preserves the instructor's audit of the eight pages shipped before the playbook existed. When refactoring one: follow WRITING.md "Refactoring an existing concept" (prose-first, keep the demo; write the Step 0 answers retroactively into a new plan doc; one page per refactor; out-of-scope discoveries go to TODO.md), start from the page's findings below, then apply §§3–6 of this runbook as normal.
+This section preserves the instructor's audit of the eight pages shipped before the playbook existed. When refactoring one: follow WRITING.md "Refactoring an existing concept" (prose-first, keep the demo; write the Step 0 answers retroactively into a new plan doc; one page per refactor; out-of-scope discoveries go to BACKLOG.md), start from the page's findings below, then apply §§3–6 of this runbook as normal.
 
 ### 7.1 AI-prose fingerprints (found in the live copy; never reintroduce)
 

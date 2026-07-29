@@ -45,8 +45,8 @@ const defaultTypeColor =
 
 const statusColors: Record<Status, string> = {
   idle: "text-subtle",
-  loading: "text-amber-600 dark:text-amber-400",
-  success: "text-emerald-600 dark:text-emerald-400",
+  loading: "text-amber-700 dark:text-amber-400",
+  success: "text-emerald-700 dark:text-emerald-400",
   error: "text-red-600 dark:text-red-400",
 };
 
@@ -249,14 +249,14 @@ export default function ApiDemo() {
           </div>
           <div className="flex justify-between gap-3">
             <span className="text-muted">method</span>
-            <span className="text-emerald-600 dark:text-emerald-400">
+            <span className="text-emerald-700 dark:text-emerald-400">
               &quot;GET&quot;
             </span>
           </div>
           <div className="flex justify-between gap-3">
             <span className="text-muted">url</span>
             <span
-              className="max-w-32 truncate text-right text-emerald-600 dark:text-emerald-400"
+              className="max-w-32 truncate text-right text-emerald-700 dark:text-emerald-400"
               title={url ?? undefined}
             >
               {url ? (
@@ -268,7 +268,7 @@ export default function ApiDemo() {
           </div>
           <div className="flex justify-between gap-3">
             <span className="text-muted">time</span>
-            <span className="text-sky-600 dark:text-sky-400">
+            <span className="text-sky-700 dark:text-sky-400">
               {responseTime !== null ? (
                 `${responseTime}ms`
               ) : (
@@ -280,7 +280,7 @@ export default function ApiDemo() {
             <span className="text-muted">response</span>
             <span className="text-muted">
               {status === "success" && (
-                <span className="text-emerald-600 dark:text-emerald-400">
+                <span className="text-emerald-700 dark:text-emerald-400">
                   {"{ name, types, sprites }"}
                 </span>
               )}

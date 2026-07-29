@@ -27,7 +27,13 @@ function useCopyLink() {
   }, []);
 
   async function handleShare() {
-    await navigator.clipboard.writeText(window.location.href);
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+    } catch {
+      // Clipboard unavailable (insecure context or denied permission) — don't
+      // flip to the "copied" confirmation for a write that didn't happen.
+      return;
+    }
     setCopied(true);
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
     timeoutRef.current = setTimeout(() => setCopied(false), 2000);
@@ -45,7 +51,7 @@ export default function Navbar() {
     : 0;
 
   return (
-    <nav className="border-default relative border-b px-4 py-2 lg:px-6 lg:py-4">
+    <nav className="border-default relative border-b px-4 py-3 lg:px-6 lg:py-5">
       <div className="mx-auto flex items-center justify-between">
         <Link
           href="/"

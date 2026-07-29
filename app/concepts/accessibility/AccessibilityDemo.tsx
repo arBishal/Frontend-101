@@ -125,7 +125,7 @@ export default function AccessibilityDemo() {
                 className={cn(
                   "cursor-pointer font-mono font-medium transition-colors",
                   fixes[key]
-                    ? "text-emerald-600 dark:text-emerald-400"
+                    ? "text-emerald-700 dark:text-emerald-400"
                     : "text-red-600 dark:text-red-400",
                 )}
               >
@@ -142,8 +142,8 @@ export default function AccessibilityDemo() {
               score === 0
                 ? "text-red-600 dark:text-red-400"
                 : score <= 2
-                  ? "text-amber-600 dark:text-amber-400"
-                  : "text-emerald-600 dark:text-emerald-400",
+                  ? "text-amber-700 dark:text-amber-400"
+                  : "text-emerald-700 dark:text-emerald-400",
             )}
           >
             {score} / {fixKeys.length}

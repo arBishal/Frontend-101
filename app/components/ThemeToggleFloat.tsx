@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import ThemeToggleButton from "@/app/components/ThemeToggleButton";
 import { cn } from "@/app/lib/cn";
 
-export default function ThemeToggle() {
+export default function ThemeToggleFloat() {
   const pathname = usePathname();
   const [atNav, setAtNav] = useState(false);
 
@@ -25,7 +25,7 @@ export default function ThemeToggle() {
   return (
     <ThemeToggleButton
       className={cn(
-        "fixed top-4 right-3 z-50 rounded-full bg-zinc-100/80 p-2.5 text-zinc-500 backdrop-blur-sm transition duration-300 hover:text-zinc-700 lg:right-5 dark:bg-zinc-900/80 dark:text-zinc-500 dark:hover:text-zinc-300",
+        "fixed top-2 right-3 z-50 rounded-full bg-zinc-200 p-2.5 text-zinc-500 backdrop-blur-sm transition duration-300 hover:text-zinc-700 lg:top-4 lg:right-5 dark:bg-zinc-800 dark:text-zinc-500 dark:hover:text-zinc-300",
         atNav && "pointer-events-none opacity-0",
       )}
       aria-hidden={atNav}

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
+import type React from "react";
 import { ChevronRight, ChevronDown, X, Plus } from "lucide-react";
 import Card from "@/app/components/ui/Card";
 import InspectorPanel from "@/app/components/ui/InspectorPanel";
@@ -164,28 +165,46 @@ function TreeNode({ node, selectedId, onSelect, onRemove }: TreeNodeProps) {
   const isSelected = node.id === selectedId;
   const isRoot = node.tag === "html" || node.tag === "body";
 
+  // Keyboard model for the row button: Enter/Space select natively (button
+  // default), Arrow keys expand/collapse, Delete/Backspace remove.
+  function handleKeyDown(e: React.KeyboardEvent<HTMLButtonElement>) {
+    switch (e.key) {
+      case "ArrowRight":
+        if (hasChildren && !expanded) {
+          e.preventDefault();
+          setExpanded(true);
+        }
+        break;
+      case "ArrowLeft":
+        if (hasChildren && expanded) {
+          e.preventDefault();
+          setExpanded(false);
+        }
+        break;
+      case "Delete":
+      case "Backspace":
+        if (!isRoot) {
+          e.preventDefault();
+          onRemove(node.id);
+        }
+        break;
+    }
+  }
+
   return (
-    <li
-      role="treeitem"
-      aria-selected={isSelected}
-      aria-expanded={hasChildren ? expanded : undefined}
-    >
+    <li>
       <div
         className={cn(
-          "group flex cursor-pointer items-center gap-1 rounded px-1.5 py-0.5 font-mono text-xs select-none",
+          "group flex items-center gap-1 rounded px-1.5 font-mono text-xs select-none",
           isSelected
             ? "bg-inset"
             : "hover:bg-zinc-50 dark:hover:bg-zinc-800/50",
         )}
-        onClick={() => onSelect(node.id)}
       >
-        {/* Chevron */}
+        {/* Chevron — mouse affordance; keyboard expands/collapses via Arrow keys. */}
         <button
           className="shrink-0 text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300"
-          onClick={(e) => {
-            e.stopPropagation();
-            setExpanded((v) => !v);
-          }}
+          onClick={() => setExpanded((v) => !v)}
           tabIndex={-1}
           aria-label={expanded ? "Collapse" : "Expand"}
         >
@@ -200,24 +219,33 @@ function TreeNode({ node, selectedId, onSelect, onRemove }: TreeNodeProps) {
           )}
         </button>
 
-        {/* Tag label */}
-        <span className="text-body">&lt;{node.tag}&gt;</span>
+        {/* Selectable row: the keyboard-focusable control for this node. */}
+        <button
+          type="button"
+          onClick={() => onSelect(node.id)}
+          onKeyDown={handleKeyDown}
+          aria-pressed={isSelected}
+          aria-expanded={hasChildren ? expanded : undefined}
+          className="flex min-w-0 flex-1 cursor-pointer items-center gap-1 rounded py-1.5 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-500 dark:focus-visible:ring-zinc-400"
+        >
+          {/* Tag label */}
+          <span className="text-body">&lt;{node.tag}&gt;</span>
 
-        {/* Text preview */}
-        {node.text && (
-          <span className="max-w-24 truncate text-zinc-400 dark:text-zinc-500">
-            {node.text}
-          </span>
-        )}
+          {/* Text preview */}
+          {node.text && (
+            <span className="max-w-24 truncate text-zinc-500 dark:text-zinc-400">
+              {node.text}
+            </span>
+          )}
+        </button>
 
-        {/* Delete button */}
+        {/* Delete — mouse affordance, revealed on hover or row focus; keyboard
+            removes via Delete/Backspace on the row. */}
         {!isRoot && (
           <button
-            className="ml-auto shrink-0 text-zinc-400 opacity-0 transition-opacity group-hover:opacity-100 hover:text-red-500 dark:hover:text-red-400"
-            onClick={(e) => {
-              e.stopPropagation();
-              onRemove(node.id);
-            }}
+            className="ml-auto shrink-0 text-zinc-400 opacity-0 transition-opacity group-focus-within:opacity-100 group-hover:opacity-100 hover:text-red-500 dark:hover:text-red-400"
+            onClick={() => onRemove(node.id)}
+            tabIndex={-1}
             aria-label={`Remove ${node.tag} node`}
           >
             <X className="size-3" />
@@ -227,7 +255,7 @@ function TreeNode({ node, selectedId, onSelect, onRemove }: TreeNodeProps) {
 
       {/* Children */}
       {hasChildren && expanded && (
-        <ul role="group" className="border-default ml-2.5 border-l pl-4">
+        <ul className="border-default ml-2.5 border-l pl-4">
           {node.children.map((child) => (
             <TreeNode
               key={child.id}
@@ -371,7 +399,10 @@ export default function DomDemo() {
       <div className="flex flex-col gap-4 sm:flex-row">
         {/* Tree panel */}
         <Card className="flex-1 overflow-x-auto">
-          <ul role="tree" className="space-y-0.5 font-mono text-xs">
+          <ul
+            aria-label="Editable DOM tree"
+            className="space-y-0.5 font-mono text-xs"
+          >
             <TreeNode
               node={tree}
               selectedId={selectedId}
@@ -384,7 +415,7 @@ export default function DomDemo() {
         {/* Inspector */}
         <InspectorPanel title="Node Inspector">
           {!selectedNode ? (
-            <p className="text-xs text-zinc-400 italic dark:text-zinc-500">
+            <p className="text-xs text-zinc-500 italic dark:text-zinc-400">
               Click a node to inspect it
             </p>
           ) : (
@@ -392,31 +423,31 @@ export default function DomDemo() {
               <div className="space-y-2 text-xs">
                 <div className="flex justify-between gap-3">
                   <span className="text-subtle">tagName</span>
-                  <span className="text-emerald-600 dark:text-emerald-400">
+                  <span className="text-emerald-700 dark:text-emerald-400">
                     &quot;{selectedNode.tag}&quot;
                   </span>
                 </div>
                 <div className="flex justify-between gap-3">
                   <span className="text-subtle">children</span>
-                  <span className="text-sky-600 dark:text-sky-400">
+                  <span className="text-sky-700 dark:text-sky-400">
                     {selectedNode.children.length}
                   </span>
                 </div>
                 <div className="flex justify-between gap-3">
                   <span className="text-subtle">textContent</span>
                   {selectedNode.text ? (
-                    <span className="max-w-28 truncate text-emerald-600 dark:text-emerald-400">
+                    <span className="max-w-28 truncate text-emerald-700 dark:text-emerald-400">
                       &quot;{selectedNode.text}&quot;
                     </span>
                   ) : (
-                    <span className="text-amber-600 dark:text-amber-400">
+                    <span className="text-amber-700 dark:text-amber-400">
                       null
                     </span>
                   )}
                 </div>
                 <div className="flex justify-between gap-3">
                   <span className="text-subtle">parentNode</span>
-                  <span className="text-emerald-600 dark:text-emerald-400">
+                  <span className="text-emerald-700 dark:text-emerald-400">
                     {parentNode ? `"${parentNode.tag}"` : "null"}
                   </span>
                 </div>
@@ -446,6 +477,7 @@ export default function DomDemo() {
                     onClick={handleAddChild}
                     className="px-3 py-1.5"
                     disabled={!newTag.trim()}
+                    aria-label="Add child node"
                   >
                     <Plus className="size-3.5" />
                   </Button>
@@ -467,7 +499,7 @@ export default function DomDemo() {
             red
           </span>{" "}
           — removed from the live DOM. Lines only in the live DOM are{" "}
-          <span className="font-medium text-emerald-600 dark:text-emerald-400">
+          <span className="font-medium text-emerald-700 dark:text-emerald-400">
             green
           </span>{" "}
           — added since the source was written.
