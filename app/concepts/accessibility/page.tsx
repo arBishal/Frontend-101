@@ -10,21 +10,21 @@ import ProblemCards from "@/app/components/ProblemCards";
 const problems = [
   {
     icon: UserX,
-    title: "Announced as a filename",
+    title: "Who's excluded",
     description:
-      "A screen reader hits your hero image and, with no alt text, reads out “IMG_2048.png.” The user has no idea what they just missed.",
-  },
-  {
-    icon: Palette,
-    title: "Red, and nothing else",
-    description:
-      "A form marks the failed field in red and adds no icon, no text. To a colorblind user, or anyone on a sun-washed screen, the field looks perfectly fine.",
+      "Around 15% of the world's population lives with some form of disability. An inaccessible UI doesn't inconvenience that group, it locks them out.",
   },
   {
     icon: Scale,
-    title: "Later, then a lawsuit",
+    title: "Legal requirement",
     description:
-      "Ship an inaccessible public service and the first formal complaint turns “later” into “now.”",
+      "The ADA and the European Accessibility Act require accessible digital experiences. This is a compliance requirement, not optional polish.",
+  },
+  {
+    icon: Palette,
+    title: "Simpler, not harder",
+    description:
+      "Semantic elements carry accessibility for free and usually need less code than a custom-built substitute. Fixing these issues tends to simplify the code.",
   },
 ];
 

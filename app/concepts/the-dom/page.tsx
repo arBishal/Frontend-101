@@ -9,21 +9,21 @@ import ProblemCards from "@/app/components/ProblemCards";
 const problems = [
   {
     icon: FileCode,
-    title: "Gone on reload",
+    title: "Selecting and changing elements",
     description:
-      "Add a row with JavaScript and it appears at once. Reload the page and it has vanished. The DOM changed; the file it was built from never did, so nothing survived the refresh.",
+      "Every button click, form update, or dynamic list depends on finding the right node in the tree and changing it. Without that model, updating the page has no address to go to.",
   },
   {
     icon: GitFork,
-    title: "Grab the wrong node",
+    title: "What frameworks sit on",
     description:
-      "Target the wrong element and your click handler runs on nothing, silently.",
+      "React, Vue, and the rest are organized ways of writing to the DOM. Knowing it directly is what makes their behavior predictable instead of magic.",
   },
   {
     icon: RefreshCw,
-    title: "Slow when it's sloppy",
+    title: "Performance",
     description:
-      "Every change to the tree makes the browser re-check what to draw. A handful of edits costs nothing. Rebuild the whole list on every keystroke and the page starts to stutter under the user's fingers.",
+      "Every change to the tree costs the browser work to re-check what to draw. The DOM, not your JS logic, is usually where that cost actually lives.",
   },
 ];
 
@@ -79,7 +79,7 @@ export default function TheDomPage() {
         <p>
           Miss that model and the everyday work turns into guesswork: selecting
           the right element, walking up to its parent, dropping a new node in
-          the right place. The problems below are the ones that bite first.
+          the right place. Here is what that model is actually for.
         </p>
         <ProblemCards problems={problems} />
       </div>

@@ -53,9 +53,9 @@ Check the previous two concepts' openings; never the same type three pages in a 
 - Code identifiers in `<code>`, sparingly. No API laundry lists here — reference material goes after the demo, when the learner has a reason to care.
 
 ### Step 4 — "Why it matters" + problem cards
-- Prose carries the **argument** (2 paragraphs max). Cards carry **vignettes** — tiny concrete scenarios, never compressed restatements of the prose. If a card repeats the prose, one of them changes.
-- Vary the card rhythm: one starts with a scenario, one is a single brutal sentence, one can run three sentences. Never three cards with the identical two-beat shape.
-- Motivate with the human cost, not fear ("you pinch-zoom, mis-tap, give up" — not "search engines will penalize you").
+- Prose carries the **argument** (2 paragraphs max). Cards carry **single direct justifications** — one clear "why I need this," stated plainly, never a scenario or narrative ("you did X, then Y happened"). No named user, no scene. If a card repeats the prose, one of them changes.
+- Each card: a short title naming the specific thing at stake, then 1-2 sentences of direct statement. See the `frameworks` page cards for the target tone.
+- Motivate with the human cost, not fear ("locks users out entirely" — not "search engines will penalize you").
 - Any statistic appears **once** on the page. Prose or card, not both.
 
 ### Step 5 — The demo

@@ -10,21 +10,21 @@ import CodeBlock from "@/app/components/ui/CodeBlock";
 const problems = [
   {
     icon: TabletSmartphone,
-    title: "Off the edge",
+    title: "Where the traffic is",
     description:
-      "Your signup form is perfect on a laptop. On a phone the submit button sits past the right edge, and no amount of scrolling down brings it into reach.",
+      "More than half of all web traffic happens on a phone. A layout that only holds up on desktop excludes most of the people trying to use it.",
   },
   {
     icon: Hand,
-    title: "Fat-finger taps",
+    title: "Touch, not cursor",
     description:
-      "Links spaced for a mouse cursor land a thumb-width too close, so every tap catches the wrong one.",
+      "Phones aren't just smaller screens, they're operated by a finger. Sizing and spacing built for a mouse is the wrong sizing for a thumb.",
   },
   {
     icon: Layers,
-    title: "Fixed twice, or not at all",
+    title: "One codebase",
     description:
-      "A separate mobile site means every fix happens twice. You patch the broken nav link on desktop, ship it, and a week later a phone user hits the same dead link, because the mobile copy never got the change.",
+      "Maintaining separate desktop and mobile versions means every fix has to happen twice, and the two inevitably drift apart.",
   },
 ];
 

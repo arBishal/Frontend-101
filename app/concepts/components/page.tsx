@@ -10,21 +10,21 @@ import ProblemCards from "@/app/components/ProblemCards";
 const problems = [
   {
     icon: Copy,
-    title: "Edit it eight times",
+    title: "Duplication cost",
     description:
-      "Ship a copy-pasted card in eight places, then get asked to add one line of text to it. That is eight separate edits, and eight chances to fat-finger one.",
+      "Copy-pasted UI means every future change has to be repeated in every copy, and any copy you miss keeps showing the old version.",
   },
   {
     icon: TriangleAlert,
-    title: "The one you missed",
+    title: "Design consistency",
     description:
-      "The single copy you forget renders last month's design right next to this month's.",
+      "A shared library of components is what keeps a product looking and behaving like one thing instead of a pile of near-identical variations.",
   },
   {
     icon: Package,
-    title: "Rebuilt from scratch",
+    title: "Reuse",
     description:
-      "New features should start from pieces you already trust. Without a shared library, each one rebuilds its own modal from scratch, and the tenth still carries bugs the first nine already fixed.",
+      "New features move faster when they start from pieces that already exist and already work, instead of being rebuilt from scratch.",
   },
 ];
 

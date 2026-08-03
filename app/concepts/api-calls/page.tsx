@@ -9,21 +9,21 @@ import ProblemCards from "@/app/components/ProblemCards";
 const problems = [
   {
     icon: EyeOff,
-    title: "The blank six seconds",
+    title: "Nothing loads on its own",
     description:
-      "On hotel wifi your profile page takes six seconds to load its data. You only built the success screen, so for those six seconds the user stares at an empty rectangle with no spinner, unable to tell whether it is broken or just busy.",
+      "Almost everything an app displays, prices, feeds, profiles, does not ship with the app. It has to be fetched, or the screen has nothing to show.",
   },
   {
     icon: Loader,
-    title: "The spinner with no exit",
+    title: "Time and failure, built in",
     description:
-      "The request fails, but nothing was written to catch a failure, so the loading spinner just spins forever.",
+      "A fetch can be slow or fail outright, in a way a hardcoded value never can. That is not an edge case, it is the normal behavior of a network.",
   },
   {
     icon: Signal,
-    title: "Works on your machine",
+    title: "Staying current",
     description:
-      "It is instant every time you test it, because you test it on fast wifi sitting next to the router. Then a real user opens it on a moving train and it falls apart. The network is the one part of your app you do not control.",
+      "Data on a server keeps changing after the app is installed. Fetching it is the only way what a user sees stays true to what is actually there.",
   },
 ];
 
@@ -83,8 +83,7 @@ export default function ApiCallsPage() {
           you do not control and comes back later, or slowly, or not at all. So
           a screen that fetches data is really four screens: before the request,
           during the wait, on success, and on failure. Beginners build the third
-          one and forget the other three, and the gaps below are what users hit
-          first.
+          one and forget the other three.
         </p>
         <ProblemCards problems={problems} />
       </div>

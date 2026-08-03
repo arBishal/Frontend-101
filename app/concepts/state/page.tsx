@@ -10,20 +10,21 @@ import ProblemCards from "@/app/components/ProblemCards";
 const problems = [
   {
     icon: MousePointerClick,
-    title: "Miss the fourth spot",
+    title: "One source of truth",
     description:
-      "You update a display name where the profile shows it, then in the nav, then the welcome toast. You miss the fourth spot, and it's the one the user is staring at.",
+      "Without state, every place data appears on screen has to be updated by hand, and any place you forget drifts out of sync with the rest.",
   },
   {
     icon: AlertCircle,
-    title: "Stale UI",
-    description: "The data says the cart is empty; the badge still shows 3.",
+    title: "Stays in sync",
+    description:
+      "State guarantees the screen reflects the current data, closing off the most common UI bug: a display showing something the data no longer says.",
   },
   {
     icon: Workflow,
-    title: "Tangled logic",
+    title: "Manageable complexity",
     description:
-      "A signup form starts simple. Then come password rules, a confirm field that has to match, an error under each input, a submit that only enables once all of it passes. Wire that by hand and every new rule threatens the last one.",
+      "The more interactive pieces a UI has, the more they can affect each other. State is what keeps that from turning into a knot of manual updates.",
   },
 ];
 
