@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { Monitor, Tablet, Smartphone } from "lucide-react";
 import Button from "@/app/components/ui/Button";
-import { useResizable } from "@/app/lib/useResizable";
+import { useResizable } from "@/app/hooks/useResizable";
 import { cn } from "@/app/lib/cn";
 
 const PRESETS = [
